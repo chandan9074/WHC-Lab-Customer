@@ -1,9 +1,12 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Images from "../../../public/assets/Images";
 import Icons from "../../../public/assets/Icons";
+import MegaMenu from "../common/MegaMenu";
 
 const Primary = () => {
+    const [open, setOpen] = useState(false);
     return (
         <div className="container mx-auto px-6 sm:px-3 lg:py-6 sm:py-5 py-4 flex items-center justify-between">
             <Image
@@ -25,15 +28,18 @@ const Primary = () => {
                     <h5 className="text-brand-blue-500 text-lg font-semibold">
                         Menu
                     </h5>
-                    <Image
-                        src={Icons.menu}
-                        alt="search"
-                        width={1000}
-                        height={1000}
-                        className="w-9 h-9"
-                    />
+                    <button onClick={() => setOpen(true)}>
+                        <Image
+                            src={Icons.menu}
+                            alt="search"
+                            width={1000}
+                            height={1000}
+                            className="w-9 h-9"
+                        />
+                    </button>
                 </div>
             </div>
+            {open && <MegaMenu setOpen={setOpen} open={open} />}
         </div>
     );
 };

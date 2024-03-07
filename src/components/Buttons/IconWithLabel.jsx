@@ -14,7 +14,9 @@ const IconWithLabel = ({ align = "right", label }) => {
                     className="w-6 h-6"
                 />
             )}
-            <p className="text-white text-base font-semibold">{label}</p>
+            <p className="text-white md:text-base text-sm font-semibold">
+                {label}
+            </p>
             {align === "right" && (
                 <Image
                     src={Icons.arrow_up_right_white}
