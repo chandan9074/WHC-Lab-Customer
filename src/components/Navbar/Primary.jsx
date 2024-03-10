@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Images from "../../../public/assets/Images";
 import Icons from "../../../public/assets/Icons";
 import MegaMenu from "../common/MegaMenu";
+import { motion } from "framer-motion";
 
 const Primary = () => {
     const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ const Primary = () => {
     }, [open]);
 
     return (
-        <div className="container mx-auto px-6 sm:px-3 lg:py-6 sm:py-5 py-4 flex items-center justify-between">
+        <div className="relative container mx-auto px-6 sm:px-3 lg:py-6 sm:py-5 py-4 flex items-center justify-between">
             <Image
                 src={Images.logo}
                 alt="Logo"
@@ -46,7 +47,20 @@ const Primary = () => {
                     </button>
                 </div>
             </div>
-            {open && <MegaMenu setOpen={setOpen} open={open} />}
+            {open && (
+                <motion.div
+                    // style={{ position: "absolute" }}
+                    variants={{
+                        open: { opacity: 1 },
+                        closed: { opacity: 0 },
+                    }}
+                    initial="closed"
+                    animate="open"
+                    transition={{ duration: 0.5, delay: 0.25 }}
+                >
+                    <MegaMenu setOpen={setOpen} open={open} />
+                </motion.div>
+            )}
         </div>
     );
 };
