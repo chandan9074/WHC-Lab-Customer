@@ -48,19 +48,31 @@ const MegaMenu = ({ setOpen, open }) => {
                                 // >
                                 //     {item.name}
                                 // </Link>
-                                <motion.div
+                                // <motion.div
+                                //     key={item._id}
+                                //     className="relative"
+                                //     onHoverStart={() => {
+                                //         if (item.name === "RESOURCES") {
+                                //             setShowResourcesButtons(true);
+                                //         }
+                                //     }}
+                                //     onHoverEnd={() => {
+                                //         if (item.name === "RESOURCES") {
+                                //             setShowResourcesButtons(false);
+                                //         }
+                                //     }}
+                                // >
+                                <div
                                     key={item._id}
-                                    className="relative"
-                                    onHoverStart={() => {
-                                        if (item.name === "RESOURCES") {
-                                            setShowResourcesButtons(true);
-                                        }
-                                    }}
-                                    onHoverEnd={() => {
-                                        if (item.name === "RESOURCES") {
-                                            setShowResourcesButtons(false);
-                                        }
-                                    }}
+                                    className=""
+                                    onMouseOver={() =>
+                                        item.name === "RESOURCES" &&
+                                        setShowResourcesButtons(true)
+                                    }
+                                    onMouseLeave={() =>
+                                        item.name === "RESOURCES" &&
+                                        setShowResourcesButtons(false)
+                                    }
                                 >
                                     <Link
                                         href={item.path}
@@ -70,7 +82,7 @@ const MegaMenu = ({ setOpen, open }) => {
                                     </Link>
                                     {item.name === "RESOURCES" &&
                                         showResourcesButtons && (
-                                            <>
+                                            <div className="flex items-center gap-4">
                                                 <motion.div
                                                     initial={{
                                                         opacity: 0,
@@ -81,7 +93,7 @@ const MegaMenu = ({ setOpen, open }) => {
                                                         y: 0,
                                                     }}
                                                     transition={{ delay: 0.1 }}
-                                                    className="absolute left-0 mt-2"
+                                                    className=" mt-2"
                                                 >
                                                     <Buttons.OutlinedButton
                                                         label="Brewing Yeast"
@@ -100,7 +112,7 @@ const MegaMenu = ({ setOpen, open }) => {
                                                         y: 0,
                                                     }}
                                                     transition={{ delay: 0.2 }}
-                                                    className="absolute left-44 mt-2 flex"
+                                                    className="mt-2"
                                                 >
                                                     <Buttons.OutlinedButton
                                                         label="Distilling Yeast"
@@ -119,7 +131,7 @@ const MegaMenu = ({ setOpen, open }) => {
                                                         y: 0,
                                                     }}
                                                     transition={{ delay: 0.3 }}
-                                                    className="absolute left-[360px] mt-2 flex"
+                                                    className="mt-2"
                                                 >
                                                     <Buttons.OutlinedButton
                                                         label="Lab Analysis"
@@ -127,9 +139,10 @@ const MegaMenu = ({ setOpen, open }) => {
                                                         textColor="text-white"
                                                     />
                                                 </motion.div>
-                                            </>
+                                            </div>
                                         )}
-                                </motion.div>
+                                </div>
+                                // </motion.div>
                             ))}
                         </div>
                         <div className="col-span-12 lg:col-span-4 lg:mx-auto">
