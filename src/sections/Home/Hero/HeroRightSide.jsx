@@ -17,7 +17,7 @@ const HeroRightSide = () => {
                 autoPlay
                 muted
                 loop
-                className="w-full h-[180px] md:h-[384px] md:absolute md:top-0 md:-z-10"
+                className="w-full h-[180px] sm:h-[280px] md:h-[384px] md:absolute md:top-0 md:-z-10"
             />
         </div>
     );

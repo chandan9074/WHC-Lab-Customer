@@ -8,7 +8,7 @@ import megamenuVideo from "../../../public/megamenu-video.mp4";
 
 const MegaMenu = ({ setOpen, open }) => {
     return (
-        <div className="fixed top-0 left-0 w-full h-screen bg-red-500 z-50 overflow-auto">
+        <div className="fixed top-0 left-0 w-full h-screen bg-white z-50 overflow-auto">
             <video
                 src={megamenuVideo}
                 autoPlay
@@ -29,13 +29,13 @@ const MegaMenu = ({ setOpen, open }) => {
                             />
                         </button>
                     </div>
-                    <div className="grid grid-cols-12 mt-12 mx-4 gap-6">
+                    <div className="grid grid-cols-12 lg:mt-12 md:mt-8 sm:mt-6 mt-4 mx-4 gap-6">
                         <div className="col-span-12 lg:col-span-8 flex flex-col gap-[13px]">
                             {megaMenuMainLinks.map((item) => (
                                 <Link
                                     href={item.path}
                                     key={item._id}
-                                    className="text-white hover:text-brand-blue-500 hover:ml-1 text-[32px] md:text-[90px] font-extrabold leading-10 md:leading-[110px] duration-300"
+                                    className="text-white hover:text-brand-blue-500 hover:ml-1 text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-300"
                                 >
                                     {item.name}
                                 </Link>
