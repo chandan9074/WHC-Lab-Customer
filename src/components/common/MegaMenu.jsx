@@ -1,12 +1,17 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import Link from "next/link";
 import { megaMenuMainLinks } from "@/libs/navLinks";
 import { socialLinks } from "@/libs/common";
 import megamenuVideo from "../../../public/megamenu-video.mp4";
+import { motion } from "framer-motion";
+import Buttons from "../Buttons";
 
 const MegaMenu = ({ setOpen, open }) => {
+    const [showResourcesButtons, setShowResourcesButtons] = useState(false);
+
     return (
         <div className="">
             <video
@@ -36,13 +41,95 @@ const MegaMenu = ({ setOpen, open }) => {
                     <div className="grid grid-cols-12 lg:mt-12 md:mt-8 sm:mt-6 mt-4 mx-4 gap-6">
                         <div className="col-span-12 lg:col-span-8 flex flex-col gap-[13px]">
                             {megaMenuMainLinks.map((item) => (
-                                <Link
-                                    href={item.path}
+                                // <Link
+                                //     href={item.path}
+                                //     key={item._id}
+                                //     className="text-white hover:text-brand-blue-500 hover:ml-1 text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-300"
+                                // >
+                                //     {item.name}
+                                // </Link>
+                                <motion.div
                                     key={item._id}
-                                    className="text-white hover:text-brand-blue-500 hover:ml-1 text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-300"
+                                    className="relative"
+                                    onHoverStart={() => {
+                                        if (item.name === "RESOURCES") {
+                                            setShowResourcesButtons(true);
+                                        }
+                                    }}
+                                    onHoverEnd={() => {
+                                        if (item.name === "RESOURCES") {
+                                            setShowResourcesButtons(false);
+                                        }
+                                    }}
                                 >
-                                    {item.name}
-                                </Link>
+                                    <Link
+                                        href={item.path}
+                                        className="text-white hover:text-brand-blue-500 hover:ml-1 text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-300"
+                                    >
+                                        {item.name}
+                                    </Link>
+                                    {item.name === "RESOURCES" &&
+                                        showResourcesButtons && (
+                                            <>
+                                                <motion.div
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: 10,
+                                                    }}
+                                                    animate={{
+                                                        opacity: 1,
+                                                        y: 0,
+                                                    }}
+                                                    transition={{ delay: 0.1 }}
+                                                    className="absolute left-0 mt-2"
+                                                >
+                                                    <Buttons.OutlinedButton
+                                                        label="Brewing Yeast"
+                                                        borderColor="border-white"
+                                                        textColor="text-white"
+                                                    />
+                                                </motion.div>
+
+                                                <motion.div
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: 20,
+                                                    }}
+                                                    animate={{
+                                                        opacity: 1,
+                                                        y: 0,
+                                                    }}
+                                                    transition={{ delay: 0.2 }}
+                                                    className="absolute left-44 mt-2 flex"
+                                                >
+                                                    <Buttons.OutlinedButton
+                                                        label="Distilling Yeast"
+                                                        borderColor="border-white"
+                                                        textColor="text-white"
+                                                    />
+                                                </motion.div>
+
+                                                <motion.div
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: 30,
+                                                    }}
+                                                    animate={{
+                                                        opacity: 1,
+                                                        y: 0,
+                                                    }}
+                                                    transition={{ delay: 0.3 }}
+                                                    className="absolute left-[360px] mt-2 flex"
+                                                >
+                                                    <Buttons.OutlinedButton
+                                                        label="Lab Analysis"
+                                                        borderColor="border-white"
+                                                        textColor="text-white"
+                                                    />
+                                                </motion.div>
+                                            </>
+                                        )}
+                                </motion.div>
                             ))}
                         </div>
                         <div className="col-span-12 lg:col-span-4 lg:mx-auto">
