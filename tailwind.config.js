@@ -14,6 +14,7 @@ module.exports = {
                 "brand-blue-800": "#061628",
                 "stroke-new": "#EBEDF0",
                 "light-gray": "rgba(235, 237, 240, 0.15)",
+                "stroke-white": "#E7EAED",
             },
         },
     },
