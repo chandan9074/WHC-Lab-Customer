@@ -10,9 +10,14 @@ const Primary = () => {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        open
-            ? (document.body.style.overflow = "hidden")
-            : (document.body.style.overflow = "auto");
+        if (open) {
+            const timer = setTimeout(() => {
+                document.body.style.overflow = "hidden";
+            }, 400); // 3ms delay
+            return () => clearTimeout(timer);
+        } else {
+            document.body.style.overflow = "auto";
+        }
     }, [open]);
 
     return (
@@ -36,7 +41,11 @@ const Primary = () => {
                     <h5 className="text-brand-blue-500 text-lg font-semibold">
                         Menu
                     </h5>
-                    <button onClick={() => setOpen(true)}>
+                    <button
+                        onClick={() => {
+                            setOpen(true);
+                        }}
+                    >
                         <Image
                             src={Icons.menu}
                             alt="search"
@@ -46,21 +55,22 @@ const Primary = () => {
                         />
                     </button>
                 </div>
+                {open && (
+                    <motion.div
+                        // style={{ position: "absolute" }}
+                        variants={{
+                            open: { opacity: 1 },
+                            closed: { opacity: 0 },
+                        }}
+                        initial="closed"
+                        animate={"open"}
+                        transition={{ duration: 0.5, delay: 0.25 }}
+                        className="fixed top-0 left-0 w-full h-screen bg-white z-50 overflow-auto"
+                    >
+                        <MegaMenu setOpen={setOpen} open={open} />
+                    </motion.div>
+                )}
             </div>
-            {open && (
-                <motion.div
-                    // style={{ position: "absolute" }}
-                    variants={{
-                        open: { opacity: 1 },
-                        closed: { opacity: 0 },
-                    }}
-                    initial="closed"
-                    animate="open"
-                    transition={{ duration: 0.5, delay: 0.25 }}
-                >
-                    <MegaMenu setOpen={setOpen} open={open} />
-                </motion.div>
-            )}
         </div>
     );
 };

@@ -8,7 +8,7 @@ import megamenuVideo from "../../../public/megamenu-video.mp4";
 
 const MegaMenu = ({ setOpen, open }) => {
     return (
-        <div className="fixed top-0 left-0 w-full h-screen bg-white z-50 overflow-auto">
+        <div className="">
             <video
                 src={megamenuVideo}
                 autoPlay
@@ -19,7 +19,11 @@ const MegaMenu = ({ setOpen, open }) => {
             <div className="w-full flex justify-center">
                 <div className="container mx-auto absolute top-0 py-9">
                     <div className="flex justify-end">
-                        <button onClick={() => setOpen(!open)}>
+                        <button
+                            onClick={() => {
+                                setOpen(!open);
+                            }}
+                        >
                             <Image
                                 src={Icons.cross}
                                 alt="close-icon"
