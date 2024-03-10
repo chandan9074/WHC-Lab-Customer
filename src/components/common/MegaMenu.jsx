@@ -41,27 +41,7 @@ const MegaMenu = ({ setOpen, open }) => {
                     <div className="grid grid-cols-12 lg:mt-12 md:mt-8 sm:mt-6 mt-4 mx-4 gap-6">
                         <div className="col-span-12 lg:col-span-8 flex flex-col gap-[13px]">
                             {megaMenuMainLinks.map((item) => (
-                                // <Link
-                                //     href={item.path}
-                                //     key={item._id}
-                                //     className="text-white hover:text-brand-blue-500 hover:ml-1 text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-300"
-                                // >
-                                //     {item.name}
-                                // </Link>
-                                // <motion.div
-                                //     key={item._id}
-                                //     className="relative"
-                                //     onHoverStart={() => {
-                                //         if (item.name === "RESOURCES") {
-                                //             setShowResourcesButtons(true);
-                                //         }
-                                //     }}
-                                //     onHoverEnd={() => {
-                                //         if (item.name === "RESOURCES") {
-                                //             setShowResourcesButtons(false);
-                                //         }
-                                //     }}
-                                // >
+                             
                                 <div
                                     key={item._id}
                                     className=""
@@ -76,7 +56,15 @@ const MegaMenu = ({ setOpen, open }) => {
                                 >
                                     <Link
                                         href={item.path}
-                                        className="text-white hover:text-brand-blue-500 hover:ml-1 text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-500"
+                                        className={` ${
+                                            item.name === `RESOURCES`
+                                                ? `${
+                                                      showResourcesButtons
+                                                          ? "text-brand-blue-500"
+                                                          : "text-white"
+                                                  }`
+                                                : "text-white hover:text-brand-blue-500 hover:ml-1 "
+                                        } text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-500`}
                                     >
                                         {item.name}
                                     </Link>

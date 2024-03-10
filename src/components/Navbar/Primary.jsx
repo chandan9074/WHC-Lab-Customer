@@ -57,7 +57,6 @@ const Primary = () => {
                 </div>
                 {open && (
                     <motion.div
-                        // style={{ position: "absolute" }}
                         variants={{
                             open: { opacity: 1 },
                             closed: { opacity: 0 },
