@@ -1,12 +1,19 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Images from "../../../public/assets/Images";
 import Icons from "../../../public/assets/Icons";
 import MegaMenu from "../common/MegaMenu";
 
 const Primary = () => {
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        open
+            ? (document.body.style.overflow = "hidden")
+            : (document.body.style.overflow = "auto");
+    }, [open]);
+
     return (
         <div className="container mx-auto px-6 sm:px-3 lg:py-6 sm:py-5 py-4 flex items-center justify-between">
             <Image

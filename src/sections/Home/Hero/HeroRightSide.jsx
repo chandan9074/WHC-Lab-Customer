@@ -3,7 +3,7 @@ import React from "react";
 
 const HeroRightSide = () => {
     return (
-        <div>
+        <div className="relative">
             {/* <video controls>
                 <source src={"/hero-video.mp4"} type="video/mp4" />
             </video> */}
@@ -12,6 +12,13 @@ const HeroRightSide = () => {
                 frameborder="0"
                 allowfullscreen
             /> */}
+            <video
+                src={require("./hero-video.mp4")}
+                autoPlay
+                muted
+                loop
+                className="w-full h-[180px] sm:h-[280px] md:h-[384px] md:absolute md:top-0 md:-z-10"
+            />
         </div>
     );
 };
