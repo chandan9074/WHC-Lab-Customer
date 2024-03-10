@@ -6,7 +6,7 @@ import MainCategoriesContainer from "@/sections/Home/MainCategories/MainCategori
 import MarketingContainer from "@/sections/Home/MarketingSection/MarketingContainer";
 import OfferContainer from "@/sections/Home/Offer/OfferContainer";
 import PioneeringExcellenceContainer from "@/sections/Home/PioneeringExcellence/PioneeringExcellenceContainer";
-import ProductContainer from "@/sections/Home/Product/ProductContainer";
+import ProductContainer from "@/sections/Home/Store/StoreContainer";
 import Image from "next/image";
 
 export default function Home() {
