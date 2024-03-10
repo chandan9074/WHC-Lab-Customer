@@ -76,7 +76,7 @@ const MegaMenu = ({ setOpen, open }) => {
                                 >
                                     <Link
                                         href={item.path}
-                                        className="text-white hover:text-brand-blue-500 hover:ml-1 text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-300"
+                                        className="text-white hover:text-brand-blue-500 hover:ml-1 text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-500"
                                     >
                                         {item.name}
                                     </Link>
@@ -92,7 +92,10 @@ const MegaMenu = ({ setOpen, open }) => {
                                                         opacity: 1,
                                                         y: 0,
                                                     }}
-                                                    transition={{ delay: 0.1 }}
+                                                    transition={{
+                                                        delay: 0.1,
+                                                        duration: 0.5,
+                                                    }}
                                                     className=" mt-2"
                                                 >
                                                     <Buttons.OutlinedButton
@@ -111,7 +114,10 @@ const MegaMenu = ({ setOpen, open }) => {
                                                         opacity: 1,
                                                         y: 0,
                                                     }}
-                                                    transition={{ delay: 0.2 }}
+                                                    transition={{
+                                                        delay: 0.2,
+                                                        duration: 0.5,
+                                                    }}
                                                     className="mt-2"
                                                 >
                                                     <Buttons.OutlinedButton
@@ -130,7 +136,10 @@ const MegaMenu = ({ setOpen, open }) => {
                                                         opacity: 1,
                                                         y: 0,
                                                     }}
-                                                    transition={{ delay: 0.3 }}
+                                                    transition={{
+                                                        delay: 0.3,
+                                                        duration: 0.5,
+                                                    }}
                                                     className="mt-2"
                                                 >
                                                     <Buttons.OutlinedButton
@@ -149,7 +158,7 @@ const MegaMenu = ({ setOpen, open }) => {
                             <LinkHeader title={"Brewers & Retailers"} />
                             <div className="mt-4 space-y-2 mb-9 flex flex-col">
                                 <NavLink title={"LOG IN"} />
-                                <NavLink title={"REGISTER NEW Account"} />
+                                <NavLink title={"REGISTER NEW ACCOUNT"} />
                             </div>
                             <LinkHeader title={"Our Products"} />
                             <div className="mt-4 space-y-2 mb-9 flex flex-col">
