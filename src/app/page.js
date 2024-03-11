@@ -16,8 +16,8 @@ export default function Home() {
             <ProductContainer />
             <MainCategoriesContainer />
             <OfferContainer />
-            <MarketingContainer />
             <ChooseUsContainer />
+            <MarketingContainer />
             <PioneeringExcellenceContainer />
         </Layouts.Primary>
     );

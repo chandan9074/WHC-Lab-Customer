@@ -9,9 +9,6 @@ const OfferContainer = () => {
     return (
         <div className="relative overflow-hidden">
             <div className="container mx-auto px-6 sm:px-3 xl:py-[120px] lg:py-20 md:py-14 sm:py-10 py-6 relative z-20">
-                {/* <h1 className="text-brand-blue-800 font-semibold lg:text-5xl md:text-4xl sm:text-3xl text-2xl">
-                    VARIOUS SERVICES WE OFFER
-                </h1> */}
                 <SectionHeader title={"VARIOUS SERVICES WE OFFER"} />
                 <div className="grid grid-cols-12 xl:mt-20 lg:mt-14 md:mt-11 sm:mt-8 mt-6">
                     <OfferLeftSide />
