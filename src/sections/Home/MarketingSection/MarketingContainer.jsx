@@ -4,7 +4,7 @@ import SingleMarketingSection from "./SingleMarketingSection";
 const MarketingContainer = () => {
     return (
         <div className="bg-[#F5F5F5]">
-            <div className="container mx-auto px-6 sm:px-3  lg:py-20 sm:py-5 py-9 space-y-10 ">
+            <div className="container mx-auto px-6 sm:px-3  lg:py-[120px] sm:py-5 py-9  flex flex-col gap-[36px] sm:gap-10 md:gap-16 xl:gap-[120px] ">
                 {marketingSectionData.map((data, index) => {
                     return (
                         <SingleMarketingSection
@@ -30,7 +30,7 @@ const marketingSectionData = [
         ],
 
         link: "",
-        videoLink: "/marketing_section_v1.mp4",
+        videoLink: "/marketing_section_video.mp4",
         videoDetails:
             "We work closely with 100s of breweries globally to make sure our product is of the absolute highest quality. ",
     },
