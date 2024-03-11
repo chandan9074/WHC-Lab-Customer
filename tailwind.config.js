@@ -27,6 +27,7 @@ module.exports = {
                 "stroke-white": "#E7EAED",
                 "brand-green-200": "#D7E6B9",
                 "neutral-10": "#FAFBFB",
+                "neutral-100": "#7A8699",
             },
         },
     },
