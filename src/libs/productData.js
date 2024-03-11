@@ -104,11 +104,77 @@ export const availabilityData = [
 //     },
 // ];
 
+export const filterData = {
+    "yeastType": [
+        {
+            name: "Dried Yeast",
+            quantity: 8,
+        },
+        {
+            name: "Liquid Yeast",
+            quantity: 3,
+        },
+    ],
+    "beerStyle": [
+        {
+            name: "American Ale",
+            quantity: "8",
+        },
+        {
+            name: "Belgian Ale",
+            quantity: "3",
+        },
+        {
+            name: "Brettanomyces",
+            quantity: "7",
+        },
+        {
+            name: "British Ale",
+            quantity: "1",
+        },
+        {
+            name: "Czech Lager",
+            quantity: "4",
+        },
+        {
+            name: "DKO ",
+            quantity: "5",
+        },
+    ],
+    "flocculation": [
+        {
+            name: "Low",
+            quantity: "8",
+        },
+        {
+            name: "Low-Medium",
+            quantity: "3",
+        },
+        {
+            name: "Medium",
+            quantity: "7",
+        },
+        {
+            name: "Medium-High",
+            quantity: "1",
+        },
+        {
+            name: "High",
+            quantity: "4",
+        },
+        {
+            name: "Very High",
+            quantity: "5",
+        },
+    ],
+};
+
 export const productsData = [
     {
         _id: 1,
         name: "Apres Ski- Crispy lager Yeast- Dehydrated (500g)",
         featuredImage: Images.productImage,
+        offerPrice: 235,
         price: 240,
     },
     {
@@ -127,6 +193,7 @@ export const productsData = [
         _id: 4,
         name: "Apres Ski- Crispy lager Yeast- Dehydrated (500g)",
         featuredImage: Images.productImage,
+        offerPrice: 235,
         price: 240,
     },
     {
@@ -139,6 +206,7 @@ export const productsData = [
         _id: 6,
         name: "Apres Ski- Crispy lager Yeast- Dehydrated (500g)",
         featuredImage: Images.productImage,
+        offerPrice: 235,
         price: 240,
     },
 ];

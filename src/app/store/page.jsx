@@ -1,11 +1,11 @@
 import Layouts from "@/layouts";
-import ProductContainer from "@/sections/Home/Store/StoreContainer";
+import StoreContainer from "@/sections/Store/StoreContainer";
 import React from "react";
 
 const page = () => {
     return (
         <Layouts.Primary>
-            <ProductContainer></ProductContainer>
+            <StoreContainer></StoreContainer>
         </Layouts.Primary>
     );
 };

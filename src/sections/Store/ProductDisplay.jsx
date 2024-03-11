@@ -6,10 +6,10 @@ import React from "react";
 import ProductHeader from "./ProductHeader";
 import { productsData } from "@/libs/productData";
 
-const ProductDisplay = ({ data, filterData, wishListIds }) => {
+const ProductDisplay = ({ data, filterData, wishListIds, selectedTab }) => {
     return (
         <div>
-            <ProductHeader />
+            <ProductHeader selectedTab={selectedTab} />
             <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-6 mt-6">
                 {productsData.map((item, index) => (
                     <div className="col-span-1" key={index}>

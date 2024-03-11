@@ -2,12 +2,14 @@ import Filter from "@/components/Filter";
 import React from "react";
 import ProductDisplay from "./ProductDisplay";
 
-const ProductListContainer = () => {
+const ProductListContainer = ({ selectedTab }) => {
     return (
         <div className="flex gap-x-6">
-            <Filter.Primary />
+            <div className="hidden md:block">
+                <Filter.Primary />
+            </div>
 
-            <ProductDisplay />
+            <ProductDisplay selectedTab={selectedTab} />
         </div>
     );
 };

@@ -95,8 +95,8 @@ const ProductCard = ({ data, wishListIds }) => {
                 {/* )} */}
 
                 <div
-                    className="absolute bottom-0 left-0 w-full  gap-x-2 justify-center items-center h-12 bg-black-1300 bg-opacity-45 md:group-hover:flex hidden animate-fadeIn cursor-pointer"
-                    onClick={() => setOpenModal(true)}
+                    className="absolute bottom-0 left-0 w-full  gap-x-2 justify-center items-center h-12 bg-brand-blue-800 bg-opacity-45 md:group-hover:flex hidden animate-fadeIn cursor-pointer duration-300 rounded-b-2xl"
+                    // onClick={() => setOpenModal(true)}
                 >
                     <Image
                         alt="view-icon"
@@ -113,17 +113,23 @@ const ProductCard = ({ data, wishListIds }) => {
                 className="space-y-2 "
             >
                 <div className="h-10">
-                    <h2 className="text-neutral-700 text-sm font-medium clamp">
+                    <h2 className="text-brand-blue-800 text-sm font-normal line-clamp-2">
                         {data.name}
                     </h2>
                 </div>
                 <div className="flex gap-x-2">
-                    <p className="text-error-500 text-sm font-medium">
-                        ${data.offerPrice ? data.offerPrice : data.price}
+                    <p
+                        className={`text-sm font-medium ${
+                            data.offerPrice
+                                ? "line-through text-neutral-100"
+                                : "text-brand-blue-500"
+                        }`}
+                    >
+                        ${data.price}
                     </p>
                     {data.offerPrice && (
-                        <p className="text-neutral-700 text-sm font-medium line-through">
-                            ${data.price}
+                        <p className="text-brand-blue-500 text-sm font-semibold">
+                            ${data.offerPrice}
                         </p>
                     )}
                 </div>

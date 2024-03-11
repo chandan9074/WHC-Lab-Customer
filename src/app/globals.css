@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.tab-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.ant-tree .ant-tree-switcher-noop {
+    display: none;
+}

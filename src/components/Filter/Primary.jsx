@@ -3,6 +3,7 @@ import FilterOptions from "@/sections/Home/Filter";
 import { Collapse } from "antd";
 import React from "react";
 import Icons from "../../../public/assets/Icons";
+import { filterData } from "@/libs/productData";
 
 const Primary = ({ data, setSearchQuery, searchQuery }) => {
     const text = `
@@ -13,14 +14,10 @@ const Primary = ({ data, setSearchQuery, searchQuery }) => {
     const items = [
         {
             key: "1",
-            label: `Yeast Type (${
-                searchQuery?.category
-                    ? searchQuery.category.split("&").length
-                    : 0
-            })`,
+            label: "Yeast Type",
             component: (
                 <FilterOptions.Category
-                    data={data}
+                    data={filterData["yeastType"]}
                     setSearchQuery={setSearchQuery}
                     searchQuery={searchQuery}
                 />
@@ -31,7 +28,7 @@ const Primary = ({ data, setSearchQuery, searchQuery }) => {
             label: "Beer Style",
             component: (
                 <FilterOptions.Category
-                    data={data}
+                    data={filterData["beerStyle"]}
                     setSearchQuery={setSearchQuery}
                     searchQuery={searchQuery}
                 />
@@ -46,7 +43,7 @@ const Primary = ({ data, setSearchQuery, searchQuery }) => {
             label: "Flocculation",
             component: (
                 <FilterOptions.Category
-                    data={data}
+                    data={filterData["flocculation"]}
                     setSearchQuery={setSearchQuery}
                     searchQuery={searchQuery}
                 />
@@ -113,6 +110,7 @@ const Primary = ({ data, setSearchQuery, searchQuery }) => {
                     expandIconPosition="left"
                     defaultActiveKey={["1", "2", "3", "4", "5", "6", "7"]}
                     ghost
+                    className="divide-y divide-[#EBEDF0]"
                 >
                     {items.map((item) => (
                         <Collapse.Panel

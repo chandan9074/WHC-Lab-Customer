@@ -4,23 +4,23 @@ import React from "react";
 
 const StoreTabButtonsSection = ({ selectedTab, setSelectedTab }) => {
     return (
-        <div className="flex gap-4 md:gap-6 py-4 md:py-6 flex-wrap">
+        <div className="w-full flex gap-4 md:gap-6 py-4 md:py-6 overflow-scroll tab-scroll">
             {StoreTabButtonsData.map((item) => (
                 <Buttons.OutlinedButton
                     key={item._id}
                     label={item.label}
-                    borderColor="border-brand-blue-800"
+                    borderColor="border-brand-blue-500"
                     textColor={
-                        selectedTab === item.label
+                        selectedTab.label === item.label
                             ? "text-white"
-                            : "text-brand-blue-800"
+                            : "text-brand-blue-500"
                     }
                     bgColor={
-                        selectedTab === item.label
-                            ? "bg-brand-blue-800"
+                        selectedTab.label === item.label
+                            ? "bg-brand-blue-500"
                             : "bg-white"
                     }
-                    onClick={() => setSelectedTab(item.label)}
+                    onClick={() => setSelectedTab(item)}
                 />
             ))}
         </div>
