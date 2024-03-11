@@ -4,7 +4,7 @@ import Icons from "../../../public/assets/Icons";
 
 const IconWithLabel = ({ align = "right", label }) => {
     return (
-        <button className="py-3.5 px-6 rounded-full bg-brand-blue-500 flex items-center gap-2.5 sm:w-auto w-full justify-center">
+        <button className="py-3 sm:py-3.5 px-6 rounded-full bg-brand-blue-500 flex items-center gap-2.5 sm:w-auto w-full justify-center">
             {align === "left" && (
                 <Image
                     src={Icons.arrow_up_right_white}

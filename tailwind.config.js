@@ -26,6 +26,7 @@ module.exports = {
                 "light-gray": "rgba(235, 237, 240, 0.15)",
                 "stroke-white": "#E7EAED",
                 "brand-green-200": "#D7E6B9",
+                "neutral-10": "#FAFBFB",
             },
         },
     },
