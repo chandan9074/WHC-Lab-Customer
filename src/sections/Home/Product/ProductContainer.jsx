@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 
 const ProductContainer = () => {
     return (
-        <div className="bg-light-gray w-full py-[36px] sm:py-[46px] md:py-[56px] lg:py-[120px] flex items-center flex-wrap gap-6 overflow-x-auto">
+        <div className="bg-neutral-10 w-full py-9 sm:py-[46px] md:py-[56px] lg:py-[120px] flex items-center flex-wrap gap-6 overflow-x-auto">
             <Marquee className="gap-5" speed={100} style={{ padding: "10px" }}>
                 {products.map((data, index) => {
                     return (

@@ -3,15 +3,20 @@ import Icons from "../../../../public/assets/Icons";
 import Image from "next/image";
 import Images from "../../../../public/assets/Images";
 import CategoryCard from "./CategoryCard";
-
+import SectionHeader from "@/components/common/SectionHeader";
 
 const MainCategoriesContainer = () => {
     return (
-        <div className="bg-cover bg-no-repeat bg-center" style={{ backgroundImage: 'url("/assets/Images/main_category_section_banner.png")' }}>
-            <div className="flex flex-col gap-6 py-9 px-6 md:p-[120px] md:gap-12">
-                <p className="font-semibold text-2xl text-brand-blue-800 md:text-5xl">Main category</p>
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 h-full">
-
+        <div
+            className="bg-cover bg-no-repeat bg-center"
+            style={{
+                backgroundImage:
+                    'url("/assets/Images/main_category_section_banner.png")',
+            }}
+        >
+            <div className="flex flex-col container mx-auto px-6 sm:px-3 xl:py-[120px] lg:py-20 md:py-14 sm:py-10 py-6 gap-6 md:gap-12">
+                <SectionHeader title={"Main Categories"} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
                     {/* <div className="relative overflow-hidden">
                         <div className="bg-red-500 w-12 h-12 absolute right-0 top-0 transition-all ease"></div>
 
@@ -118,17 +123,12 @@ const MainCategoriesContainer = () => {
 
                     </div> */}
 
-
                     <CategoryCard />
                     <CategoryCard />
                     <CategoryCard />
-
                 </div>
-
             </div>
         </div>
-
-
     );
 };
 

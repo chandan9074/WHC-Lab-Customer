@@ -1,4 +1,5 @@
 import Buttons from "@/components/Buttons";
+import SectionHeader from "@/components/common/SectionHeader";
 import React from "react";
 
 function SingleMarketingSection({ data, index }) {
@@ -41,17 +42,17 @@ function SingleMarketingSection({ data, index }) {
                 </div>
             </div>
             <div className="flex-1 rounded-[25px] relative">
-                <div className="bg-[#C1AE91] opacity-75 xl:h-[650px] lg:h-[550px] md:h-[470px] sm:h-[400px] h-[350px] 2xl:w-[650px] lg:w-auto md:w-[550px] sm:w-[500px] w-[312px] rounded-[25px] shadow-lg">
+                <div className="bg-[#C1AE91] opacity-75 xl:h-[650px] lg:h-[550px] md:h-[470px] sm:h-[400px] h-[350px] 2xl:w-[650px] lg:w-auto md:w-[550px] sm:w-[500px] w-[312px] md:rounded-[25px] rounded-[13px] shadow-lg">
                     <video
                         src={data.videoLink}
                         autoPlay
                         muted
                         loop
-                        className="xl:h-[650px] lg:h-[550px] md:h-[470px] sm:h-[400px] h-[350px] 2xl:w-[650px] lg:w-auto md:w-[550px] sm:w-[500px] w-[312px]  rounded-[25px] object-fill shadow-lg"
+                        className="xl:h-[650px] lg:h-[550px] md:h-[470px] sm:h-[400px] h-[350px] 2xl:w-[650px] lg:w-auto md:w-[550px] sm:w-[500px] w-[312px]  md:rounded-[25px] rounded-[13px] object-fill shadow-lg"
                     />
                 </div>
 
-                <div className="absolute w-[90%] 2xl:w-[78%] bottom-1 left-[5%] sm:left-[5%] right-[50%] inline-block mb-[-20px]  sm:mb-[-20px]  md:mb-[-30px] lg:mb-[-30px] border bg-[rgba(235, 237, 240, 0.15)] px-5 py-[8px] rounded-[25px]  bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border-[#0000001A] shadow-md">
+                <div className="absolute w-[90%] 2xl:w-[78%] bottom-1 left-[5%] sm:left-[5%] right-[50%] inline-block mb-[-20px]  sm:mb-[-20px]  md:mb-[-30px] lg:mb-[-30px] border bg-[rgba(235, 237, 240, 0.15)] px-5 py-[8px] md:rounded-[25px] rounded-[13px]  bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border-[#0000001A] shadow-md">
                     <h3 className="text-center text-[12px] sm:text-base md:text-xl lg:text-xl xl:text-2xl text-white py-[8px] sm:py-[12px] md:py-[16px] lg:py-[32px] xl:">
                         {data.videoDetails}
                     </h3>
