@@ -34,13 +34,15 @@ function SingleMarketingSection({ data, index }) {
                 </div>
             </div>
             <div className="flex-1 rounded-[25px] relative">
-                <video
-                    src={data.videoLink}
-                    autoPlay
-                    muted
-                    loop
-                    className=" xl:h-[650px] lg:h-[550px] md:h-[470px] sm:h-[400px] h-[350px] 2xl:w-[650px] lg:w-auto sm:w-[500px] rounded-[25px] object-fill"
-                />
+                <div className="bg-[#C1AE91] opacity-75 xl:h-[650px] lg:h-[550px] md:h-[470px] sm:h-[400px] h-[350px] 2xl:w-[650px] lg:w-auto sm:w-[500px] rounded-[25px]">
+                    <video
+                        src={data.videoLink}
+                        autoPlay
+                        muted
+                        loop
+                        className=" xl:h-[650px] lg:h-[550px] md:h-[470px] sm:h-[400px] h-[350px] 2xl:w-[650px] lg:w-auto sm:w-[500px] rounded-[25px] object-fill"
+                    />
+                </div>
 
                 <div className="absolute w-[90%] 2xl:w-[78%] bottom-1 left-[5%] sm:left-[5%] right-[50%] inline-block mb-[-20px]  sm:mb-[-20px]  md:mb-[-30px] lg:mb-[-30px] border bg-slate-400 px-5 py-5 rounded-[25px]  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 border-gray-400">
                     <h3 className="text-center text-[12px] lg:text-2xl md:text-xl sm:text-base  text-white">
