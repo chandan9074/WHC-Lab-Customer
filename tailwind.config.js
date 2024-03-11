@@ -9,6 +9,15 @@ module.exports = {
     ],
     theme: {
         extend: {
+            keyframes: {
+                fadeIn: {
+                    "0%": { opacity: "0" },
+                    "100%": { opacity: "1" },
+                },
+            },
+            animation: {
+                fadeIn: "fadeIn 0.3s ease-in-out",
+            },
             colors: {
                 "brand-blue-500": "#0B2848",
                 "brand-blue-800": "#061628",

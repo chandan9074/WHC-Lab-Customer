@@ -30,13 +30,13 @@ const CategoryCard = () => {
             </div> */}
 
 
-            <div className={styles.gallery}>
+            <div className='cursor-pointer' onClick={() => console.log('Navigating to another page')}>
                 <figure className={`${styles.snip0025} ${hoveredIndex === 0 ? styles.hover : ''}`} onMouseEnter={() => handleMouseEnter(0)} onMouseLeave={handleMouseLeave}>
 
 
                     <div className='clipBox'>
 
-                        <i className="ion-ios-arrow-thin-right myImage -rotate-45 cursor-pointer" onClick={() => console.log('I am navigate')}></i>
+                        <i className="ion-ios-arrow-thin-right myImage -rotate-45"></i>
                         <div className={styles.curl}></div>
                     </div>
 
@@ -48,7 +48,9 @@ const CategoryCard = () => {
                                 alt='Arrow up right'
                                 width={1000}
                                 height={1000}
-                                className="w-10 h-10"
+                                // className={`w-10 h-10`}
+                                // className={`w-10 h-10 ${hoveredIndex === 0 ? 'animate-fadeIn duration-300' : 'hidden'}`}
+                                className={`w-10 h-10 ${hoveredIndex === 0 ? 'transition duration-50 delay-100' : 'hidden'}`}
                             /> */}
                         </div>
                         <h3 className="text-brand-blue-500 font-medium text-xl md:text-4xl">Laboratory <br /> Analysis</h3>
