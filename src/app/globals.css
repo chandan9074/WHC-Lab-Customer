@@ -9,3 +9,12 @@
 .ant-tree .ant-tree-switcher-noop {
     display: none;
 }
+
+.ant-input-outlined {
+    border-width: 2px;
+    border-color: #ebedf0;
+}
+
+.ant-input-outlined:hover {
+    border-color: #0b2848;
+}

@@ -68,7 +68,7 @@ const Price = ({ setSearchQuery, searchQuery }) => {
                     onChange={(e) => handleInputFieldChange(e, "min")}
                     onPressEnter={(e) => handlePressEnter(e, "min")}
                     prefix={
-                        <span className="text-neutral-700 text-sm font-medium">
+                        <span className="text-[#262626] text-sm font-medium">
                             $
                         </span>
                     }
@@ -81,7 +81,7 @@ const Price = ({ setSearchQuery, searchQuery }) => {
                     onChange={(e) => handleInputFieldChange(e, "max")}
                     onPressEnter={(e) => handlePressEnter(e, "max")}
                     prefix={
-                        <span className="text-neutral-700 text-sm font-medium">
+                        <span className="text-[#262626] text-sm font-medium">
                             $
                         </span>
                     }
