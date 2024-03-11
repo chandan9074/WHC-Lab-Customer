@@ -8,7 +8,7 @@ const StoreContainer = () => {
     const [selectedTab, setSelectedTab] = useState(StoreTabButtonsData[0]);
 
     return (
-        <div className="container mx-auto space-y-[14.5px] px-4 md:px-0">
+        <div className="container mx-auto space-y-[14.5px] px-4 md:px-0 pb-0 md:pb-20">
             <StoreTabButtonsSection
                 selectedTab={selectedTab}
                 setSelectedTab={setSelectedTab}
