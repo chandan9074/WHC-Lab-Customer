@@ -1,4 +1,4 @@
-import { Input, Slider } from "antd";
+import { Input, InputNumber, Slider } from "antd";
 import React, { useEffect, useState } from "react";
 
 const Price = ({ setSearchQuery, searchQuery }) => {
@@ -14,6 +14,7 @@ const Price = ({ setSearchQuery, searchQuery }) => {
             setMinValue(Number(searchQuery?.minPrice));
         }
     }, [searchQuery?.maxPrice, searchQuery?.minPrice]);
+
     const handleChange = (newValue) => {
         setMinValue(newValue[0]);
         setMaxValue(newValue[1]);
@@ -43,11 +44,11 @@ const Price = ({ setSearchQuery, searchQuery }) => {
     };
 
     const handleSliderComplete = (newValue) => {
-        setSearchQuery((prev) => ({
-            ...prev,
-            minPrice: newValue[0],
-            maxPrice: newValue[1],
-        }));
+        // setSearchQuery((prev) => ({
+        //     ...prev,
+        //     minPrice: newValue[0],
+        //     maxPrice: newValue[1],
+        // }));
     };
     return (
         <div>
@@ -60,10 +61,10 @@ const Price = ({ setSearchQuery, searchQuery }) => {
                 onChangeComplete={handleSliderComplete}
             />
             <div className="grid grid-cols-2 gap-x-9 mt-5">
-                <Input
+                <InputNumber
                     placeholder="Min price"
-                    type="number"
                     className="h-10"
+                    controls={false}
                     value={minValue}
                     onChange={(e) => handleInputFieldChange(e, "min")}
                     onPressEnter={(e) => handlePressEnter(e, "min")}
@@ -73,10 +74,10 @@ const Price = ({ setSearchQuery, searchQuery }) => {
                         </span>
                     }
                 />
-                <Input
+                <InputNumber
                     placeholder="Max price"
-                    type="number"
                     className="h-10"
+                    controls={false}
                     value={maxValue}
                     onChange={(e) => handleInputFieldChange(e, "max")}
                     onPressEnter={(e) => handlePressEnter(e, "max")}

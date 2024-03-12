@@ -63,3 +63,58 @@
 .ant-slider .ant-slider-handle:hover::after {
     box-shadow: 0 0 0 4px #0b2848;
 }
+
+.ant-slider:hover .ant-slider-handle::after {
+    box-shadow: 0 0 0 4px #0b2848;
+}
+
+.ant-slider-horizontal:hover .ant-slider-rail {
+    background-color: #a6aebb;
+}
+
+/* antd input number */
+.ant-input-number-affix-wrapper input.ant-input-number-input {
+    padding-top: 8px;
+}
+
+.ant-input-number-outlined:hover {
+    border-color: #0b2848;
+}
+
+.ant-input-number-outlined:focus,
+.ant-input-number-outlined:focus-within {
+    border-color: #0b2848;
+    box-shadow: none;
+}
+
+/* Antd checkbox */
+.ant-tree
+    .ant-tree-checkbox:not(.ant-tree-checkbox-disabled):hover
+    .ant-tree-checkbox-inner {
+    border-color: #0b2848;
+}
+
+.ant-tree .ant-tree-checkbox .ant-tree-checkbox-inner {
+    border-color: #7a8699;
+    border-radius: 2px;
+}
+
+.ant-tree .ant-tree-checkbox-checked .ant-tree-checkbox-inner {
+    background-color: #0b2848;
+    border-color: #0b2848;
+}
+
+.ant-tree
+    .ant-tree-checkbox-checked:not(.ant-tree-checkbox-disabled):hover
+    .ant-tree-checkbox-inner {
+    background-color: #0b2848;
+}
+
+/* antd collapse header */
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    padding: 16px 16px 0px 0px;
+}
+
+.ant-collapse .ant-collapse-content > .ant-collapse-content-box {
+    padding: 0px;
+}

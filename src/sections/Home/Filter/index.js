@@ -1,8 +1,8 @@
-import Category from "./Category";
+import FilterCategory from "./FilterCategory";
 import Price from "./Price";
 
 const FilterOptions = {
-    Category,
+    FilterCategory,
     Price,
 };
 
