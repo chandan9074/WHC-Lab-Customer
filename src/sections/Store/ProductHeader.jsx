@@ -58,6 +58,14 @@ const ProductHeader = ({ selectedTab }) => {
                     </p>
                     <Select
                         defaultValue="newest"
+                        suffixIcon={
+                            <Image
+                                src={Icons.caretDown}
+                                width={1000}
+                                height={1000}
+                                className="w-4 h-4"
+                            />
+                        }
                         style={{ width: 92 }}
                         bordered={false}
                         className="text-sm md:text-base text-brand-blue-500"

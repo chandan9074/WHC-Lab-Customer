@@ -4,50 +4,51 @@ import { DownOutlined } from "@ant-design/icons";
 
 const { TreeNode } = Tree;
 
-const Category = ({ data, setSearchQuery, searchQuery }) => {
+const FilterCategory = ({ data, setSearchQuery, searchQuery, name }) => {
     // const [checkedKeys, setCheckedKeys] = useState([]);
     // useEffect(() => {
     //     setCheckedKeys(searchQuery.category.split("&"));
     // }, [searchQuery.category]);
 
     const renderTreeNodes = (data) => {
-        return data?.map((category) => {
-            const isNodeChecked = searchQuery?.category
-                .split("&")
-                .includes(category.name);
+        return data?.map((item) => {
+            const isNodeChecked = searchQuery[name]
+                ?.split("&")
+                .includes(item.name);
             const nodeClass = isNodeChecked ? "font-semibold" : "font-normal";
 
             return (
                 <TreeNode
                     title={
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center mt-0.5">
                             <span
-                                className={`${nodeClass} text-neutral-700 text-sm`}
+                                className={`${nodeClass} text-brand-blue-800 text-sm`}
                             >
-                                {category.name} &nbsp;
+                                {item.name} &nbsp;
                             </span>
                             <span className="text-neutral-100 text-sm">
-                                ({category.quantity})
+                                ({item.quantity})
                             </span>
                         </div>
                     }
-                    key={category.name}
+                    key={item.name}
                 />
             );
         });
     };
 
     const handleCheck = (checkedKeys, info) => {
-        // // setCheckedKeys(checkedKeys);
-        // console.log("Selected data:", checkedKeys);
-        // let searchStr = "";
-        // for (let i = info.checkedNodes.length - 1; i >= 0; i--) {
-        //     searchStr += info.checkedNodes[i].title;
-        //     if (i !== 0) {
-        //         searchStr += "&";
-        //     }
-        // }
-        // setSearchQuery({ ...searchQuery, category: searchStr });
+        // setCheckedKeys(checkedKeys);
+        console.log("Selected data:", info.checkedNodes);
+        let searchStr = "";
+        for (let i = info.checkedNodes.length - 1; i >= 0; i--) {
+            searchStr += info.checkedNodes[i].key;
+            if (i !== 0) {
+                searchStr += "&";
+            }
+        }
+        console.log(searchStr);
+        setSearchQuery({ ...searchQuery, [name]: searchStr });
     };
 
     return (
@@ -55,12 +56,12 @@ const Category = ({ data, setSearchQuery, searchQuery }) => {
             <Tree
                 checkable
                 defaultExpandAll
-                // defaultCheckedKeys={data.map((category) =>
-                //     category._id.toString()
+                // defaultCheckedKeys={data.map((name) =>
+                //     name._id.toString()
                 // )}
                 switcherIcon={<DownOutlined />}
                 onCheck={handleCheck}
-                checkedKeys={searchQuery?.category.split("&")}
+                checkedKeys={searchQuery[name]?.split("&")}
             >
                 {renderTreeNodes(data)}
             </Tree>
@@ -68,4 +69,4 @@ const Category = ({ data, setSearchQuery, searchQuery }) => {
     );
 };
 
-export default Category;
+export default FilterCategory;
