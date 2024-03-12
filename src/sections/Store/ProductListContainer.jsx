@@ -3,6 +3,7 @@ import Filter from "@/components/Filter";
 import React, { useCallback, useEffect, useState } from "react";
 import ProductDisplay from "./ProductDisplay";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import ProductService from "@/services/productsService";
 
 const ProductListContainer = ({ data, productData, selectedTab }) => {
     const searchParams = useSearchParams();
@@ -29,8 +30,8 @@ const ProductListContainer = ({ data, productData, selectedTab }) => {
             paramData[key] = value;
         });
 
-        // const response = await ProductService.getProducts(paramData);
-        // setProductList(response.body.docs);
+        const response = await ProductService.getProducts(paramData);
+        setProductList(response.body.docs);
         setIsLoading(false);
     }, [searchParams]);
 
