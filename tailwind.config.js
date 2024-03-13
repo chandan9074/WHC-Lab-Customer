@@ -30,6 +30,7 @@ module.exports = {
                 "neutral-10": "#FAFBFB",
                 "neutral-40": "#DFE2E6",
                 "neutral-50": "#C2C7D0",
+                "neutral-100": "#7A8699",
             },
         },
     },
