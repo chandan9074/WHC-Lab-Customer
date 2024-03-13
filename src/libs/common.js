@@ -43,3 +43,36 @@ export const offerData = [
             "WHCLAB is a key supplier in enzymes and processing aids for the Brewing/Distilling industry. WHCLAB can help with technical support for any of the products or give you a advise on what products might suit your breweries individual needs.",
     },
 ];
+
+export const chooseUsData = [
+    {
+        _id: "01",
+        name: "Quality Control",
+        description:
+            "We use the highest quality control standards with our yeast production. We utilize both next generation gentic/QPCR and plating methods to test the various batches for any spoiler organisms. Nothing is shipped without meeting the highest QC Standards.",
+    },
+    {
+        _id: "02",
+        name: "Healthy Viable Yeast",
+        description:
+            "We use the highest quality control standards with our yeast production. We utilize both next generation gentic/QPCR and plating methods to test the various batches for any spoiler organisms. Nothing is shipped without meeting the highest QC Standards.",
+    },
+    {
+        _id: "03",
+        name: "Healthy Viable Yeast",
+        description:
+            "We use the highest quality control standards with our yeast production. We utilize both next generation gentic/QPCR and plating methods to test the various batches for any spoiler organisms. Nothing is shipped without meeting the highest QC Standards.",
+    },
+    {
+        _id: "04",
+        name: "Healthy Viable Yeast",
+        description:
+            "We use the highest quality control standards with our yeast production. We utilize both next generation gentic/QPCR and plating methods to test the various batches for any spoiler organisms. Nothing is shipped without meeting the highest QC Standards.",
+    },
+    {
+        _id: "05",
+        name: "Healthy Viable Yeast",
+        description:
+            "We use the highest quality control standards with our yeast production. We utilize both next generation gentic/QPCR and plating methods to test the various batches for any spoiler organisms. Nothing is shipped without meeting the highest QC Standards.",
+    },
+];
