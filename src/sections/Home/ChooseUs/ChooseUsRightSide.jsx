@@ -111,7 +111,7 @@ const ChooseUsRightSide = ({ refId }) => {
     // }, []);
 
     return (
-        <div className="lg:col-span-7 col-span-12 h-[40rem]">
+        <div className="lg:col-span-7 col-span-12 h-[40rem] overflow-auto choose-us-scroll">
             <div
                 id="scrollable-section"
                 // ref={scrollableRef}

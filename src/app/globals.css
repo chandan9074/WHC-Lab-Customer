@@ -5,7 +5,3 @@
 .choose-us-scroll::-webkit-scrollbar {
     display: none;
 }
-
-body {
-    scroll-behavior: smooth;
-}
