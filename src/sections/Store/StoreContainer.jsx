@@ -4,7 +4,7 @@ import StoreTabButtonsSection from "./StoreTabButtonsSection";
 import ProductListContainer from "./ProductListContainer";
 import { StoreTabButtonsData } from "@/libs/storeTabButtons";
 
-const StoreContainer = () => {
+const StoreContainer = ({ productData }) => {
     const [selectedTab, setSelectedTab] = useState(StoreTabButtonsData[0]);
 
     return (
@@ -14,7 +14,10 @@ const StoreContainer = () => {
                 setSelectedTab={setSelectedTab}
             />
 
-            <ProductListContainer selectedTab={selectedTab} />
+            <ProductListContainer
+                selectedTab={selectedTab}
+                productData={productData}
+            />
         </div>
     );
 };

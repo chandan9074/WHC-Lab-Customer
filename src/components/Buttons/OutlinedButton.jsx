@@ -11,7 +11,7 @@ const OutlinedButton = ({
     return (
         <button
             {...rest}
-            className={`${className} ${borderColor} ${bgColor} ${textColor} whitespace-nowrap duration-300 flex justify-center items-center px-[13px] py-[6.5px] md:px-4 md:py-2 border rounded-full text-sm md:text-lg font-medium`}
+            className={`${className} ${borderColor} ${bgColor} ${textColor} whitespace-nowrap duration-300 flex justify-center items-center px-4 py-2 md:px-6 md:py-3 border rounded-full text-sm md:text-lg font-medium`}
         >
             {label}
         </button>

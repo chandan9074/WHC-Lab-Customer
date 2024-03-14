@@ -12,8 +12,11 @@ import Link from "next/link";
 // import { useRouter } from "next/navigation";
 // import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import Images from "../../../public/assets/Images";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 const ProductCard = ({ data, wishListIds }) => {
+    console.log(`${GET_IMAGE_RENDER}?key=${data.featuredImage}`);
+    console.log("render");
     // const router = useRouter();
     // const [openModal, setOpenModal] = useState(false);
     // const [isFavourite, setIsFavourite] = useState(false);
@@ -62,8 +65,8 @@ const ProductCard = ({ data, wishListIds }) => {
                 <div className="w-full h-[214px] lg:h-[400px] overflow-hidden rounded-2xl border border-[#EBEDF0]">
                     <Image
                         alt="product-image"
-                        // src={`${GET_IMAGE_RENDER}?key=${data.featuredImage}`}
-                        src={data.featuredImage}
+                        src={`${GET_IMAGE_RENDER}?key=${data.featuredImage}`}
+                        // src={data.featuredImage}
                         className="w-full h-[214px] lg:h-[400px] object-cover group-hover:scale-110 duration-300"
                         width={1000}
                         height={1000}
