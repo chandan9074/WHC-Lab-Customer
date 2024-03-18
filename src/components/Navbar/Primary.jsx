@@ -5,6 +5,7 @@ import Images from "../../../public/assets/Images";
 import Icons from "../../../public/assets/Icons";
 import MegaMenu from "../common/MegaMenu";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const Primary = () => {
     const [open, setOpen] = useState(false);
@@ -22,13 +23,15 @@ const Primary = () => {
 
     return (
         <div className="relative container mx-auto px-6 sm:px-3 lg:py-6 sm:py-5 py-4 flex items-center justify-between">
-            <Image
-                src={Images.logo}
-                alt="Logo"
-                width={1000}
-                height={1000}
-                className="lg:w-[98px] sm:w-[80px] w-[73px] lg:h-8 sm:h-7 h-6"
-            />
+            <Link href={"/"}>
+                <Image
+                    src={Images.logo}
+                    alt="Logo"
+                    width={1000}
+                    height={1000}
+                    className="lg:w-[98px] sm:w-[80px] w-[73px] lg:h-8 sm:h-7 h-6"
+                />
+            </Link>
             <div className="flex items-center gap-6">
                 <Image
                     src={Icons.search_blue}

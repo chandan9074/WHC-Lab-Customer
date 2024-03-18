@@ -4,7 +4,7 @@ const HeroRightSide = () => {
     return (
         <div className="relative">
             <video
-                src={require("./hero-video.mp4")}
+                src={"/hero-video.mp4"}
                 autoPlay
                 muted
                 loop

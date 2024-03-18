@@ -17,6 +17,7 @@ export default function Home() {
             <ProductContainer />
             <MainCategoriesContainer />
             <OfferContainer />
+
             <MarketingContainer />
             <ChooseUsContainer />
             <OurProductsContainer />
