@@ -8,6 +8,8 @@ const page = async () => {
 
     const [productData] = await Promise.all([getProducts]);
 
+    console.log(productData);
+
     return (
         <Layouts.Primary>
             <StoreContainer productData={productData.body.docs} />
