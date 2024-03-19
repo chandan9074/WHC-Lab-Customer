@@ -7,7 +7,7 @@ import Image from "next/image";
 import Icons from "../../../public/assets/Icons";
 
 const Primary = () => {
-    const navlinks = [
+    const navLinks = [
         {
             _id: 1,
             label: "Home",
@@ -57,54 +57,22 @@ const Primary = () => {
         },
     ];
 
-    const controlsLeft = useAnimation();
-    const controlsRight = useAnimation();
-    const controlsBottom = useAnimation();
-    const scrollY = useRef(window.scrollY); // Initial scroll position
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY >= 100) {
-                animateElements();
-                window.removeEventListener("scroll", handleScroll);
-            }
-            scrollY.current = currentScrollY; // Update scroll position reference
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
-    const animateElements = () => {
-        controlsLeft.start({
-            x: 0,
-            opacity: 1,
-            transition: { type: "spring", damping: 10, stiffness: 100 },
-        });
-        controlsRight.start({
-            x: 0,
-            opacity: 1,
-            transition: { type: "spring", damping: 10, stiffness: 100 },
-        });
-        controlsBottom.start({
-            y: 0,
-            opacity: 1,
-            transition: { type: "spring", damping: 10, stiffness: 100 },
-        });
-    };
+    const footerRef = useRef(null);
 
     return (
-        <div className="bg-[#111111]">
+        <div ref={footerRef} className="bg-[#111111]">
             <div className="flex flex-col gap-y-12 container mx-auto px-6 md:px-0 pt-20">
                 <div className="pt-20 flex flex-col lg:flex-row gap-y-9 justify-between text-white">
                     <motion.div
                         initial={{ x: -100, opacity: 0 }}
-                        animate={controlsLeft}
-                        transition={{ duration: 3 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        transition={{
+                            duration: 1,
+                            type: "spring",
+                            damping: 10,
+                            stiffness: 100,
+                        }}
+                        viewport={{ once: true }}
                         className="space-y-9 md:space-y-20"
                     >
                         <div className="flex flex-col gap-y-[18px] md:w-[300px]">
@@ -117,7 +85,7 @@ const Primary = () => {
                             </p>
                         </div>
                         <div className="flex flex-wrap gap-y-4 gap-x-[50px] md:gap-x-9">
-                            {navlinks.map((item) => (
+                            {navLinks.map((item) => (
                                 <Link
                                     key={item._id}
                                     href={item.path}
@@ -130,8 +98,14 @@ const Primary = () => {
                     </motion.div>
                     <motion.div
                         initial={{ x: 100, opacity: 0 }}
-                        animate={controlsRight}
-                        transition={{ duration: 3 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        transition={{
+                            duration: 1,
+                            type: "spring",
+                            damping: 10,
+                            stiffness: 100,
+                        }}
+                        viewport={{ once: true }}
                         className="md:w-[500px]"
                     >
                         <div className="space-y-9">
@@ -196,7 +170,7 @@ const Primary = () => {
                                             key={item._id}
                                             className="group flex items-center gap-x-1.5 px-[18px] py-[10.5px] border-[1.5px] border-[#2B2E3A] hover:bg-[#1B1B1B] hover:border-[#1B1B1B] rounded-[37.5px]  duration-300 relative"
                                         >
-                                            <p className="text-xs font-bold text-[#D9D9D9] group-hover:text-white leading-4 mr-0 group-hover:mr-1 duration-300">
+                                            <p className="text-xs font-bold text-[#D9D9D9] group-hover:text-white leading-4 mr-0 group-hover:mr-3 duration-300">
                                                 {item.label}
                                             </p>
 
@@ -217,8 +191,14 @@ const Primary = () => {
                 <motion.div
                     className="text-white border-t border-[#2B2E3A] py-[30px] w-full flex flex-col md:flex-row gap-y-9 items-center justify-center md:justify-between"
                     initial={{ y: 50, opacity: 0 }}
-                    animate={controlsBottom}
-                    transition={{ duration: 3 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{
+                        duration: 1,
+                        type: "spring",
+                        damping: 10,
+                        stiffness: 100,
+                    }}
+                    viewport={{ once: true }}
                 >
                     <div className="flex gap-x-3 text-[#D9D9D9] text-xs font-semibold leading-4 items-center">
                         <p>Privacy Policy</p>
