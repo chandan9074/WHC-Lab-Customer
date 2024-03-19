@@ -190,7 +190,7 @@ const Primary = () => {
                 </div>
                 <motion.div
                     className="text-white border-t border-[#2B2E3A] py-[30px] w-full flex flex-col md:flex-row gap-y-9 items-center justify-center md:justify-between"
-                    initial={{ y: 50, opacity: 0 }}
+                    initial={{ y: 10, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{
                         duration: 1,
