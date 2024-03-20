@@ -20,6 +20,12 @@ const nextConfig = {
                 pathname: "/**",
             },
             {
+                protocol: "http",
+                hostname: "192.168.10.5",
+                port: "5003",
+                pathname: "/**",
+            },
+            {
                 protocol: "https",
                 hostname: "whc-lab-backend.s2.zaagsys.com",
                 pathname: "/**",
