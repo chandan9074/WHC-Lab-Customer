@@ -44,7 +44,7 @@ const PioneeringExcellenceContainer = () => {
                                     className="w-full h-[320px] md:h-[629px] flex items-center justify-center"
                                 >
                                     <div className="px-4 py-4 md:py-6 md:px-9 bg-stroke-new bg-opacity-25 backdrop-blur-xl rounded-[6.5px] md:rounded-[25px]">
-                                        <p className="text-sm md:text-lg text-white leading-4 md:leading-7 text-center w-[280px] md:w-[550px] lg:w-[750px] xl:w-[911px] md:py-4">
+                                        <p className="text-sm md:text-lg text-white leading-4 md:leading-7 text-center w-[250px] sm:w-[350px] md:w-[550px] lg:w-[750px] xl:w-[911px] md:py-4">
                                             {item.comment}
                                         </p>
                                     </div>
