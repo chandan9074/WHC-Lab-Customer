@@ -17,6 +17,11 @@ import caretDown from "./caretDown.svg";
 import arrowLeft from "./arrow-left.svg";
 import arrowRightGreen from "./arrow-right-green.svg";
 import doubleQuotation from "./doubleQuotation.svg";
+import arrow_up_right_gray from "./arrow_up_right_gray.svg";
+import paper_plane_tilt from "./paper_plane_tilt.svg";
+import paper_plane_tilt_white from "./paper_plane_tilt_white.svg";
+
+import copy from "./copy.svg";
 
 const Icons = {
     search_blue,
@@ -38,6 +43,10 @@ const Icons = {
     arrowLeft,
     arrowRightGreen,
     doubleQuotation,
+    arrow_up_right_gray,
+    paper_plane_tilt,
+    paper_plane_tilt_white,
+    copy,
 };
 
 export default Icons;
