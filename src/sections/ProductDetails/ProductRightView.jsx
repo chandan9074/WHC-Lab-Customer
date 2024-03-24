@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import AddToCartSuccession from "./AddToCartSuccession";
+import Link from "next/link";
+import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
 
 const ProductRightView = ({
     forModal = false,
@@ -241,10 +243,7 @@ const ProductRightView = ({
                             <Link href={PRODUCT_DETAILS_PATH + data?._id}>
                                 <Buttons.OutlinedButton
                                     label="View Details"
-                                    width="w-full h-12"
-                                    active={true}
-                                    activeTextColor="text-neutral-700 text-base font-semibold"
-                                    activeBorderColor="border border-neutral-700"
+                                    className="w-full h-12"
                                 />
                             </Link>
                         )}
