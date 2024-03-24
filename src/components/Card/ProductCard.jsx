@@ -13,6 +13,7 @@ import Link from "next/link";
 // import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import Images from "../../../public/assets/Images";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
+import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
 
 const ProductCard = ({ data, wishListIds }) => {
     console.log(`${GET_IMAGE_RENDER}?key=${data.featuredImage}`);
@@ -111,8 +112,8 @@ const ProductCard = ({ data, wishListIds }) => {
             </div>
 
             <Link
-                // href={PRODUCT_DETAILS_PATH + data?._id}
-                href={"/"}
+                href={PRODUCT_DETAILS_PATH + data?._id}
+                // href={"/"}
                 className="space-y-2 "
             >
                 <div className="h-10">
