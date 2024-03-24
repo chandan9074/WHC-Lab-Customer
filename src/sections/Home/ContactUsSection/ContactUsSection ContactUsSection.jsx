@@ -1,9 +1,9 @@
 import { Carousel } from "antd";
 import React from "react";
-import Icons from "../../../public/assets/Icons";
+import Icons from "../../../../public/assets/Icons";
 import Image from "next/image";
 
-const Secondary = () => {
+const ContactUsSection = () => {
     return (
         <div className="lg:block hidden container mx-auto py-[120px] bg-white">
             <div className="flex items-center justify-between">
@@ -55,4 +55,4 @@ const Secondary = () => {
     );
 };
 
-export default Secondary;
+export default ContactUsSection;

@@ -7,7 +7,6 @@ const Primary = ({ children }) => {
         <div>
             <Navbar.Primary />
             {children}
-            <Footer.Secondary />
             <Footer.Primary />
         </div>
     );
