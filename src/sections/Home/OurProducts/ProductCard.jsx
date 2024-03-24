@@ -27,7 +27,7 @@ const ProductCard = () => {
                     height={1000}
                     className="w-full"
                 />
-                <p className="mt-[30px] text-lg md:text-xl lg:text-2xl xl:text-[32px] text-white leading-[44px] tracking-[0.285px]">
+                <p className="mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-[30px] text-lg md:text-xl lg:text-2xl xl:text-[32px] text-white left-7 sm:leading-8 md:leading-9 lg:leading-[44px] tracking-[0.285px]">
                     Blitz Lager-Fast Lager Yeast-Fresh Yeast Pouch
                 </p>
                 <div className="mt-6 flex justify-end">
@@ -37,6 +37,7 @@ const ProductCard = () => {
                         bgColor="bg-transparent"
                         textColor="text-white"
                         border="border border-white"
+                        width="w-auto"
                     />
                 </div>
             </div>

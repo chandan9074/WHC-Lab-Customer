@@ -27,6 +27,7 @@ const OurProductsContainer = () => {
         // } else if (window.innerWidth >= 640) {
         // }
         const value = generateLeftMargin();
+        console.log(value);
         setLeftMargin(value.margin);
         setSlides(value.slides);
     }, []);
@@ -40,15 +41,15 @@ const OurProductsContainer = () => {
                     title={"VARIOUS SERVICES WE OFFER"}
                     color="text-white"
                 />
-                <NavHeader activeTab={activeTab} setActiveTab={setActiveTab} />
+                {/* <NavHeader activeTab={activeTab} setActiveTab={setActiveTab} /> */}
                 <div className="h-[1px] w-full bg-stroke-new mt-6" />
                 <div className="mt-9 cursor-grab">
                     <Carousel
                         slidesToShow={slides}
-                        // initialSlide={0}
+                        initialSlide={slides === 1 ? 1.2 : slides}
                         dots={false}
                         draggable
-                        centerMode
+                        centerMode={slides === 1 ? false : true}
                     >
                         {[1, 2, 3, 4, 5, 6].map((item) => (
                             <ProductCard key={item} />
