@@ -1,6 +1,6 @@
 import Layouts from "@/layouts";
 import ChooseUsContainer from "@/sections/Home/ChooseUs/ChooseUsContainer";
-import ContactUsSection from "@/sections/Home/ContactUsSection/ContactUsSection ContactUsSection";
+import ContactUsSection from "@/sections/Home/ContactUsSection/ContactUsSection";
 import AboutUs from "@/sections/Home/Hero/AboutUs";
 import HeroContainer from "@/sections/Home/Hero/HeroContainer";
 import MainCategoriesContainer from "@/sections/Home/MainCategories/MainCategoriesContainer";
