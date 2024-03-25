@@ -42,7 +42,7 @@ export default function FAQ() {
 
 
 
-                <div className={`flex flex-col md:flex-row justify-between gap-10 items-center p-8 border transform transition-colors duration-300 border-stroke-new rounded-2xl`}>
+                <div className={`flex flex-col md:flex-row justify-between gap-5 md:gap-10 items-center p-8 border transform transition-colors duration-300 border-stroke-new rounded-2xl`}>
                     <p className="font-semibold text-sm md:text-[18px] text-brand-blue-500">Do all tokens need to be used at onceDo all tokens need to be used at once?</p>
                     <Buttons.PrimaryButton label={'Contact Us'} className='whitespace-nowrap px-14' />
                 </div>
