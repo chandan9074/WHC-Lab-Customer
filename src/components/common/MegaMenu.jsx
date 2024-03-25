@@ -56,15 +56,13 @@ const MegaMenu = ({ setOpen, open }) => {
                                 >
                                     <Link
                                         href={item.path}
-                                        className={` ${
-                                            item.name === `RESOURCES`
-                                                ? `${
-                                                      showResourcesButtons
-                                                          ? "text-brand-blue-500"
-                                                          : "text-white"
-                                                  }`
-                                                : "text-white hover:text-brand-blue-500 hover:ml-1 "
-                                        } text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-500`}
+                                        className={` ${item.name === `RESOURCES`
+                                            ? `${showResourcesButtons
+                                                ? "text-brand-blue-500"
+                                                : "text-white"
+                                            }`
+                                            : "text-white hover:text-brand-blue-500 hover:ml-1 "
+                                            } text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-500`}
                                     >
                                         {item.name}
                                     </Link>
@@ -145,20 +143,20 @@ const MegaMenu = ({ setOpen, open }) => {
                         <div className="col-span-12 lg:col-span-4 lg:mx-auto">
                             <LinkHeader title={"Brewers & Retailers"} />
                             <div className="mt-4 space-y-2 mb-9 flex flex-col">
-                                <NavLink title={"LOG IN"} />
-                                <NavLink title={"REGISTER NEW ACCOUNT"} />
+                                <NavLink title={"LOG IN"} path="/log-in" />
+                                <NavLink title={"REGISTER NEW ACCOUNT"} path="/register" />
                             </div>
                             <LinkHeader title={"Our Products"} />
                             <div className="mt-4 space-y-2 mb-9 flex flex-col">
-                                <NavLink title={"BUY ONLINE"} />
-                                <NavLink title={"OUR DISTRIBUTORS"} />
+                                <NavLink title={"BUY ONLINE"} path="/buy-online" />
+                                <NavLink title={"OUR DISTRIBUTORS"} path="/our-distributors" />
                             </div>
                             <div className="space-y-2 mb-9 flex flex-col">
-                                <NavLink title={"FAQ"} />
-                                <NavLink title={"BLOG"} />
-                                <NavLink title={"CONTACT US"} />
+                                <NavLink title={"FAQ"} path="/faq" />
+                                <NavLink title={"BLOG"} path="/blog" />
+                                <NavLink title={"CONTACT US"} path="/contact-us" />
                             </div>
-                            <NavLink title={"WHC LAB"} />
+                            <NavLink title={"WHC LAB"} path="/" />
                             <p className="mt-4 text-base text-white font-medium leading-7 w-[336px]">
                                 Revolutionizing Longevity and Health through
                                 Personalized Medicine and Advanced Science.
