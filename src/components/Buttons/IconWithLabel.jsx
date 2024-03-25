@@ -11,14 +11,16 @@ const IconWithLabel = ({
     rightIcon = Icons.arrow_up_right_white,
     bgHoverColor = "hover:bg-brand-blue-800",
     textHoverColor = "text-",
+    width = "sm:w-auto w-full",
+    border
 }) => {
     return (
         <button
-            className={`${className} group py-3 sm:py-3.5 px-6 rounded-full ${bgColor} ${bgHoverColor} $ duration-200 flex items-center gap-2.5 sm:w-auto w-full justify-center`}
+            className={`${className} group py-2 md:py-2.5 lg:py-3.5 px-4 md:px-5 lg:px-6 rounded-full ${bgColor} ${bgHoverColor} ${border && border} ${width} duration-200 flex items-center gap-2.5 sm:w-auto w-full justify-center`}
         >
             {align === "left" && (
                 <Image
-                    src={Icons.arrow_up_right_white}
+                    src={icon}
                     alt="Logo"
                     width={1000}
                     height={1000}

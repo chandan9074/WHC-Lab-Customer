@@ -9,6 +9,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            backgroundImage: {
+                "our-product": "url('/assets/Images/product_bg.png')",
+            },
             keyframes: {
                 fadeIn: {
                     "0%": { opacity: "0" },

@@ -46,9 +46,7 @@ const ChooseUsContainer = () => {
                 ref={sectionOneRef}
             >
                 <div className="container mx-auto h-full flex flex-col justify-center items-start xl:py-[100px] lg:py-20 md:py-14 sm:py-10 py-6">
-                    <h1 className="text-[#061628] font-semibold lg:text-5xl md:text-4xl sm:text-3xl text-2xl">
-                        Why Choose Us
-                    </h1>
+                    <SectionHeader title={"Why Choose Us"} />
                     <div className="h-[700px] overflow-hidden grid grid-cols-12 mt-12">
                         <div className="col-span-5">
                             <p className="md:text-base text-sm font-light w-full sm:w-[486px] text-[#061628] text-opacity-80 md:mb-9 mb-7">

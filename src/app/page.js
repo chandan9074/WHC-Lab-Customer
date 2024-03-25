@@ -6,6 +6,7 @@ import HeroContainer from "@/sections/Home/Hero/HeroContainer";
 import MainCategoriesContainer from "@/sections/Home/MainCategories/MainCategoriesContainer";
 import MarketingContainer from "@/sections/Home/MarketingSection/MarketingContainer";
 import OfferContainer from "@/sections/Home/Offer/OfferContainer";
+import OurProductsContainer from "@/sections/Home/OurProducts/OurProductsContainer";
 import PioneeringExcellenceContainer from "@/sections/Home/PioneeringExcellence/PioneeringExcellenceContainer";
 import ProductContainer from "@/sections/Home/Product/ProductContainer";
 import TestimonialSection from "@/sections/Home/TestimonialSection/TestimonialSection";
@@ -19,6 +20,7 @@ export default function Home() {
             <MainCategoriesContainer />
             <OfferContainer />
             <MarketingContainer />
+            <OurProductsContainer />
             <ChooseUsContainer />
             <PioneeringExcellenceContainer />
             <TestimonialSection />
