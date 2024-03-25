@@ -10,7 +10,7 @@ const ProductDisplay = ({ data, filterData, wishListIds, selectedTab }) => {
     console.log(data);
     return (
         <div>
-            <ProductHeader selectedTab={selectedTab} />
+            <ProductHeader selectedTab={selectedTab} dataLength={data.length} />
             <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-6 mt-6">
                 {data.map((item, index) => (
                     <div className="col-span-1" key={index}>

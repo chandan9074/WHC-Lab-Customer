@@ -20,8 +20,14 @@ import doubleQuotation from "./doubleQuotation.svg";
 import arrow_up_right_gray from "./arrow_up_right_gray.svg";
 import paper_plane_tilt from "./paper_plane_tilt.svg";
 import paper_plane_tilt_white from "./paper_plane_tilt_white.svg";
-
+import share from "./share.svg";
 import copy from "./copy.svg";
+import disabled_minus from "./disabled_minus.svg";
+import disabled_plus from "./disabled_plus.svg";
+import plus from "./plus.svg";
+import minus from "./minus.svg";
+import rating from "./rating.svg";
+import verified from "./verified.svg";
 
 const Icons = {
     search_blue,
@@ -47,6 +53,13 @@ const Icons = {
     paper_plane_tilt,
     paper_plane_tilt_white,
     copy,
+    share,
+    disabled_minus,
+    disabled_plus,
+    plus,
+    minus,
+    rating,
+    verified,
 };
 
 export default Icons;
