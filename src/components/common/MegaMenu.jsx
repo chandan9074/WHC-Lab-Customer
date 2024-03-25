@@ -190,10 +190,10 @@ const LinkHeader = ({ title }) => {
     return <h6 className="text-white text-base font-semibold">{title}</h6>;
 };
 
-const NavLink = ({ title }) => {
+const NavLink = ({ title, path }) => {
     return (
         <Link
-            href={"/"}
+            href={path}
             className="text-white text-xl font-bold hover:text-brand-blue-500 hover:ml-1 duration-300"
         >
             {title}

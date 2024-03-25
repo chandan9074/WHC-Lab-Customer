@@ -16,14 +16,23 @@
 /* antd input outline */
 .ant-input-outlined {
     border-color: #ebedf0;
+    padding: 13px 12px !important;
+    line-height: 24px;
+    font-weight: 400;
+    border-radius: 4px;
 }
 
 .ant-input-outlined:hover {
-    border-color: #ebedf0 !important;
+    border-color: #0b2848 !important;
+}
+
+.ant-input-outlined:focus {
+    box-shadow: none;
+    border-color: #0b2848 !important;
 }
 
 .ant-input-outlined:focus-within {
-    border-color: #ebedf0 !important;
+    border-color: #0b2848 !important;
 }
 
 /* antd slider rail */
@@ -91,6 +100,21 @@
 }
 
 /* Antd checkbox */
+.ant-checkbox-inner {
+    /* background-color: white !important; */
+    border-color: #0b2848 !important;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #0b2848;
+}
+
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover
+    .ant-checkbox-checked:not(.ant-checkbox-disabled)
+    .ant-checkbox-inner {
+    background-color: #0b2848;
+}
+
 .ant-tree
     .ant-tree-checkbox:not(.ant-tree-checkbox-disabled):hover
     .ant-tree-checkbox-inner {
