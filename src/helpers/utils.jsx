@@ -5,7 +5,7 @@ export const generateLeftMargin = () => {
     if (window.innerWidth >= 1568) {
         x = (window.innerWidth - 1568) / 2;
         value = window.innerWidth - (1568 + x);
-        slides = 3;
+        slides = 3.2;
     } else if (window.innerWidth >= 1280) {
         x = (window.innerWidth - 1280) / 2;
         value = window.innerWidth - (1280 + x);
@@ -24,7 +24,7 @@ export const generateLeftMargin = () => {
         slides = 1.5;
     } else {
         value = 0;
-        slides = 1;
+        slides = 1.05;
     }
 
     return { margin: value, slides: slides };

@@ -8,6 +8,7 @@ import NavHeader from "./NavHeader";
 import ProductCard from "./ProductCard";
 import { Carousel } from "antd";
 import { generateLeftMargin } from "@/helpers/utils";
+import Icons from "../../../../public/assets/Icons";
 
 const OurProductsContainer = () => {
     const [activeTab, setActiveTab] = useState("New Products");
@@ -32,30 +33,38 @@ const OurProductsContainer = () => {
         setSlides(value.slides);
     }, []);
     return (
-        <div className="bg-our-product bg-cover">
-            <div
-                style={{ marginLeft: `${leftMargin}px` }}
-                className={`  pl-6 sm:pl-3 xl:py-[100px] lg:py-20 md:py-14 sm:py-10 py-6`}
-            >
+        <div className="bg-our-product bg-cover pl-6 sm:pl-3 xl:py-[100px] lg:py-20 md:py-14 sm:py-10 py-6">
+            <div className={`container mx-auto`}>
                 <SectionHeader
                     title={"VARIOUS SERVICES WE OFFER"}
                     color="text-white"
                 />
-                {/* <NavHeader activeTab={activeTab} setActiveTab={setActiveTab} /> */}
+                <NavHeader activeTab={activeTab} setActiveTab={setActiveTab} />
                 <div className="h-[1px] w-full bg-stroke-new mt-6" />
-                <div className="mt-9 cursor-grab">
-                    <Carousel
-                        slidesToShow={slides}
-                        initialSlide={slides === 1 ? 1.2 : slides}
-                        dots={false}
-                        draggable
-                        centerMode={slides === 1 ? false : true}
-                    >
-                        {[1, 2, 3, 4, 5, 6].map((item) => (
-                            <ProductCard key={item} />
-                        ))}
-                    </Carousel>
-                </div>
+            </div>
+            <div
+                className="mt-9 cursor-grab"
+                style={{ marginLeft: `${leftMargin}px` }}
+            >
+                <Carousel
+                    slidesToShow={slides}
+                    initialSlide={slides === 1 ? 1.2 : slides}
+                    dots={false}
+                    draggable
+                    centerMode={slides === 1.05 ? false : true}
+                >
+                    {["01", "02", "03", "04", "05", "06"].map((item) => (
+                        <ProductCard key={item} index={item} />
+                    ))}
+                </Carousel>
+            </div>
+            <div className="flex lg:hidden mt-10 justify-center pr-6">
+                <Buttons.IconWithLabel
+                    label="Explore Our All Strains"
+                    icon={Icons.arrow_up_right_blue}
+                    bgColor="bg-white"
+                    textColor="text-brand-blue-800"
+                />
             </div>
         </div>
     );

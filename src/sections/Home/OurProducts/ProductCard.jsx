@@ -4,7 +4,7 @@ import Images from "../../../../public/assets/Images";
 import Buttons from "@/components/Buttons";
 import Icons from "../../../../public/assets/Icons";
 
-const ProductCard = () => {
+const ProductCard = ({ index }) => {
     return (
         <div className="relative rounded-xl w-[300px] sm:w-[320px] md:w-[370px] lg:w-[390px] xl:w-[420px] 2xl:w-[467px] overflow-hidden">
             <Image
@@ -16,7 +16,7 @@ const ProductCard = () => {
             />
             <div className="absolute left-0 bottom-0 z-20 ">
                 <p className="text-lg md:text-xl lg:text-2xl xl:text-[32px] p-2.5 text-white font-light">
-                    01
+                    {index}
                 </p>
             </div>
             <div className="relative z-20 p-4 md:p-5 lg:p-6 xl:p-[30px]">

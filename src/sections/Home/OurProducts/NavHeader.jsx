@@ -19,7 +19,7 @@ const NavHeader = ({ activeTab, setActiveTab }) => {
     ];
     return (
         <div className="mt-9 flex items-center justify-between">
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 overflow-x-auto tab-scroll">
                 {navButtons.map((item) => (
                     <Buttons.OutlinedButton
                         onClick={() => setActiveTab(item.label)}
@@ -34,12 +34,14 @@ const NavHeader = ({ activeTab, setActiveTab }) => {
                     />
                 ))}
             </div>
-            <Buttons.IconWithLabel
-                label="Explore Our All Strains"
-                icon={Icons.arrow_up_right_blue}
-                bgColor="bg-white"
-                textColor="text-brand-blue-800"
-            />
+            <div className="hidden lg:block">
+                <Buttons.IconWithLabel
+                    label="Explore Our All Strains"
+                    icon={Icons.arrow_up_right_blue}
+                    bgColor="bg-white"
+                    textColor="text-brand-blue-800"
+                />
+            </div>
         </div>
     );
 };
