@@ -9,10 +9,12 @@ const IconWithLabel = ({
     bgColor = "bg-brand-blue-500",
     textColor = "text-white",
     rightIcon = Icons.arrow_up_right_white,
+    bgHoverColor = "hover:bg-brand-blue-800",
+    textHoverColor = "text-",
 }) => {
     return (
         <button
-            className={`${className} py-3 sm:py-3.5 px-6 rounded-full ${bgColor} flex items-center gap-2.5 sm:w-auto w-full justify-center`}
+            className={`${className} group py-3 sm:py-3.5 px-6 rounded-full ${bgColor} ${bgHoverColor} $ duration-200 flex items-center gap-2.5 sm:w-auto w-full justify-center`}
         >
             {align === "left" && (
                 <Image
@@ -23,7 +25,9 @@ const IconWithLabel = ({
                     className="w-6 h-6"
                 />
             )}
-            <p className={`${textColor} md:text-base text-sm font-semibold`}>
+            <p
+                className={`${textColor} ${textHoverColor} duration-200 md:text-base text-sm font-semibold`}
+            >
                 {label}
             </p>
             {align === "right" && (

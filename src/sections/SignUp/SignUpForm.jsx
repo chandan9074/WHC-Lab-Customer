@@ -32,6 +32,7 @@ import LabelText from "@/components/common/LabelText";
 import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Icons from "../../../public/assets/Icons";
 import Images from "../../../public/assets/Images";
+import { LOGIN_PATH } from "@/helpers/slug";
 
 const { Title } = Typography;
 
@@ -127,7 +128,7 @@ const SignInForm = () => {
                         alt="Logo"
                         width={1000}
                         height={1000}
-                        className=" md:w-[148.55px] md:h-[49px]"
+                        className="sm:w-[80px] w-[73px] sm:h-7 h-6 md:w-[148.55px] md:h-[49px]"
                     />
                 </div>
 
@@ -144,16 +145,16 @@ const SignInForm = () => {
                 >
                     <div className="flex flex-col gap-9 w-full">
                         <div className="flex flex-col gap-2 w-full">
-                            <h1 className="text-[28px] font-semibold leading-[42px] text-brand-blue-500 mb-0">
+                            <h1 className="text-xl md:text-[28px] font-semibold leading-[42px] text-brand-blue-500 mb-0">
                                 Register New Account
                             </h1>
-                            <h4 className="m-0 text-base font-normal text-neutral-400">
+                            <h4 className="m-0 text-sm md:text-base font-normal text-neutral-400">
                                 Please fill up the form to create a new account!
                             </h4>
                         </div>
 
                         <div className="flex flex-col gap-6 w-full">
-                            <Flex gap={24}>
+                            <div className="flex flex-col gap-6 md:flex-row">
                                 <Form.Item
                                     label={<LabelText>First name</LabelText>}
                                     name="firstName"
@@ -191,7 +192,7 @@ const SignInForm = () => {
                                         placeholder="Write your last name"
                                     />
                                 </Form.Item>
-                            </Flex>
+                            </div>
 
                             <Form.Item
                                 label={<LabelText>Email</LabelText>}
@@ -397,8 +398,7 @@ const SignInForm = () => {
                 <h4 className="text-sm font-medium text-neutral-400 text-center leading-[21px]">
                     Already have an account?{" "}
                     <Link
-                        // href={SIGN_IN_PATH}
-                        href={"/"}
+                        href={LOGIN_PATH}
                         className="text-[15px] text-brand-blue-500 cursor-pointer font-medium leading-[19.53px]"
                     >
                         Sign In
