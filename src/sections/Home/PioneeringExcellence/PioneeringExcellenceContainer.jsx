@@ -56,6 +56,8 @@ const PioneeringExcellenceContainer = () => {
                                 label={"EXPLORE OUR ALL STRAINS"}
                                 bgColor="bg-white"
                                 textColor="text-brand-blue-800"
+                                bgHoverColor="hover:bg-brand-blue-500"
+                                textHoverColor="group-hover:text-white"
                                 rightIcon={Icons.arrow_up_right_blue}
                             />
                         </div>

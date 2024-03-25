@@ -145,3 +145,8 @@
 .ant-collapse .ant-collapse-content > .ant-collapse-content-box {
     padding: 0px;
 }
+
+/* ANtd button */
+.ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+    background-color: #061628;
+}
