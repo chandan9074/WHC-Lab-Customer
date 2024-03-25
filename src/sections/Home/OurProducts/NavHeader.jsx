@@ -37,7 +37,7 @@ const NavHeader = ({ activeTab, setActiveTab }) => {
             <div className="hidden lg:block">
                 <Buttons.IconWithLabel
                     label="Explore Our All Strains"
-                    icon={Icons.arrow_up_right_blue}
+                    rightIcon={Icons.arrow_up_right_blue}
                     bgColor="bg-white"
                     textColor="text-brand-blue-800"
                 />

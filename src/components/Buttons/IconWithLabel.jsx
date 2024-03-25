@@ -5,17 +5,18 @@ import Icons from "../../../public/assets/Icons";
 const IconWithLabel = ({
     align = "right",
     label,
-    textColor = "text-white",
+    className,
     bgColor = "bg-brand-blue-500",
-    icon = Icons.arrow_up_right_white,
+    textColor = "text-white",
+    rightIcon = Icons.arrow_up_right_white,
+    bgHoverColor = "hover:bg-brand-blue-800",
+    textHoverColor = "text-",
     width = "sm:w-auto w-full",
-    border,
+    border
 }) => {
     return (
         <button
-            className={`py-2 md:py-2.5 lg:py-3.5 px-4 md:px-5 lg:px-6 rounded-full ${bgColor} ${
-                border && border
-            } flex items-center gap-2.5 ${width} justify-center`}
+            className={`${className} group py-2 md:py-2.5 lg:py-3.5 px-4 md:px-5 lg:px-6 rounded-full ${bgColor} ${bgHoverColor} ${border && border} ${width} duration-200 flex items-center gap-2.5 sm:w-auto w-full justify-center`}
         >
             {align === "left" && (
                 <Image
@@ -26,12 +27,14 @@ const IconWithLabel = ({
                     className="w-6 h-6"
                 />
             )}
-            <p className={`${textColor} md:text-base text-sm font-semibold`}>
+            <p
+                className={`${textColor} ${textHoverColor} duration-200 md:text-base text-sm font-semibold`}
+            >
                 {label}
             </p>
             {align === "right" && (
                 <Image
-                    src={icon}
+                    src={rightIcon}
                     alt="Logo"
                     width={1000}
                     height={1000}

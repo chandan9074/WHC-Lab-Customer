@@ -12,12 +12,12 @@ export default class ProductService {
         return res;
     }
 
-    // static async getSingleProduct(id) {
-    //     const res = await palooiFetch({
-    //         endpoint: GET_PRODUCTS,
-    //         query: { id },
-    //         ...MethodsStructure.getMethod(),
-    //     });
-    //     return res;
-    // }
+    static async getSingleProduct(id) {
+        const res = await whcFetch({
+            endpoint: GET_PRODUCTS,
+            query: { id },
+            ...MethodsStructure.getMethod(),
+        });
+        return res;
+    }
 }
