@@ -32,6 +32,7 @@ import LabelText from "@/components/common/LabelText";
 import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Icons from "../../../public/assets/Icons";
 import Images from "../../../public/assets/Images";
+import { LOGIN_PATH } from "@/helpers/slug";
 
 const { Title } = Typography;
 
@@ -397,8 +398,7 @@ const SignInForm = () => {
                 <h4 className="text-sm font-medium text-neutral-400 text-center leading-[21px]">
                     Already have an account?{" "}
                     <Link
-                        // href={SIGN_IN_PATH}
-                        href={"/"}
+                        href={LOGIN_PATH}
                         className="text-[15px] text-brand-blue-500 cursor-pointer font-medium leading-[19.53px]"
                     >
                         Sign In

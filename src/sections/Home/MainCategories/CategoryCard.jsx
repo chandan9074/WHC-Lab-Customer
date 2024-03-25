@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./CategoryCard.module.css";
 import Icons from "../../../../public/assets/Icons";
 import Image from "next/image";
+import Buttons from "@/components/Buttons";
 
 const CategoryCard = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -73,9 +74,10 @@ const CategoryCard = () => {
                                 height={1000}
                                 className="w-24"
                             />
-                            <button className="rounded-[20px] border border-brand-blue-500 text-sm font-medium px-[13px] py-[6.5px] md:text-[18px] md:px-4 md:py-2">
+                            {/* <button className="rounded-[20px] border border-brand-blue-500 text-sm font-medium px-[13px] py-[6.5px] md:text-[18px] md:px-4 md:py-2">
                                 Explore Now
-                            </button>
+                            </button> */}
+                            <Buttons.OutlinedButton label="Explore Now" />
                         </div>
                     </div>
                 </figure>
