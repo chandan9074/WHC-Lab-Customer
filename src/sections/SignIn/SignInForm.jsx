@@ -134,7 +134,7 @@ const SignInForm = () => {
                             alt="Logo"
                             width={1000}
                             height={1000}
-                            className=" md:w-[148.55px] md:h-[49px]"
+                            className="sm:w-[80px] w-[73px] sm:h-7 h-6 md:w-[148.55px] md:h-[49px]"
                         />
                     </div>
 
@@ -152,7 +152,7 @@ const SignInForm = () => {
                         >
                             <div className="self-start flex flex-col gap-3 w-full">
                                 <div className="flex flex-col gap-2 w-full">
-                                    <h1 className="text-[28px] font-semibold leading-[42px] text-brand-blue-500 mb-0">
+                                    <h1 className="text-xl md:text-[28px] font-semibold leading-[42px] text-brand-blue-500 mb-0">
                                         Log in
                                     </h1>
                                     <h4 className="m-0 text-base font-normal text-neutral-400">
@@ -228,18 +228,15 @@ const SignInForm = () => {
                                         valuePropName="checked"
                                         className="flex items-center m-0 "
                                     >
-                                        <Checkbox className="  text-[#3A3A3A] text-opacity-[88%] text-sm font-medium">
+                                        <Checkbox className=" text-[#3A3A3A] text-opacity-[88%] text-sm font-medium">
                                             Keep me logged in
                                         </Checkbox>
                                     </Form.Item>
 
                                     <Link href={"/"}>
-                                        <Title
-                                            level={5}
-                                            className="text-brand-blue-500 m-0 font-medium hover:underline cursor-pointer text-sm"
-                                        >
+                                        <h5 className="text-brand-blue-500 m-0 font-medium hover:underline cursor-pointer text-sm">
                                             Forgot password?
-                                        </Title>
+                                        </h5>
                                     </Link>
                                 </div>
                             </div>
