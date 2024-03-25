@@ -28,6 +28,8 @@ import plus from "./plus.svg";
 import minus from "./minus.svg";
 import rating from "./rating.svg";
 import verified from "./verified.svg";
+import wishlistIcon_blue from "./wishlistIcon_blue.svg";
+import user_avatar from "./user_avatar.svg";
 
 const Icons = {
     search_blue,
@@ -60,6 +62,8 @@ const Icons = {
     minus,
     rating,
     verified,
+    wishlistIcon_blue,
+    user_avatar
 };
 
 export default Icons;
