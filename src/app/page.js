@@ -8,6 +8,7 @@ import MarketingContainer from "@/sections/Home/MarketingSection/MarketingContai
 import OfferContainer from "@/sections/Home/Offer/OfferContainer";
 import PioneeringExcellenceContainer from "@/sections/Home/PioneeringExcellence/PioneeringExcellenceContainer";
 import ProductContainer from "@/sections/Home/Product/ProductContainer";
+import TestimonialSection from "@/sections/Home/TestimonialSection/TestimonialSection";
 import Image from "next/image";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
             <MarketingContainer />
             <ChooseUsContainer />
             <PioneeringExcellenceContainer />
+            <TestimonialSection />
             <ContactUsSection />
         </Layouts.Primary>
     );

@@ -133,7 +133,7 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                 </motion.div>
             </div>
             <motion.div
-                className="text-white border-t border-[#2B2E3A] py-[30px] w-full flex flex-col md:flex-row gap-y-9 items-center justify-center md:justify-between"
+                className="text-white border-t border-[#2B2E3A] py-[30px] w-full flex flex-col md:flex-row gap-y-9 items-center justify-center md:justify-between mt-12"
                 initial={{ y: 10, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{

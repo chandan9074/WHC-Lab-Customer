@@ -14,6 +14,9 @@ import right_arrow_gray from "./right_arrow_gray.svg";
 import arrow_up_right_brand_blue_gradient from "./arrow_up_right_brand_blue_gradient.svg";
 import brewing_yeast from "./brewing_yeast.svg";
 import caretDown from "./caretDown.svg";
+import arrowLeft from "./arrow-left.svg";
+import arrowRightGreen from "./arrow-right-green.svg";
+import doubleQuotation from "./doubleQuotation.svg";
 import arrow_up_right_gray from "./arrow_up_right_gray.svg";
 import paper_plane_tilt from "./paper_plane_tilt.svg";
 import paper_plane_tilt_white from "./paper_plane_tilt_white.svg";
@@ -43,6 +46,9 @@ const Icons = {
     arrow_up_right_brand_blue_gradient,
     brewing_yeast,
     caretDown,
+    arrowLeft,
+    arrowRightGreen,
+    doubleQuotation,
     arrow_up_right_gray,
     paper_plane_tilt,
     paper_plane_tilt_white,
