@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import Filter from "@/components/Filter";
 
-const ProductHeader = ({ selectedTab }) => {
+const ProductHeader = ({ selectedTab, dataLength }) => {
     const [open, setOpen] = useState(false);
 
     const showDrawer = () => {
@@ -50,7 +50,7 @@ const ProductHeader = ({ selectedTab }) => {
                 </button>
 
                 <h5 className="text-sm md:text-base text-brand-blue-800 font-normal leading-6">
-                    Showing <span>{productsData.length}</span> products
+                    Showing <span>{dataLength}</span> products
                 </h5>
                 <div className="flex items-center">
                     <p className="hidden lg:block text-brand-blue-800 font-normal leading-6 text-sm md:text-base">

@@ -13,24 +13,26 @@ import Link from "next/link";
 // import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import Images from "../../../public/assets/Images";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
+import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
+import QuickViewModalContent from "@/sections/ProductDetails/QuickViewModalContent";
 
 const ProductCard = ({ data, wishListIds }) => {
     console.log(`${GET_IMAGE_RENDER}?key=${data.featuredImage}`);
     console.log("render");
     // const router = useRouter();
-    // const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
     // const [isFavourite, setIsFavourite] = useState(false);
     // const [loading, setLoading] = useState(false);
 
     // const { createProductWishlist, deleteWishlist } =
     //     useContext(wishlistContext);
 
-    // const handleOk = () => {
-    //     setOpenModal(false);
-    // };
-    // const handleCancel = () => {
-    //     setOpenModal(false);
-    // };
+    const handleOk = () => {
+        setOpenModal(false);
+    };
+    const handleCancel = () => {
+        setOpenModal(false);
+    };
 
     // const handlewishlistClick = async () => {
     //     // setIsFavourite(!isFavourite);
@@ -99,7 +101,7 @@ const ProductCard = ({ data, wishListIds }) => {
 
                 <div
                     className="absolute bottom-0 left-0 w-full  gap-x-2 justify-center items-center h-12 bg-brand-blue-800 bg-opacity-45 md:group-hover:flex hidden animate-fadeIn cursor-pointer duration-300 rounded-b-2xl"
-                    // onClick={() => setOpenModal(true)}
+                    onClick={() => setOpenModal(true)}
                 >
                     <Image
                         alt="view-icon"
@@ -111,8 +113,8 @@ const ProductCard = ({ data, wishListIds }) => {
             </div>
 
             <Link
-                // href={PRODUCT_DETAILS_PATH + data?._id}
-                href={"/"}
+                href={PRODUCT_DETAILS_PATH + data?._id}
+                // href={"/"}
                 className="space-y-2 "
             >
                 <div className="h-10">
@@ -138,7 +140,7 @@ const ProductCard = ({ data, wishListIds }) => {
                 </div>
             </Link>
 
-            {/* <Modal
+            <Modal
                 footer={false}
                 centered
                 open={openModal}
@@ -150,7 +152,7 @@ const ProductCard = ({ data, wishListIds }) => {
                     data={data}
                     setOpenQuickViewModal={setOpenModal}
                 />
-            </Modal> */}
+            </Modal>
         </div>
     );
 };
