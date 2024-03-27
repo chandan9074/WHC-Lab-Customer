@@ -8,6 +8,7 @@ import product_shape_1 from "./product_shape_1.svg";
 import our_product_image from "./our_product_image.png";
 import profilePic from "./walter.png";
 import forgot_password from "./forgot_password.svg";
+import page_header_bg from "./page_header_bg.png";
 
 const Images = {
     logo,
@@ -21,6 +22,7 @@ const Images = {
     our_product_image,
     profilePic,
     forgot_password,
+    page_header_bg
 };
 
 export default Images;
