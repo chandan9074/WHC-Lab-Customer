@@ -22,7 +22,6 @@ module.exports = {
                 fadeIn: "fadeIn 0.3s ease-in-out",
             },
             colors: {
-                "white-base": "#FFF",
                 "brand-blue-100": "#B3BCC6",
                 "brand-blue-500": "#0B2848",
                 "brand-blue-800": "#061628",

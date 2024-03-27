@@ -23,7 +23,7 @@ const Secondary = () => {
 
     return (
         <>
-            <div className="relative  lg:py-6 sm:py-5 py-4 border-stroke-new border-b-[1px] bg-[#FFF] flex flex-col gap-4">
+            <div className="relative  lg:py-6 sm:py-5 py-4 border-stroke-new border-b-[1px] bg-white flex flex-col gap-4">
                 <div className="container mx-auto px-6 sm:px-3  flex items-center justify-between">
                     <Link href={"/"}>
                         <Image
@@ -117,7 +117,7 @@ function MobileMenuItem() {
             />
             <button className="py-1 sm:py-2 px-4 border border-neutral-50 rounded-3xl font-medium flex gap-2 items-center">
                 <p className="text-brand-blue-500 text-sm sm:text-base leading-6">My Cart</p>
-                <p className="py-[1px] sm:py-[3px] px-[5px] sm:px-2 bg-brand-blue-500 text-[#FFF] text-xs sm:text-sm rounded-full">0</p>
+                <p className="py-[1px] sm:py-[3px] px-[5px] sm:px-2 bg-brand-blue-500 text-white text-xs sm:text-sm rounded-full">0</p>
             </button>
         </div>
     )
