@@ -13,13 +13,26 @@
     display: none;
 }
 
+/* andt input */
+.ant-input {
+    color: #7a8699 !important;
+    font-size: 16px;
+}
 /* antd input outline */
-.ant-input-outlined {
+.ant-input-outlined,
+.ant-input-number-input {
     border-color: #ebedf0;
     padding: 13px 12px !important;
     line-height: 24px;
     font-weight: 400;
     border-radius: 4px;
+    color: #7a8699 !important;
+    font-size: 16px;
+}
+
+/* andt select item */
+.ant-select-selection-item {
+    color: #3a3a3a !important;
 }
 
 .ant-input-outlined:hover {
@@ -149,4 +162,18 @@
 /* ANtd button */
 .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
     background-color: #061628;
+}
+
+/* Antd radio */
+:where(.css-dev-only-do-not-override-1uweeqc).ant-radio-wrapper
+    .ant-radio-checked
+    .ant-radio-inner {
+    border-color: #0b2848;
+    background-color: #0b2848;
+}
+.ant-radio-wrapper .ant-radio-checked::after {
+    border: none;
+}
+.ant-radio-wrapper:hover .ant-radio-inner {
+    border-color: #0b2848;
 }

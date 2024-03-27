@@ -7,6 +7,7 @@ import product_shape from "./product_shape.png";
 import product_shape_1 from "./product_shape_1.svg";
 import our_product_image from "./our_product_image.png";
 import profilePic from "./walter.png";
+import forgot_password from "./forgot_password.svg";
 import page_header_bg from "./page_header_bg.png";
 
 const Images = {
@@ -20,6 +21,7 @@ const Images = {
     product_shape_1,
     our_product_image,
     profilePic,
+    forgot_password,
     page_header_bg
 };
 
