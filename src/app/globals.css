@@ -150,3 +150,17 @@
 .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
     background-color: #061628;
 }
+
+/* Antd radio */
+:where(.css-dev-only-do-not-override-1uweeqc).ant-radio-wrapper
+    .ant-radio-checked
+    .ant-radio-inner {
+    border-color: #0b2848;
+    background-color: #0b2848;
+}
+.ant-radio-wrapper .ant-radio-checked::after {
+    border: none;
+}
+.ant-radio-wrapper:hover .ant-radio-inner {
+    border-color: #0b2848;
+}

@@ -12,7 +12,7 @@ const page = async () => {
 
     return (
         <Layouts.Primary>
-            <StoreContainer productData={productData.body.docs} />
+            <StoreContainer productData={productData?.body?.docs} />
         </Layouts.Primary>
     );
 };
