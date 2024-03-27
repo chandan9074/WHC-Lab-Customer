@@ -9,8 +9,12 @@ function PhoneNumberPrefix() {
                 defaultValue="+880"
                 className="flex items-center w-20 h-full"
             >
-                <Option value="+880">+880</Option>
-                <Option value="+1">+1</Option>
+                <Option value="+880" className="text-red-800">
+                    <span className="text-[#505F79]">+880</span>
+                </Option>
+                <Option value="+1">
+                    <span className="text-[#505F79]">+1</span>
+                </Option>
             </Select>
         </Form.Item>
     );

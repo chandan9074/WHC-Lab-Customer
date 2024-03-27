@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { Form, Input, InputNumber } from "antd";
 import React from "react";
 import LabelText from "./LabelText";
 import PhoneNumberPrefix from "./PhoneNumberPrefix";
@@ -23,8 +23,9 @@ function PhoneNumberInputField({
             ]}
             className="w-full text-sm font-medium text-neutral-300 mb-0"
         >
-            <Input
-                type="number"
+            <InputNumber
+                controls={false}
+                min={10}
                 addonBefore={<PhoneNumberPrefix />}
                 className="w-full rounded"
                 placeholder="1234567890"
