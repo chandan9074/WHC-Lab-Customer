@@ -40,7 +40,6 @@ module.exports = {
                 "neutral-400": "#505F79",
                 "neutral-700": "#243757",
                 "neutral-800": "#15294B",
-                "neutral-400": "#505F79",
             },
         },
     },
