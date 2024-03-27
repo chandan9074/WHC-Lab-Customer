@@ -1,7 +1,10 @@
 import React from 'react'
 import NextBreadcrumb from './Breadcrumb'
 
-function PageHeaderWithNameAndBgImage({ pageHeading, backgroundImage }) {
+function PageHeaderWithNameAndBgImage({
+    pageHeading,
+    backgroundImage = '/assets/Images/page_header_bg.png'
+}) {
     return (
         <>
             <div className="h-52 bg-cover bg-no-repeat bg-center relative"
