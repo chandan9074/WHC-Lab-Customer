@@ -30,6 +30,8 @@ import rating from "./rating.svg";
 import verified from "./verified.svg";
 import wishlistIcon_blue from "./wishlistIcon_blue.svg";
 import user_avatar from "./user_avatar.svg";
+import building from "./building.svg";
+import phone from "./phone.svg";
 
 const Icons = {
     search_blue,
@@ -63,7 +65,9 @@ const Icons = {
     rating,
     verified,
     wishlistIcon_blue,
-    user_avatar
+    user_avatar,
+    building,
+    phone
 };
 
 export default Icons;
