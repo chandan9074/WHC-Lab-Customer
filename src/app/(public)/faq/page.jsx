@@ -15,7 +15,7 @@ export default function FAQ() {
     const toggleCollapse = (itemId) => setCollapse(prevState => (prevState === itemId ? null : itemId));
 
     return (
-        <Layouts.Secondary>
+        <Layouts.Secondary breadcrumb={false}>
 
             <PageHeaderWithNameAndBgImage pageHeading='FAQ' backgroundImage={'/assets/Images/page_header_bg.png'} />
             <div className="container mx-auto py-6 px-4 flex gap-4 flex-col mb-20">
