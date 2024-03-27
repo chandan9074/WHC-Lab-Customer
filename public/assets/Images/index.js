@@ -7,6 +7,7 @@ import product_shape from "./product_shape.png";
 import product_shape_1 from "./product_shape_1.svg";
 import our_product_image from "./our_product_image.png";
 import profilePic from "./walter.png";
+import verify_otp_image from "./verify_otp_image.svg";
 
 const Images = {
     logo,
@@ -19,6 +20,7 @@ const Images = {
     product_shape_1,
     our_product_image,
     profilePic,
+    verify_otp_image,
 };
 
 export default Images;
