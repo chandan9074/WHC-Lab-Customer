@@ -14,7 +14,7 @@ const Primary = () => {
         {
             _id: 2,
             label: "About Us",
-            path: "/",
+            path: "/about-us",
         },
         {
             _id: 3,

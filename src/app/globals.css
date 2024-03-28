@@ -18,6 +18,7 @@
 .ant-input {
     color: #7a8699 !important;
     font-size: 16px;
+    font-family: var(--font-poppins);
 }
 
 /* antd input outline */
@@ -30,11 +31,13 @@
     border-radius: 4px;
     color: #7a8699 !important;
     font-size: 16px;
+    font-family: var(--font-poppins);
 }
 
 /* andt select item */
 .ant-select-selection-item {
     color: #3a3a3a !important;
+    font-family: var(--font-poppins);
 }
 
 .ant-input-outlined:hover {
@@ -180,4 +183,9 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.ant-form-item-explain-error {
+    font-family: var(--font-poppins);
+    padding-top: 4px;
 }

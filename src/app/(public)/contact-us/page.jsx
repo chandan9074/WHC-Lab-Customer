@@ -83,10 +83,10 @@ function Contact() {
                     </div>
                     <div className='w-full bg-neutral-10 p-6 md:p-12 flex flex-col gap-6 md:gap-9 rounded-2xl border border-stroke-new'>
                         <h3 className='text-2xl md:text-4xl font-semibold text-brand-blue-500 font-montserrat'>Let’s Connect</h3>
-                        <div>
+                        <div className='flex flex-col gap-4'>
                             {
                                 Array(8).fill().map((_, index) => (
-                                    <div key={index} className='flex items-center gap-3 text-brand-blue-500 text-sm md:text-lg font-light font-poppins'>
+                                    <div key={index} className='flex items-center gap-3'>
                                         <Image
                                             src={Icons.phone}
                                             width={1000}
@@ -94,7 +94,7 @@ function Contact() {
                                             alt="arrow-button"
                                             className="w-5 h-5 md:w-6 md:h-6"
                                         />
-                                        <p>EU Sales & Technical: +353 894 068 622</p>
+                                        <p className='text-brand-blue-500 text-sm md:text-lg font-light'>EU Sales & Technical: +353 894 068 622</p>
                                     </div>
                                 ))
                             }
