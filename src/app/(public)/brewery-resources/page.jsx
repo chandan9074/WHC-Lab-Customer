@@ -1,9 +1,7 @@
 import InfoPagesContainer from '@/components/common/InfoPagesContainer'
 import PageHeaderWithNameAndBgImage from '@/components/common/PageHeaderWithNameAndBgImage'
 import Layouts from '@/layouts'
-import Image from 'next/image'
 import React from 'react'
-import Icons from '../../../../public/assets/Icons'
 import DownloadableResource from '@/components/common/DownloadableResource'
 
 function BreweryResources() {
