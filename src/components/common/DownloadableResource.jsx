@@ -11,7 +11,7 @@ function DownloadableResource({
                 src={Icons.download}
                 width={1000}
                 height={1000}
-                alt="arrow-button"
+                alt="download"
                 className="w-5 h-5 md:w-6 md:h-6"
             />
             <p className='text-brand-blue-500 text-base font-medium font-montserrat'>{text}</p>

@@ -10,6 +10,7 @@ import profilePic from "./walter.png";
 import verify_otp_image from "./verify_otp_image.svg";
 import forgot_password from "./forgot_password.svg";
 import page_header_bg from "./page_header_bg.png";
+import aboutBanner from "./aboutBanner.png";
 import profile_avatar from "./profile_avatar.svg";
 
 const Images = {
@@ -26,6 +27,7 @@ const Images = {
     verify_otp_image,
     forgot_password,
     page_header_bg,
+    aboutBanner,
     profile_avatar,
 };
 
