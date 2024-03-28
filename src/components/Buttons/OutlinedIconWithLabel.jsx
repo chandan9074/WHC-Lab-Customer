@@ -2,12 +2,21 @@ import Image from "next/image";
 import React from "react";
 import Icons from "../../../public/assets/Icons";
 
-const OutlinedIconWithLabel = ({ align = "right", label }) => {
+const OutlinedIconWithLabel = ({
+    align = "right",
+    leftIcon = Icons.arrow_up_right_blue,
+    rightIcon = Icons.arrow_up_right_blue,
+    alt,
+    label,
+    width = "sm:w-auto w-full",
+}) => {
     return (
-        <button className="py-3.5 px-6 rounded-full bg-transparent flex items-center gap-2.5 sm:w-auto w-full justify-center border border-brand-blue-500">
+        <button
+            className={`py-3.5 px-6 rounded-full bg-transparent flex items-center gap-2.5 justify-center border border-brand-blue-500 ${width}`}
+        >
             {align === "left" && (
                 <Image
-                    src={Icons.arrow_up_right_blue}
+                    src={leftIcon}
                     alt="Logo"
                     width={1000}
                     height={1000}
@@ -19,7 +28,7 @@ const OutlinedIconWithLabel = ({ align = "right", label }) => {
             </p>
             {align === "right" && (
                 <Image
-                    src={Icons.arrow_up_right_blue}
+                    src={rightIcon}
                     alt="Logo"
                     width={1000}
                     height={1000}

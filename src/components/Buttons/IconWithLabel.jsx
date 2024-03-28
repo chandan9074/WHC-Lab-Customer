@@ -8,17 +8,19 @@ const IconWithLabel = ({
     className,
     bgColor = "bg-brand-blue-500",
     textColor = "text-white",
+    leftIcon = Icons.lock,
     rightIcon = Icons.arrow_up_right_white,
-    leftIcon,
     hoverIcon,
     bgHoverColor = "hover:bg-brand-blue-800",
     textHoverColor = "group-hover:text-white",
     width = "sm:w-auto w-full",
-    border
+    border,
 }) => {
     return (
         <button
-            className={`${className} group py-2 md:py-2.5 lg:py-3.5 px-4 md:px-5 lg:px-6 rounded-full ${bgColor} ${bgHoverColor} ${border && border} ${width} duration-200 flex items-center gap-2.5 sm:w-auto w-full justify-center`}
+            className={`${className} group py-2 md:py-2.5 lg:py-3.5 px-4 md:px-5 lg:px-6 rounded-full ${bgColor} ${bgHoverColor} ${
+                border && border
+            } ${width} duration-200 flex items-center gap-2.5 justify-center`}
         >
             {align === "left" && (
                 <Image
@@ -41,15 +43,19 @@ const IconWithLabel = ({
                         alt="Logo"
                         width={1000}
                         height={1000}
-                        className={`w-6 h-6 ${hoverIcon && "group-hover:hidden block"}`}
+                        className={`w-6 h-6 ${
+                            hoverIcon && "group-hover:hidden block"
+                        }`}
                     />
-                    {hoverIcon && <Image
-                        src={hoverIcon}
-                        alt="Logo"
-                        width={1000}
-                        height={1000}
-                        className={`w-6 h-6 group-hover:block hidden`}
-                    />}
+                    {hoverIcon && (
+                        <Image
+                            src={hoverIcon}
+                            alt="Logo"
+                            width={1000}
+                            height={1000}
+                            className={`w-6 h-6 group-hover:block hidden`}
+                        />
+                    )}
                 </>
             )}
         </button>
