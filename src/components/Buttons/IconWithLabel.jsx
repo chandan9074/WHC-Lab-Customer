@@ -9,8 +9,10 @@ const IconWithLabel = ({
     bgColor = "bg-brand-blue-500",
     textColor = "text-white",
     rightIcon = Icons.arrow_up_right_white,
+    leftIcon,
+    hoverIcon,
     bgHoverColor = "hover:bg-brand-blue-800",
-    textHoverColor = "text-",
+    textHoverColor = "group-hover:text-white",
     width = "sm:w-auto w-full",
     border
 }) => {
@@ -20,7 +22,7 @@ const IconWithLabel = ({
         >
             {align === "left" && (
                 <Image
-                    src={icon}
+                    src={leftIcon}
                     alt="Logo"
                     width={1000}
                     height={1000}
@@ -33,13 +35,22 @@ const IconWithLabel = ({
                 {label}
             </p>
             {align === "right" && (
-                <Image
-                    src={rightIcon}
-                    alt="Logo"
-                    width={1000}
-                    height={1000}
-                    className="w-6 h-6"
-                />
+                <>
+                    <Image
+                        src={rightIcon}
+                        alt="Logo"
+                        width={1000}
+                        height={1000}
+                        className={`w-6 h-6 ${hoverIcon && "group-hover:hidden block"}`}
+                    />
+                    {hoverIcon && <Image
+                        src={hoverIcon}
+                        alt="Logo"
+                        width={1000}
+                        height={1000}
+                        className={`w-6 h-6 group-hover:block hidden`}
+                    />}
+                </>
             )}
         </button>
     );
