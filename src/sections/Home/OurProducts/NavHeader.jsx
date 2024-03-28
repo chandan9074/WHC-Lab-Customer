@@ -20,15 +20,15 @@ const NavHeader = ({ activeTab, setActiveTab }) => {
     return (
         <div className="mt-9 flex items-center justify-between">
             <div className="flex items-center gap-6 overflow-x-auto tab-scroll">
-                {navButtons.map((item,index) => (
+                {navButtons.map((item, index) => (
                     <Buttons.OutlinedButton
                         onClick={() => setActiveTab(item.label)}
                         key={index}
                         label={item.label}
                         className={
                             activeTab === item.label
-                                ? "text-black hover:text-white bg-white duration-300"
-                                : "text-white bg-transparent duration-300"
+                                ? "text-black hover:text-white hover:border-brand-blue-500 bg-white duration-300"
+                                : "text-white bg-transparent duration-300 hover:border-brand-blue-500"
                         }
                         borderColor="border-white"
                     />

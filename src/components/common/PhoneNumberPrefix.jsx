@@ -6,6 +6,7 @@ function PhoneNumberPrefix() {
     return (
         <Form.Item name={"prefix"} noStyle>
             <Select
+                defaultValue={"+880"}
                 className="flex items-center w-20 h-full"
             >
                 <Option value="+880" className="text-red-800">

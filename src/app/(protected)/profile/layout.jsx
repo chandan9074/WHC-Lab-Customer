@@ -25,7 +25,7 @@ export default async function ProfileLayout({
     const user = userInfo && JSON.parse(userInfo);
 
     const userData = await UserService.getUserInfo(1);
-    console.log(userData);
+    console.log(accountData);
 
     return (
         <Suspense fallback={<Loader />}>
@@ -54,9 +54,9 @@ export default async function ProfileLayout({
                                     : Images?.profile_avatar
                             }
                             name={
-                                userData?.body?.body?.user.firstName +
+                                accountData?.firstName +
                                 " " +
-                                userData?.body?.body?.user.lastName
+                                accountData?.lastName
                             }
                         />
                     </div>

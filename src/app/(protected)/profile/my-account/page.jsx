@@ -3,6 +3,7 @@ import UserService from "@/services/UserService/UserService";
 import React from "react";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
+import { accountData } from "@/libs/myAccountData";
 
 const MyAccount = async () => {
     // const userInfo = getCookie("userInfo", { cookies });
@@ -21,7 +22,7 @@ const MyAccount = async () => {
 
     return (
         <div className="flex justify-center items-center rounded-sm">
-            <MyAccountSection data={userData?.body?.body?.user} />
+            <MyAccountSection data={accountData} />
         </div>
     );
 };

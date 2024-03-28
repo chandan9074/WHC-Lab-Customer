@@ -13,7 +13,7 @@ import {
 } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import { LOGIN_PATH, SIGN_UP_PATH } from "@/helpers/slug";
+import { FORGOT_PASSWORD_PATH, LOGIN_PATH, SIGN_UP_PATH } from "@/helpers/slug";
 // import AuthService from "@/services/AuthService/AuthService";
 // import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -234,7 +234,7 @@ const SignInForm = () => {
                                         </Checkbox>
                                     </Form.Item>
 
-                                    <Link href={"/"}>
+                                    <Link href={FORGOT_PASSWORD_PATH}>
                                         <h5 className="text-brand-blue-500 m-0 font-medium hover:underline cursor-pointer text-sm">
                                             Forgot password?
                                         </h5>
