@@ -240,12 +240,18 @@ const ProductRightView = ({
 
                     <div className={`pb-6 ${forModal && "space-y-5"}`}>
                         {forModal && (
-                            <Link href={PRODUCT_DETAILS_PATH + data?._id}>
-                                <Buttons.OutlinedButton
-                                    label="View Details"
-                                    className="w-full h-12"
-                                />
-                            </Link>
+                            // <Link href={PRODUCT_DETAILS_PATH + data?._id}>
+                            <Buttons.OutlinedButton
+                                label="View Details"
+                                className="w-full h-12 hover:text-white"
+                                onClick={() => {
+                                    router.push(
+                                        PRODUCT_DETAILS_PATH + data?._id
+                                    );
+                                    setOpenQuickViewModal(false);
+                                }}
+                            />
+                            // </Link>
                         )}
                         <Buttons.PrimaryButton
                             label={`ADD TO CART - $ ${

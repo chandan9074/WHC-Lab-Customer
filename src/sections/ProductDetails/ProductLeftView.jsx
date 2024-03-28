@@ -108,9 +108,7 @@ const ProductLeftView = ({ forModal = false, data }) => {
                                 <div
                                     key={index}
                                     className={`flex justify-center items-center border border-[#EBEDF0] rounded-lg overflow-hidden ${
-                                        forModal
-                                            ? "w-[460px] h-[708px]"
-                                            : "h-[480px] xl:h-[513px]"
+                                        forModal ? "w-[460px] h-[708px]" : ""
                                     }`}
                                 >
                                     <Image
@@ -121,7 +119,7 @@ const ProductLeftView = ({ forModal = false, data }) => {
                                         className={`${
                                             forModal
                                                 ? "w-[460px] h-[708px]"
-                                                : "h-[480px] xl:h-[513px]"
+                                                : ""
                                         } w-full  rounded-sm`}
                                     />
                                 </div>

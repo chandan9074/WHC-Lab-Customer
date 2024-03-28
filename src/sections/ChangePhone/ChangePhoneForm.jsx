@@ -20,7 +20,7 @@ const ChangePhoneForm = () => {
     const { Option } = Select;
 
     const onFinish = async (values) => {
-        router.push(CHANGE_PHONE_VERIFICATION_PATH);
+        // router.push(CHANGE_PHONE_VERIFICATION_PATH);
         // try {
         //     const token = getCookie("accessToken");
         //     let prefixValue = values.prefix || "+880";
