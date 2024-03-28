@@ -26,6 +26,7 @@ import LabelText from "@/components/common/LabelText";
 import PhoneNumberPrefix from "@/components/common/PhoneNumberPrefix";
 import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Images from "../../../public/assets/Images";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
@@ -298,7 +299,7 @@ const SignInForm = () => {
                     </div>
 
                     <h4 className="text-sm font-medium text-neutral-400 text-center leading-[21px]">
-                        Don't have an account ?{" "}
+                        Don&apos;t have an account ?{" "}
                         <Link
                             href={SIGN_UP_PATH}
                             className="text-[15px] text-brand-blue-500 cursor-pointer font-medium leading-[19.53px]"

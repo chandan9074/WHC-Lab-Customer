@@ -40,7 +40,7 @@ const VerificationForm = ({ title, handleUpdate, verifyShortForm }) => {
 
     useEffect(() => {
         hideEmail(verifyShortForm);
-    }, []);
+    }, [verifyShortForm]);
 
     // const linkHref =
     //     currentPath === FORGOT_PASSWORD_VERIFY_PATH
