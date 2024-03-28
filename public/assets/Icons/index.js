@@ -32,6 +32,7 @@ import wishlistIcon_blue from "./wishlistIcon_blue.svg";
 import user_avatar from "./user_avatar.svg";
 import building from "./building.svg";
 import phone from "./phone.svg";
+import download from "./download.svg";
 
 const Icons = {
     search_blue,
@@ -67,7 +68,8 @@ const Icons = {
     wishlistIcon_blue,
     user_avatar,
     building,
-    phone
+    phone,
+    download
 };
 
 export default Icons;
