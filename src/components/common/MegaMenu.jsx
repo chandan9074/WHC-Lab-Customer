@@ -56,15 +56,13 @@ const MegaMenu = ({ setOpen, open }) => {
                                 >
                                     <Link
                                         href={item.path}
-                                        className={` ${
-                                            item.name === `RESOURCES`
-                                                ? `${
-                                                      showResourcesButtons
-                                                          ? "text-brand-blue-500"
-                                                          : "text-white"
-                                                  }`
-                                                : "text-white hover:text-brand-blue-500 hover:ml-1 "
-                                        } text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-500`}
+                                        className={` ${item.name === `RESOURCES`
+                                            ? `${showResourcesButtons
+                                                ? "text-brand-blue-500"
+                                                : "text-white"
+                                            }`
+                                            : "text-white hover:text-brand-blue-500 hover:ml-1 "
+                                            } text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-500`}
                                     >
                                         {item.name}
                                     </Link>
@@ -86,11 +84,14 @@ const MegaMenu = ({ setOpen, open }) => {
                                                     }}
                                                     className=" mt-2"
                                                 >
-                                                    <Buttons.OutlinedButton
-                                                        label="Brewing Yeast"
-                                                        borderColor="border-white hover:border-transparent"
-                                                        textColor="text-white"
-                                                    />
+                                                    <Link href='/brewery-resources'>
+                                                        <Buttons.OutlinedButton
+                                                            label="Brewing Yeast"
+                                                            borderColor="border-white hover:border-transparent"
+                                                            textColor="text-white"
+                                                        />
+                                                    </Link>
+
                                                 </motion.div>
 
                                                 <motion.div
@@ -108,11 +109,13 @@ const MegaMenu = ({ setOpen, open }) => {
                                                     }}
                                                     className="mt-2"
                                                 >
-                                                    <Buttons.OutlinedButton
-                                                        label="Distilling Yeast"
-                                                        borderColor="border-white  hover:border-transparent"
-                                                        textColor="text-white"
-                                                    />
+                                                    <Link href='/distilled-resources'>
+                                                        <Buttons.OutlinedButton
+                                                            label="Distilling Yeast"
+                                                            borderColor="border-white  hover:border-transparent"
+                                                            textColor="text-white"
+                                                        />
+                                                    </Link>
                                                 </motion.div>
 
                                                 <motion.div
@@ -130,11 +133,13 @@ const MegaMenu = ({ setOpen, open }) => {
                                                     }}
                                                     className="mt-2"
                                                 >
-                                                    <Buttons.OutlinedButton
-                                                        label="Lab Analysis"
-                                                        borderColor="border-white hover:border-transparent"
-                                                        textColor="text-white"
-                                                    />
+                                                    <Link href='lab-analysis-resources'>
+                                                        <Buttons.OutlinedButton
+                                                            label="Lab Analysis"
+                                                            borderColor="border-white hover:border-transparent"
+                                                            textColor="text-white"
+                                                        />
+                                                    </Link>
                                                 </motion.div>
                                             </div>
                                         )}

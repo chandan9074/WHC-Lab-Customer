@@ -20,10 +20,10 @@ const NavHeader = ({ activeTab, setActiveTab }) => {
     return (
         <div className="mt-9 flex items-center justify-between">
             <div className="flex items-center gap-6 overflow-x-auto tab-scroll">
-                {navButtons.map((item) => (
+                {navButtons.map((item,index) => (
                     <Buttons.OutlinedButton
                         onClick={() => setActiveTab(item.label)}
-                        key={item._id}
+                        key={index}
                         label={item.label}
                         className={
                             activeTab === item.label
