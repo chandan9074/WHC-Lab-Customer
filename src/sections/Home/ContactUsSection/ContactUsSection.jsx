@@ -31,7 +31,7 @@ const ContactUsSection = () => {
 
                 <div className="flex items-center gap-x-9">
                     <h2 className="lg:text-3xl xl:text-4xl leading-[50px] text-[#6F7284] font-bold underline text-nowrap">
-                        Let's Talk
+                        Let&apos;s Talk
                     </h2>
 
                     <button className="group flex items-center gap-x-3 px-[18px] py-[10.5px] bg-[#1B1B1B] rounded-[37.5px]  duration-300 relative">

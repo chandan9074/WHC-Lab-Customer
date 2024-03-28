@@ -17,8 +17,8 @@ const TestimonialCarouselDesktop = ({ data }) => {
     return (
         <div className="w-full hidden md:block">
             <Carousel ref={slider} afterChange={onChange} dots={false}>
-                {data.map((item) => (
-                    <div className="flex items-center py-12">
+                {data.map((item, index) => (
+                    <div key={index} className="flex items-center py-12">
                         <div className="flex gap-x-6 justify-center">
                             <div className="flex items-center justify-center w-[383px]">
                                 <div className="flex gap-x-5">

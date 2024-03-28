@@ -18,8 +18,8 @@ const TestimonialCarouselMobile = ({ data }) => {
     return (
         <div className="block md:hidden">
             <Carousel ref={slider1} afterChange={onChange} dots={false}>
-                {data.map((item) => (
-                    <div className="pt-6 flex flex-col gap-y-4">
+                {data.map((item, index) => (
+                    <div key={index} className="pt-6 flex flex-col gap-y-4">
                         <Rate
                             disabled
                             defaultValue={item.rating}
@@ -40,8 +40,11 @@ const TestimonialCarouselMobile = ({ data }) => {
                     vertical
                     // effect="fade"
                 >
-                    {data.map((item) => (
-                        <div className="flex items-center justify-center w-[383px]">
+                    {data.map((item, index) => (
+                        <div
+                            key={index}
+                            className="flex items-center justify-center w-[383px]"
+                        >
                             <div className="flex gap-x-5">
                                 <Image
                                     alt="avatar"
