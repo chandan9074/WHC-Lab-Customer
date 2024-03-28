@@ -101,7 +101,7 @@ const Icons = {
     logout,
     password,
     active,
-    download
+    download,
 };
 
 export default Icons;

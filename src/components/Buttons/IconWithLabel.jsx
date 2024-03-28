@@ -10,7 +10,6 @@ const IconWithLabel = ({
     textColor = "text-white",
     leftIcon = Icons.lock,
     rightIcon = Icons.arrow_up_right_white,
-    leftIcon,
     hoverIcon,
     bgHoverColor = "hover:bg-brand-blue-800",
     textHoverColor = "group-hover:text-white",
@@ -44,15 +43,19 @@ const IconWithLabel = ({
                         alt="Logo"
                         width={1000}
                         height={1000}
-                        className={`w-6 h-6 ${hoverIcon && "group-hover:hidden block"}`}
+                        className={`w-6 h-6 ${
+                            hoverIcon && "group-hover:hidden block"
+                        }`}
                     />
-                    {hoverIcon && <Image
-                        src={hoverIcon}
-                        alt="Logo"
-                        width={1000}
-                        height={1000}
-                        className={`w-6 h-6 group-hover:block hidden`}
-                    />}
+                    {hoverIcon && (
+                        <Image
+                            src={hoverIcon}
+                            alt="Logo"
+                            width={1000}
+                            height={1000}
+                            className={`w-6 h-6 group-hover:block hidden`}
+                        />
+                    )}
                 </>
             )}
         </button>
