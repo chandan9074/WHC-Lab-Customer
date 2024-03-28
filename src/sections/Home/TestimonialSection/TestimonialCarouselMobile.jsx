@@ -11,9 +11,7 @@ const TestimonialCarouselMobile = ({ data }) => {
     const slider2 = useRef(null);
 
     const onChange = (current) => {
-        console.log(current);
         setCurrentSlide(current + 1);
-        console.log(currentSlide);
     };
     return (
         <div className="block md:hidden">
@@ -38,7 +36,7 @@ const TestimonialCarouselMobile = ({ data }) => {
                     afterChange={onChange}
                     dots={false}
                     vertical
-                    // effect="fade"
+                // effect="fade"
                 >
                     {data.map((item, index) => (
                         <div
@@ -72,9 +70,8 @@ const TestimonialCarouselMobile = ({ data }) => {
                             slider1.current.prev();
                             slider2.current.prev();
                         }}
-                        className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
-                            currentSlide === 1 ? "opacity-20" : ""
-                        }`}
+                        className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${currentSlide === 1 ? "opacity-20" : ""
+                            }`}
                         disabled={currentSlide < 2}
                     >
                         <Image
@@ -91,9 +88,8 @@ const TestimonialCarouselMobile = ({ data }) => {
                             slider2.current.next();
                         }}
                         disabled={currentSlide > 3}
-                        className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
-                            currentSlide > 3 ? "opacity-20" : ""
-                        }`}
+                        className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${currentSlide > 3 ? "opacity-20" : ""
+                            }`}
                     >
                         <Image
                             alt="nav-next"

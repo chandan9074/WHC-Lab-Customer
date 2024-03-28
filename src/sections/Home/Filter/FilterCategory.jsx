@@ -39,7 +39,6 @@ const FilterCategory = ({ data, setSearchQuery, searchQuery, name }) => {
 
     const handleCheck = (checkedKeys, info) => {
         // setCheckedKeys(checkedKeys);
-        console.log("Selected data:", info.checkedNodes);
         let searchStr = "";
         for (let i = info.checkedNodes.length - 1; i >= 0; i--) {
             searchStr += info.checkedNodes[i].key;
@@ -47,7 +46,6 @@ const FilterCategory = ({ data, setSearchQuery, searchQuery, name }) => {
                 searchStr += "&";
             }
         }
-        console.log(searchStr);
         setSearchQuery({ ...searchQuery, [name]: searchStr });
     };
 

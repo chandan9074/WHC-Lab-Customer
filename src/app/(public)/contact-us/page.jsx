@@ -39,7 +39,7 @@ function Contact() {
 
                                 </Form.Item>
                                 <div className='flex flex-col gap-6 md:flex-row md:items-center'>
-                                    <div className="w-1/2">
+                                    <div className="w-full md:w-1/2">
                                         <Form.Item
                                             label={<LabelText>Email</LabelText>}
                                             name='email'
@@ -53,12 +53,12 @@ function Contact() {
                                                     message: 'Please input your E-mail!',
                                                 },
                                             ]}
-                                            className="mb-0"
+                                            className="mb-0 w-full"
                                         >
                                             <Input />
                                         </Form.Item>
                                     </div>
-                                    <div className="w-1/2">
+                                    <div className="w-full md:w-1/2">
                                         <PhoneNumberInputField labelText='Phone' name='phone' />
                                     </div>
                                 </div>
