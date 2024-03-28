@@ -15,7 +15,6 @@ const ChangeEmailForm = () => {
     const router = useRouter();
 
     const onFinish = (values) => {
-        console.log("Success:", values);
         router.push("/change-email-verification");
     };
 

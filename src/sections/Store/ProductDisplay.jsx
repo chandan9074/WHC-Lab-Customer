@@ -7,7 +7,6 @@ import ProductHeader from "./ProductHeader";
 import { productsData } from "@/libs/productData";
 
 const ProductDisplay = ({ data, filterData, wishListIds, selectedTab }) => {
-    console.log(data);
     return (
         <div>
             <ProductHeader

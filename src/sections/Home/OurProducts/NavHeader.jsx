@@ -27,7 +27,7 @@ const NavHeader = ({ activeTab, setActiveTab }) => {
                         label={item.label}
                         className={
                             activeTab === item.label
-                                ? "text-black bg-white duration-300"
+                                ? "text-black hover:text-white bg-white duration-300"
                                 : "text-white bg-transparent duration-300"
                         }
                         borderColor="border-white"
@@ -38,6 +38,7 @@ const NavHeader = ({ activeTab, setActiveTab }) => {
                 <Buttons.IconWithLabel
                     label="Explore Our All Strains"
                     rightIcon={Icons.arrow_up_right_blue}
+                    hoverIcon={Icons.arrow_up_right_white}
                     bgColor="bg-white"
                     textColor="text-brand-blue-800"
                 />

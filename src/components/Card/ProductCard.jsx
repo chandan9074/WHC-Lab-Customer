@@ -17,8 +17,7 @@ import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
 import QuickViewModalContent from "@/sections/ProductDetails/QuickViewModalContent";
 
 const ProductCard = ({ data, wishListIds }) => {
-    console.log(`${GET_IMAGE_RENDER}?key=${data.featuredImage}`);
-    console.log("render");
+    // console.log(`${GET_IMAGE_RENDER}?key=${data.featuredImage}`);
     // const router = useRouter();
     const [openModal, setOpenModal] = useState(false);
     // const [isFavourite, setIsFavourite] = useState(false);
@@ -77,10 +76,9 @@ const ProductCard = ({ data, wishListIds }) => {
 
                 {/* {hasCookie("accessToken") && ( */}
                 <div
-                    className={`absolute top-4 right-4 ${
-                        wishListIds?.includes(data._id) ? "block" : "hidden"
-                    } md:group-hover:block  animate-fadeIn cursor-pointer`}
-                    // onClick={handlewishlistClick}
+                    className={`absolute top-4 right-4 ${wishListIds?.includes(data._id) ? "block" : "hidden"
+                        } md:group-hover:block  animate-fadeIn cursor-pointer`}
+                // onClick={handlewishlistClick}
                 >
                     {/* {loading ? (
                         <Spin spinning={loading} />
@@ -124,11 +122,10 @@ const ProductCard = ({ data, wishListIds }) => {
                 </div>
                 <div className="flex gap-x-2">
                     <p
-                        className={`text-sm font-medium ${
-                            data.offerPrice
+                        className={`text-sm font-medium ${data.offerPrice
                                 ? "line-through text-neutral-100"
                                 : "text-brand-blue-500"
-                        }`}
+                            }`}
                     >
                         ${data.price}
                     </p>
