@@ -23,6 +23,7 @@ module.exports = {
             },
             colors: {
                 "brand-blue-100": "#B3BCC6",
+                "brand-blue-300": "#5C6F84",
                 "brand-blue-500": "#0B2848",
                 "brand-blue-800": "#061628",
                 "brand-blue-800-80%": "rgba(6, 22, 40, 0.80)",
