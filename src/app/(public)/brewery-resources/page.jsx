@@ -11,7 +11,7 @@ function BreweryResources() {
         <Layouts.Secondary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading='BREWING RESOURCES' />
             <InfoPagesContainer>
-                <div className='flex flex-col gap-4 md:gap-6'>
+                <div className='flex flex-col gap-6'>
                     <h3 className='text-xl md:text-2xl font-bold text-brand-blue-500'>
                         BREWING RESOURCES
                     </h3>
