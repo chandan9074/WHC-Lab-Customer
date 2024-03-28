@@ -41,6 +41,7 @@ module.exports = {
                 "neutral-400": "#505F79",
                 "neutral-700": "#243757",
                 "neutral-800": "#15294B",
+                "error-500": "#EF4444",
             },
             fontFamily: {
                 poppins: ['var(--font-poppins)'],
