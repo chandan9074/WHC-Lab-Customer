@@ -32,6 +32,22 @@ import wishlistIcon_blue from "./wishlistIcon_blue.svg";
 import user_avatar from "./user_avatar.svg";
 import building from "./building.svg";
 import phone from "./phone.svg";
+import edit from "./edit.svg";
+import camera from "./camera.svg";
+import save from "./save.svg";
+import profile_active from "./profile_active.svg";
+import profile_inactive from "./profile_inactive.svg";
+import address_inactive from "./address_inactive.svg";
+import address_active from "./address_active.svg";
+import wishlist_inactive from "./wishlist_inactive.svg";
+import wishlist_active from "./wishlist_active.svg";
+import credit_active from "./credit_active.svg";
+import credit_inactive from "./credit_inactive.svg";
+import order_active from "./order_active.svg";
+import order_inactive from "./order_inactive.svg";
+import logout from "./logout.svg";
+import password from "./password.svg";
+import active from "./active.svg";
 
 const Icons = {
     search_blue,
@@ -67,7 +83,23 @@ const Icons = {
     wishlistIcon_blue,
     user_avatar,
     building,
-    phone
+    phone,
+    edit,
+    camera,
+    save,
+    profile_active,
+    profile_inactive,
+    address_inactive,
+    address_active,
+    wishlist_inactive,
+    wishlist_active,
+    credit_active,
+    credit_inactive,
+    order_active,
+    order_inactive,
+    logout,
+    password,
+    active,
 };
 
 export default Icons;

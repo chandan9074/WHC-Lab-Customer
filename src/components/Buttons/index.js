@@ -4,6 +4,7 @@ import OutlinedIconWithLabel from "./OutlinedIconWithLabel";
 import IconButton from "./IconButton";
 import CounterBtn from "./CounterBtn";
 import PrimaryButton from "./PrimaryButton";
+import ProfileTabBtn from "./ProfileTabBtn";
 
 const Buttons = {
     IconWithLabel,
@@ -12,6 +13,7 @@ const Buttons = {
     IconButton,
     CounterBtn,
     PrimaryButton,
+    ProfileTabBtn,
 };
 
 export default Buttons;
