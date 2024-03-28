@@ -14,7 +14,6 @@ const page = async ({ params }) => {
         getProducts,
         // getWishlist,
     ]);
-    console.log(productData);
 
     // const wishListIds = wishlistData?.body?.docs.map(
     //     (wishes) => wishes.productId
@@ -28,7 +27,7 @@ const page = async ({ params }) => {
                 <ProductDetailsSection data={data.body.doc} />
                 <RecentlyViewedSlideShowSection
                     data={productData}
-                    // wishListIds={wishListIds}
+                // wishListIds={wishListIds}
                 />
             </section>
         </Layouts.Primary>

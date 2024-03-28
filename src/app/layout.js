@@ -1,7 +1,5 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { montserrat, poppins } from "@/utils/fonts";
 
 export const metadata = {
     title: "WHC-Lab",
@@ -11,7 +9,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body className={inter.className}>{children}</body>
+            <body className={`${poppins} ${montserrat} font-poppins`}>{children}</body>
         </html>
     );
 }

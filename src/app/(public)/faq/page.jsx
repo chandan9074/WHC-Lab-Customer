@@ -25,7 +25,7 @@ export default function FAQ() {
                         faqData.map((item, index) => (
                             <div onClick={() => toggleCollapse(item.id)} className={` cursor-pointer flex justify-between gap-1 items-start p-4 md:p-8 border ${collapse === item.id ? 'border-brand-blue-500' : 'border-stroke-new '} rounded-2xl`} key={index}>
                                 <div className="flex flex-col gap-4">
-                                    <p className="font-semibold text-sm md:text-[18px] text-brand-blue-500">{item.title}</p>
+                                    <p className="font-semibold text-sm md:text-[18px] text-brand-blue-500 font-montserrat">{item.title}</p>
                                     <p className={`text-[#474D66] font-normal text-xs md:text-base transition-all duration-500 ease-in-out overflow-hidden ${collapse === item.id ? 'block' : 'hidden'}`}>{item.description}</p>
 
                                 </div>
@@ -45,7 +45,7 @@ export default function FAQ() {
 
 
                     <div className={`flex flex-col md:flex-row justify-between gap-5 md:gap-10 items-center p-8 border transform transition-colors duration-300 border-stroke-new rounded-2xl`}>
-                        <p className="font-semibold text-sm md:text-lg text-brand-blue-500">Do all tokens need to be used at onceDo all tokens need to be used at once?</p>
+                        <p className="font-semibold text-sm md:text-lg text-brand-blue-500 font-montserrat">Do all tokens need to be used at onceDo all tokens need to be used at once?</p>
                         <Buttons.PrimaryButton label={'Contact Us'} className='whitespace-nowrap px-14' />
                     </div>
 

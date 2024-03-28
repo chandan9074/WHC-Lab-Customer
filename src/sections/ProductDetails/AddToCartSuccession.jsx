@@ -11,7 +11,6 @@ const AddToCartSuccession = ({
     setOpenQuickViewModal,
     setOpenSuccessionModal,
 }) => {
-    console.log(data, "image");
     const router = useRouter();
     return (
         <div className="p-3">

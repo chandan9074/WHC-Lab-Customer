@@ -91,7 +91,7 @@ const ProductViewMobile = ({ data }) => {
         if (maxLimit < quantity) {
             setQuantity((ps) => 1);
         }
-    }, [maxLimit]);
+    }, [maxLimit, quantity]);
 
     const handelSelectColor = (item, index) => {
         setSelectedSize(index);

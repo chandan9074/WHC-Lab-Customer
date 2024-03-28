@@ -20,14 +20,14 @@ const NavHeader = ({ activeTab, setActiveTab }) => {
     return (
         <div className="mt-9 flex items-center justify-between">
             <div className="flex items-center gap-6 overflow-x-auto tab-scroll">
-                {navButtons.map((item) => (
+                {navButtons.map((item,index) => (
                     <Buttons.OutlinedButton
                         onClick={() => setActiveTab(item.label)}
-                        key={item._id}
+                        key={index}
                         label={item.label}
                         className={
                             activeTab === item.label
-                                ? "text-black bg-white duration-300"
+                                ? "text-black hover:text-white bg-white duration-300"
                                 : "text-white bg-transparent duration-300"
                         }
                         borderColor="border-white"
@@ -38,6 +38,7 @@ const NavHeader = ({ activeTab, setActiveTab }) => {
                 <Buttons.IconWithLabel
                     label="Explore Our All Strains"
                     rightIcon={Icons.arrow_up_right_blue}
+                    hoverIcon={Icons.arrow_up_right_white}
                     bgColor="bg-white"
                     textColor="text-brand-blue-800"
                 />

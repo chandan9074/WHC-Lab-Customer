@@ -48,6 +48,7 @@ import order_inactive from "./order_inactive.svg";
 import logout from "./logout.svg";
 import password from "./password.svg";
 import active from "./active.svg";
+import download from "./download.svg";
 
 const Icons = {
     search_blue,
@@ -100,6 +101,7 @@ const Icons = {
     logout,
     password,
     active,
+    download
 };
 
 export default Icons;

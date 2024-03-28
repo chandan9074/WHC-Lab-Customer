@@ -43,6 +43,10 @@ module.exports = {
                 "neutral-800": "#15294B",
                 "error-500": "#EF4444",
             },
+            fontFamily: {
+                poppins: ['var(--font-poppins)'],
+                montserrat: ['var(--font-montserrat)'],
+            }
         },
     },
     plugins: [],

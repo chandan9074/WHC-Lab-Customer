@@ -133,6 +133,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
                             src={Icons.caretDown}
                             width={1000}
                             height={1000}
+                            alt="caretDown"
                             className={`w-4 h-4 duration-300 ${
                                 isActive ? "rotate-0" : "-rotate-90"
                             }`}

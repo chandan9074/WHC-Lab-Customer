@@ -10,15 +10,13 @@ const TestimonialCarouselDesktop = ({ data }) => {
     const slider = useRef(null);
 
     const onChange = (current) => {
-        console.log(current);
         setCurrentSlide(current + 1);
-        console.log(currentSlide);
     };
     return (
         <div className="w-full hidden md:block">
             <Carousel ref={slider} afterChange={onChange} dots={false}>
-                {data.map((item) => (
-                    <div className="flex items-center py-12">
+                {data.map((item, index) => (
+                    <div key={index} className="flex items-center py-12">
                         <div className="flex gap-x-6 justify-center">
                             <div className="flex items-center justify-center w-[383px]">
                                 <div className="flex gap-x-5">
@@ -62,9 +60,8 @@ const TestimonialCarouselDesktop = ({ data }) => {
                         <div className="flex gap-x-5">
                             <button
                                 onClick={() => slider.current.prev()}
-                                className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
-                                    currentSlide === 1 ? "opacity-20" : ""
-                                }`}
+                                className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${currentSlide === 1 ? "opacity-20" : ""
+                                    }`}
                                 disabled={currentSlide < 2}
                             >
                                 <Image
@@ -78,9 +75,8 @@ const TestimonialCarouselDesktop = ({ data }) => {
                             <button
                                 onClick={() => slider.current.next()}
                                 disabled={currentSlide > 3}
-                                className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
-                                    currentSlide > 3 ? "opacity-20" : ""
-                                }`}
+                                className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${currentSlide > 3 ? "opacity-20" : ""
+                                    }`}
                             >
                                 <Image
                                     alt="nav-next"

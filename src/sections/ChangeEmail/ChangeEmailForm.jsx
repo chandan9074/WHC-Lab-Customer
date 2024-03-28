@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Form, Input, Spin, Typography } from "antd";
 import { useRouter } from "next/navigation";
 import LabelText from "@/components/common/LabelText";
 import Images from "../../../public/assets/Images";
 import Image from "next/image";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
@@ -14,7 +15,6 @@ const ChangeEmailForm = () => {
     const router = useRouter();
 
     const onFinish = (values) => {
-        console.log("Success:", values);
         router.push("/change-email-verification");
     };
 

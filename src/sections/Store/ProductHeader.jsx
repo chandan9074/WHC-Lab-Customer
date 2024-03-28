@@ -63,6 +63,7 @@ const ProductHeader = ({ selectedTab, dataLength }) => {
                                 src={Icons.caretDown}
                                 width={1000}
                                 height={1000}
+                                alt="caret-down"
                                 className="w-4 h-4"
                             />
                         }

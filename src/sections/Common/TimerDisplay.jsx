@@ -21,7 +21,7 @@ const TimerDisplay = ({ timeRemaining, setTimeRemaining }) => {
         return () => {
             memoizedDeleteCookie("timeRemaining");
         };
-    }, [memoizedDeleteCookie]);
+    }, [memoizedDeleteCookie, setTimeRemaining]);
 
     useEffect(() => {
         if (timeRemaining > 0) {
@@ -35,7 +35,7 @@ const TimerDisplay = ({ timeRemaining, setTimeRemaining }) => {
 
             return () => clearInterval(intervalId);
         }
-    }, [timeRemaining, memoizedSetCookie]);
+    }, [timeRemaining, memoizedSetCookie, setTimeRemaining]);
 
     return (
         <>

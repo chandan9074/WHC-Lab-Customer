@@ -28,7 +28,6 @@ const OurProductsContainer = () => {
         // } else if (window.innerWidth >= 640) {
         // }
         const value = generateLeftMargin();
-        console.log(value);
         setLeftMargin(value.margin);
         setSlides(value.slides);
     }, []);
