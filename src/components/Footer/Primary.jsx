@@ -29,7 +29,7 @@ const Primary = () => {
         {
             _id: 5,
             label: "Contact Us",
-            path: "/",
+            path: "/contact-us",
         },
     ];
     const socialLinks = [
