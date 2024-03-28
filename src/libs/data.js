@@ -10,6 +10,8 @@ export const MY_WISHLIST_NAV = "My Wishlist";
 
 export const CREDIT_BALANCE_NAV = "Credit Balance";
 
+export const ACTIVE_ORDERS_PATH = "Active Orders"
+
 export const ORDERS_NAV = "Orders";
 
 export const profileData = [
@@ -44,14 +46,14 @@ export const profileData = [
         children: [
             {
                 title: CREDIT_BALANCE_NAV,
-                url: SLUG.CREDIT_BALANCE_NAV,
+                url: CREDIT_BALANCE_NAV,
                 inactiveIcon: Icons.credit_inactive,
                 activeIcon: Icons.credit_active,
                 path: "",
             },
             {
                 title: ORDERS_NAV,
-                url: SLUG.ACTIVE_ORDERS_PATH,
+                url: ACTIVE_ORDERS_PATH,
                 inactiveIcon: Icons.order_inactive,
                 activeIcon: Icons.order_active,
                 path: "",
