@@ -20,7 +20,7 @@ const NextBreadcrumb = () => {
     };
 
     return (
-        <ul className="flex breadcrumb container mx-auto py-6">
+        <ul className="flex breadcrumb container mx-auto py-6 font-poppins">
             <li>
                 <Link href="/" className="text-sm font-normal capitalize">
                     <span className={pathNames.length === 0 ? 'text-brand-blue-800' : 'text-neutral-200 hover:brand-blue-800'}>Home</span>
