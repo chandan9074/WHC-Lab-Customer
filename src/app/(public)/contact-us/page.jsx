@@ -18,8 +18,8 @@ function Contact() {
                 <div className="flex flex-col gap-12 md:flex-row">
                     <div className='w-full p-6 md:p-12 flex flex-col gap-6 md:gap-9'>
                         <div className='flex flex-col gap-2'>
-                            <h3 className='text-2xl md:text-4xl font-semibold text-brand-blue-500'>Send Us A Message</h3>
-                            <p className='text-sm md:text-base text-neutral-400'>Want to get in touch? We’d love to hear from you</p>
+                            <h3 className='text-2xl md:text-4xl font-semibold text-brand-blue-500 font-montserrat'>Send Us A Message</h3>
+                            <p className='text-sm md:text-base text-neutral-400 font-poppins'>Want to get in touch? We’d love to hear from you</p>
                         </div>
                         <Form
                             onFinish={(values) => console.log(values)}
@@ -71,7 +71,7 @@ function Contact() {
                                     <Input.TextArea showCount rows={5} maxLength={100} placeholder='Please write description here...' />
                                 </Form.Item>
 
-                                <p className='text-neutral-400 text-base'>
+                                <p className='text-neutral-400 text-base font-poppins'>
                                     I consent to the processing of my personal data to WHC Lab for contact purposes. For more information, please refer to our <span className='text-brand-blue-500'>privacy policy</span>.
                                 </p>
                             </div>
@@ -82,11 +82,11 @@ function Contact() {
                         </Form>
                     </div>
                     <div className='w-full bg-neutral-10 p-6 md:p-12 flex flex-col gap-6 md:gap-9 rounded-2xl border border-stroke-new'>
-                        <h3 className='text-2xl md:text-4xl font-semibold text-brand-blue-500'>Let’s Connect</h3>
+                        <h3 className='text-2xl md:text-4xl font-semibold text-brand-blue-500 font-montserrat'>Let’s Connect</h3>
                         <div>
                             {
                                 Array(8).fill().map((_, index) => (
-                                    <div key={index} className='flex items-center gap-3 text-brand-blue-500 text-sm md:text-lg font-light'>
+                                    <div key={index} className='flex items-center gap-3 text-brand-blue-500 text-sm md:text-lg font-light font-poppins'>
                                         <Image
                                             src={Icons.phone}
                                             width={1000}
