@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Image from "next/image";
 import Images from "../../../public/assets/Images";
+import { CHANGE_PHONE_VERIFICATION_PATH } from "@/helpers/slug";
 
 const { Title } = Typography;
 const ChangePhoneForm = () => {
@@ -19,6 +20,7 @@ const ChangePhoneForm = () => {
     const { Option } = Select;
 
     const onFinish = async (values) => {
+        router.push(CHANGE_PHONE_VERIFICATION_PATH);
         // try {
         //     const token = getCookie("accessToken");
         //     let prefixValue = values.prefix || "+880";

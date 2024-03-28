@@ -6,6 +6,7 @@ import LabelText from "@/components/common/LabelText";
 import Images from "../../../public/assets/Images";
 import Image from "next/image";
 import { LoadingOutlined } from "@ant-design/icons";
+import { CHANGE_EMAIL_VERIFICATION_PATH } from "@/helpers/slug";
 
 const { Title } = Typography;
 
@@ -15,7 +16,7 @@ const ChangeEmailForm = () => {
     const router = useRouter();
 
     const onFinish = (values) => {
-        router.push("/change-email-verification");
+        router.push(CHANGE_EMAIL_VERIFICATION_PATH);
     };
 
     return (

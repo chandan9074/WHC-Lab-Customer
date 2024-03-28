@@ -4,6 +4,7 @@ export const accountData = {
     _id: 1,
     firstName: "Mr. Bilaal",
     lastName: "Assad",
+    companyName: "ABC",
     userName: "Bilaal",
     password: "",
     profilePicture: Images.profile_avatar,

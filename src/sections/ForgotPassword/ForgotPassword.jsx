@@ -12,6 +12,7 @@ import LabelText from "@/components/common/LabelText";
 // import PhoneNumberPrefix from "@/components/common/PhoneNumberPrefix";
 import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Images from "../../../public/assets/Images";
+import { FORGOT_PASSWORD_CONFIRMATION_PATH } from "@/helpers/slug";
 
 const { Title } = Typography;
 
@@ -36,6 +37,7 @@ const ForgotPassword = ({ title, description, navigateRoute }) => {
     // };
 
     const onFinish = async (values) => {
+        router.push(FORGOT_PASSWORD_CONFIRMATION_PATH);
         // try {
         //     const token = getCookie("accessToken");
         //     let prefixValue = values.prefix || "+880";
