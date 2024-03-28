@@ -38,7 +38,7 @@ const FooterWithoutAnimation = ({ navLinks, socialLinks }) => {
                             <div className="flex gap-x-3">
                                 <input
                                     type="text"
-                                    className="bg-transparent border-b-[1.5px] border-[#2B2E3A] h-12"
+                                    className="bg-transparent border-b-[1.5px] border-[#2B2E3A] h-12 outline-none"
                                 />
                                 <button className="w-[42px] h-[42px] flex justify-center items-center rounded-full bg-[#1B1B1B]">
                                     <Image
