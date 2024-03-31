@@ -77,7 +77,7 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                             <p className="text-[#9194A6] text-[13.5px] font-medium leading-5">
                                 Drop us a line
                             </p>
-                            <button className="group flex items-center gap-x-1.5 px-[18px] py-[10.5px] border-[1.5px] border-[#2B2E3A] hover:bg-[#1B1B1B] hover:border-[#1B1B1B] rounded-[37.5px] w-56 hover:w-[244px] duration-300 relative">
+                            <button className="group flex items-center gap-x-1.5 px-[18px] py-[10.5px] border-[1.5px] border-[#2B2E3A] hover:bg-[#1B1B1B] hover:border-[#1B1B1B] rounded-[37.5px] w-60 hover:w-[260px] duration-300 relative">
                                 <Image
                                     src={Icons.copy}
                                     width={1000}

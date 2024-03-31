@@ -30,8 +30,53 @@ export const generateLeftMargin = () => {
     return { margin: value, slides: slides };
 };
 
-
 export function generateBreadcrumbPath(routes, index) {
     if (routes[index] === "product-details") return "/" + routes.join("/");
     return "/" + routes.slice(0, index + 1).join("/");
 }
+
+export function formatDate(originalDateStr) {
+    const originalDate = new Date(originalDateStr);
+
+    // Months array
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+
+    // Extract components
+    const year = originalDate.getFullYear();
+    const month = originalDate.getMonth();
+    const day = originalDate.getDate();
+
+    // Format the date
+    const formattedDate = `${months[month]} ${day}, ${year}`;
+
+    return formattedDate;
+}
+
+/**
+ * Format a given date into "hh:mm am/pm" format.
+ * @param {Date} inputDate - The input date to be formatted.
+ * @returns {string} The formatted time string.
+ */
+export const formatTime = (inputDate) => {
+    const hours = inputDate.getHours();
+    const minutes = inputDate.getMinutes();
+
+    let ampm = hours >= 12 ? "pm" : "am";
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+    return `${formattedHours}:${formattedMinutes} ${ampm}`;
+};
