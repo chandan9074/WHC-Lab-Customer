@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, Typography } from "antd";
-import { useCart } from "@/contexts/CartContext";
+// import { useCart } from "@/contexts/CartContext";
 
 const { Text } = Typography;
 
@@ -20,8 +20,8 @@ const Summary = ({
                     <Container
                         content={`Total Items`}
                         value={totalItems}
-                        contentStyle="font-bold text-neutral-700"
-                        valueStyle="font-bold text-neutral-700"
+                        contentStyle="font-medium text-brand-blue-800"
+                        valueStyle="font-medium text-brand-blue-800"
                     />
                 </div>
             )}
@@ -57,8 +57,8 @@ const Summary = ({
                     content={"Total"}
                     value={total}
                     containerStyle="border-t-2 py-2 border-dashed"
-                    contentStyle="text-neutral-700 font-semibold"
-                    valueStyle="text-neutral-700 font-semibold"
+                    contentStyle="text-brand-blue-800 font-medium"
+                    valueStyle="text-brand-blue-800 font-medium"
                 />
             </Flex>
         </div>

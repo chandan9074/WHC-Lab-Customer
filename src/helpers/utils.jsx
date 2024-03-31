@@ -80,3 +80,7 @@ export const formatTime = (inputDate) => {
 
     return `${formattedHours}:${formattedMinutes} ${ampm}`;
 };
+
+export const getTextShort = (value, size) => {
+    return value.length > size ? value.slice(0, size) + "..." : value;
+};

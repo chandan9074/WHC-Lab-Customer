@@ -3,6 +3,7 @@ import menu from "./menu.svg";
 import arrow_up_right_white from "./arrow_up_right_white.svg";
 import arrow_up_right_blue from "./arrow_up_right_blue.svg";
 import cross from "./cross.svg";
+import cross_blue from "./cross_blue.svg";
 import facebook from "./facebook.svg";
 import linkedin from "./linkedin.svg";
 import twitter from "./twitter.svg";
@@ -53,6 +54,8 @@ import trash from "./trash.svg";
 import dots_three_vertical from "./dots_three_vertical.svg";
 import clock from "./clock.svg";
 import calendar from "./calendar.svg";
+import arrow_down_neutral from "./arrow_down_neautral.svg";
+import arrow_up_neutral from "./arrow_up_neautral.svg";
 
 const Icons = {
     search_blue,
@@ -110,6 +113,9 @@ const Icons = {
     dots_three_vertical,
     calendar,
     clock,
+    arrow_up_neutral,
+    arrow_down_neutral,
+    cross_blue,
 };
 
 export default Icons;
