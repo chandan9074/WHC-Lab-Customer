@@ -76,3 +76,18 @@ export const chooseUsData = [
             "We use the highest quality control standards with our yeast production. We utilize both next generation gentic/QPCR and plating methods to test the various batches for any spoiler organisms. Nothing is shipped without meeting the highest QC Standards.",
     },
 ];
+
+export const orderStatusColor = [
+    {
+        title: "Processing",
+        color: "#9B81E5",
+        bgColor: "#9b81e514",
+    },
+    {
+        title: "Order placed",
+        color: "#4796FF",
+        bgColor: "#4796ff14",
+    },
+    { title: "Delivered", color: "#0ACF83", bgColor: "#0acf8314" },
+    { title: "Canceled", color: "#D9333F", bgColor: "#d9333f14" },
+];

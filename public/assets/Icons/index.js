@@ -51,6 +51,8 @@ import active from "./active.svg";
 import download from "./download.svg";
 import trash from "./trash.svg";
 import dots_three_vertical from "./dots_three_vertical.svg";
+import clock from "./clock.svg";
+import calendar from "./calendar.svg";
 
 const Icons = {
     search_blue,
@@ -106,6 +108,8 @@ const Icons = {
     download,
     trash,
     dots_three_vertical,
+    calendar,
+    clock,
 };
 
 export default Icons;

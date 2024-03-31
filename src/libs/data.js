@@ -10,9 +10,9 @@ export const MY_WISHLIST_NAV = "My Wishlist";
 
 export const CREDIT_BALANCE_NAV = "Credit Balance";
 
-export const ACTIVE_ORDERS_PATH = "Active Orders"
+export const ACTIVE_ORDERS_PATH = "Active Orders";
 
-export const ORDERS_NAV = "Orders";
+export const ORDERS_NAV = "Orders History";
 
 export const profileData = [
     {
@@ -53,7 +53,7 @@ export const profileData = [
             },
             {
                 title: ORDERS_NAV,
-                url: ACTIVE_ORDERS_PATH,
+                url: SLUG.ORDERS_HISTORY_PATH,
                 inactiveIcon: Icons.order_inactive,
                 activeIcon: Icons.order_active,
                 path: "",
@@ -83,7 +83,7 @@ export const orderData = [
 
 export const orderHistory = [
     {
-        _id: "#343322",
+        _id: "343322",
         customerId: 1,
         lineItems: [{}, {}, {}],
         state: "Delivered",
@@ -91,7 +91,7 @@ export const orderHistory = [
         createdAt: "Tue Jan 02 2024 11:47:22 GMT+0600",
     },
     {
-        _id: "#343233",
+        _id: "343233",
         customerId: 2,
         lineItems: [{}, {}, {}],
         state: "Canceled",

@@ -25,7 +25,7 @@
 .ant-input-outlined,
 .ant-input-number-input {
     border-color: #ebedf0;
-    padding: 13px 12px !important;
+    /* padding: 13px 12px !important; */
     line-height: 24px;
     font-weight: 400;
     border-radius: 4px;
