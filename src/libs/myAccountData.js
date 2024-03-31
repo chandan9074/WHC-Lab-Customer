@@ -45,3 +45,24 @@ export const accountData = {
         },
     ],
 };
+
+export const countriesData = [
+    {
+        country: "Bangladesh",
+        states: [
+            "Dhaka",
+            "Chittagong",
+            "Rajshahi",
+            // Add more states/districts as needed
+        ],
+    },
+    {
+        country: "United States",
+        states: [
+            "California",
+            "New York",
+            "Texas",
+            // Add more states as needed
+        ],
+    },
+];

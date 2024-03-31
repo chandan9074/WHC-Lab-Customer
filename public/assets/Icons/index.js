@@ -49,6 +49,8 @@ import logout from "./logout.svg";
 import password from "./password.svg";
 import active from "./active.svg";
 import download from "./download.svg";
+import trash from "./trash.svg";
+import dots_three_vertical from "./dots_three_vertical.svg";
 
 const Icons = {
     search_blue,
@@ -102,6 +104,8 @@ const Icons = {
     password,
     active,
     download,
+    trash,
+    dots_three_vertical,
 };
 
 export default Icons;
