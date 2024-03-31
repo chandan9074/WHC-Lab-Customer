@@ -36,7 +36,7 @@
 
 /* andt select item */
 .ant-select-selection-item {
-    color: #3a3a3a !important;
+    color: #505f79 !important;
     font-family: var(--font-poppins);
 }
 
@@ -51,6 +51,24 @@
 
 .ant-input-outlined:focus-within {
     border-color: #0b2848 !important;
+}
+
+.ant-select-outlined:not(.ant-select-disabled):not(
+        .ant-select-customize-input
+    ):not(.ant-pagination-size-changer):hover
+    .ant-select-selector {
+    border-color: #0b2848;
+}
+
+.ant-select-focused:where(
+        .css-dev-only-do-not-override-1uweeqc
+    ).ant-select-outlined:not(.ant-select-disabled):not(
+        .ant-select-customize-input
+    ):not(.ant-pagination-size-changer)
+    .ant-select-selector {
+    border-color: #0b2848;
+    box-shadow: none;
+    /* outline: 0; */
 }
 
 /* antd slider rail */
@@ -127,11 +145,15 @@
     background-color: #0b2848;
 }
 
-.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-checked:not(.ant-checkbox-disabled) .ant-checkbox-inner {
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover
+    .ant-checkbox-checked:not(.ant-checkbox-disabled)
+    .ant-checkbox-inner {
     background-color: #0b2848;
 }
 
-.ant-tree .ant-tree-checkbox:not(.ant-tree-checkbox-disabled):hover .ant-tree-checkbox-inner {
+.ant-tree
+    .ant-tree-checkbox:not(.ant-tree-checkbox-disabled):hover
+    .ant-tree-checkbox-inner {
     border-color: #0b2848;
 }
 
@@ -145,16 +167,18 @@
     border-color: #0b2848;
 }
 
-.ant-tree .ant-tree-checkbox-checked:not(.ant-tree-checkbox-disabled):hover .ant-tree-checkbox-inner {
+.ant-tree
+    .ant-tree-checkbox-checked:not(.ant-tree-checkbox-disabled):hover
+    .ant-tree-checkbox-inner {
     background-color: #0b2848;
 }
 
 /* antd collapse header */
-.ant-collapse>.ant-collapse-item>.ant-collapse-header {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
     padding: 16px 16px 0px 0px;
 }
 
-.ant-collapse .ant-collapse-content>.ant-collapse-content-box {
+.ant-collapse .ant-collapse-content > .ant-collapse-content-box {
     padding: 0px;
 }
 
@@ -164,7 +188,9 @@
 }
 
 /* Antd radio */
-:where(.css-dev-only-do-not-override-1uweeqc).ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+:where(.css-dev-only-do-not-override-1uweeqc).ant-radio-wrapper
+    .ant-radio-checked
+    .ant-radio-inner {
     border-color: #0b2848;
     background-color: #0b2848;
 }
