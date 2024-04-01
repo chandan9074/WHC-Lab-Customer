@@ -1,27 +1,17 @@
 import InfoPagesContainer from '@/components/common/InfoPagesContainer'
 import PageHeaderWithNameAndBgImage from '@/components/common/PageHeaderWithNameAndBgImage'
 import Layouts from '@/layouts'
-import React, { Fragment } from 'react'
+import React from 'react'
 import Images from '../../../../public/assets/Images'
-import BlogInfoCard from '@/sections/Blog/BlogInfoCard'
+import BlogContainer from '@/sections/Blog/BlogContainer'
 
 function page() {
     return (
         <Layouts.Secondary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading='Blog' />
             <InfoPagesContainer>
-                <div className="grid grid-col-1 md:grid-cols-3 gap-6">
-                    {
-                        blogsData?.map(data => (
-                            <Fragment key={data._id}>
-                                <BlogInfoCard data={data} />
-                            </Fragment>
-                        ))
-                    }
-                </div>
-
+                <BlogContainer blogsData={blogsData} />
             </InfoPagesContainer>
-
         </Layouts.Secondary>
     )
 }
@@ -29,7 +19,7 @@ function page() {
 export default page
 
 
-const blogsData = [
+export const blogsData = [
     {
         _id: '65f2f25ff2cb7067b2976284',
         title: 'Thermotolerant yeast and efficient fermentation solutions',
