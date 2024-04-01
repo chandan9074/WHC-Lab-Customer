@@ -5,13 +5,14 @@ import React from 'react'
 import Icons from '../../../../public/assets/Icons'
 
 function CommentList() {
+    const comments = Array(4).fill();
     return (
         <div>
             <Text.Secondary>Comment</Text.Secondary>
 
-            {Array(4).fill().map((_, index) => (
+            {comments.map((_, index) => (
 
-                <div className='py-5 md:py-6 flex gap-5' key={index}>
+                <div className={`py-6 flex gap-6 ${index !== comments.length - 1 ? 'border-b border-stroke-new' : ''}`} key={index}>
                     <Image
                         src={Icons.user_avatar}
                         alt="Icon"
