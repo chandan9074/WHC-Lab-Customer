@@ -105,7 +105,7 @@ export const availabilityData = [
 // ];
 
 export const filterData = {
-    "yeastType": [
+    yeastType: [
         {
             name: "Dried Yeast",
             quantity: 8,
@@ -115,7 +115,7 @@ export const filterData = {
             quantity: 3,
         },
     ],
-    "beerStyle": [
+    beerStyle: [
         {
             name: "American Ale",
             quantity: "8",
@@ -141,7 +141,7 @@ export const filterData = {
             quantity: "5",
         },
     ],
-    "flocculation": [
+    flocculation: [
         {
             name: "Low",
             quantity: "8",
@@ -230,3 +230,22 @@ export const productsData = [
 //     { size: 48, inStock: true },
 //     { size: 50, inStock: false },
 // ];
+
+export const wishlistData = [
+    {
+        productId: 1,
+        productFeaturedImage: Images.productImage,
+        productName: "Old English-Dehydrated Yeast (500g)",
+        productOfferPrice: 244,
+        productPrice: 329,
+        inStock: true,
+    },
+    {
+        productId: 2,
+        productFeaturedImage: Images.productImage,
+        productName: "New English-Dehydrated Yeast (500g)",
+        productOfferPrice: 269,
+        productPrice: 389,
+        inStock: false,
+    },
+];

@@ -14,3 +14,4 @@ export const FORGOT_PASSWORD_CONFIRMATION_PATH =
     "/forgot-password-confirmation";
 export const CHANGE_EMAIL_VERIFICATION_PATH = "/change-email-verification";
 export const CHANGE_PHONE_VERIFICATION_PATH = "/change-phone-verification";
+export const ORDERS_HISTORY_PATH = "/profile/orders-history";

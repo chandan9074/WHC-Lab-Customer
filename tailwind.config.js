@@ -46,9 +46,9 @@ module.exports = {
                 "error-500": "#EF4444",
             },
             fontFamily: {
-                poppins: ['var(--font-poppins)'],
-                montserrat: ['var(--font-montserrat)'],
-            }
+                poppins: ["var(--font-poppins)"],
+                montserrat: ["var(--font-montserrat)"],
+            },
         },
     },
     plugins: [],
