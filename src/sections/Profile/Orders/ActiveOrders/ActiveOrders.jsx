@@ -1,7 +1,7 @@
 import React from "react";
 import OrderItem from "../OrderItem";
 import Link from "next/link";
-import { TRACK_ORDER_PATH } from "@/helpers/slug";
+import { ORDERS_HISTORY_PATH, TRACK_ORDER_PATH } from "@/helpers/slug";
 import NoDataFound from "@/components/common/NoDataFound";
 
 const ActiveOrders = ({ activeOrderList }) => {
@@ -12,14 +12,19 @@ const ActiveOrders = ({ activeOrderList }) => {
                     const createdAtDate = new Date(ele?.createdAt); // Convert createdAt to Date object if not already
 
                     return (
-                        <OrderItem
+                        <Link
+                            href={`${ORDERS_HISTORY_PATH}/${ele._id}`}
                             key={index}
-                            createdAt={createdAtDate}
-                            orderId={ele?._id}
-                            state={ele.state}
-                            lineItemCount={ele.lineItems.length}
-                            total={ele.total}
-                        />
+                        >
+                            <OrderItem
+                                key={index}
+                                createdAt={createdAtDate}
+                                orderId={ele?._id}
+                                state={ele.state}
+                                lineItemCount={ele.lineItems.length}
+                                total={ele.total}
+                            />
+                        </Link>
                     );
                 })
             ) : (

@@ -3,12 +3,12 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Icons from "../../../../../public/assets/Icons";
 import Badges from "@/components/Badges";
-import PriceFormatter from "@/components/common/PriceFormatter";
-import { getTextShort } from "@/helpers/utils";
 import Buttons from "@/components/Buttons";
 import CustomModal from "@/components/common/CustomModal";
-import ItemReviewForm from "@/app/(protected)/profile/track-orders/ItemReviewForm";
-import Images from "../../../../../public/assets/images";
+import ItemReviewForm from "@/app/(protected)/profile/orders-history/ItemReviewForm";
+import { getTextShort } from "@/helpers/utils";
+import Images from "../../../../../public/assets/Images";
+import PriceFormatter from "@/components/common/PriceFormatter";
 
 const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
     const pathName = usePathname();
@@ -39,7 +39,7 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
     };
 
     return (
-        <div className="bg-neutral-10 border border-neutral-30 border-opacity-[12%] px-5 py-5 rounded-lg w-full ">
+        <div className="border border-neutral-30 border-opacity-[12%] px-5 py-5 rounded-lg w-full ">
             {/* Collapse */}
             <div className=" flex justify-between items-center">
                 <div>
@@ -47,7 +47,7 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
                         onClick={() => setIsCollapse(!isCollapse)}
                         className={`text-neutral-700 text-sm font-medium cursor-pointer mb-2`}
                     >
-                        Products
+                        #{data._id}
                     </p>
 
                     {data.state && <Badges.Primary title={data.state} />}
@@ -58,11 +58,7 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
                         <p className="text-neutral-300 text-sm font-medium mb-2 text-end">
                             {data.lineItems && data.lineItems.length} items
                         </p>
-                        <PriceFormatter
-                            price={1515.15}
-                            variant="default"
-                            fontWeight="font-bold"
-                        />
+                        <PriceFormatter price={1515.15} variant="default" />
                     </div>
                     <Image
                         src={
@@ -87,16 +83,16 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
                     <div key={i} className="animate-fadeIn ">
                         <div className="flex items-center justify-between gap-x-4">
                             <div>
-                                <p className="text-neutral-600 text-sm font-medium md:block hidden">
+                                <p className="text-neutral-400 leading-[21px] text-sm font-medium md:block hidden">
                                     {getTextShort(item.name, 40)}
                                 </p>
 
-                                <p className="text-neutral-600 text-sm font-medium md:hidden block">
+                                <p className="text-neutral-400 leading-[21px] text-sm font-medium md:hidden block">
                                     {getTextShort(item.name, 20)}
                                 </p>
 
-                                <div className="text-neutral-300 text-[13px] font-medium">
-                                    {item.quantity} x $ {item.salePrice}
+                                <div className="text-neutral-400 leading-[19.5px] text-[13px] font-medium">
+                                    {item.quantity} x ${item.salePrice}
                                 </div>
                             </div>
 
@@ -115,31 +111,12 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
                     </div>
                 ))}
 
-            <div className="mt-5 flex flex-col gap-y-3">
-                <Buttons.LabelBtn
-                    label="Track your order"
-                    variant="primary"
-                    width="w-full h-12"
-                    onClick={() => trackOrder()}
+            <div className="mt-5 md:mt-9 flex flex-col gap-y-3">
+                <Buttons.OutlinedButton
+                    className="h-12"
+                    label="Leave items review"
+                    onClick={() => leaveItemReview()}
                 />
-
-                <div className="flex gap-x-3">
-                    <Buttons.PrimaryOutlinedBtn
-                        label="Give Seller Ratings"
-                        border="border"
-                        paddingX="px-[12px]"
-                        className="border-neutral-300 w-full"
-                        onClick={() => handleSellerRatingOpen()}
-                    />
-
-                    <Buttons.PrimaryOutlinedBtn
-                        label="Leave items review"
-                        border="border"
-                        paddingX="px-[12px]"
-                        className="border-neutral-300 w-full"
-                        onClick={() => leaveItemReview()}
-                    />
-                </div>
             </div>
 
             <CustomModal
