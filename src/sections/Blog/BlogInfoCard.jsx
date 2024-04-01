@@ -1,6 +1,7 @@
 import { GET_IMAGE_RENDER } from '@/helpers/apiURLS'
 import { formatDate } from '@/utils'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function BlogInfoCard({
@@ -25,7 +26,9 @@ function BlogInfoCard({
                     <p className='text-brand-blue-300'>{formatDate(data?.createdAt)}</p>
                 </div>
                 <div className='h-12'>
-                    <p className='font-montserrat text-base font-semibold clamp cursor-pointer'>{data?.title} {data?.title} {data?.title} {data?.title}</p>
+                    <Link href='/blog/564654645'>
+                        <p className='font-montserrat text-base font-semibold clamp cursor-pointer text-brand-blue-800'>{data?.title} {data?.title} {data?.title} {data?.title}</p>
+                    </Link>
                 </div>
                 <div className='h-[1px] bg-stroke-new'></div>
                 <div className='flex gap-4 items-center'>
@@ -37,7 +40,7 @@ function BlogInfoCard({
                         className={`w-[48px] h-[48px] cursor-pointer `}
 
                     />
-                    <p className='font-montserrat text-base font-semibold'> {`${data?.author?.firstName} ${data?.author?.lastName}`} </p>
+                    <p className='font-montserrat text-base font-semibold text-brand-blue-800'> {`${data?.author?.firstName} ${data?.author?.lastName}`} </p>
                 </div>
             </div>
 

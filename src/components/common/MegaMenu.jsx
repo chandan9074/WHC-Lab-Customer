@@ -29,6 +29,7 @@ const MegaMenu = ({ setOpen, open }) => {
                             onClick={() => {
                                 setOpen(!open);
                             }}
+                            className="p-5"
                         >
                             <Image
                                 src={Icons.cross}

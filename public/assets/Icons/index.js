@@ -49,6 +49,11 @@ import logout from "./logout.svg";
 import password from "./password.svg";
 import active from "./active.svg";
 import download from "./download.svg";
+import chevron_small_left from "./chevron_small_left.svg";
+import chevron_small_right from "./chevron_small_right.svg";
+import facebook_regular from "./facebook_regular.svg";
+import linkedIn_regular from "./linkedIn_regular.svg";
+import twitter_regular from "./twitter_regular.svg";
 
 const Icons = {
     search_blue,
@@ -102,6 +107,11 @@ const Icons = {
     password,
     active,
     download,
+    chevron_small_left,
+    chevron_small_right,
+    facebook_regular,
+    linkedIn_regular,
+    twitter_regular
 };
 
 export default Icons;
