@@ -35,6 +35,42 @@
 }
 
 /* andt select item */
+
+/* .ant-select-outlined:not(.ant-select-customize-input)
+    .ant-select-selector
+    .custom-select {
+    height: 40px;
+    border: none;
+    background-color: #f5f6f7;
+    border-radius: 2px;
+} */
+
+.ant-picker-outlined:hover {
+    border-color: #0b2848;
+}
+
+.ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+    border-radius: 2px;
+}
+
+.ant-select-focused:where(
+        .css-dev-only-do-not-override-42nv3w
+    ).ant-select-outlined:not(.ant-select-disabled):not(
+        .ant-select-customize-input
+    ):not(.ant-pagination-size-changer)
+    .ant-select-selector {
+    box-shadow: none;
+}
+
+.ant-select-focused:where(
+        .css-dev-only-do-not-override-42nv3w
+    ).ant-select-outlined:not(.ant-select-disabled):not(
+        .ant-select-customize-input
+    ):not(.ant-pagination-size-changer)
+    .ant-select-selector {
+    border-color: #0b2848;
+}
+
 .ant-select-selection-item {
     color: #505f79 !important;
     font-family: var(--font-poppins);
@@ -214,4 +250,41 @@
 .ant-form-item-explain-error {
     font-family: var(--font-poppins);
     padding-top: 4px;
+}
+
+/* Antd Date Picker */
+
+.ant-picker-outlined:focus,
+.ant-picker-outlined:focus-within {
+    border-color: #0b2848;
+    box-shadow: none;
+    outline: 0;
+    /* background-color: #f5f6f7; */
+}
+
+.ant-picker-outlined {
+    /* background-color: #f5f6f7; */
+    /* border: none; */
+    height: 40px;
+    border-radius: 2px;
+}
+
+/* Antd pagination */
+
+.ant-pagination .ant-pagination-item-active {
+    background-color: #0b2848;
+    border-color: #0b2848;
+    border-radius: 3px;
+}
+
+.ant-pagination .ant-pagination-item-active a {
+    color: white;
+}
+
+/* Antd table */
+.custom-table .ant-table-thead > tr > th {
+    background-color: #fff;
+}
+.ant-table-wrapper .ant-table-thead > tr > th {
+    color: #5d6b82;
 }

@@ -53,6 +53,7 @@ import trash from "./trash.svg";
 import dots_three_vertical from "./dots_three_vertical.svg";
 import clock from "./clock.svg";
 import calendar from "./calendar.svg";
+import suffixIcon from "./suffixIcon.svg";
 
 const Icons = {
     search_blue,
@@ -110,6 +111,7 @@ const Icons = {
     dots_three_vertical,
     calendar,
     clock,
+    suffixIcon,
 };
 
 export default Icons;

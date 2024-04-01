@@ -36,7 +36,7 @@ export default async function ProfileLayout({
                     <TitleBar profileData={profileData} />
                 </div>
                 <section
-                    className={`flex flex-col md:flex-row gap-6 container mx-auto px-6 sm:px-0 py-8`}
+                    className={`flex flex-col lg:flex-row gap-6 container mx-auto px-6 sm:px-0 py-8`}
                 >
                     {/* Include shared UI here e.g. a header or sidebar */}
                     <div className="">
@@ -60,7 +60,7 @@ export default async function ProfileLayout({
                             }
                         />
                     </div>
-                    <div className="flex-1 bg-white rounded-2xl border-[1.5px] border-[#EBEDF0]">
+                    <div className="flex-1 bg-white rounded-2xl border-[1.5px] border-[#EBEDF0] mb-6 md:mb-[120px]">
                         {children}
                     </div>
                 </section>

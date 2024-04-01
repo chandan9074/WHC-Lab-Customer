@@ -46,7 +46,7 @@ export const profileData = [
         children: [
             {
                 title: CREDIT_BALANCE_NAV,
-                url: CREDIT_BALANCE_NAV,
+                url: SLUG.CREDIT_BALANCE_PATH,
                 inactiveIcon: Icons.credit_inactive,
                 activeIcon: Icons.credit_active,
                 path: "",
