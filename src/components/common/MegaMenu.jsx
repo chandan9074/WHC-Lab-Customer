@@ -8,9 +8,12 @@ import { socialLinks } from "@/libs/common";
 import megamenuVideo from "../../../public/megamenu-video.mp4";
 import { motion } from "framer-motion";
 import Buttons from "../Buttons";
+import { useAuth } from "@/context/AuthContext";
+import { LOGIN_PATH, SIGN_UP_PATH } from "@/helpers/slug";
 
 const MegaMenu = ({ setOpen, open }) => {
     const [showResourcesButtons, setShowResourcesButtons] = useState(false);
+    const { isLogin, logOut } = useAuth();
 
     return (
         <div className="">
@@ -151,12 +154,28 @@ const MegaMenu = ({ setOpen, open }) => {
                         <div className="col-span-12 lg:col-span-4 lg:mx-auto">
                             <LinkHeader title={"Brewers & Retailers"} />
                             <div className="mt-4 space-y-2 mb-9 flex flex-col">
-                                <NavLink title={"LOG IN"} path="/log-in" />
-                                <NavLink
-                                    title={"REGISTER NEW ACCOUNT"}
-                                    path="/sign-up"
-                                />
+
+                                {
+                                    !isLogin ?
+                                        <>
+                                            <NavLink title={"LOG IN"} path={LOGIN_PATH} />
+                                            <NavLink
+                                                title={"REGISTER NEW ACCOUNT"}
+                                                path={SIGN_UP_PATH}
+                                            />
+                                        </>
+                                        :
+                                        <button
+                                            onClick={() => {
+                                                logOut()
+                                                setOpen(!open);
+                                            }}
+                                            className="text-white text-xl font-bold hover:text-brand-blue-500 hover:ml-1 duration-300 text-left" >
+                                            Logout
+                                        </button>
+                                }
                             </div>
+
                             <LinkHeader title={"Our Products"} />
                             <div className="mt-4 space-y-2 mb-9 flex flex-col">
                                 <NavLink
