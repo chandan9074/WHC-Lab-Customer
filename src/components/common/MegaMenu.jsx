@@ -8,12 +8,12 @@ import { socialLinks } from "@/libs/common";
 import megamenuVideo from "../../../public/megamenu-video.mp4";
 import { motion } from "framer-motion";
 import Buttons from "../Buttons";
-import { useAuth } from "@/context/AuthContext";
 import { LOGIN_PATH, SIGN_UP_PATH } from "@/helpers/slug";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 const MegaMenu = ({ setOpen, open }) => {
     const [showResourcesButtons, setShowResourcesButtons] = useState(false);
-    const { isLogin, logOut } = useAuth();
+    const { isLogin, logOut } = useAuthContext();
 
     return (
         <div className="">
@@ -60,13 +60,15 @@ const MegaMenu = ({ setOpen, open }) => {
                                 >
                                     <Link
                                         href={item.path}
-                                        className={` ${item.name === `RESOURCES`
-                                            ? `${showResourcesButtons
-                                                ? "text-brand-blue-500"
-                                                : "text-white"
-                                            }`
-                                            : "text-white hover:text-brand-blue-500 hover:ml-1 "
-                                            } text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-500`}
+                                        className={` ${
+                                            item.name === `RESOURCES`
+                                                ? `${
+                                                      showResourcesButtons
+                                                          ? "text-brand-blue-500"
+                                                          : "text-white"
+                                                  }`
+                                                : "text-white hover:text-brand-blue-500 hover:ml-1 "
+                                        } text-[32px] sm:text-5xl md:text-6xl lg:text-[90px] font-extrabold leading-10 sm:leading-[60px] md:leading-[80px] lg:leading-[110px] duration-500`}
                                     >
                                         {item.name}
                                     </Link>
@@ -88,14 +90,13 @@ const MegaMenu = ({ setOpen, open }) => {
                                                     }}
                                                     className=" mt-2"
                                                 >
-                                                    <Link href='/brewery-resources'>
+                                                    <Link href="/brewery-resources">
                                                         <Buttons.OutlinedButton
                                                             label="Brewing Yeast"
                                                             borderColor="border-white hover:border-transparent"
                                                             textColor="text-white"
                                                         />
                                                     </Link>
-
                                                 </motion.div>
 
                                                 <motion.div
@@ -113,7 +114,7 @@ const MegaMenu = ({ setOpen, open }) => {
                                                     }}
                                                     className="mt-2"
                                                 >
-                                                    <Link href='/distilled-resources'>
+                                                    <Link href="/distilled-resources">
                                                         <Buttons.OutlinedButton
                                                             label="Distilling Yeast"
                                                             borderColor="border-white  hover:border-transparent"
@@ -137,7 +138,7 @@ const MegaMenu = ({ setOpen, open }) => {
                                                     }}
                                                     className="mt-2"
                                                 >
-                                                    <Link href='lab-analysis-resources'>
+                                                    <Link href="lab-analysis-resources">
                                                         <Buttons.OutlinedButton
                                                             label="Lab Analysis"
                                                             borderColor="border-white hover:border-transparent"
@@ -154,26 +155,28 @@ const MegaMenu = ({ setOpen, open }) => {
                         <div className="col-span-12 lg:col-span-4 lg:mx-auto">
                             <LinkHeader title={"Brewers & Retailers"} />
                             <div className="mt-4 space-y-2 mb-9 flex flex-col">
-
-                                {
-                                    !isLogin ?
-                                        <>
-                                            <NavLink title={"LOG IN"} path={LOGIN_PATH} />
-                                            <NavLink
-                                                title={"REGISTER NEW ACCOUNT"}
-                                                path={SIGN_UP_PATH}
-                                            />
-                                        </>
-                                        :
-                                        <button
-                                            onClick={() => {
-                                                logOut()
-                                                setOpen(!open);
-                                            }}
-                                            className="text-white text-xl font-bold hover:text-brand-blue-500 hover:ml-1 duration-300 text-left" >
-                                            Logout
-                                        </button>
-                                }
+                                {!isLogin ? (
+                                    <>
+                                        <NavLink
+                                            title={"LOG IN"}
+                                            path={LOGIN_PATH}
+                                        />
+                                        <NavLink
+                                            title={"REGISTER NEW ACCOUNT"}
+                                            path={SIGN_UP_PATH}
+                                        />
+                                    </>
+                                ) : (
+                                    <button
+                                        onClick={() => {
+                                            logOut();
+                                            setOpen(!open);
+                                        }}
+                                        className="text-white text-xl font-bold hover:text-brand-blue-500 hover:ml-1 duration-300 text-left"
+                                    >
+                                        Logout
+                                    </button>
+                                )}
                             </div>
 
                             <LinkHeader title={"Our Products"} />

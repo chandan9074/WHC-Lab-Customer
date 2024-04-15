@@ -21,8 +21,8 @@ export const CHANGE_PASSWORD = `${BASEURL}/change-password`;
 
 //Signin
 export const SIGN_IN_URL = `${BASEURL}/users/login`;
-export const FACEBOOK_LOGIN_INFO = `${BASEURL}/users/login/facebook`;
-export const GOOGLE_LOGIN_INFO = `${BASEURL}/users/login/google`;
+export const FACEBOOK_LOGIN_URL = `${BASEURL}/users/login/facebook`;
+export const GOOGLE_LOGIN_URL = `${BASEURL}/users/login/google`;
 
 //Signup
 export const SIGN_UP_URL = `${BASEURL}/users/customer/register`;

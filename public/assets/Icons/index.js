@@ -61,6 +61,9 @@ import clock from "./clock.svg";
 import calendar from "./calendar.svg";
 import arrow_down_neutral from "./arrow_down_neautral.svg";
 import arrow_up_neutral from "./arrow_up_neautral.svg";
+import appleLogo from "./appleLogo.svg";
+import googleLogo from "./googleLogo.svg";
+import facebookLogo from "./facebookLogo.svg";
 
 const Icons = {
     search_blue,
@@ -126,6 +129,9 @@ const Icons = {
     arrow_up_neutral,
     arrow_down_neutral,
     cross_blue,
+    appleLogo,
+    googleLogo,
+    facebookLogo,
 };
 
 export default Icons;

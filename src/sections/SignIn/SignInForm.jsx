@@ -1,69 +1,38 @@
 "use client";
 import React, { useState } from "react";
-import {
-    Button,
-    Checkbox,
-    Form,
-    Input,
-    Typography,
-    Divider,
-    Spin,
-} from "antd";
+import { Button, Checkbox, Form, Input, Divider, Spin } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { FORGOT_PASSWORD_PATH, SIGN_UP_PATH } from "@/helpers/slug";
-import { useRouter } from "next/navigation";
-import { setCookie } from "cookies-next";
 import LabelText from "@/components/common/LabelText";
 import Images from "../../../public/assets/Images";
 import { LoadingOutlined } from "@ant-design/icons";
 import { SIGN_IN_URL } from "@/helpers/apiURLS";
 import MakeApiCall from "@/services/MakeApiCall";
-import { useAuth } from "@/context/AuthContext";
 import { toast } from "react-toastify";
-
-const { Title } = Typography;
+import { useAuthContext } from "@/contexts/AuthContext";
 
 const SignInForm = () => {
-    const router = useRouter();
-    const { setUserInfo, setIsLogin, userInfo, isLogin } = useAuth();
+    const { handlePageTransition } = useAuthContext();
     const [isLoading, setIsLoading] = useState(false);
 
-
     const onFinish = async (values) => {
-        delete values.remember
+        delete values.remember;
         try {
             setIsLoading(true);
-            const responseData = await MakeApiCall(SIGN_IN_URL, 'POST', values);
-
-            // Assuming your API returns a token in the response
-            const token = responseData.token;
-            const userInfo = responseData.user;
-
-            // set userInfo and token inside a state
-            setUserInfo(userInfo);
-            setIsLogin(true);
-
-            // Set the token and userInfo set inside cookie
-            setCookie("accessToken", token);
-            setCookie("userInfo", JSON.stringify(userInfo));
+            const responseData = await MakeApiCall(SIGN_IN_URL, "POST", values);
+            handlePageTransition(responseData);
             toast.success(responseData.message);
-
-            // You can use the router to navigate to another page
-            router.push("/");
-
         } catch (error) {
-            console.log('error', error.message)
+            console.log("error", error.message);
         } finally {
-            setIsLoading(false)
+            setIsLoading(false);
         }
-
     };
     const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo);
         setIsLoading(false);
     };
-
 
     return (
         <>
@@ -106,7 +75,7 @@ const SignInForm = () => {
 
                             <div className="flex flex-col gap-5">
                                 <Form.Item
-                                    label={<LabelText>Email id</LabelText>}
+                                    label={<LabelText>Email</LabelText>}
                                     name="email"
                                     rules={[
                                         {
