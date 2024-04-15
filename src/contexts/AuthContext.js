@@ -1,19 +1,21 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { hasCookie, getCookie } from "cookies-next";
+import { hasCookie, getCookie, deleteCookie, setCookie } from "cookies-next";
 import {
     signInWithPopup,
     signOut,
-    onAuthStateChanged,
     GoogleAuthProvider,
     FacebookAuthProvider,
 } from "firebase/auth";
 import { socialAuth } from "@/config/firebase";
 import { useRouter } from "next/navigation";
+import MakeApiCall from "@/services/MakeApiCall";
+import { FACEBOOK_LOGIN_URL, GOOGLE_LOGIN_URL } from "@/helpers/apiURLS";
 
-const authContext = createContext();
+const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     const [userInfo, setUserInfo] = useState(null);
+    const [isLogin, setIsLogin] = useState(false);
     const router = useRouter();
 
     // if user already
@@ -21,30 +23,38 @@ export function AuthProvider({ children }) {
         if (hasCookie("userInfo")) {
             setUserInfo(JSON.parse(getCookie("userInfo")));
         }
+        if (hasCookie("accessToken")) {
+            setIsLogin(true);
+        }
     }, []);
 
-    const handlePageTransition = (res) => {
-        if (res?.status === 200) {
-            const token = res.body.token;
-            const userInfo = res.body.user;
-            // Set the token in a cookie
-            Cookies.set("accessToken", token);
-            Cookies.set("userInfo", JSON.stringify(userInfo));
-            router.push("/");
-        }
+    const handlePageTransition = (response) => {
+        console.log("handlePageTransition(response);");
+        // Assuming your API returns a token in the response
+        const token = response.token;
+        const userInfo = response.user;
+
+        // set userInfo and token inside a state
+        setUserInfo(userInfo);
+        setIsLogin(true);
+
+        // Set the token and userInfo set inside cookie
+        setCookie("accessToken", token);
+        setCookie("userInfo", JSON.stringify(userInfo));
+
+        // You can use the router to navigate to home page
+        router.push("/");
     };
 
-    const handleGoogleLogin = async (data) => {
-        console.log(data);
-        // try {
-        //     const res = await AuthService.googleLogin(data);
-
-        //     if (res?.status === 200) {
-        //         handlePageTransition(res);
-        //     }
-        // } catch (error) {
-        //     console.error("Error in makeFacebookLogin:", error);
-        // }
+    const handleSocialLogin = async (firebaseToken, apiEndPoint) => {
+        try {
+            let url = `${apiEndPoint}?firebaseToken=${firebaseToken}`;
+            const res = await MakeApiCall(url, "POST", {});
+            console.log(res);
+            handlePageTransition(res);
+        } catch (error) {
+            console.error("Error in makeFacebookLogin:", error);
+        }
     };
 
     const googleSingIn = async () => {
@@ -57,7 +67,10 @@ export function AuthProvider({ children }) {
                 const user = result.user;
                 console.log(user);
                 if (user) {
-                    await handleGoogleLogin(user?.accessToken);
+                    await handleSocialLogin(
+                        user?.accessToken,
+                        GOOGLE_LOGIN_URL
+                    );
                 }
             }
         } catch (error) {
@@ -68,7 +81,6 @@ export function AuthProvider({ children }) {
 
     const facebookSignIn = async () => {
         const provider = new FacebookAuthProvider();
-
         provider.setCustomParameters({
             display: "popup",
         });
@@ -84,7 +96,10 @@ export function AuthProvider({ children }) {
 
                 if (user) {
                     console.log(user);
-                    // await handleFacebookLogin(user?.accessToken);
+                    await handleSocialLogin(
+                        user?.accessToken,
+                        FACEBOOK_LOGIN_URL
+                    );
                 }
             }
         } catch (error) {
@@ -95,19 +110,26 @@ export function AuthProvider({ children }) {
 
     const logOut = () => {
         signOut(socialAuth);
+        deleteCookie("userInfo", "accessToken");
+        setUserInfo(null);
+        setIsLogin(false);
+        router.push("/");
     };
 
     const values = {
         userInfo,
         setUserInfo,
+        isLogin,
+        setIsLogin,
         googleSingIn,
         facebookSignIn,
         logOut,
+        handlePageTransition,
     };
 
     return (
-        <authContext.Provider value={values}>{children}</authContext.Provider>
+        <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
     );
 }
 
-export const useAuthContext = () => useContext(authContext);
+export const useAuthContext = () => useContext(AuthContext);

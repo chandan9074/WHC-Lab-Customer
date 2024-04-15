@@ -1,6 +1,8 @@
+import { Providers } from "@/contexts/Providers";
 import "./globals.css";
 import { montserrat, poppins } from "@/utils/fonts";
-import { Providers } from "@/contexts/Providers";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
     title: "WHC-Lab",
@@ -13,7 +15,10 @@ export default function RootLayout({ children }) {
             <body
                 className={`${poppins} ${montserrat} font-poppins font-normal text-sm`}
             >
-                <Providers>{children}</Providers>
+                <Providers>
+                    <ToastContainer autoClose={3000} />
+                    {children}
+                </Providers>
             </body>
         </html>
     );
