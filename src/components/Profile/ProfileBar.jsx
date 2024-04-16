@@ -40,7 +40,7 @@ const ProfileBar = ({ width, data }) => {
         currentPathForCollapse && currentPathForCollapse.title
     );
     const [userData, setUserData] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     // const [image, setImage] = useState(
     //     userData?.profilePicture
     //         ? `${GET_IMAGE_RENDER}?key=${userData?.profilePicture}`
@@ -222,22 +222,26 @@ const ProfileBar = ({ width, data }) => {
                 } px-6 py-12 rounded-2xl border-[1.5px] border-[#EBEDF0]  hidden md:block`}
             >
                 {/* Profile Details */}
-                <div className="mb-6 px-4 flex items-center gap-x-3">
-                    <Image
-                        alt="profile"
-                        src={
-                            userData?.profilePicture
-                                ? `${GET_IMAGE_RENDER}?key=${userData?.profilePicture}`
-                                : Images.profile_avatar
-                        }
-                        width={1000}
-                        height={1000}
-                        className="w-12 h-12 rounded-full mb-2"
-                    />
-                    <p className="w-[170px] truncate text-neutral-700 text-base font-medium">
-                        {userData?.firstName} {userData?.lastName}
-                    </p>
-                </div>
+                {isLoading ? (
+                    <LoadingSkeleton />
+                ) : (
+                    <div className="mb-6 px-4 flex items-center gap-x-3">
+                        <Image
+                            alt="profile"
+                            src={
+                                userData?.profilePicture
+                                    ? `${GET_IMAGE_RENDER}?key=${userData?.profilePicture}`
+                                    : Images.profile_avatar
+                            }
+                            width={1000}
+                            height={1000}
+                            className="w-12 h-12 rounded-full mb-2"
+                        />
+                        <p className="w-[170px] truncate text-neutral-700 text-base font-medium">
+                            {userData?.firstName} {userData?.lastName}
+                        </p>
+                    </div>
+                )}
 
                 {/* Nav  */}
                 {data.length > 0 &&
@@ -334,3 +338,12 @@ const ProfileBar = ({ width, data }) => {
 };
 
 export default ProfileBar;
+
+const LoadingSkeleton = () => {
+    return (
+        <div className="flex items-center gap-x-3">
+            <div className="w-12 h-12 rounded-full mb-2 bg-gray-300" />
+            <div className="w-[170px] h-6 bg-gray-300 rounded-md" />
+        </div>
+    );
+};
