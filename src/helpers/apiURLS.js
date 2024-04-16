@@ -30,3 +30,6 @@ export const SIGN_UP_URL = `${BASEURL}/users/customer/register`;
 // orders
 export const ORDERS_URL = `${BASEURL}/orders`;
 
+// wishlists
+export const WISHLISTS_URL = `${BASEURL}/wishlists`;
+

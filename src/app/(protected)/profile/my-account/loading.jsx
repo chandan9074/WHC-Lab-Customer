@@ -1,6 +1,3 @@
-'use client'
-
-
 export default function Loading() {
   return (
     <div className="flex animate-pulse flex-col items-center h-full justify-center space-x mt-2">
