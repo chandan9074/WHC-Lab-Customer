@@ -16,7 +16,7 @@
  * @param {string} signal
  * @returns {object | object[]}
  */
-export async function MakeApiCall({
+async function MakeApiCall({
     apiUrl,
     method = "GET",
     body = null,
@@ -30,8 +30,8 @@ export async function MakeApiCall({
     try {
         const url = query
             ? `${apiUrl}?${new URLSearchParams({
-                  ...query,
-              })}`
+                ...query,
+            })}`
             : `${apiUrl}`;
 
         const options = {
@@ -60,5 +60,5 @@ export async function MakeApiCall({
     }
 }
 
-// Exporting the function
+// Export the async function as default
 export default MakeApiCall;
