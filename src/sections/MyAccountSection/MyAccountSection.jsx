@@ -8,9 +8,15 @@ import Images from "../../../public/assets/Images";
 import Image from "next/image";
 import Icons from "../../../public/assets/Icons";
 import EditableInput from "@/components/common/EditableInput";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 const MyAccountSection = ({ data }) => {
-    const [image, setImage] = useState(data?.profilePicture);
+    console.log(data);
+    const [image, setImage] = useState(
+        data.profilePicture
+            ? `${GET_IMAGE_RENDER}?key=${data?.profilePicture}`
+            : null
+    );
     const inputRef = useRef(null);
     const editFieldRef = useRef();
     const [isEdit, setIsEdit] = useState("");
@@ -122,7 +128,7 @@ const MyAccountSection = ({ data }) => {
     };
 
     return (
-        <div className="py-12 flex flex-col gap-y-10 ">
+        <div className="py-12 flex flex-col gap-y-10">
             <div className="w-[296px] lg:w-[400px] flex flex-col items-center">
                 <div className="relative">
                     {image ? (
