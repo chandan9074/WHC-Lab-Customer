@@ -35,6 +35,7 @@ module.exports = {
                 "brand-green-200": "#D7E6B9",
                 "brand-green-500": "#A8C866",
                 "neutral-10": "#FAFBFB",
+                "neutral-30": "#EBEDF0",
                 "neutral-40": "#DFE2E6",
                 "neutral-50": "#C2C7D0",
                 "neutral-100": "#7A8699",

@@ -12,6 +12,9 @@ import Icons from "../../../public/assets/Icons";
 import ConfirmationModal from "@/components/common/ConfirmationModal";
 import NoDataFound from "@/components/common/NoDataFound";
 import Image from "next/image";
+import MakeApiCall from "@/services/MakeApiCall";
+import { MY_ADDRESS_URL } from "@/helpers/apiURLS";
+import { toast } from "react-toastify";
 
 const MyAddressSection = ({ data }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,30 +76,25 @@ const MyAddressSection = ({ data }) => {
 
     const onChange = async (e) => {
         console.log("radio checked", e.target.value);
-        // // setValue(e.target.value);
+        // setValue(e.target.value);
 
-        // // If the selected address is not the default address, update it
-        // try {
-        //     // Make the API call to update the address
-        //     console.log(e.target.value);
-        //     setValue(e.target.value);
-        //     const res = await UserService.updateUserAddress(
-        //         e.target.value,
-        //         { isDefault: true },
-        //         token
-        //     );
-
-        //     if (res?.status === 200) {
-        //         toast.success("Default address updated successfully!");
-        //         // router.refresh();
-        //         getUserData();
-        //     } else {
-        //         toast.error("Failed to update default address");
-        //     }
-        // } catch (error) {
-        //     console.error("Error updating default address:", error);
-        //     toast.error("Failed to update default address");
-        // }
+        // If the selected address is not the default address, update it
+        try {
+            // Make the API call to update the address
+            console.log(e.target.value);
+            setValue(e.target.value);
+            const res = await MakeApiCall({
+                method: "PATCH",
+                apiUrl: MY_ADDRESS_URL,
+                query: { id: e.target.value },
+                body: { isDefault: true },
+                headers: { Authorization: token },
+            });
+            toast.success("Default address updated successfully!");
+        } catch (error) {
+            console.error("Error updating default address:", error);
+            toast.error("Failed to update default address");
+        }
     };
 
     const handleNewAddressBtn = () => {
@@ -163,7 +161,7 @@ const MyAddressSection = ({ data }) => {
                                             </h2>
 
                                             {addressList[index].isDefault && (
-                                                <div className=" bg-neutral-20 rounded-sm px-2.5 py-[5px] ml-2">
+                                                <div className=" bg-neutral-30 rounded-sm px-2.5 py-[5px] ml-2">
                                                     <p className=" text-neutral-300 text-xs font-semibold">
                                                         Default
                                                     </p>
