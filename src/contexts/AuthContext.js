@@ -109,10 +109,11 @@ export function AuthProvider({ children }) {
     };
 
     const logOut = () => {
-        signOut(socialAuth);
-        deleteCookie("userInfo", "accessToken");
+        deleteCookie("userInfo");
+        deleteCookie("accessToken");
         setUserInfo(null);
         setIsLogin(false);
+        signOut(socialAuth);
         router.push("/");
     };
 
