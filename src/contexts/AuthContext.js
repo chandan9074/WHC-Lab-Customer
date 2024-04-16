@@ -8,8 +8,8 @@ import {
 } from "firebase/auth";
 import { socialAuth } from "@/config/firebase";
 import { useRouter } from "next/navigation";
-import MakeApiCall from "@/services/MakeApiCall";
 import { FACEBOOK_LOGIN_URL, GOOGLE_LOGIN_URL } from "@/helpers/apiURLS";
+import MakeApiCall from "@/services/MakeApiCall";
 
 const AuthContext = createContext();
 

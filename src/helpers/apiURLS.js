@@ -27,5 +27,11 @@ export const GOOGLE_LOGIN_URL = `${BASEURL}/users/login/google`;
 //Signup
 export const SIGN_UP_URL = `${BASEURL}/users/customer/register`;
 
+// orders
+export const ORDERS_URL = `${BASEURL}/orders`;
+
+// wishlists
+export const WISHLISTS_URL = `${BASEURL}/wishlists`;
+
 //MyAccount
 export const MY_ACCOUNT_URL = `${BASEURL}/users/profile`;
