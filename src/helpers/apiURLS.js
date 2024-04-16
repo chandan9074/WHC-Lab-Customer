@@ -33,3 +33,5 @@ export const ORDERS_URL = `${BASEURL}/orders`;
 // wishlists
 export const WISHLISTS_URL = `${BASEURL}/wishlists`;
 
+//MyAccount
+export const MY_ACCOUNT_URL = `${BASEURL}/users/profile`;

@@ -1,28 +1,24 @@
 import MyAccountSection from "@/sections/MyAccountSection/MyAccountSection";
-import UserService from "@/services/UserService/UserService";
-import React from "react";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
-import { accountData } from "@/libs/myAccountData";
+import { MY_ACCOUNT_URL } from "@/helpers/apiURLS";
+
+async function getData(token) {
+    const res = await fetch(MY_ACCOUNT_URL, {
+        headers: { Authorization: token },
+    });
+
+    return res.json();
+}
 
 const MyAccount = async () => {
-    // const userInfo = getCookie("userInfo", { cookies });
     const token = getCookie("accessToken", { cookies });
-    // const user = JSON.parse(userInfo);
-    // console.log(token);
 
-    // if (userInfo) {
-    //     user = JSON.parse(userInfo?.value);
-    // } else {
-    //     console.error("User cookie is empty or undefined.");
-    // }
-
-    const userData = await UserService.getUserInfo(1);
-    console.log(userData);
+    const userData = await getData(token);
 
     return (
         <div className="flex justify-center items-center rounded-sm">
-            <MyAccountSection data={accountData} />
+            <MyAccountSection data={userData.user} />
         </div>
     );
 };
