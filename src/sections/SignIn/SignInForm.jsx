@@ -20,7 +20,11 @@ const SignInForm = () => {
         delete values.remember;
         try {
             setIsLoading(true);
-            const responseData = await MakeApiCall(SIGN_IN_URL, "POST", values);
+            const responseData = await MakeApiCall({
+                apiUrl: SIGN_IN_URL,
+                method: "POST",
+                body: values,
+            });
             handlePageTransition(responseData);
             toast.success(responseData.message);
         } catch (error) {

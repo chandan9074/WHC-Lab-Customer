@@ -1,9 +1,24 @@
 // apiController.js
 
 // Function to make API calls
-export const MakeApiCall = async (
+
+/**
+ * Generic API call hook
+ *
+ * @param {string} apiUrl
+ * @param {string} method
+ * @param {object} body
+ * @param {string} cache
+ * @param {object} headers
+ * @param {string} query
+ * @param {string} tags
+ * @param {string} variables
+ * @param {string} signal
+ * @returns {object | object[]}
+ */
+export async function MakeApiCall({
     apiUrl,
-    method = 'GET',
+    method = "GET",
     body = null,
     cache = "no-store",
     headers,
@@ -11,13 +26,12 @@ export const MakeApiCall = async (
     tags,
     variables,
     signal,
-
-) => {
+}) {
     try {
         const url = query
             ? `${apiUrl}?${new URLSearchParams({
-                ...query,
-            })}`
+                  ...query,
+              })}`
             : `${apiUrl}`;
 
         const options = {
@@ -32,23 +46,19 @@ export const MakeApiCall = async (
             signal,
         };
 
-
         const response = await fetch(url, options);
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.message || 'Something went wrong');
+            throw new Error(data.message || "Something went wrong");
         }
 
         return data;
     } catch (error) {
         console.log(error.message);
-        throw new Error(error.message || 'Failed to fetch data');
+        throw new Error(error.message || "Failed to fetch data");
     }
-};
-
-// Example usage:
-// const data = await makeApiCall('https://api.example.com/data');
+}
 
 // Exporting the function
 export default MakeApiCall;
