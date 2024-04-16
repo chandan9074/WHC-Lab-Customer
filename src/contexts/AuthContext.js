@@ -49,7 +49,7 @@ export function AuthProvider({ children }) {
     const handleSocialLogin = async (firebaseToken, apiEndPoint) => {
         try {
             let url = `${apiEndPoint}?firebaseToken=${firebaseToken}`;
-            const res = await MakeApiCall(url, "POST", {});
+            const res = await MakeApiCall({ apiUrl: url, method: "POST" });
             console.log(res);
             handlePageTransition(res);
         } catch (error) {
