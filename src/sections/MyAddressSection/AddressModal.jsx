@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { countriesData } from "@/libs/myAccountData";
 import MakeApiCall from "@/services/MakeApiCall";
 import { MY_ADDRESS_URL } from "@/helpers/apiURLS";
+import { toast } from "react-toastify";
 const { TextArea } = Input;
 
 const AddressModal = ({
@@ -60,31 +61,31 @@ const AddressModal = ({
             }
             const res = await MakeApiCall({
                 apiUrl: MY_ADDRESS_URL,
-                method: "PATCH",
-                query: { id: data._id },
+                method: "POST",
                 body: body,
                 headers: { Authorization: token },
             });
-            if (res?.status === 200) {
-                toast.success(res?.body?.message);
-                getUserAddress();
-                onOk();
-            }
+
+            toast.success(res?.message);
+            getUserAddress();
+            onOk();
         } else {
             // For update
             console.log(values);
-            const res = await UserService.updateUserAddress(
-                data?._id,
-                { ...values },
-                token
-            );
-            if (res?.status === 200) {
-                handleDetailsModalOpen(null);
-                toast.success(res?.body?.message);
-                // router.refresh();
-                getUserAddress();
-                onOk();
-            }
+            const res = await MakeApiCall({
+                apiUrl: MY_ADDRESS_URL,
+                method: "PATCH",
+                query: { id: data._id },
+                body: { ...values },
+                headers: { Authorization: token },
+            });
+            console.log(res);
+
+            handleDetailsModalOpen(null);
+            toast.success(res?.message);
+            // router.refresh();
+            getUserAddress();
+            onOk();
         }
     };
 

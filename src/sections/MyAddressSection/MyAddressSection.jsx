@@ -27,12 +27,16 @@ const MyAddressSection = ({ data }) => {
     const token = getCookie("accessToken");
     const [addressList, setAddressList] = useState([]);
 
-    // const getUserData = async () => {
-    //     const userData = await UserService.getUserAddress(token);
-    //     // return userData;
-    //     setAddressList(userData.body.docs);
-    //     handleActiveAddress(userData.body.docs);
-    // };
+    const getUserData = async () => {
+        const userData = await MakeApiCall({
+            apiUrl: MY_ADDRESS_URL,
+            headers: { Authorization: token },
+        });
+
+        // return userData;
+        setAddressList(userData.docs);
+        handleActiveAddress(userData.docs);
+    };
 
     useEffect(() => {
         setAddressList(data);
@@ -104,11 +108,16 @@ const MyAddressSection = ({ data }) => {
     };
 
     const handleDelete = async (addressId) => {
-        // const res = await UserService.deleteUserAddress(addressId, token);
-        // if (res?.status === 200) {
-        //     router.refresh();
-        //     toast.success(res?.body?.message);
-        // }
+        const res = await MakeApiCall({
+            method: "DELETE",
+            apiUrl: MY_ADDRESS_URL,
+            query: { id: addressId },
+            headers: { Authorization: token },
+        });
+
+        handleDetailsModalOpen(null);
+        getUserData();
+        toast.success(res?.message);
     };
 
     return (
@@ -139,9 +148,9 @@ const MyAddressSection = ({ data }) => {
                                 value === address._id
                                     ? "border-magenta-600  bg-white"
                                     : "border-transparent bg-neutral-10"
-                            } border flex justify-between px-4 py-4 lg:px-6 lg:py-5 rounded-sm`}
+                            } border flex justify-between items-start lg:items-center px-4 py-4 lg:px-6 lg:py-5 rounded-sm`}
                         >
-                            <div className="flex">
+                            <div className="flex flex-1 items-start">
                                 <Radio
                                     // style={radioStyle}
                                     value={address._id}
@@ -169,38 +178,34 @@ const MyAddressSection = ({ data }) => {
                                             )}
                                         </div>
 
-                                        <p className="text-neutral-400 text-sm font-normal tracking-wide flex flex-wrap w-[170px] sm:w-full">
+                                        <div className="text-neutral-400 text-sm font-normal tracking-wide w-full flex flex-wrap flex-1">
                                             {address.addressLine1 && (
-                                                <span>
-                                                    {address.addressLine1},
-                                                </span>
+                                                <p>{address.addressLine1},</p>
                                             )}
                                             {address.addressLine2 && (
-                                                <span>
-                                                    {address.addressLine2},
-                                                </span>
+                                                <p>{address.addressLine2},</p>
                                             )}
                                             {address.street && (
-                                                <span>{address.street},</span>
+                                                <p>{address.street},</p>
                                             )}
                                             {address.city && (
-                                                <span>{address.city},</span>
+                                                <p>{address.city},</p>
                                             )}
                                             {address.state && (
-                                                <span>{address.state},</span>
+                                                <p>{address.state},</p>
                                             )}
                                             {address.zip && (
-                                                <span>{address.zip},</span>
+                                                <p>{address.zip},</p>
                                             )}
                                             {address.country && (
-                                                <span> {address.country}</span>
+                                                <p> {address.country}</p>
                                             )}
-                                        </p>
+                                        </div>
                                     </div>
                                 </Radio>
                             </div>
 
-                            <div className="border-l border-primary-black border-opacity-[24%] pl-6 gap-4 items-center lg:flex hidden">
+                            <div className="h-10 border-l border-primary-black border-opacity-[24%] pl-6 gap-4 items-center lg:flex lg:items-center hidden">
                                 <Buttons.IconButton
                                     icon={Icons.edit}
                                     alt="edit-icon"
@@ -224,7 +229,7 @@ const MyAddressSection = ({ data }) => {
                                 />
                             </div>
 
-                            <div className="relative w-20 flex justify-end items-start lg:hidden">
+                            <div className="relative  flex  justify-end items-start lg:hidden">
                                 <div className="bg-neutral-20 p-1.5 rounded-[4px]">
                                     <Buttons.IconButton
                                         icon={Icons.dots_three_vertical}
@@ -239,6 +244,8 @@ const MyAddressSection = ({ data }) => {
                                 </div>
                                 {isDetailsOpen === address._id && (
                                     <ThreeDotsMenu
+                                        handleDelete={handleDelete}
+                                        getUserData={getUserData}
                                         handleDetailsModalOpen={
                                             handleDetailsModalOpen
                                         }
@@ -293,7 +300,7 @@ const MyAddressSection = ({ data }) => {
                     }
                     buttonTitle={isUpdateData ? "Update" : "Create"}
                     handleDetailsModalOpen={handleDetailsModalOpen}
-                    // getUserAddress={getUserData}
+                    getUserAddress={getUserData}
                 />
             </Modal>
         </div>
@@ -303,9 +310,11 @@ const MyAddressSection = ({ data }) => {
 export default MyAddressSection;
 
 export const ThreeDotsMenu = ({
+    getUserData,
     handleDetailsModalOpen,
     handleUpdateBtnClick,
     address,
+    handleDelete,
     detailsOpen,
 }) => {
     const [openDeleteModal, setOpenDeleteModal] = useState(null);
@@ -316,16 +325,7 @@ export const ThreeDotsMenu = ({
     const handleSelectUserId = (id) => {
         setOpenDeleteModal(true);
         openModal = id;
-    };
-
-    const handleDelete = async (addressId) => {
-        // const res = await UserService.deleteUserAddress(addressId, token);
-        // if (res?.status === 200) {
-        //     router.refresh();
-        //     toast.success(res?.body?.message);
-        //     setOpenDeleteModal(null);
-        //     handleDetailsModalOpen(null);
-        // }
+        // handleDetailsModalOpen(null);
     };
 
     return (

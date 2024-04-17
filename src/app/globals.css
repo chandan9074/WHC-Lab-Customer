@@ -215,3 +215,22 @@
     font-family: var(--font-poppins);
     padding-top: 4px;
 }
+:where(.css-dev-only-do-not-override-42nv3w).ant-radio-wrapper {
+    position: relative;
+}
+
+.ant-radio-wrapper .ant-radio {
+    position: absolute;
+    top: 4px !important;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-radio-wrapper
+    span.ant-radio
+    + * {
+    padding-inline-start: 28px !important;
+}
+
+.ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+    border-color: #0b2848;
+    background-color: #0b2848;
+}
