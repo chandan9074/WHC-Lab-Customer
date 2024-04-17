@@ -7,10 +7,16 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import Buttons from "../Buttons";
 import Icons from "../../../public/assets/Icons";
+import { GET_IMAGE_RENDER, MY_ACCOUNT_URL } from "@/helpers/apiURLS";
+import { getCookie } from "cookies-next";
+import MakeApiCall from "@/services/MakeApiCall";
+import Images from "../../../public/assets/Images";
 
 const { Text } = Typography;
 
-const ProfileBar = ({ width, data, name, image }) => {
+const ProfileBar = ({ width, data }) => {
+    const token = getCookie("accessToken");
+
     const currentPath = usePathname();
     const pathSegment = currentPath.split("/");
     const secondLastSegment = pathSegment[pathSegment.length - 2];
@@ -30,10 +36,36 @@ const ProfileBar = ({ width, data, name, image }) => {
         })[0];
     const [showHideCollapse, setShowHideCollapse] = useState(false);
     const [activeIcon, setActiveIcon] = useState("");
-
     const [currentPage, setCurrentPage] = useState(
         currentPathForCollapse && currentPathForCollapse.title
     );
+    const [userData, setUserData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    // const [image, setImage] = useState(
+    //     userData?.profilePicture
+    //         ? `${GET_IMAGE_RENDER}?key=${userData?.profilePicture}`
+    //         : Images.profile_avatar
+    // );
+
+    useEffect(() => {
+        const getUserData = async () => {
+            try {
+                setIsLoading(true);
+                const responseData = await MakeApiCall({
+                    apiUrl: MY_ACCOUNT_URL,
+                    headers: { Authorization: token },
+                });
+
+                setUserData(responseData.user);
+                toast.success(responseData.message);
+            } catch (error) {
+                console.log("error", error.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        getUserData();
+    }, []); // Empty dependency array to ensure it runs only once on mount
 
     // const { logOut } = useContext(userContext);
     // const { resetCartItemLength } = useCart();
@@ -182,8 +214,6 @@ const ProfileBar = ({ width, data, name, image }) => {
         },
     ];
 
-    // const user = Cookies.get("userInfo");
-
     return (
         <div className={`bg-white rounded-sm ${width || "w-full"}`}>
             <div
@@ -192,18 +222,26 @@ const ProfileBar = ({ width, data, name, image }) => {
                 } px-6 py-12 rounded-2xl border-[1.5px] border-[#EBEDF0]  hidden lg:block`}
             >
                 {/* Profile Details */}
-                <div className="mb-6 px-4 flex items-center gap-x-3">
-                    <Image
-                        alt="profile"
-                        src={image ? image : ""}
-                        width={1000}
-                        height={1000}
-                        className="w-12 h-12 rounded-full mb-2"
-                    />
-                    <p className="text-neutral-700  text-base font-medium">
-                        {name}
-                    </p>
-                </div>
+                {isLoading ? (
+                    <LoadingSkeleton />
+                ) : (
+                    <div className="mb-6 px-4 flex items-center gap-x-3">
+                        <Image
+                            alt="profile"
+                            src={
+                                userData?.profilePicture
+                                    ? `${GET_IMAGE_RENDER}?key=${userData?.profilePicture}`
+                                    : Images.profile_avatar
+                            }
+                            width={1000}
+                            height={1000}
+                            className="w-12 h-12 rounded-full mb-2"
+                        />
+                        <p className="w-[170px] truncate text-neutral-700 text-base font-medium">
+                            {userData?.firstName} {userData?.lastName}
+                        </p>
+                    </div>
+                )}
 
                 {/* Nav  */}
                 {data.length > 0 &&
@@ -300,3 +338,12 @@ const ProfileBar = ({ width, data, name, image }) => {
 };
 
 export default ProfileBar;
+
+const LoadingSkeleton = () => {
+    return (
+        <div className="flex items-center gap-x-3">
+            <div className="w-12 h-12 rounded-full mb-2 bg-gray-300" />
+            <div className="w-[170px] h-6 bg-gray-300 rounded-md" />
+        </div>
+    );
+};

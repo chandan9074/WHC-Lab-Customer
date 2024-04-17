@@ -33,22 +33,28 @@ import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Icons from "../../../public/assets/Icons";
 import Images from "../../../public/assets/Images";
 import { LOGIN_PATH } from "@/helpers/slug";
+import { getCookie, hasCookie } from "cookies-next";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 const { Title } = Typography;
 
 const SignInForm = () => {
     const router = useRouter();
-    // const { setUserInfo, googleSingIn, facebookSignIn } =
-    //     useContext(userContext);
+    const { setUserInfo, googleSingIn, facebookSignIn } = useAuthContext();
     const [loading, setLoading] = useState(false);
-    // const loginWithSocialMedia = [
-    //     { title: "google", icon: Icons.google, handleSingIn: googleSingIn },
-    //     {
-    //         title: "facebook",
-    //         icon: Icons.facebook,
-    //         handleSingIn: facebookSignIn,
-    //     },
-    // ];
+    const [isSocialLoading, setIsSocialLoading] = useState({
+        google: false,
+        facebook: false,
+    });
+
+    const loginWithSocialMedia = [
+        { title: "google", icon: Icons.googleLogo },
+        { title: "Apple", icon: Icons.appleLogo },
+        {
+            title: "facebook",
+            icon: Icons.facebookLogo,
+        },
+    ];
 
     const { Option } = Select;
     const phoneNumberPrefix = (
@@ -104,6 +110,32 @@ const SignInForm = () => {
         //     setLoading(false);
         //     toast.error(error.error.message);
         // }
+    };
+
+    const handleGoogleSignIn = async () => {
+        try {
+            setIsSocialLoading({ ...isSocialLoading, google: true });
+            await googleSingIn();
+            const token = getCookie("accessToken");
+            // getUpdateCartList(token);
+            setIsSocialLoading({ ...isSocialLoading, google: false });
+        } catch (e) {
+            setIsSocialLoading({ ...isSocialLoading, google: false });
+            console.log(e);
+        }
+    };
+
+    const handleFaceBookSignIn = async () => {
+        try {
+            setIsSocialLoading({ ...isSocialLoading, facebook: true });
+            await facebookSignIn();
+            const token = getCookie("accessToken");
+            // getUpdateCartList(token);
+            setIsSocialLoading({ ...isSocialLoading, facebook: false });
+        } catch (e) {
+            setIsSocialLoading({ ...isSocialLoading, facebook: false });
+            console.log(e);
+        }
     };
 
     // const generateRecaptcha = () => {
@@ -378,21 +410,32 @@ const SignInForm = () => {
                     </div>
 
                     <Divider className="m-0 text-neutral-300">or</Divider>
-                    {/* <div className="flex flex-row gap-4 justify-between w-full">
-                        {loginWithSocialMedia.map((ele, id) => (
-                            <div
-                                key={id}
-                                // onClick={ele.handleSingIn}
-                                className="border-2 border-[#EBEDF0] rounded-sms w-full h-[48px] flex items-center justify-center gap-3 bg-[#F5F6F7] cursor-pointer"
-                            >
-                                <Image
-                                    alt={ele.title}
-                                    src={ele.icon}
-                                    height={24}
-                                />
-                            </div>
-                        ))}
-                    </div> */}
+                    <div className="flex flex-row gap-4 justify-between w-full">
+                        {loginWithSocialMedia.map((ele, id) => {
+                            const handleSocialMediaLogin = () => {
+                                if (ele.title === "google") {
+                                    handleGoogleSignIn();
+                                } else if (ele.title === "facebook") {
+                                    handleFaceBookSignIn();
+                                }
+                            };
+
+                            return (
+                                <div
+                                    key={id}
+                                    // onClick={ele.handleSingIn}
+                                    className="border-2 border-[#EBEDF0] rounded-sms w-full h-[48px] flex items-center justify-center gap-3 bg-[#F5F6F7] cursor-pointer"
+                                    onClick={handleSocialMediaLogin}
+                                >
+                                    <Image
+                                        alt={ele.title}
+                                        src={ele.icon}
+                                        height={24}
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
                 </Form>
 
                 <h4 className="text-sm font-medium text-neutral-400 text-center leading-[21px]">

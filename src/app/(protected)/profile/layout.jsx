@@ -48,16 +48,16 @@ export default async function ProfileLayout({
                             //         : Images?.profile_avatar
                             // }
                             // name={user?.firstName + " " + user?.lastName}
-                            image={
-                                accountData?.profilePicture
-                                    ? accountData?.profilePicture
-                                    : Images?.profile_avatar
-                            }
-                            name={
-                                accountData?.firstName +
-                                " " +
-                                accountData?.lastName
-                            }
+                            // image={
+                            //     accountData?.profilePicture
+                            //         ? accountData?.profilePicture
+                            //         : Images?.profile_avatar
+                            // }
+                            // name={
+                            //     accountData?.firstName +
+                            //     " " +
+                            //     accountData?.lastName
+                            // }
                         />
                     </div>
                     <div className="flex-1 bg-white rounded-2xl border-[1.5px] border-[#EBEDF0] mb-6 md:mb-[120px]">

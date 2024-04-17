@@ -3,6 +3,7 @@ import menu from "./menu.svg";
 import arrow_up_right_white from "./arrow_up_right_white.svg";
 import arrow_up_right_blue from "./arrow_up_right_blue.svg";
 import cross from "./cross.svg";
+import cross_blue from "./cross_blue.svg";
 import facebook from "./facebook.svg";
 import linkedin from "./linkedin.svg";
 import twitter from "./twitter.svg";
@@ -49,11 +50,21 @@ import logout from "./logout.svg";
 import password from "./password.svg";
 import active from "./active.svg";
 import download from "./download.svg";
+import chevron_small_left from "./chevron_small_left.svg";
+import chevron_small_right from "./chevron_small_right.svg";
+import facebook_regular from "./facebook_regular.svg";
+import linkedIn_regular from "./linkedIn_regular.svg";
+import twitter_regular from "./twitter_regular.svg";
 import trash from "./trash.svg";
 import dots_three_vertical from "./dots_three_vertical.svg";
 import clock from "./clock.svg";
 import calendar from "./calendar.svg";
 import suffixIcon from "./suffixIcon.svg";
+import arrow_down_neutral from "./arrow_down_neautral.svg";
+import arrow_up_neutral from "./arrow_up_neautral.svg";
+import appleLogo from "./appleLogo.svg";
+import googleLogo from "./googleLogo.svg";
+import facebookLogo from "./facebookLogo.svg";
 
 const Icons = {
     search_blue,
@@ -107,11 +118,22 @@ const Icons = {
     password,
     active,
     download,
+    chevron_small_left,
+    chevron_small_right,
+    facebook_regular,
+    linkedIn_regular,
+    twitter_regular,
     trash,
     dots_three_vertical,
     calendar,
     clock,
     suffixIcon,
+    arrow_up_neutral,
+    arrow_down_neutral,
+    cross_blue,
+    appleLogo,
+    googleLogo,
+    facebookLogo,
 };
 
 export default Icons;

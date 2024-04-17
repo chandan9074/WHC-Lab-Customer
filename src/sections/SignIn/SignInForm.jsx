@@ -1,127 +1,42 @@
 "use client";
-import React, { useContext, useState } from "react";
-import {
-    Button,
-    Checkbox,
-    Form,
-    Input,
-    Typography,
-    Divider,
-    Select,
-    message,
-    Spin,
-} from "antd";
+import React, { useState } from "react";
+import { Button, Checkbox, Form, Input, Divider, Spin } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import { FORGOT_PASSWORD_PATH, LOGIN_PATH, SIGN_UP_PATH } from "@/helpers/slug";
-// import AuthService from "@/services/AuthService/AuthService";
-// import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-// import { userContext } from "@/contexts/UserContext";
-// import "./signInForm.css";
-// import { toast } from "react-toastify";
-// import { useCart } from "@/contexts/CartContext";
-// import { getCookie, hasCookie } from "cookies-next";
+import { FORGOT_PASSWORD_PATH, SIGN_UP_PATH } from "@/helpers/slug";
 import LabelText from "@/components/common/LabelText";
-import PhoneNumberPrefix from "@/components/common/PhoneNumberPrefix";
-import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Images from "../../../public/assets/Images";
 import { LoadingOutlined } from "@ant-design/icons";
-
-const { Title } = Typography;
+import { SIGN_IN_URL } from "@/helpers/apiURLS";
+import { toast } from "react-toastify";
+import { useAuthContext } from "@/contexts/AuthContext";
+import MakeApiCall from "@/services/MakeApiCall";
 
 const SignInForm = () => {
-    const router = useRouter();
-    // const { setUserInfo, googleSingIn, facebookSignIn, socialLoginLoader } =
-    //     useContext(userContext);
+    const { handlePageTransition } = useAuthContext();
     const [isLoading, setIsLoading] = useState(false);
-    // const [isSocialLoading, setIsSocialLoading] = useState({
-    //     google: false,
-    //     facebook: false,
-    // });
-    // const { getUpdateCartList } = useCart();
-
-    const { Option } = Select;
-    // const phoneNumberPrefix = (
-    //     <Form.Item name={"prefix"} value="+880" noStyle>
-    //         <Select defaultValue="+880" className="flex items-center w-20">
-    //             <Option value="+880">+880</Option>
-    //             <Option value="+1">+1</Option>
-    //         </Select>
-    //     </Form.Item>
-    // );
-
-    // const loginWithSocialMedia = [
-    //     {
-    //         title: "google",
-    //         icon: Icons.google,
-    //         isLoading: isSocialLoading.google,
-    //     },
-    //     // { title: "apple", icon: Icons.apple },
-    //     {
-    //         title: "facebook",
-    //         icon: Icons.facebook,
-    //         isLoading: isSocialLoading.facebook,
-    //     },
-    // ];
 
     const onFinish = async (values) => {
-        // try {
-        //     // Call the sign-in service
-        //     setIsLoading(true);
-        //     let prefixValue = values.prefix || "+880";
-        //     const response = await AuthService.signIn(
-        //         prefixValue + values.primaryPhone,
-        //         values.password
-        //     );
-        //     setUserInfo(response.body.user);
-        //     // Assuming your API returns a token in the response
-        //     const token = response.body.token;
-        //     const userInfo = response.body.user;
-        //     // Set the token in a cookie
-        //     Cookies.set("accessToken", token);
-        //     Cookies.set("userInfo", JSON.stringify(userInfo));
-        //     setIsLoading(true);
-        //     toast.success(response.body.message);
-        //     getUpdateCartList(token);
-        //     // You can use the router to navigate to another page
-        //     router.push("/");
-        // } catch (error) {
-        //     console.error("Failed:", error);
-        //     setIsLoading(false);
-        //     toast.error(error.error.message);
-        // }
+        delete values.remember;
+        try {
+            setIsLoading(true);
+            const responseData = await MakeApiCall({
+                apiUrl: SIGN_IN_URL,
+                method: "POST",
+                body: values,
+            });
+            handlePageTransition(responseData);
+            toast.success(responseData.message);
+        } catch (error) {
+            console.log("error", error.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
     const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo);
         setIsLoading(false);
     };
-
-    // const handleGoogleSignIn = async () => {
-    //     try {
-    //         setIsSocialLoading({ ...isSocialLoading, google: true });
-    //         await googleSingIn();
-    //         const token = getCookie("accessToken");
-    //         getUpdateCartList(token);
-    //         setIsSocialLoading({ ...isSocialLoading, google: false });
-    //     } catch (e) {
-    //         setIsSocialLoading({ ...isSocialLoading, google: false });
-    //         console.log(e);
-    //     }
-    // };
-
-    // const handleFaceBookSignIn = async () => {
-    //     try {
-    //         setIsSocialLoading({ ...isSocialLoading, facebook: true });
-    //         await facebookSignIn();
-    //         const token = getCookie("accessToken");
-    //         getUpdateCartList(token);
-    //         setIsSocialLoading({ ...isSocialLoading, facebook: false });
-    //     } catch (e) {
-    //         setIsSocialLoading({ ...isSocialLoading, facebook: false });
-    //         console.log(e);
-    //     }
-    // };
 
     return (
         <>
@@ -163,30 +78,9 @@ const SignInForm = () => {
                             </div>
 
                             <div className="flex flex-col gap-5">
-                                {/* <Form.Item
-                                    label={<LabelText>Phone number</LabelText>}
-                                    name="primaryPhone"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Please input your phone number!",
-                                        },
-                                    ]}
-                                    className="w-full text-sm font-medium text-neutral-300 mb-0"
-                                >
-                                    <Input
-                                        type="number"
-                                        addonBefore={<PhoneNumberPrefix />}
-                                        className="w-full rounded text-[#7a8699] text-sm"
-                                        placeholder="1234567890"
-                                    />
-                                </Form.Item> */}
-                                {/* <PhoneNumberInputField /> */}
-
                                 <Form.Item
-                                    label={<LabelText>Email id</LabelText>}
-                                    name="primaryEmail"
+                                    label={<LabelText>Email</LabelText>}
+                                    name="email"
                                     rules={[
                                         {
                                             required: true,
