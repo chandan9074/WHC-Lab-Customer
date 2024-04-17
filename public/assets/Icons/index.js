@@ -64,8 +64,10 @@ import arrow_up_neutral from "./arrow_up_neautral.svg";
 import appleLogo from "./appleLogo.svg";
 import googleLogo from "./googleLogo.svg";
 import facebookLogo from "./facebookLogo.svg";
+import grey_bg_profile_avatar from "./grey_bg_profile_avatar.svg";
 
 const Icons = {
+    grey_bg_profile_avatar,
     search_blue,
     menu,
     arrow_up_right_white,
