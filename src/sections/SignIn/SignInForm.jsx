@@ -11,10 +11,12 @@ import { SIGN_IN_URL } from "@/helpers/apiURLS";
 import { toast } from "react-toastify";
 import { useAuthContext } from "@/contexts/AuthContext";
 import MakeApiCall from "@/services/MakeApiCall";
+import { useRouter } from "next/navigation";
 
 const SignInForm = () => {
     const { handlePageTransition } = useAuthContext();
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
 
     const onFinish = async (values) => {
         delete values.remember;
@@ -27,6 +29,7 @@ const SignInForm = () => {
             });
             handlePageTransition(responseData);
             toast.success(responseData.message);
+            router.push("/");
         } catch (error) {
             console.log("error", error.message);
         } finally {

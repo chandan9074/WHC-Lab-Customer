@@ -6,6 +6,9 @@ import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 // import { toast } from "react-toastify";
 import { countriesData } from "@/libs/myAccountData";
+import MakeApiCall from "@/services/MakeApiCall";
+import { MY_ADDRESS_URL } from "@/helpers/apiURLS";
+import { toast } from "react-toastify";
 const { TextArea } = Input;
 
 const AddressModal = ({
@@ -48,36 +51,42 @@ const AddressModal = ({
     }, [data]);
 
     const onFinish = async (values) => {
-        // if (Object.keys(data).length === 0) {
-        //     // For create
-        //     let body = {};
-        //     if (addressList.length > 0) {
-        //         body = { ...values, isDefault: false };
-        //     } else {
-        //         body = { ...values, isDefault: true };
-        //     }
-        //     const res = await UserService.createUserAddress(body, token);
-        //     if (res?.status === 200) {
-        //         toast.success(res?.body?.message);
-        //         getUserAddress();
-        //         onOk();
-        //     }
-        // } else {
-        //     // For update
-        //     console.log(values);
-        //     const res = await UserService.updateUserAddress(
-        //         data?._id,
-        //         { ...values },
-        //         token
-        //     );
-        //     if (res?.status === 200) {
-        //         handleDetailsModalOpen(null);
-        //         toast.success(res?.body?.message);
-        //         // router.refresh();
-        //         getUserAddress();
-        //         onOk();
-        //     }
-        // }
+        if (Object.keys(data).length === 0) {
+            // For create
+            let body = {};
+            if (addressList.length > 0) {
+                body = { ...values, isDefault: false };
+            } else {
+                body = { ...values, isDefault: true };
+            }
+            const res = await MakeApiCall({
+                apiUrl: MY_ADDRESS_URL,
+                method: "POST",
+                body: body,
+                headers: { Authorization: token },
+            });
+
+            toast.success(res?.message);
+            getUserAddress();
+            onOk();
+        } else {
+            // For update
+            console.log(values);
+            const res = await MakeApiCall({
+                apiUrl: MY_ADDRESS_URL,
+                method: "PATCH",
+                query: { id: data._id },
+                body: { ...values },
+                headers: { Authorization: token },
+            });
+            console.log(res);
+
+            handleDetailsModalOpen(null);
+            toast.success(res?.message);
+            // router.refresh();
+            getUserAddress();
+            onOk();
+        }
     };
 
     const handleCountryChange = (value) => {
@@ -253,6 +262,7 @@ const AddressModal = ({
                         label={buttonTitle}
                         className="flex justify-center items-center h-12 text-white font-semibold"
                         width="w-full"
+                        type="submit"
                         // onClick={onOk}
                     />
                 </Form>
