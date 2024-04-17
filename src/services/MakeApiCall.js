@@ -1,5 +1,7 @@
 // apiController.js
 
+import { toast } from "react-toastify";
+
 // Function to make API calls
 
 /**
@@ -30,8 +32,8 @@ async function MakeApiCall({
     try {
         const url = query
             ? `${apiUrl}?${new URLSearchParams({
-                ...query,
-            })}`
+                  ...query,
+              })}`
             : `${apiUrl}`;
 
         const options = {
@@ -56,7 +58,7 @@ async function MakeApiCall({
         return data;
     } catch (error) {
         console.log(error.message);
-        throw new Error(error.message || "Failed to fetch data");
+        toast.error(error.message);
     }
 }
 

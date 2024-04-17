@@ -6,7 +6,7 @@ import React from "react";
 const Secondary = ({ children, breadcrumb = true }) => {
     return (
         <div>
-            <Navbar.Secondary />
+            <Navbar.Primary />
             {breadcrumb && <NextBreadcrumb />}
             {children}
             <Footer.Primary />
