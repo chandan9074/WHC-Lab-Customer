@@ -59,6 +59,7 @@ import trash from "./trash.svg";
 import dots_three_vertical from "./dots_three_vertical.svg";
 import clock from "./clock.svg";
 import calendar from "./calendar.svg";
+import suffixIcon from "./suffixIcon.svg";
 import arrow_down_neutral from "./arrow_down_neautral.svg";
 import arrow_up_neutral from "./arrow_up_neautral.svg";
 import appleLogo from "./appleLogo.svg";
@@ -128,6 +129,7 @@ const Icons = {
     dots_three_vertical,
     calendar,
     clock,
+    suffixIcon,
     arrow_up_neutral,
     arrow_down_neutral,
     cross_blue,

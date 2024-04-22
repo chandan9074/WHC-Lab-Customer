@@ -219,7 +219,7 @@ const ProfileBar = ({ width, data }) => {
             <div
                 className={`${
                     width ? width : "w-[300px]"
-                } px-6 py-12 rounded-2xl border-[1.5px] border-[#EBEDF0]  hidden md:block`}
+                } px-6 py-12 rounded-2xl border-[1.5px] border-[#EBEDF0]  hidden lg:block`}
             >
                 {/* Profile Details */}
                 {isLoading ? (
@@ -320,7 +320,7 @@ const ProfileBar = ({ width, data }) => {
                 </div>
             </div>
             <div
-                className={`block md:hidden px-5`}
+                className={`block lg:hidden px-5`}
                 onClick={() => {
                     setShowHideCollapse(!showHideCollapse);
                 }}
