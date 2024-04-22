@@ -31,7 +31,7 @@ const ProductListContainer = ({ data, productData, selectedTab }) => {
         });
 
         const response = await ProductService.getProducts(paramData);
-        setProductList(response?.body?.docs);
+        setProductList(response?.docs);
         setIsLoading(false);
     }, [searchParams]);
 

@@ -7,10 +7,11 @@ import ProductService from "@/services/productsService";
 const page = async ({ params }) => {
     // const token = getCookie("accessToken", { cookies });
 
-    const data = await ProductService.getSingleProduct(params.slug);
+    const getSingleProduct = ProductService.getProducts({ id: params.slug });
     const getProducts = ProductService.getProducts();
     // const getWishlist = await WishlistServices.getWishlist(token);
-    const [productData] = await Promise.all([
+    const [singleProductData, productData] = await Promise.all([
+        getSingleProduct,
         getProducts,
         // getWishlist,
     ]);
@@ -23,10 +24,10 @@ const page = async ({ params }) => {
         // <Suspense fallback={<Loader />}>
         <Layouts.Primary>
             <section className="container mx-auto flex flex-col gap-y-20 px-4 sm:px-0 pb-[120px] py-4 md:py-6">
-                <ProductView data={data.body.doc} />
-                <ProductDetailsSection data={data.body.doc} />
+                <ProductView data={singleProductData?.doc} />
+                <ProductDetailsSection data={singleProductData?.doc} />
                 <RecentlyViewedSlideShowSection
-                    data={productData}
+                    data={productData?.docs}
                 // wishListIds={wishListIds}
                 />
             </section>

@@ -17,7 +17,6 @@ import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
 import QuickViewModalContent from "@/sections/ProductDetails/QuickViewModalContent";
 
 const ProductCard = ({ data, wishListIds }) => {
-    // console.log(`${GET_IMAGE_RENDER}?key=${data.featuredImage}`);
     // const router = useRouter();
     const [openModal, setOpenModal] = useState(false);
     // const [isFavourite, setIsFavourite] = useState(false);
@@ -123,8 +122,8 @@ const ProductCard = ({ data, wishListIds }) => {
                 <div className="flex gap-x-2">
                     <p
                         className={`text-sm font-medium ${data.offerPrice
-                                ? "line-through text-neutral-100"
-                                : "text-brand-blue-500"
+                            ? "line-through text-neutral-100"
+                            : "text-brand-blue-500"
                             }`}
                     >
                         ${data.price}
