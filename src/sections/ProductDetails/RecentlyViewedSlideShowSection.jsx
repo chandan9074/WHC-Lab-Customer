@@ -75,7 +75,7 @@ const RecentlyViewedSlideShowSection = ({ data, wishListIds }) => {
                     infinite={false}
                     className="custom-carousel"
                 >
-                    {data.body.docs.map((item, index) => (
+                    {data?.map((item, index) => (
                         <div key={index}>
                             <div className="px-3">
                                 <ProductCard
@@ -85,6 +85,16 @@ const RecentlyViewedSlideShowSection = ({ data, wishListIds }) => {
                             </div>
                         </div>
                     ))}
+                    {/* {data.body.docs.map((item, index) => (
+                        <div key={index}>
+                            <div className="px-3">
+                                <ProductCard
+                                    data={item}
+                                    wishListIds={wishListIds}
+                                />
+                            </div>
+                        </div>
+                    ))} */}
                 </Carousel>
 
                 <button
