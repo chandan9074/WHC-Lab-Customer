@@ -3,7 +3,7 @@ import React from "react";
 
 const HeroLeftSide = () => {
     return (
-        <div>
+        <div className="my-auto">
             <h4 className="lg:text-base md:text-sm text-xs font-semibold text-brand-blue-800">
                 WELCOME TO THE WHC LAB
             </h4>
