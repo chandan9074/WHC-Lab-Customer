@@ -18,7 +18,6 @@ export default function FAQ() {
             const response = await whcFetch({
                 endpoint: FAQ_URL,
             });
-            console.log(response.body);
             setFaqs(response.body.docs);
         };
         fetchData();
