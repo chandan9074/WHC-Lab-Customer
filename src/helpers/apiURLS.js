@@ -39,5 +39,7 @@ export const MY_ACCOUNT_URL = `${BASEURL}/users/profile`;
 export const MY_ADDRESS_URL = `${BASEURL}/addresses`;
 //Testimonials
 export const GET_TESTIMONIALS = `${BASEURL}/testimonials`
+//Main Categories
+export const GET_MAIN_CATEGORIES = `${BASEURL}/categories`
 // FAQ
 export const FAQ_URL = `${BASEURL}/faqs`;
