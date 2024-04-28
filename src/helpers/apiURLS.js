@@ -37,4 +37,5 @@ export const WISHLISTS_URL = `${BASEURL}/wishlists`;
 export const MY_ACCOUNT_URL = `${BASEURL}/users/profile`;
 //My Address
 export const MY_ADDRESS_URL = `${BASEURL}/addresses`;
-
+// FAQ
+export const FAQ_URL = `${BASEURL}/faqs`;
