@@ -19,13 +19,17 @@ export default async function Home() {
 
     const getTestimonials = HomeService.getTestimonials(token);
 
-    const [testimonialsData] = await Promise.all([getTestimonials]);
+    const getMainCategories = HomeService.getMainCategories(token);
+
+    const [testimonialsData,mainCategoriesData] = await Promise.all([getTestimonials,getMainCategories]);
+
+    console.log("categories----------------",mainCategoriesData);
 
     return (
         <Layouts.Primary>
             <HeroContainer />
             <ProductContainer />
-            <MainCategoriesContainer />
+            <MainCategoriesContainer mainCategoriesData={mainCategoriesData.docs}/>
             <OfferContainer />
             <MarketingContainer />
             <OurProductsContainer />
