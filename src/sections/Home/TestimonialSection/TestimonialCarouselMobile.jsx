@@ -3,6 +3,7 @@ import { Carousel, Rate } from "antd";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import Icons from "../../../../public/assets/Icons";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 const TestimonialCarouselMobile = ({ data }) => {
     const [currentSlide, setCurrentSlide] = useState(1);
@@ -24,7 +25,7 @@ const TestimonialCarouselMobile = ({ data }) => {
                             style={{ color: "#F5BB0C", fontSize: 20 }}
                         />
                         <p className="text-brand-blue-800 font-light text-sm leading-[21px]">
-                            {item.comment}
+                            {item.description}
                         </p>
                     </div>
                 ))}
@@ -36,7 +37,7 @@ const TestimonialCarouselMobile = ({ data }) => {
                     afterChange={onChange}
                     dots={false}
                     vertical
-                // effect="fade"
+                    // effect="fade"
                 >
                     {data.map((item, index) => (
                         <div
@@ -48,15 +49,15 @@ const TestimonialCarouselMobile = ({ data }) => {
                                     alt="avatar"
                                     width={1000}
                                     height={1000}
-                                    src={item.profilePic}
+                                    src={`${GET_IMAGE_RENDER}?key=${item.client.image}`}
                                     className="w-12 h-12 rounded-full"
                                 />
                                 <div className="space-y-1.5">
                                     <h5 className="text-brand-blue-800 text-base font-medium leading-5">
-                                        {item.name}
+                                        {item.client.name}
                                     </h5>
                                     <p className="text-[#151924] text-opacity-30 text-sm leading-[17px]">
-                                        {item.designation}
+                                        {item.client.designation}
                                     </p>
                                 </div>
                             </div>
@@ -70,8 +71,9 @@ const TestimonialCarouselMobile = ({ data }) => {
                             slider1.current.prev();
                             slider2.current.prev();
                         }}
-                        className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${currentSlide === 1 ? "opacity-20" : ""
-                            }`}
+                        className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
+                            currentSlide === 1 ? "opacity-20" : ""
+                        }`}
                         disabled={currentSlide < 2}
                     >
                         <Image
@@ -88,8 +90,9 @@ const TestimonialCarouselMobile = ({ data }) => {
                             slider2.current.next();
                         }}
                         disabled={currentSlide > 3}
-                        className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${currentSlide > 3 ? "opacity-20" : ""
-                            }`}
+                        className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
+                            currentSlide > 3 ? "opacity-20" : ""
+                        }`}
                     >
                         <Image
                             alt="nav-next"
