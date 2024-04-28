@@ -68,7 +68,7 @@ const ProductHeader = ({ selectedTab, dataLength }) => {
                             />
                         }
                         style={{ width: 92 }}
-                        bordered={false}
+                        variant={false}
                         className="text-sm md:text-base text-brand-blue-500"
                         options={[
                             { value: "newest", label: "Newest" },

@@ -1,7 +1,7 @@
 "use client";
 import FilterOptions from "@/sections/Home/Filter";
 import { Collapse } from "antd";
-import React from "react";
+import React, { Fragment } from "react";
 import Icons from "../../../public/assets/Icons";
 import { filterData } from "@/libs/productData";
 import Image from "next/image";
@@ -134,15 +134,14 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
                             width={1000}
                             height={1000}
                             alt="caretDown"
-                            className={`w-4 h-4 duration-300 ${
-                                isActive ? "rotate-0" : "-rotate-90"
-                            }`}
+                            className={`w-4 h-4 duration-300 ${isActive ? "rotate-0" : "-rotate-90"
+                                }`}
                         />
                     )}
                     className="divide-y divide-[#EBEDF0]"
                 >
                     {items.map((item) => (
-                        <>
+                        <Fragment key={item.key}>
                             {getVisibility(item.label, selectedTab.label) && (
                                 <Collapse.Panel
                                     header={
@@ -155,7 +154,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
                                     {item.component}
                                 </Collapse.Panel>
                             )}
-                        </>
+                        </Fragment>
                     ))}
                 </Collapse>
             </div>
