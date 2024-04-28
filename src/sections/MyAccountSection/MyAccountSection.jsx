@@ -13,7 +13,7 @@ import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 const MyAccountSection = ({ data }) => {
     console.log(data);
     const [image, setImage] = useState(
-        data.profilePicture
+        data?.profilePicture
             ? `${GET_IMAGE_RENDER}?key=${data?.profilePicture}`
             : null
     );

@@ -6,6 +6,7 @@ import Link from "next/link";
 import Buttons from "@/components/Buttons";
 import CartList from "./CartItems";
 import { PRODUCTS_PATH } from "@/helpers/slug";
+import OrderSummary from "@/components/OrderSummary";
 
 const { Text, Title } = Typography;
 
@@ -13,6 +14,7 @@ function CartContainer() {
     const { cartItem, loading, getUpdateCartList, loadingCalculateData } =
         useCart();
     const [orderItem, setOrderItem] = useState([]);
+    const [summaryCalculate, setSummaryCalculate] = useState();
 
     const addOrderItem = (newCartItem, checked, quantity) => {
         if (checked) {
@@ -85,6 +87,7 @@ function CartContainer() {
                         </span>
                     </Title>
                     <div className="grid grid-cols-3 gap-6">
+                        {/* Cart List */}
                         <div className="col-span-3 md:col-span-3 lg:col-span-2">
                             {cartItem?.length > 0 ? (
                                 <div className="mt- ">
@@ -117,6 +120,27 @@ function CartContainer() {
                                     </Link>
                                 </div>
                             )}
+                        </div>
+
+                        {/* Order Summary */}
+                        <div className="col-span-3 md:col-span-3 lg:col-span-1">
+                            <div className="relative">
+                                <OrderSummary
+                                    cartSummary={cartItem}
+                                    orderItem={orderItem}
+                                    className={`${
+                                        loadingCalculateData.isLoading
+                                            ? "blur"
+                                            : ""
+                                    }`}
+                                    summaryCalculate={summaryCalculate}
+                                    // calculateOrder={calculateOrder}
+                                />
+                                <Spin
+                                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                                    spinning={loadingCalculateData.isLoading}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

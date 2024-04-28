@@ -9,7 +9,7 @@ import { getCookie } from "cookies-next";
 import { useCart } from "@/contexts/CartContext";
 import Link from "next/link";
 import { toast } from "react-toastify";
-import { debounce } from "@/helpers/utils";
+import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
 
 const { Text } = Typography;
 
@@ -115,7 +115,7 @@ function Cart({
                                 )}
                             ></Checkbox>
                             <Link
-                                href={`/products/product-details/${product._id}`}
+                                href={`${PRODUCT_DETAILS_PATH}/${product?._id}`}
                                 className="flex flex-row justify-start items-center gap-4 w-full"
                             >
                                 <Image
@@ -231,19 +231,19 @@ function Cart({
                             src={`${GET_IMAGE_RENDER}?key=${product?.featuredImage}`}
                             height={100}
                             width={100}
-                            alt={product.name}
+                            alt={product?.name}
                             className="rounded-md"
                         />
                         <div className="flex flex-col justify-between gap-4">
                             <div className="flex flex-col gap-1">
                                 <Text className="line-clamp-4 text-sm text-neutral-700">
-                                    {product.name}
+                                    {product?.name}
                                 </Text>
                                 <Text className="text-neutral-300">
                                     <span className="text-neutral-700">
                                         Product code:
                                     </span>{" "}
-                                    {product.productCode}
+                                    {product?.productCode}
                                 </Text>
                             </div>
                             <div className="flex flex-row justify-between items-center border-[1px] border-black-500 p-2 rounded-sm w-[7.5rem]">
