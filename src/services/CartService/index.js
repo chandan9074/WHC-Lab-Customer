@@ -8,15 +8,11 @@ export default class CartService {
     static latestSignal;
 
     static async getCart(token) {
-        try {
-            const res = await MakeApiCall({
-                apiUrl: MY_CART_URL,
-                ...MethodsStructure.getMethod({ Authorization: `${token}` }),
-            });
-            return res;
-        } catch (e) {
-            console.log(e);
-        }
+        const res = await MakeApiCall({
+            apiUrl: MY_CART_URL,
+            ...MethodsStructure.getMethod({ Authorization: `${token}` }),
+        });
+        return res;
     }
 
     static async createCart(data, token) {
@@ -35,10 +31,9 @@ export default class CartService {
 
     static async updateCart(data, token) {
         try {
-            const res = palooiFetch({
-                endpoint: ADD_TO_CART_URL,
+            const res = MakeApiCall({
+                apiUrl: MY_CART_URL,
                 query: { ...data },
-                signal: signal,
                 ...MethodsStructure.patchMethod({ Authorization: `${token}` }),
             });
 
@@ -59,10 +54,10 @@ export default class CartService {
         CartService.latestController = controller;
         CartService.latestSignal = signal;
 
+        // Perform the API call to update the cart item
         try {
-            // Perform the API call to update the cart item
-            const response = await palooiFetch({
-                endpoint: ADD_TO_CART_URL,
+            const response = await MakeApiCall({
+                apiUrl: MY_CART_URL,
                 query: { ...data },
                 signal: signal,
                 ...MethodsStructure.patchMethod({ Authorization: `${token}` }),
@@ -76,14 +71,12 @@ export default class CartService {
             // console.log("Cart item updated:", response);
             return response;
         } catch (error) {
-            // Handle errors
             if (error.name === "AbortError") {
                 console.log("Fetch aborted:", error.message);
             } else {
                 console.error("Error:", error);
                 return error;
             }
-            // throw error;
         }
     }
 
@@ -107,15 +100,11 @@ export default class CartService {
     }
 
     static async removeCart(productId, token) {
-        try {
-            const res = palooiFetch({
-                endpoint: ADD_TO_CART_URL,
-                query: { productId },
-                ...MethodsStructure.deleteMethod({ Authorization: `${token}` }),
-            });
-            return res;
-        } catch (e) {
-            return e;
-        }
+        const res = MakeApiCall({
+            apiUrl: MY_CART_URL,
+            query: { productId },
+            ...MethodsStructure.deleteMethod({ Authorization: `${token}` }),
+        });
+        return res;
     }
 }

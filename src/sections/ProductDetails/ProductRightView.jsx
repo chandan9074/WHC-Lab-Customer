@@ -72,23 +72,20 @@ const ProductRightView = ({
     };
 
     const handleAddToCart = async () => {
-        const res = await createCartItem(data?._id, quantity, token);
-        setLoading(true);
+        try {
+            const res = await createCartItem(data?._id, quantity, token);
+            setLoading(true);
 
-        console.log(res);
-
-        if (res?.status === 200) {
-            toast.success(res?.body?.message);
-            getUpdateCartList(token);
-            setOpenSuccessionModal(true);
+            if (res?.status === 200) {
+                toast.success(res?.message);
+                getUpdateCartList(token);
+                setOpenSuccessionModal(true);
+            }
+        } catch (e) {
+            toast.error(e?.message);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
-        // try {
-        // } catch (e) {
-        //     console.log(e?.message);
-        //     toast.error(e?.message);
-        // } finally {
-        // }
     };
 
     const handleChangeQuantity = (color) => {

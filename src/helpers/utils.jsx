@@ -84,3 +84,13 @@ export const formatTime = (inputDate) => {
 export const getTextShort = (value, size) => {
     return value.length > size ? value.slice(0, size) + "..." : value;
 };
+
+export const debounce = (func, delay) => {
+    let timeoutId;
+    return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func(...args);
+        }, delay);
+    };
+};

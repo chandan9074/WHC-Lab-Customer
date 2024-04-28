@@ -26,8 +26,9 @@ export function CartProvider({ children }) {
             try {
                 setLoading(true);
                 const res = await CartService.getCart(token);
+
                 if (res?.status === 200) {
-                    setCartItem(res?.body?.docs);
+                    setCartItem(res?.docs);
                 }
             } catch (e) {
                 console.log(e);
