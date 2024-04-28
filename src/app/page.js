@@ -22,11 +22,13 @@ export default async function Home() {
 
     const getMainCategories = HomeService.getMainCategories(token);
 
+    const getNewProducts = ProductService.getProducts();
+
     const getFeaturedProducts = ProductService.getProducts({isFeatured:true});
 
-    const [testimonialsData,mainCategoriesData,featuredProducts] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts]);
+    const [testimonialsData,mainCategoriesData,featuredProducts,newProducts] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts,getNewProducts]);
 
-    console.log("categories----------------",featuredProducts);
+    console.log("categories----------------",newProducts.docs);
 
     return (
         <Layouts.Primary>
@@ -35,7 +37,7 @@ export default async function Home() {
             <MainCategoriesContainer mainCategoriesData={mainCategoriesData.docs}/>
             <OfferContainer />
             <MarketingContainer />
-            <OurProductsContainer />
+            <OurProductsContainer data={newProducts.docs}/>
             <ChooseUsContainer />
             <PioneeringExcellenceContainer />
             <TestimonialSection testimonialsData={testimonialsData.docs}/>
