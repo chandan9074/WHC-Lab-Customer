@@ -10,6 +10,7 @@ import PioneeringExcellenceContainer from "@/sections/Home/PioneeringExcellence/
 import ProductContainer from "@/sections/Home/Product/ProductContainer";
 import TestimonialSection from "@/sections/Home/TestimonialSection/TestimonialSection";
 import HomeService from "@/services/HomeService";
+import ProductService from "@/services/productsService";
 import { getCookie } from "cookies-next";
 import {cookies} from "next/headers"
 
@@ -21,14 +22,16 @@ export default async function Home() {
 
     const getMainCategories = HomeService.getMainCategories(token);
 
-    const [testimonialsData,mainCategoriesData] = await Promise.all([getTestimonials,getMainCategories]);
+    const getFeaturedProducts = ProductService.getProducts({isFeatured:true});
 
-    console.log("categories----------------",mainCategoriesData);
+    const [testimonialsData,mainCategoriesData,featuredProducts] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts]);
+
+    console.log("categories----------------",featuredProducts);
 
     return (
         <Layouts.Primary>
             <HeroContainer />
-            <ProductContainer />
+            <ProductContainer featuredProducts={featuredProducts.docs}/>
             <MainCategoriesContainer mainCategoriesData={mainCategoriesData.docs}/>
             <OfferContainer />
             <MarketingContainer />
