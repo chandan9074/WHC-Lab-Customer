@@ -55,7 +55,10 @@ async function MakeApiCall({
             throw new Error(data.message || "Something went wrong");
         }
 
-        return data;
+        return {
+            status: response.status,
+            body: data,
+        };
     } catch (error) {
         console.log(error.message);
         toast.error(error.message);

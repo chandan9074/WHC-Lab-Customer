@@ -55,7 +55,7 @@ export async function whcFetch({
         //         throw {
         //             cause: e.cause?.toString() || "unknown",
         //             status: e.status || 500,
-        //             message: e.message,
+        //             message: e.message,`
         //         };
         //     }
 
@@ -63,5 +63,6 @@ export async function whcFetch({
         //         error: e,
         //     };
         console.log(e);
+        return e;
     }
 }
