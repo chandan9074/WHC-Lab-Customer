@@ -12,6 +12,7 @@ import forgot_password from "./forgot_password.svg";
 import page_header_bg from "./page_header_bg.png";
 import aboutBanner from "./aboutBanner.png";
 import profile_avatar from "./profile_avatar.svg";
+import noImageFound from "./noImageFound.svg"
 
 const Images = {
     logo,
@@ -29,6 +30,7 @@ const Images = {
     page_header_bg,
     aboutBanner,
     profile_avatar,
+    noImageFound
 };
 
 export default Images;

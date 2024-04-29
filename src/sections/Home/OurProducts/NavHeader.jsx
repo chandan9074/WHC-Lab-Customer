@@ -2,7 +2,7 @@ import Buttons from "@/components/Buttons";
 import React from "react";
 import Icons from "../../../../public/assets/Icons";
 
-const NavHeader = ({ activeTab, setActiveTab }) => {
+const NavHeader = ({ activeTab, setActiveTab, handleNavChange }) => {
     const navButtons = [
         {
             _id: 1,
@@ -22,7 +22,10 @@ const NavHeader = ({ activeTab, setActiveTab }) => {
             <div className="flex items-center gap-6 overflow-x-auto tab-scroll">
                 {navButtons.map((item, index) => (
                     <Buttons.OutlinedButton
-                        onClick={() => setActiveTab(item.label)}
+                        onClick={() => {
+                            setActiveTab(item.label);
+                            handleNavChange(item.label);
+                        }}
                         key={index}
                         label={item.label}
                         className={
