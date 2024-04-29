@@ -5,7 +5,7 @@ import Images from "../../../../public/assets/Images";
 import CategoryCard from "./CategoryCard";
 import SectionHeader from "@/components/common/SectionHeader";
 
-const MainCategoriesContainer = () => {
+const MainCategoriesContainer = ({ mainCategoriesData }) => {
     return (
         <div
             className="bg-cover bg-no-repeat bg-center"
@@ -123,9 +123,13 @@ const MainCategoriesContainer = () => {
 
                     </div> */}
 
+                    {mainCategoriesData.slice(0, 3).map((item) => (
+                        <CategoryCard key={item._id} data={item} />
+                    ))}
+
+                    {/* <CategoryCard />
                     <CategoryCard />
-                    <CategoryCard />
-                    <CategoryCard />
+                    <CategoryCard /> */}
                 </div>
             </div>
         </div>

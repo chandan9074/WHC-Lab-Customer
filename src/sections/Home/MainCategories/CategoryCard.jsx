@@ -5,8 +5,9 @@ import styles from "./CategoryCard.module.css";
 import Icons from "../../../../public/assets/Icons";
 import Image from "next/image";
 import Buttons from "@/components/Buttons";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
-const CategoryCard = () => {
+const CategoryCard = ({ data }) => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
     const handleMouseEnter = (index) => {
@@ -51,7 +52,7 @@ const CategoryCard = () => {
                     >
                         <div className="flex justify-between items-center">
                             <button className="bg-[#E7EAED] rounded-3xl py-[6.5px] px-[13px] text-sm text-brand-blue-500 font-medium md:py-2 md:px-4">
-                                Brewing
+                                {data.name.split(" ")[0]}
                             </button>
                             {/* <Image
                                 src={Icons.arrow_up_right_brand_blue_gradient}
@@ -64,11 +65,11 @@ const CategoryCard = () => {
                             /> */}
                         </div>
                         <h3 className="text-brand-blue-500 font-medium text-xl md:text-4xl">
-                            Laboratory <br /> Analysis
+                            {data.name}
                         </h3>
                         <div className="flex justify-between items-center">
                             <Image
-                                src={Icons.brewing_yeast}
+                                src={`${GET_IMAGE_RENDER}?key=${data.icon}`}
                                 alt="Arrow up right"
                                 width={1000}
                                 height={1000}

@@ -41,3 +41,9 @@ export const MY_ADDRESS_URL = `${BASEURL}/addresses`;
 export const MY_CART_URL = `${BASEURL}/carts`;
 // Location
 export const GET_LOCATIONS = `${BASEURL}/locations`;
+//Testimonials
+export const GET_TESTIMONIALS = `${BASEURL}/testimonials`;
+//Main Categories
+export const GET_MAIN_CATEGORIES = `${BASEURL}/categories`;
+// FAQ
+export const FAQ_URL = `${BASEURL}/faqs`;

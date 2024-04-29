@@ -9,9 +9,11 @@ import ProductCard from "./ProductCard";
 import { Carousel } from "antd";
 import { generateLeftMargin } from "@/helpers/utils";
 import Icons from "../../../../public/assets/Icons";
+import ProductService from "@/services/productsService";
 
-const OurProductsContainer = () => {
+const OurProductsContainer = ({ data }) => {
     const [activeTab, setActiveTab] = useState("New Products");
+    const [productList, setProductList] = useState(data);
     const [leftMargin, setLeftMargin] = useState();
     const [slides, setSlides] = useState(0);
 
@@ -31,6 +33,23 @@ const OurProductsContainer = () => {
         setLeftMargin(value.margin);
         setSlides(value.slides);
     }, []);
+
+    const handleNavChange = async (value) => {
+        if (value === "Best Seller") {
+            const bestSellerProducts = await ProductService.getProducts({
+                isBestSeller: true,
+            });
+            setProductList(bestSellerProducts.docs);
+        } else if (value === "WHC Signature") {
+            const whcSignatureProducts = await ProductService.getProducts({
+                isSignature: true,
+            });
+            setProductList(whcSignatureProducts.docs);
+        } else {
+            const newProducts = await ProductService.getProducts();
+            setProductList(newProducts.docs);
+        }
+    };
     return (
         <div className="bg-our-product bg-cover pl-6 sm:pl-3 xl:py-[100px] lg:py-20 md:py-14 sm:py-10 py-6">
             <div className={`container mx-auto`}>
@@ -38,7 +57,11 @@ const OurProductsContainer = () => {
                     title={"VARIOUS SERVICES WE OFFER"}
                     color="text-white"
                 />
-                <NavHeader activeTab={activeTab} setActiveTab={setActiveTab} />
+                <NavHeader
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                    handleNavChange={handleNavChange}
+                />
                 <div className="h-[1px] w-full bg-stroke-new mt-6" />
             </div>
             <div
@@ -52,8 +75,8 @@ const OurProductsContainer = () => {
                     draggable
                     centerMode={slides === 1.05 ? false : true}
                 >
-                    {["01", "02", "03", "04", "05", "06"].map((item) => (
-                        <ProductCard key={item} index={item} />
+                    {productList?.map((item, index) => (
+                        <ProductCard key={item} index={index + 1} data={item} />
                     ))}
                 </Carousel>
             </div>

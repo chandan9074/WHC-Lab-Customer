@@ -3,6 +3,7 @@ import { Carousel, Rate } from "antd";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import Icons from "../../../../public/assets/Icons";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 const TestimonialCarouselDesktop = ({ data }) => {
     const [currentSlide, setCurrentSlide] = useState(1);
@@ -24,15 +25,15 @@ const TestimonialCarouselDesktop = ({ data }) => {
                                         alt="avatar"
                                         width={1000}
                                         height={1000}
-                                        src={item.profilePic}
+                                        src={`${GET_IMAGE_RENDER}?key=${item.client.image}`}
                                         className="w-[68px] h-[68px] rounded-full"
                                     />
                                     <div className="space-y-1.5">
                                         <h5 className="text-brand-blue-800 text-2xl font-medium leading-[30px]">
-                                            {item.name}
+                                            {item.client.name}
                                         </h5>
                                         <p className="text-[#151924] text-opacity-30 text-base leading-5">
-                                            {item.designation}
+                                            {item.client.designation}
                                         </p>
                                     </div>
                                 </div>
@@ -45,7 +46,7 @@ const TestimonialCarouselDesktop = ({ data }) => {
                                     style={{ color: "#F5BB0C", fontSize: 32 }}
                                 />
                                 <p className="text-brand-blue-800 text-2xl leading-9">
-                                    {item.comment}
+                                    {item.description}
                                 </p>
                             </div>
                         </div>
@@ -60,8 +61,9 @@ const TestimonialCarouselDesktop = ({ data }) => {
                         <div className="flex gap-x-5">
                             <button
                                 onClick={() => slider.current.prev()}
-                                className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${currentSlide === 1 ? "opacity-20" : ""
-                                    }`}
+                                className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
+                                    currentSlide === 1 ? "opacity-20" : ""
+                                }`}
                                 disabled={currentSlide < 2}
                             >
                                 <Image
@@ -75,8 +77,9 @@ const TestimonialCarouselDesktop = ({ data }) => {
                             <button
                                 onClick={() => slider.current.next()}
                                 disabled={currentSlide > 3}
-                                className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${currentSlide > 3 ? "opacity-20" : ""
-                                    }`}
+                                className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
+                                    currentSlide > 3 ? "opacity-20" : ""
+                                }`}
                             >
                                 <Image
                                     alt="nav-next"
