@@ -11,11 +11,13 @@ import { GET_IMAGE_RENDER, MY_ACCOUNT_URL } from "@/helpers/apiURLS";
 import { getCookie } from "cookies-next";
 import MakeApiCall from "@/services/MakeApiCall";
 import Images from "../../../public/assets/Images";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 const { Text } = Typography;
 
 const ProfileBar = ({ width, data }) => {
     const token = getCookie("accessToken");
+    const { logOut } = useAuthContext();
 
     const currentPath = usePathname();
     const pathSegment = currentPath.split("/");
@@ -70,19 +72,19 @@ const ProfileBar = ({ width, data }) => {
     // const { logOut } = useContext(userContext);
     // const { resetCartItemLength } = useCart();
 
-    const handleLogout = useCallback(async () => {
-        // Cookies.remove("accessToken");
-        // Cookies.remove("userInfo");
-        // resetCartItemLength();
-        // router.push("/");
-        // try {
-        //     await logOut();
-        //     localStorage.setItem("showDiscountBar", "true");
-        // } catch (e) {
-        //     console.log(e);
-        // }
-        // }, [logOut, resetCartItemLength, router]);
-    }, []);
+    // const handleLogout = useCallback(async () => {
+    //     // Cookies.remove("accessToken");
+    //     // Cookies.remove("userInfo");
+    //     // resetCartItemLength();
+    //     // router.push("/");
+    //     // try {
+    //     //     await logOut();
+    //     //     localStorage.setItem("showDiscountBar", "true");
+    //     // } catch (e) {
+    //     //     console.log(e);
+    //     // }
+    //     // }, [logOut, resetCartItemLength, router]);
+    // }, []);
 
     useEffect(() => {
         currentPage === undefined && setCurrentPage(formattedSegment);
@@ -206,7 +208,7 @@ const ProfileBar = ({ width, data }) => {
                             iconWidth="w-6"
                             iconHeight="h-6"
                             label="Logout"
-                            onClick={handleLogout}
+                            onClick={logOut}
                         />
                     </div>
                 </>
@@ -315,7 +317,7 @@ const ProfileBar = ({ width, data }) => {
                         iconWidth="w-6"
                         iconHeight="h-6"
                         label="Logout"
-                        onClick={handleLogout}
+                        onClick={logOut}
                     />
                 </div>
             </div>

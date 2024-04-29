@@ -1,11 +1,9 @@
 "use client";
-
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import { Carousel } from "antd";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import Icons from "../../../public/assets/Icons";
-import DOMPurify from "dompurify";
 
 const ProductLeftView = ({ forModal = false, data }) => {
     const carouselRef = useRef();
@@ -61,37 +59,39 @@ const ProductLeftView = ({ forModal = false, data }) => {
                         forModal ? "flex-row gap-x-4" : "flex-col gap-y-4"
                     }`}
                 >
-                    {[data.featuredImage, ...data.images].map((item, index) => (
-                        <div
-                            key={index}
-                            className={`flex justify-center items-center duration-300 cursor-pointer border ${
-                                index === selectedImageIndex
-                                    ? "border-magenta-600"
-                                    : "border-neutral-30"
-                            } p-2 rounded-sm`}
-                            onClick={() => handleSmallImageClick(index)}
-                        >
+                    {[data?.featuredImage, ...data?.images].map(
+                        (item, index) => (
                             <div
-                                className={`flex items-center justify-center ${
-                                    forModal
-                                        ? "w-[62px] h-[62px]"
-                                        : "w-[100px] h-[70px] xl:w-[130px] xl:h-[109px]"
-                                } rounded-sm`}
+                                key={index}
+                                className={`flex justify-center items-center duration-300 cursor-pointer border ${
+                                    index === selectedImageIndex
+                                        ? "border-magenta-600"
+                                        : "border-neutral-30"
+                                } p-2 rounded-sm`}
+                                onClick={() => handleSmallImageClick(index)}
                             >
-                                <Image
-                                    src={`${GET_IMAGE_RENDER}?key=${item}`}
-                                    alt="value"
-                                    width={1000}
-                                    height={1000}
-                                    className={`${
+                                <div
+                                    className={`flex items-center justify-center ${
                                         forModal
                                             ? "w-[62px] h-[62px]"
-                                            : "w-[68px] h-[38px] xl:w-[98px] xl:h-[77px]"
+                                            : "w-[100px] h-[70px] xl:w-[130px] xl:h-[109px]"
                                     } rounded-sm`}
-                                />
+                                >
+                                    <Image
+                                        src={`${GET_IMAGE_RENDER}?key=${item}`}
+                                        alt="value"
+                                        width={1000}
+                                        height={1000}
+                                        className={`${
+                                            forModal
+                                                ? "w-[62px] h-[62px]"
+                                                : "w-[68px] h-[38px] xl:w-[98px] xl:h-[77px]"
+                                        } rounded-sm`}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        )
+                    )}
                 </div>
                 <div
                     className={`${

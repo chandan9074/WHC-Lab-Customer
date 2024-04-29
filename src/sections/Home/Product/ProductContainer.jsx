@@ -1,19 +1,26 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 import ProductCard from "./ProductCard";
+import Link from "next/link";
+import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
 
 const ProductContainer = ({ featuredProducts }) => {
+    console.log(featuredProducts[0]._id, "data");
     return (
         <div className="bg-neutral-10 w-full py-9 sm:py-[46px] md:py-[56px] lg:py-[120px] flex items-center flex-wrap gap-6 overflow-x-auto">
             <Marquee className="gap-5" speed={100} style={{ padding: "10px" }}>
                 {featuredProducts.map((data, index) => {
                     return (
-                        <ProductCard
+                        <Link
+                            href={PRODUCT_DETAILS_PATH + data?._id}
                             key={index}
-                            id={index}
-                            title={data.name}
-                            image={data.featuredImage}
-                        />
+                        >
+                            <ProductCard
+                                id={index}
+                                title={data.name}
+                                image={data.featuredImage}
+                            />
+                        </Link>
                     );
                 })}
             </Marquee>
