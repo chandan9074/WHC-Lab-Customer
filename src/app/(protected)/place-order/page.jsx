@@ -14,7 +14,6 @@ async function PlaceOrder() {
         userAddress = await UserService.getUserAddress(token);
     }
 
-    console.log(userAddress);
     return (
         <Suspense fallback={null}>
             <Layouts.Primary>

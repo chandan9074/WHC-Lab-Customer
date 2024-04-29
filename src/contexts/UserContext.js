@@ -7,12 +7,12 @@ const userContext = createContext();
 
 export function UserProvider({ children }) {
     const [locations, setLocations] = useState([]);
-    const token = getCookie("accessToken");
+    // const token = getCookie("accessToken");
 
     // Get Locations
     const getLocation = async () => {
         try {
-            const res = await LocationService.getLocation(token);
+            const res = await LocationService.getLocation();
             const formattedLocations = res?.docs?.map((location) => ({
                 label: location.name,
                 value: location._id,
@@ -20,8 +20,6 @@ export function UserProvider({ children }) {
             }));
 
             setLocations(formattedLocations);
-            console.log(formattedLocations);
-            console.log(res);
         } catch (e) {
             toast.error(e?.message);
         }
