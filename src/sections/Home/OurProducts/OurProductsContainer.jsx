@@ -17,8 +17,6 @@ const OurProductsContainer = ({ data }) => {
     const [leftMargin, setLeftMargin] = useState();
     const [slides, setSlides] = useState(0);
 
-    console.log(productList);
-
     useEffect(() => {
         // console.log(window.innerWidth);
         // let x = 0;
