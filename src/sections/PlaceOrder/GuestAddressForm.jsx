@@ -1,15 +1,21 @@
-import { Flex, Form, Input, Select, Switch, Typography } from "antd";
+import { Flex, Form, Input, Select, Typography } from "antd";
 const { Text } = Typography;
 const { TextArea } = Input;
 
 import React from "react";
 import BillingAddressToggleButton from "./BillingAddressToggleButton";
+import { useUserContext } from "@/contexts/UserContext";
+import { getCookie } from "cookies-next";
 
 const GuestAddressForm = ({
     inputStyle,
     onToggleChange,
     billingAddress = false,
 }) => {
+    const { locations } = useUserContext();
+    const location = getCookie("selected_location");
+    const selectedLocation = JSON.parse(location);
+
     return (
         <div
             // name="form_item_path"
@@ -38,6 +44,7 @@ const GuestAddressForm = ({
                         placeholder="First Name"
                     />
                 </Form.Item>
+
                 <Form.Item
                     label={
                         <p className=" text-neutral-700 font-medium">
@@ -73,6 +80,7 @@ const GuestAddressForm = ({
                         placeholder="+880 - 1234567890"
                     />
                 </Form.Item>
+
                 <Form.Item
                     label={
                         <p className=" text-neutral-700 font-medium">Email</p>
@@ -183,15 +191,11 @@ const GuestAddressForm = ({
                                 backgroundColor: "#FAFBFB",
                                 height: 48,
                             }}
-                        >
-                            <Select.Option value="usa">
-                                United State
-                            </Select.Option>
-                            <Select.Option value="bangladesh">
-                                Bangladesh
-                            </Select.Option>
-                        </Select>
+                            options={locations}
+                            defaultValue={selectedLocation}
+                        ></Select>
                     </Form.Item>
+
                     <Form.Item
                         label={
                             <p className=" text-neutral-700 font-medium">
@@ -202,7 +206,11 @@ const GuestAddressForm = ({
                         name={billingAddress ? "billingState" : "state"}
                         rules={[{ required: true }]}
                     >
-                        <Select
+                        <Input
+                            className={`${inputStyle}  bg-neutral-10 h-12 rounded-sm`}
+                            placeholder="Enter District/State name"
+                        />
+                        {/* <Select
                             placeholder="Please Select"
                             style={{
                                 backgroundColor: "#FAFBFB",
@@ -210,7 +218,7 @@ const GuestAddressForm = ({
                             }}
                         >
                             <Select.Option value="state">Demo</Select.Option>
-                        </Select>
+                        </Select> */}
                     </Form.Item>
                 </div>
                 <div className="flex flex-row w-full gap-5">
@@ -224,7 +232,11 @@ const GuestAddressForm = ({
                         name={billingAddress ? "billingCity" : "city"}
                         rules={[{ required: true }]}
                     >
-                        <Select
+                        <Input
+                            className={`${inputStyle}  bg-neutral-10 h-12 rounded-sm`}
+                            placeholder="Enter City/Area name"
+                        />
+                        {/* <Select
                             placeholder="Please Select"
                             style={{
                                 backgroundColor: "#FAFBFB",
@@ -232,8 +244,9 @@ const GuestAddressForm = ({
                             }}
                         >
                             <Select.Option value="demo">Dhaka</Select.Option>
-                        </Select>
+                        </Select> */}
                     </Form.Item>
+
                     <Form.Item
                         label={
                             <p className=" text-neutral-700 font-medium">
@@ -246,6 +259,7 @@ const GuestAddressForm = ({
                     >
                         <Input
                             className={`${inputStyle} bg-neutral-10 rounded-sm h-12`}
+                            placeholder="ZIP/Postal code"
                         />
                     </Form.Item>
                 </div>
