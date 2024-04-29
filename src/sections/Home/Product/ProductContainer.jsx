@@ -3,6 +3,7 @@ import Marquee from "react-fast-marquee";
 import ProductCard from "./ProductCard";
 
 const ProductContainer = ({ featuredProducts }) => {
+    console.log(featuredProducts);
     return (
         <div className="bg-neutral-10 w-full py-9 sm:py-[46px] md:py-[56px] lg:py-[120px] flex items-center flex-wrap gap-6 overflow-x-auto">
             <Marquee className="gap-5" speed={100} style={{ padding: "10px" }}>
@@ -12,7 +13,7 @@ const ProductContainer = ({ featuredProducts }) => {
                             key={index}
                             id={index}
                             title={data.name}
-                            image={data.image}
+                            image={data.featuredImage}
                         />
                     );
                 })}
