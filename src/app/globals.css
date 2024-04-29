@@ -308,3 +308,17 @@
     border-color: #0b2848;
     background-color: #0b2848;
 }
+
+/* LEAFLET */
+
+.leaflet-container {
+    height: 792px;
+    width: 100%;
+    /* border-radius: 2rem; */
+  }
+
+  @media only screen and (max-width: 768px) {
+    .leaflet-container {
+      height: 400px; /* Height for small screens */
+    }
+  }
