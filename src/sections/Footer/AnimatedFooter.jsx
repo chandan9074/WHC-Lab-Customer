@@ -53,7 +53,7 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                     className="md:w-[500px]"
                 >
                     <div className="space-y-9">
-                        <div className="flex flex-col gap-y-2 md:gap-y-0">
+                        {/* <div className="flex flex-col gap-y-2 md:gap-y-0">
                             <p className="text-[#9194A6] text-[13.5px] font-medium leading-5">
                                 Subscribe to our newsletter{" "}
                             </p>
@@ -72,7 +72,7 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                                     />
                                 </button>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="space-y-[15px]">
                             <p className="text-[#9194A6] text-[13.5px] font-medium leading-5">
                                 Drop us a line
