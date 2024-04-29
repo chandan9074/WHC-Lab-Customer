@@ -15,7 +15,7 @@ export const GET_IMAGE_RENDER = `${BASEURL}/files/view-image`;
 
 export const GET_USER_PROFILE = `${BASEURL}/profile/1`;
 
-export const GET_USER_ADDRESS = `${BASEURL}/address`;
+export const GET_USER_ADDRESS = `${BASEURL}/addresses`;
 
 export const CHANGE_PASSWORD = `${BASEURL}/change-password`;
 

@@ -1,4 +1,5 @@
 import { whcFetch } from "../BaseWHCHTTP";
+import MakeApiCall from "../MakeApiCall";
 import { MethodsStructure } from "../MethodsStructure";
 import {
     GET_USER_INFO,
@@ -22,12 +23,13 @@ export default class UserService {
     }
 
     static async getUserAddress(token) {
-        const res = await whcFetch({
-            endpoint: GET_USER_ADDRESS,
+        const res = await MakeApiCall({
+            apiUrl: GET_USER_ADDRESS,
             // query: { id },
             // headers: { Authorization: `Bearer ${token}` },
             ...MethodsStructure.getMethod({ Authorization: `${token}` }),
         });
+
         return res;
     }
 

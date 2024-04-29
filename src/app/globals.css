@@ -293,10 +293,10 @@
     position: relative;
 }
 
-.ant-radio-wrapper .ant-radio {
+/* .ant-radio-wrapper .ant-radio {
     position: absolute;
     top: 4px !important;
-}
+} */
 
 :where(.css-dev-only-do-not-override-42nv3w).ant-radio-wrapper
     span.ant-radio
