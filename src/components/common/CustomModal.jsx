@@ -16,6 +16,7 @@ const CustomModal = ({ children, ...rest }) => {
                     alt="modal"
                 />
             }
+            center
             {...rest}
         >
             {children}

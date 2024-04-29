@@ -39,3 +39,5 @@ export const MY_ACCOUNT_URL = `${BASEURL}/users/profile`;
 export const MY_ADDRESS_URL = `${BASEURL}/addresses`;
 // Cart
 export const MY_CART_URL = `${BASEURL}/carts`;
+// Location
+export const GET_LOCATIONS = `${BASEURL}/locations`;
