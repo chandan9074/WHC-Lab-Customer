@@ -28,8 +28,6 @@ export default async function Home() {
 
     const [testimonialsData,mainCategoriesData,featuredProducts,newProducts] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts,getNewProducts]);
 
-    console.log("categories----------------",newProducts.docs);
-
     return (
         <Layouts.Primary>
             <HeroContainer />

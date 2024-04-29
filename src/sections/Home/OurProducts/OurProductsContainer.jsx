@@ -9,6 +9,7 @@ import ProductCard from "./ProductCard";
 import { Carousel } from "antd";
 import { generateLeftMargin } from "@/helpers/utils";
 import Icons from "../../../../public/assets/Icons";
+import ProductService from "@/services/productsService";
 
 const OurProductsContainer = ({ data }) => {
     const [activeTab, setActiveTab] = useState("New Products");
@@ -35,7 +36,22 @@ const OurProductsContainer = ({ data }) => {
         setSlides(value.slides);
     }, []);
 
-    const handleNavChange = (value) => {};
+    const handleNavChange = async (value) => {
+        if (value === "Best Seller") {
+            const bestSellerProducts = await ProductService.getProducts({
+                isBestSeller: true,
+            });
+            setProductList(bestSellerProducts.docs);
+        } else if (value === "WHC Signature") {
+            const whcSignatureProducts = await ProductService.getProducts({
+                isSignature: true,
+            });
+            setProductList(whcSignatureProducts.docs);
+        } else {
+            const newProducts = await ProductService.getProducts();
+            setProductList(newProducts.docs);
+        }
+    };
     return (
         <div className="bg-our-product bg-cover pl-6 sm:pl-3 xl:py-[100px] lg:py-20 md:py-14 sm:py-10 py-6">
             <div className={`container mx-auto`}>
