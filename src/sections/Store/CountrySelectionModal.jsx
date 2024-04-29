@@ -7,12 +7,17 @@ import { hasCookie, setCookie } from "cookies-next";
 import { useUserContext } from "@/contexts/UserContext";
 
 function CountrySelectionModal() {
+    const [selectLocation, setSelectLocation] = useState();
     const { locations } = useUserContext();
     const selected_locations = hasCookie("selected_location");
     const [selected, setSelected] = useState(true);
 
     const handleChange = (value) => {
-        setCookie("selected_location", JSON.stringify(value));
+        setSelectLocation(value);
+    };
+
+    const handleSelectLocation = () => {
+        setCookie("selected_location", JSON.stringify(selectLocation));
         setSelected(false);
     };
 
@@ -54,6 +59,7 @@ function CountrySelectionModal() {
                 <Buttons.PrimaryButton
                     label={"Continue"}
                     className="h-12 whitespace-nowrap"
+                    onClick={handleSelectLocation}
                 ></Buttons.PrimaryButton>
             </Flex>
         </CustomModal>

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Divider, Form, Input, Spin, Typography } from "antd";
 import { useSearchParams } from "next/navigation";
 import { getCookie, hasCookie } from "cookies-next";
@@ -9,12 +10,14 @@ import { useRouter } from "next/navigation";
 
 import { ORDER_CONFIRM_PATH } from "@/helpers/slug";
 import "./PlaceOrder.css";
-import GuestAddressForm from "./GuestAddressForm";
 import UserShippingAddressForm from "./UserShippingAddressForm";
 import ShippingMethod from "./ShippingMethod";
 import PaymentMethodSelection from "./PaymentMethod";
 import CardForm from "./CardForm";
 import BankAccountForm from "./BankAccountForm";
+const GuestAddressForm = dynamic(() => import("./GuestAddressForm"), {
+    ssr: false,
+});
 
 const { Text, Title } = Typography;
 
@@ -30,7 +33,6 @@ function PlaceOrderContainer({ addressData }) {
 
     const searchParams = useSearchParams();
     const userType = `${searchParams}`.split("=")[1];
-    console.log(userType);
 
     const onFinish = (values) => {
         console.log(values);

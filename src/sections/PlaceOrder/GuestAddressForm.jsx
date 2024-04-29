@@ -5,7 +5,7 @@ const { TextArea } = Input;
 import React from "react";
 import BillingAddressToggleButton from "./BillingAddressToggleButton";
 import { useUserContext } from "@/contexts/UserContext";
-import { getCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 
 const GuestAddressForm = ({
     inputStyle,
@@ -14,7 +14,8 @@ const GuestAddressForm = ({
 }) => {
     const { locations } = useUserContext();
     const location = getCookie("selected_location");
-    const selectedLocation = JSON.parse(location);
+    const selectedLocation =
+        hasCookie("selected_location") && JSON.parse(location);
 
     return (
         <div
@@ -186,13 +187,13 @@ const GuestAddressForm = ({
                         rules={[{ required: true }]}
                     >
                         <Select
-                            placeholder="United State"
+                            placeholder="Please select a country"
                             style={{
                                 backgroundColor: "#FAFBFB",
                                 height: 48,
                             }}
                             options={locations}
-                            defaultValue={selectedLocation}
+                            defaultValue={selectedLocation || null}
                         ></Select>
                     </Form.Item>
 
