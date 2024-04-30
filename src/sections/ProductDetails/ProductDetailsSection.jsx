@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ReviewsAndRatings from "./ReviewsAndRatings";
 import { allRatingReviewers } from "@/libs/reviewData";
-import DOMPurify from "dompurify";
+// import DOMPurify from "dompurify";
 
 const ProductDetailsSection = ({ data }) => {
     const [selectedTab, setSelectedTab] = useState(0);
@@ -14,7 +14,7 @@ const ProductDetailsSection = ({ data }) => {
                 </h3>
                 <p
                     dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(data.description),
+                        __html: data?.description,
                     }}
                 />
             </div>

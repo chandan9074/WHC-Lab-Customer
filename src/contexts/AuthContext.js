@@ -109,6 +109,7 @@ export function AuthProvider({ children }) {
     };
 
     const logOut = () => {
+        console.log("logout");
         deleteCookie("userInfo");
         deleteCookie("accessToken");
         setUserInfo(null);

@@ -1,7 +1,20 @@
+import dynamic from "next/dynamic";
 import React from "react";
-import ProductLeftView from "./ProductLeftView";
-import ProductRightView from "./ProductRightView";
-import ProductViewMobile from "./ProductViewMobile";
+// import ProductLeftView from "./ProductLeftView";
+// import ProductRightView from "./ProductRightView";
+// import ProductViewMobile from "./ProductViewMobile";
+
+const ProductLeftView = dynamic(() => import("./ProductLeftView"), {
+    ssr: false,
+});
+
+const ProductRightView = dynamic(() => import("./ProductRightView"), {
+    ssr: false,
+});
+
+const ProductViewMobile = dynamic(() => import("./ProductViewMobile"), {
+    ssr: false,
+});
 
 const ProductView = ({ data }) => {
     return (
