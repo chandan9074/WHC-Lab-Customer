@@ -17,7 +17,7 @@ export const GET_USER_PROFILE = `${BASEURL}/profile/1`;
 
 export const GET_USER_ADDRESS = `${BASEURL}/addresses`;
 
-export const CHANGE_PASSWORD = `${BASEURL}/change-password`;
+export const CHANGE_PASSWORD = `${BASEURL}/users/change-password`;
 
 export const RESET_PASSWORD = `${BASEURL}/users/reset-password`;
 
