@@ -33,8 +33,12 @@ import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Icons from "../../../public/assets/Icons";
 import Images from "../../../public/assets/Images";
 import { LOGIN_PATH } from "@/helpers/slug";
-import { getCookie, hasCookie } from "cookies-next";
+import { getCookie, hasCookie, setCookie } from "cookies-next";
 import { useAuthContext } from "@/contexts/AuthContext";
+import { whcFetch } from "@/services/BaseWHCHTTP";
+import { SIGN_UP_URL } from "@/helpers/apiURLS";
+import { toast } from "react-toastify";
+import MakeApiCall from "@/services/MakeApiCall";
 
 const { Title } = Typography;
 
@@ -67,27 +71,51 @@ const SignInForm = () => {
     );
 
     const onFinish = async (values) => {
-        // try {
-        //     // Call the sign-in service
-        //     const response = await AuthService.signUp(
-        //         values.firstName,
-        //         values.lastName,
-        //         values.primaryPhone,
-        //         values.password,
-        //         values.confirmPassword
-        //     );
-        //     setUserInfo(response.body.user);
-        //     // Assuming your API returns a token in the response
-        //     const token = response.body.token;
-        //     console.log(response);
-        //     // Set the token in a cookie
-        //     Cookies.set("accessToken", token);
-        //     Cookies.set("userInfo", JSON.stringify(response.body.user));
-        //     // You can use the router to navigate to another page
-        //     router.push("/");
-        // } catch (error) {
-        //     console.error("Failed:", error);
-        // }
+        console.log(values);
+        try {
+            setLoading(true);
+            // Call the sign-in service
+            // const response = await AuthService.signUp(
+            //     values.firstName,
+            //     values.lastName,
+            //     values.primaryEmail,
+            //     values.company,
+            //     values.password,
+            //     values.confirmPassword
+            // );
+            const body = {
+                firstName: values.firstName,
+                lastName: values.lastName,
+                primaryEmail: values.primaryEmail,
+                company: values.company,
+                password: values.password,
+                confirmPassword: values.confirmPassword,
+            };
+            const response = await MakeApiCall({
+                apiUrl: SIGN_UP_URL,
+                method: "POST",
+                body: body,
+            });
+            console.log(response, "sign  up response");
+            setCookie("temp_userInfo", JSON.stringify(response.user));
+            setCookie("temp_accessToken", response.user.token);
+            toast.success(response.message);
+            setLoading(false);
+
+            // setUserInfo(response.body.user);
+            // // Assuming your API returns a token in the response
+            // const token = response.body.token;
+            // console.log(response);
+            // // Set the token in a cookie
+            // Cookies.set("accessToken", token);
+            // Cookies.set("userInfo", JSON.stringify(response.body.user));
+            // You can use the router to navigate to another page
+            router.push("/sign-up-verification");
+        } catch (error) {
+            // console.error("Failed:", error);
+            setLoading(false);
+            toast.error(error.message);
+        }
         // try {
         //     setLoading(true);
         //     values.primaryPhone = formatPhoneNumberWithCountryCode(
@@ -390,6 +418,7 @@ const SignInForm = () => {
                         <Button
                             type="primary"
                             htmlType="submit"
+                            disabled={loading}
                             className="w-full duration-200 bg-brand-blue-500 text-base font-semibold leading-6 rounded-full p-2 h-[52px] flex items-center justify-center gap-3"
                         >
                             {loading && (
@@ -405,7 +434,7 @@ const SignInForm = () => {
                                     }
                                 />
                             )}
-                            Send Verification Code
+                            {loading ? "please wait" : "Send Verification Code"}
                         </Button>
                     </div>
 
