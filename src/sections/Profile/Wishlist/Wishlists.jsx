@@ -5,7 +5,7 @@ import Wish from "./Wish";
 const Wishlists = ({ wishLists }) => {
     return (
         <div className={`flex flex-col gap-0`}>
-            {wishLists.length === 0 && (
+            {wishLists?.length === 0 && (
                 <NoDataFound message="You have no wishList currently!" />
             )}
             {wishLists?.length > 0 &&
@@ -25,8 +25,8 @@ const Wishlists = ({ wishLists }) => {
                                 }
                                 inStock={wish.inStock}
                                 id={wish.productId}
-                                handleGetWishList={handleGetWishList}
-                                setLoading={setLoading}
+                                // handleGetWishList={handleGetWishList}
+                                // setLoading={setLoading}
                             />
                         </div>
                     );

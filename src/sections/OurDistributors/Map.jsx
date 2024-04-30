@@ -3,8 +3,10 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import { Icon } from "leaflet";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icons from "../../../public/assets/Icons";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // create custom icon
 const customIcon = new Icon({
@@ -27,8 +29,12 @@ const markers = [
         popUp: "Hello, I am pop up 3",
     },
 ];
-function Map() {
+function Map({ data }) {
+    console.log("data------", data);
+    const router = useRouter();
     const mapRef = useRef();
+    const [map, setMap] = useState(null);
+    // const [openPopups, setOpenPopups] = useState([]);
 
     useEffect(() => {
         if (mapRef.current) {
@@ -229,8 +235,58 @@ function Map() {
             map.setStyle(styles);
         }
     }, []);
+
+    // const closePopup = (index) => {
+    //     // Find the marker by its index
+    //     const layers = mapRef.current.leafletElement.getLayers();
+    //     // Filter out only the marker layers
+    //     const markerLayers = layers.filter(
+    //         (layer) => layer instanceof L.Marker
+    //     );
+    //     // Find the marker layer by its index
+    //     const markerLayer = markerLayers[index];
+    //     // Close the popup associated with the marker layer
+    //     if (markerLayer && markerLayer.closePopup) {
+    //         markerLayer.closePopup();
+    //     }
+    // };
+    const popupElRef = useRef(null);
+
+    // const hideElement = () => {
+    //     if (!popupElRef.current || !map) return;
+    //     popupElRef.current._close();
+    //     // map.closePopup();
+    // };
+
+    // const togglePopup = (index) => {
+    //     if (openPopups.includes(index)) {
+    //         setOpenPopups(openPopups.filter((item) => item !== index));
+    //     } else {
+    //         setOpenPopups([...openPopups, index]);
+    //     }
+    // };
+
+    // const handlePopupOpen = (index) => {
+    //     setOpenPopups([...openPopups, index]);
+    // };
+
+    // const handlePopupClose = (index) => {
+    //     setOpenPopups(openPopups.filter((item) => item !== index));
+    // };
+
+    // const handlePopupClose = (popupRef) => {
+    //     if (popupRef?.current) {
+    //         popupRef.current.closePopup();
+    //     }
+    // };
+
     return (
-        <MapContainer center={[48.8566, 2.3522]} zoom={5} ref={mapRef}>
+        <MapContainer
+            center={[48.8566, 2.3522]}
+            zoom={2}
+            ref={mapRef}
+            // whenCreated={setMap}
+        >
             {/* OPEN STREEN MAPS TILES */}
             <TileLayer
                 attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
@@ -238,9 +294,55 @@ function Map() {
             />
 
             {/* Mapping through the markers */}
-            {markers.map((marker, index) => (
-                <Marker key={index} position={marker.geocode} icon={customIcon}>
-                    <Popup>{marker.popUp}</Popup>
+            {data.map((marker, index) => (
+                <Marker
+                    key={index}
+                    position={[marker.lat, marker.lng]}
+                    icon={customIcon}
+                >
+                    <Popup
+                        // onOpen={() => handlePopupOpen(index)}
+                        // onClose={() => handlePopupClose(index)}
+                        // ref={popupElRef}
+
+                        // ref={(popupElRef) => handlePopupClose(popupElRef)}
+                        closeButton={false}
+                    >
+                        <div className="w-[300px] flex flex-col items-center justify-center">
+                            <div className="w-full bg-[#0E2F55] px-5 py-2 flex justify-between">
+                                <h5 className="text-xl font-medium text-white">
+                                    {marker.name}
+                                </h5>
+                                {/* <button
+                                    onClick={() => handlePopupClose(popupElRef)}
+                                >
+                                    <Image
+                                        alt="cross"
+                                        width={1000}
+                                        height={1000}
+                                        src={Icons.cross}
+                                        className="w-5 h-5"
+                                    />
+                                </button> */}
+                            </div>
+                            <p className="text-base italic">{marker.address}</p>
+                            <div className="flex gap-x-2 pb-[14.4px]">
+                                <button className="px-[21px] py-[4.5px] bg-[#0E2F55] text-white text-base">
+                                    Directions
+                                </button>
+                                <a
+                                    href={marker.webUrl}
+                                    target="_blank"
+                                    className="px-[21px] py-[4.5px] bg-[#0E2F55] "
+                                    // onClick={() => router.push(marker.webUrl)}
+                                >
+                                    <span className="text-white text-base">
+                                        Website
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </Popup>
                 </Marker>
             ))}
         </MapContainer>

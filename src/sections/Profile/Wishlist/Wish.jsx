@@ -48,8 +48,8 @@ const Wish = ({
             <div className="flex flex-row items-center gap-4">
                 <Image
                     alt={name}
-                    // src={`${GET_IMAGE_RENDER}?key=${image}`}
-                    src={image}
+                    src={`${GET_IMAGE_RENDER}?key=${image}`}
+                    // src={image}
                     width={80}
                     height={80}
                     className="rounded-sm w-[80px] h-[80px]"
