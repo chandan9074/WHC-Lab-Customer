@@ -21,8 +21,8 @@ const MyAccountSection = ({ data }) => {
     const editFieldRef = useRef();
     const [isEdit, setIsEdit] = useState("");
     const [formValue, setFormValue] = useState({
-        firstName: data?.firstName,
-        lastName: data?.lastName,
+        name: data?.firstName + " " + data?.lastName,
+        // lastName: data?.lastName,
         companyName: data?.companyName,
         primaryEmail: data?.primaryEmail,
         primaryPhone: data?.primaryPhone,
@@ -31,30 +31,30 @@ const MyAccountSection = ({ data }) => {
     const [fields, setFields] = useState([
         {
             id: 1,
-            title: "First Name",
-            value: data?.firstName || "",
+            title: "Name",
+            value: data?.firstName + " " + data?.lastName || "",
             isEditing: false,
         },
+        // {
+        //     id: 2,
+        //     title: "Last Name",
+        //     value: data?.lastName || "",
+        //     isEditing: false,
+        // },
         {
             id: 2,
-            title: "Last Name",
-            value: data?.lastName || "",
-            isEditing: false,
-        },
-        {
-            id: 3,
             title: "Company Name",
             value: data?.companyName || "",
             isEditing: false,
         },
+        // {
+        //     id: 3,
+        //     title: "Phone Number",
+        //     value: data?.primaryPhone || "",
+        //     isEditing: false,
+        // },
         {
-            id: 4,
-            title: "Phone Number",
-            value: data?.primaryPhone || "",
-            isEditing: false,
-        },
-        {
-            id: 5,
+            id: 3,
             title: "Email",
             value: data?.primaryEmail || "",
             isEditing: false,
@@ -178,15 +178,15 @@ const MyAccountSection = ({ data }) => {
                     
                 ))} */}
                 <EditableInput
-                    label={"First Name"}
+                    label={"Name"}
                     formValue={formValue}
                     setFormValue={setFormValue}
-                    name={"firstName"}
+                    name={"name"}
                     forwardedRef={editFieldRef}
                     isEdit={isEdit}
                     setIsEdit={setIsEdit}
                 />
-                <EditableInput
+                {/* <EditableInput
                     label={"Last Name"}
                     formValue={formValue}
                     setFormValue={setFormValue}
@@ -194,7 +194,7 @@ const MyAccountSection = ({ data }) => {
                     forwardedRef={editFieldRef}
                     isEdit={isEdit}
                     setIsEdit={setIsEdit}
-                />
+                /> */}
 
                 <EditableInput
                     label={"Company Name"}
@@ -206,7 +206,7 @@ const MyAccountSection = ({ data }) => {
                     setIsEdit={setIsEdit}
                 />
 
-                <EditableInput
+                {/* <EditableInput
                     label={"Phone Number"}
                     formValue={formValue}
                     setFormValue={setFormValue}
@@ -214,7 +214,7 @@ const MyAccountSection = ({ data }) => {
                     handleNavigate={handleNavigate}
                     // isEdit={isEdit}
                     setIsEdit={setIsEdit}
-                />
+                /> */}
                 <EditableInput
                     label={"Email"}
                     formValue={formValue}
