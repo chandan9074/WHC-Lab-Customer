@@ -1,18 +1,21 @@
-"use client";
 import InfoPagesContainer from "@/components/common/InfoPagesContainer";
 import dynamic from "next/dynamic";
 import Layouts from "@/layouts";
 import CountryCategorySelection from "@/sections/OurDistributors/CountryCategorySelection";
 // import Map from "@/sections/OurDistributors/Map";
-import { Form, Select } from "antd";
-import FormItem from "antd/es/form/FormItem";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
+import DistributorsService from "@/services/DistributorsService";
 
 const Map = dynamic(() => import("@/sections/OurDistributors/Map"), {
     ssr: false,
 });
 
-const OurDistributors = () => {
+const OurDistributors = async () => {
+    const getDistributors = DistributorsService.getDistributors();
+
+    const [distributorsData] = await Promise.all([getDistributors]);
+    console.log("dist-----------", distributorsData);
+
     return (
         <Suspense fallback={null}>
             <Layouts.Primary>
@@ -25,7 +28,7 @@ const OurDistributors = () => {
                             <CountryCategorySelection />
                         </div>
                         <div className="col-span-12 md:col-span-8 relative z-0">
-                            <Map />
+                            <Map data={distributorsData.docs} />
                         </div>
                     </div>
                 </InfoPagesContainer>

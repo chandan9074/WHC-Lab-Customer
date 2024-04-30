@@ -43,3 +43,5 @@ export const GET_TESTIMONIALS = `${BASEURL}/testimonials`
 export const GET_MAIN_CATEGORIES = `${BASEURL}/categories`
 // FAQ
 export const FAQ_URL = `${BASEURL}/faqs`;
+//Distributors
+export const DISTRIBUTORS_URL = `${BASEURL}/distributors`;

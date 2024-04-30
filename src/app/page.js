@@ -11,8 +11,6 @@ import ProductContainer from "@/sections/Home/Product/ProductContainer";
 import TestimonialSection from "@/sections/Home/TestimonialSection/TestimonialSection";
 import HomeService from "@/services/HomeService";
 import ProductService from "@/services/productsService";
-import { getCookie } from "cookies-next";
-import {cookies} from "next/headers"
 
 export default async function Home() {
 
