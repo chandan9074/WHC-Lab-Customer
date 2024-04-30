@@ -22,7 +22,7 @@ const VerificationForm = ({ title, handleUpdate, verifyShortForm }) => {
 
     function hideEmail(email) {
         // Split the email address into local part and domain part
-        var parts = email.split("@");
+        var parts = email?.split("@");
         var localPart = parts[0];
         var domainPart = parts[1];
 

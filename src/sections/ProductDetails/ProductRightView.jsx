@@ -1,13 +1,16 @@
 "use client";
 
 import Buttons from "@/components/Buttons";
-import { Modal, Rate } from "antd";
+import { Modal, Rate, Spin } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import AddToCartSuccession from "./AddToCartSuccession";
 import Link from "next/link";
 import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
+import { getCookie } from "cookies-next";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "react-toastify";
 
 const ProductRightView = ({
     forModal = false,
@@ -21,13 +24,13 @@ const ProductRightView = ({
     const [quantity, setQuantity] = useState(1);
     const [maxLimit, setMaxLimit] = useState(0);
     const [loading, setLoading] = useState(false);
-    // const { getUpdateCartList, createCartItem } = useCart();
+    const { getUpdateCartList, createCartItem } = useCart();
     const [openSuccessionModal, setOpenSuccessionModal] = useState(false);
     const [wishlistData, setWishlistData] = useState([]);
     const [wishlistIds, setWishlistIds] = useState([]);
     const router = useRouter();
 
-    // const token = getCookie("accessToken");
+    const token = getCookie("accessToken");
 
     // const { createProductWishlist, deleteWishlist } =
     //     useContext(wishlistContext);
@@ -68,22 +71,22 @@ const ProductRightView = ({
         setOpenSuccessionModal(false);
     };
 
-    // const handleAddToCart = async () => {
-    //     setLoading(true);
-    //     try {
-    //         const res = await createCartItem(data?._id, quantity, token);
+    const handleAddToCart = async () => {
+        try {
+            const res = await createCartItem(data?._id, quantity, token);
+            setLoading(true);
 
-    //         if (res?.status === 200) {
-    //             toast.success(res?.body?.message);
-    //             getUpdateCartList(token);
-    //             setOpenSuccessionModal(true);
-    //         }
-    //     } catch (e) {
-    //         toast.error(e?.error?.message);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+            if (res?.status === 200) {
+                toast.success(res?.message);
+                getUpdateCartList(token);
+                setOpenSuccessionModal(true);
+            }
+        } catch (e) {
+            toast.error(e?.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleChangeQuantity = (color) => {
         handelInitialMaxLimit(color);
@@ -110,7 +113,7 @@ const ProductRightView = ({
 
     return (
         <div className={`${forModal ? "" : "w-[486px]"} px-6`}>
-            {/* {loading && <Spin spinning={loading} fullscreen />} */}
+            {loading && <Spin spinning={loading} fullscreen />}
 
             <p className="text-sm font-medium text-neutral-300 pb-2 capitalize">
                 {data?.mainCategory?.name}
@@ -261,11 +264,11 @@ const ProductRightView = ({
                             }`}
                             className="h-[52px] bg-magenta-600 text-white font-semibold"
                             width="w-full"
-                            // onClick={() => {
-                            //     token
-                            //         ? handleAddToCart()
-                            //         : router.push("/sign-in");
-                            // }}
+                            onClick={() => {
+                                token
+                                    ? handleAddToCart()
+                                    : router.push("/log-in");
+                            }}
                         />
                         {openSuccessionModal && (
                             <Modal

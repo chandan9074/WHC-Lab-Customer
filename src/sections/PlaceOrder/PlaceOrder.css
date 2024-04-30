@@ -1,0 +1,75 @@
+.ant-select,
+.ant-select-selector {
+    height: 2.5rem;
+    width: 80%;
+    border-radius: 8px;
+}
+
+.ant-select-selector {
+    border-radius: 8px;
+    border-color: rgb(226, 226, 226) !important;
+    @apply border shadow-none;
+}
+
+.ant-select-open {
+    /* border: 1px solid #eb038b !important; */
+    @apply border;
+}
+
+/* Hover state */
+
+.ant-select-selector:hover {
+    /* border: 0.5px solid #eb038b !important; */
+    @apply border border-[#505f79]  !important;
+}
+
+/* Active state */
+.ant-select:active,
+.ant-select-selector:active {
+    @apply border-[0.4px] border-[#0b2848] shadow-none !important;
+}
+
+.ant-select > .ant-form-item-control-input-content:hover {
+    border: 1px solid red;
+    border-radius: 6px;
+    height: 30px;
+}
+
+.ant-switch-inner {
+    background-color: gray;
+}
+
+.ant-switch-checked {
+    & .ant-switch-inner {
+        background-color: #0b2848;
+    }
+}
+
+.custom-radio .ant-radio-checked .ant-radio-inner {
+    /* Change the fill color when the radio is checked */
+    background-color: #0b2848; /* Change the fill color when the radio is checked */
+    border-color: #0b2848;
+    outline-color: #0b2848;
+}
+
+label,
+.form_item_path_postalCode {
+    white-space: nowrap;
+}
+
+/* .ant-radio-wrapper span:nth-child(2) {
+    width: 100%;
+}
+
+.ant-radio-wrapper span:nth-child(1) {
+    width: 16px;
+} */
+
+/* .ant-input-outlined {
+    height: 100px !important;
+} */
+
+.ant-picker,
+.ant-picker-outlined {
+    height: 48px !important;
+}

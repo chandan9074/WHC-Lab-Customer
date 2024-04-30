@@ -7,12 +7,15 @@ import MegaMenu from "../common/MegaMenu";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { MY_ACCOUNT_PATH } from "@/helpers/slug";
+import { MY_ACCOUNT_PATH, MY_CART_PATH } from "@/helpers/slug";
+import { useCart } from "@/contexts/CartContext";
 
 const Primary = () => {
     const [open, setOpen] = useState(false);
 
     const { isLogin } = useAuthContext();
+    const { cartItem } = useCart();
+    console.log(cartItem?.length);
 
     useEffect(() => {
         if (open) {
@@ -40,7 +43,10 @@ const Primary = () => {
                     </Link>
                     <div className="flex items-center gap-6">
                         <div className="sm:flex sm:gap-6 h-full sm:items-center hidden">
-                            <MobileMenuItem isLogin={isLogin} />
+                            <MobileMenuItem
+                                isLogin={isLogin}
+                                cartItem={cartItem?.length || 0}
+                            />
                             <div className="w-[1px] h-6 bg-neutral-30"></div>
                         </div>
 
@@ -82,7 +88,10 @@ const Primary = () => {
             <div className="w-full h-[1px] bg-neutral-50"></div>
             <div className="flex flex-col gap-2 sm:gap-4 sm:hidden py-2">
                 <div className="flex justify-end container mx-auto px-6 sm:px-3 ">
-                    <MobileMenuItem isLogin={isLogin} />
+                    <MobileMenuItem
+                        isLogin={isLogin}
+                        cartItem={cartItem?.length || 0}
+                    />
                 </div>
             </div>
         </>
@@ -91,7 +100,7 @@ const Primary = () => {
 
 export default Primary;
 
-function MobileMenuItem({ isLogin }) {
+function MobileMenuItem({ isLogin, cartItem }) {
     return (
         <div className="flex gap-3 sm:gap-4 items-center">
             <Image
@@ -119,14 +128,16 @@ function MobileMenuItem({ isLogin }) {
                             className="w-5 sm:w-[40px] h-5 sm:h-[40px] cursor-pointer"
                         />
                     </Link>
-                    <button className="py-1 sm:py-2 px-4 border border-neutral-50 rounded-3xl font-medium flex gap-2 items-center">
-                        <p className="text-brand-blue-500 text-sm sm:text-base leading-6">
-                            My Cart
-                        </p>
-                        <p className="py-[1px] sm:py-[3px] px-[5px] sm:px-2 bg-brand-blue-500 text-white text-xs sm:text-sm rounded-full">
-                            0
-                        </p>
-                    </button>
+                    <Link href={MY_CART_PATH}>
+                        <button className="py-1 sm:py-2 px-4 border border-neutral-50 rounded-3xl font-medium flex gap-2 items-center">
+                            <p className="text-brand-blue-500 text-sm sm:text-base leading-6">
+                                My Cart
+                            </p>
+                            <p className="py-[1px] sm:py-[3px] px-[5px] sm:px-2 bg-brand-blue-500 text-white text-xs sm:text-sm rounded-full">
+                                {cartItem}
+                            </p>
+                        </button>
+                    </Link>
                 </>
             )}
         </div>

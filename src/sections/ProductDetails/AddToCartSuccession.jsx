@@ -3,7 +3,8 @@ import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import Icons from "../../../public/assets/Icons";
+import { MY_ACCOUNT_PATH, MY_CART_PATH, PRODUCTS_PATH } from "@/helpers/slug";
 
 const AddToCartSuccession = ({
     data,
@@ -58,7 +59,7 @@ const AddToCartSuccession = ({
                         <h3 className="text-neutral-700 font-normal text-sm">
                             <span className="font-medium text-base">
                                 Quantity:
-                            </span>{" "}
+                            </span>
                             {quantity}
                         </h3>
 
