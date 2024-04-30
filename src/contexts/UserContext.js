@@ -1,6 +1,6 @@
 import LocationService from "@/services/LocationService";
 import { createContext, useContext, useEffect, useState } from "react";
-import { getCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 import { toast } from "react-toastify";
 
 const userContext = createContext();
@@ -8,6 +8,13 @@ const userContext = createContext();
 export function UserProvider({ children }) {
     const [locations, setLocations] = useState([]);
     // const token = getCookie("accessToken");
+    const [userInfo, setUserInfo] = useState(null);
+
+    useEffect(() => {
+        if (hasCookie("userInfo")) {
+            setUserInfo(JSON.parse(getCookie("userInfo")));
+        }
+    }, []);
 
     // Get Locations
     const getLocation = async () => {
@@ -29,7 +36,7 @@ export function UserProvider({ children }) {
         getLocation();
     }, []);
 
-    const values = { locations, setLocations };
+    const values = { locations, setLocations,userInfo,setUserInfo };
     return (
         <userContext.Provider value={values}>{children}</userContext.Provider>
     );
