@@ -25,7 +25,7 @@ const ChangePassword = () => {
                 email,
             };
 
-            const response = await UserService.verifyOTP(data, token);
+            const response = await UserService.verifyOTP(data);
 
             if (response?.status === 200) {
                 toast.success(response?.message);
