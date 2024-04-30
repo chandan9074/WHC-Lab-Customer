@@ -19,6 +19,10 @@ export const GET_USER_ADDRESS = `${BASEURL}/addresses`;
 
 export const CHANGE_PASSWORD = `${BASEURL}/change-password`;
 
+export const CHANGE_EMAIL = `${BASEURL}/users/change-email`;
+
+export const VERIFY_OTP = `${BASEURL}/users/verify-otp`;
+
 //Signin
 export const SIGN_IN_URL = `${BASEURL}/users/login`;
 export const FACEBOOK_LOGIN_URL = `${BASEURL}/users/login/facebook`;
