@@ -24,7 +24,7 @@ const OurDistributors = () => {
                             </h1>
                             <CountryCategorySelection />
                         </div>
-                        <div className="col-span-12 md:col-span-8">
+                        <div className="col-span-12 md:col-span-8 relative z-0">
                             <Map />
                         </div>
                     </div>

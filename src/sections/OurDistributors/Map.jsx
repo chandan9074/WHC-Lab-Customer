@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import { useEffect, useRef } from "react";
 import Icons from "../../../public/assets/Icons";
+import Image from "next/image";
 
 // create custom icon
 const customIcon = new Icon({
@@ -240,7 +241,33 @@ function Map() {
             {/* Mapping through the markers */}
             {markers.map((marker, index) => (
                 <Marker key={index} position={marker.geocode} icon={customIcon}>
-                    <Popup>{marker.popUp}</Popup>
+                    <Popup closeButton={false}>
+                        <div className="w-[300px] flex flex-col items-center justify-center">
+                            <div className="w-full bg-[#0E2F55] px-5 py-2 flex justify-between">
+                                <h5 className="text-xl font-medium text-white">
+                                    Name
+                                </h5>
+                                <button>
+                                    <Image
+                                        alt="cross"
+                                        width={1000}
+                                        height={1000}
+                                        src={Icons.cross}
+                                        className="w-5 h-5"
+                                    />
+                                </button>
+                            </div>
+                            <p className="text-base italic">{marker.popUp}</p>
+                            <div className="flex gap-x-2 pb-[14.4px]">
+                                <button className="px-[21px] py-[4.5px] bg-[#0E2F55] text-white text-base">
+                                    Directions
+                                </button>
+                                <button className="px-[21px] py-[4.5px] bg-[#0E2F55] text-white text-base">
+                                    Website
+                                </button>
+                            </div>
+                        </div>
+                    </Popup>
                 </Marker>
             ))}
         </MapContainer>

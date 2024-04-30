@@ -1,8 +1,15 @@
 import { WISHLISTS_URL } from "@/helpers/apiURLS";
-import Wishlists from "@/sections/Profile/Wishlist/Wishlists";
+// import Wishlists from "@/sections/Profile/Wishlist/Wishlists";
 import { getCookie } from "cookies-next";
-import { cookies } from 'next/headers';
+import dynamic from "next/dynamic";
+import { cookies } from "next/headers";
 
+const Wishlists = dynamic(
+    () => import("@/sections/Profile/Wishlist/Wishlists"),
+    {
+        ssr: false,
+    }
+);
 
 async function getWishListData(token) {
     const res = await fetch(WISHLISTS_URL, {
@@ -16,7 +23,9 @@ const MyWishLists = async () => {
     const wishListsData = await getWishListData(token);
     return (
         <div className="py-5 px-2 md:p-12">
-            <Wishlists wishLists={wishListsData?.error ? [] : wishListsData?.docs} />
+            <Wishlists
+                wishLists={wishListsData?.error ? [] : wishListsData?.docs}
+            />
         </div>
     );
 };

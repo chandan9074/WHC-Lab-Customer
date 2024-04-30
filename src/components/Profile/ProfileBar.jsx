@@ -67,7 +67,7 @@ const ProfileBar = ({ width, data }) => {
             }
         };
         getUserData();
-    }, []); // Empty dependency array to ensure it runs only once on mount
+    }, [token]); // Empty dependency array to ensure it runs only once on mount
 
     // const { logOut } = useContext(userContext);
     // const { resetCartItemLength } = useCart();
