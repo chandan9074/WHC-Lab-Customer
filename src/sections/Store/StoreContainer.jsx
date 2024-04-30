@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import StoreTabButtonsSection from "./StoreTabButtonsSection";
 import ProductListContainer from "./ProductListContainer";
 import { StoreTabButtonsData } from "@/libs/storeTabButtons";
+import CountrySelectionModal from "./CountrySelectionModal";
 
 const StoreContainer = ({ productData }) => {
     const [selectedTab, setSelectedTab] = useState(StoreTabButtonsData[0]);
@@ -18,6 +19,8 @@ const StoreContainer = ({ productData }) => {
                 selectedTab={selectedTab}
                 productData={productData}
             />
+
+            <CountrySelectionModal />
         </div>
     );
 };

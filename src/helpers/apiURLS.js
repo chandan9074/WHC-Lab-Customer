@@ -15,7 +15,7 @@ export const GET_IMAGE_RENDER = `${BASEURL}/files/view-image`;
 
 export const GET_USER_PROFILE = `${BASEURL}/profile/1`;
 
-export const GET_USER_ADDRESS = `${BASEURL}/address`;
+export const GET_USER_ADDRESS = `${BASEURL}/addresses`;
 
 export const CHANGE_PASSWORD = `${BASEURL}/change-password`;
 
@@ -37,9 +37,13 @@ export const WISHLISTS_URL = `${BASEURL}/wishlists`;
 export const MY_ACCOUNT_URL = `${BASEURL}/users/profile`;
 //My Address
 export const MY_ADDRESS_URL = `${BASEURL}/addresses`;
+// Cart
+export const MY_CART_URL = `${BASEURL}/carts`;
+// Location
+export const GET_LOCATIONS = `${BASEURL}/locations`;
 //Testimonials
-export const GET_TESTIMONIALS = `${BASEURL}/testimonials`
+export const GET_TESTIMONIALS = `${BASEURL}/testimonials`;
 //Main Categories
-export const GET_MAIN_CATEGORIES = `${BASEURL}/categories`
+export const GET_MAIN_CATEGORIES = `${BASEURL}/categories`;
 // FAQ
 export const FAQ_URL = `${BASEURL}/faqs`;

@@ -1,0 +1,3 @@
+.ant-radio-group > div > label > span:nth-child(2) {
+    width: 100%;
+}
