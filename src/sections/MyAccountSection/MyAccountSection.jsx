@@ -9,6 +9,7 @@ import Image from "next/image";
 import Icons from "../../../public/assets/Icons";
 import EditableInput from "@/components/common/EditableInput";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
+import { setCookie } from "cookies-next";
 
 const MyAccountSection = ({ data }) => {
     console.log(data);
@@ -126,6 +127,10 @@ const MyAccountSection = ({ data }) => {
             `${name === "primaryPhone" ? "/change-phone" : "/change-email"}`
         );
     };
+
+    useEffect(() => {
+        setCookie("userInfo", `${JSON.stringify(data)}`);
+    }, [data]);
 
     return (
         <div className="py-12 flex flex-col gap-y-10">
