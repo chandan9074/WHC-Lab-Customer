@@ -89,9 +89,9 @@ const TestimonialCarouselMobile = ({ data }) => {
                             slider1.current.next();
                             slider2.current.next();
                         }}
-                        disabled={currentSlide > 3}
+                        disabled={currentSlide > data.length - 1}
                         className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
-                            currentSlide > 3 ? "opacity-20" : ""
+                            currentSlide > data.length - 1 ? "opacity-20" : ""
                         }`}
                     >
                         <Image
@@ -119,7 +119,7 @@ const TestimonialCarouselMobile = ({ data }) => {
                         <div
                             className={`h-[2px] bg-black absolute top-0 left-0 z-10 duration-300`}
                             style={{
-                                width: `${20 * currentSlide}px`,
+                                width: `${(80 / data.length) * currentSlide}px`,
                             }}
                         />
                     </div>
@@ -128,7 +128,9 @@ const TestimonialCarouselMobile = ({ data }) => {
                 <div className="w-[132px] h-1.5 bg-[#15192433] bg-opacity-20 relative overflow-hidden rounded-full">
                     <div
                         className={`h-1.5 bg-black absolute top-0 left-0 z-10  rounded-full duration-300`}
-                        style={{ width: `${33 * currentSlide}px` }}
+                        style={{
+                            width: `${(80 / data.length) * currentSlide}px`,
+                        }}
                     />
                 </div>
             </div>
