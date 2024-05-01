@@ -4,6 +4,7 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import WhcHero from "../../../../public/WhcHero";
+import petriDishVideo from "../../../../public/petri_dish_topview.mp4";
 
 const HeroRightSide = () => {
     const isDragging = useRef(false);
@@ -57,25 +58,32 @@ const HeroRightSide = () => {
     };
 
     return (
-        <div
-            className="relative h-[600px]"
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-        >
-            <Canvas>
-                <ambientLight />
-                <Suspense fallback={null}>
-                    {/* <Earth /> */}
-                    <WhcHero />
-                </Suspense>
-                <OrbitControls
-                    enableRotate={!isDragging.current}
-                    enableZoom={false}
-                />
-                <Environment preset="sunset" />
-            </Canvas>
-        </div>
+        // <div
+        //     className="relative h-[600px]"
+        //     onMouseDown={handleMouseDown}
+        //     onMouseMove={handleMouseMove}
+        //     onMouseUp={handleMouseUp}
+        // >
+        //     <Canvas>
+        //         <ambientLight />
+        //         <Suspense fallback={null}>
+        //             {/* <Earth /> */}
+        //             <WhcHero />
+        //         </Suspense>
+        //         <OrbitControls
+        //             enableRotate={!isDragging.current}
+        //             enableZoom={false}
+        //         />
+        //         <Environment preset="sunset" />
+        //     </Canvas>
+        // </div>
+        <video
+            src={petriDishVideo}
+            autoPlay
+            muted
+            loop
+            className="w-full h-[600px] object-cover"
+        />
     );
 };
 
