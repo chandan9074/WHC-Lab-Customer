@@ -26,9 +26,9 @@ const FilterCategory = ({ data, setSearchQuery, searchQuery, name }) => {
                             >
                                 {item.name} &nbsp;
                             </span>
-                            <span className="text-neutral-100 text-sm">
+                            {/* <span className="text-neutral-100 text-sm">
                                 ({item.quantity})
-                            </span>
+                            </span> */}
                         </div>
                     }
                     key={item.name}

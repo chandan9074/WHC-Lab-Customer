@@ -64,3 +64,6 @@ export const VERIFY_OTP = `${BASEURL}/users/verify-otp`;
 // distributors
 
 export const DISTRIBUTORS_URL = `${BASEURL}/distributors`;
+
+// category
+export const CATEGORY_URL = `${BASEURL}/categories`;

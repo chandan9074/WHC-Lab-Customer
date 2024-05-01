@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import ProductDisplay from "./ProductDisplay";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ProductService from "@/services/productsService";
+import { getCookie } from "cookies-next";
 
 const ProductListContainer = ({ data, productData, selectedTab }) => {
     const searchParams = useSearchParams();
@@ -32,7 +33,14 @@ const ProductListContainer = ({ data, productData, selectedTab }) => {
             paramData[key] = value;
         });
 
-        const response = await ProductService.getProducts(paramData);
+        const locationId = getCookie("selected_location");
+        const _selectedLocation = locationId && JSON.parse(locationId);
+
+        const response = await ProductService.getProducts({
+            ...paramData,
+            category: selectedTab.name,
+            locationId: _selectedLocation,
+        });
         setProductList(response?.docs);
         setIsLoading(false);
     }, [searchParams]);

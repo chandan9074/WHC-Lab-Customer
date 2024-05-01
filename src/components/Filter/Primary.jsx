@@ -27,11 +27,6 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
     );
     // console.log("tags---------------------", flocculationTags);
 
-    const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
     const items = [
         {
             key: "1",
@@ -135,7 +130,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
             "Chemicals and Enzymes": ["Price"],
             "Laboratory Analysis": ["Price"],
         };
-        return tabList[activeTab].includes(label);
+        return tabList[activeTab]?.includes(label);
     };
 
     return (
@@ -163,7 +158,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
                 >
                     {items.map((item) => (
                         <Fragment key={item.key}>
-                            {getVisibility(item.label, selectedTab.label) && (
+                            {getVisibility(item.label, selectedTab.name) && (
                                 <Collapse.Panel
                                     header={
                                         <h6 className="text-sm font-semibold text-brand-blue-800 leading-5">
