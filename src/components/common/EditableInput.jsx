@@ -64,16 +64,17 @@ const EditableInput = ({
                     readOnly={!(isEdit === name)}
                     className={`w-full bg-[#FAFBFB]  rounded-md text-neutral-700 text-sm font-normal border-none outline-none active:outline-none focus:outline-none pl-3`}
                 />
-                {isEdit === name ? (
-                    <Image
-                        alt="save"
-                        src={Icons.save}
-                        width={24}
-                        height={24}
-                        onClick={() => setIsEdit("")}
-                        className="cursor-pointer"
-                    />
-                ) : (
+                {/* {isEdit === name ? ( */}
+                {/* <Image
+                    alt="save"
+                    src={Icons.save}
+                    width={24}
+                    height={24}
+                    onClick={() => setIsEdit("")}
+                    className="cursor-pointer"
+                />
+                ) : ( */}
+                {name !== "companyName" && (
                     <Image
                         alt="edit-icon"
                         src={Icons.edit}
@@ -83,6 +84,7 @@ const EditableInput = ({
                         className="cursor-pointer"
                     />
                 )}
+                {/* )} */}
             </div>
         </Form.Item>
     );

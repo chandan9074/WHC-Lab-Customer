@@ -53,7 +53,8 @@ export function AuthProvider({ children }) {
             console.log(res);
             handlePageTransition(res);
         } catch (error) {
-            console.error("Error in makeFacebookLogin:", error);
+            // console.error("Error in makeFacebookLogin:", error.message);
+            throw new Error(error.message || "Something went wrong");
         }
     };
 
@@ -74,8 +75,8 @@ export function AuthProvider({ children }) {
                 }
             }
         } catch (error) {
-            console.error("Error in google sign in:", error);
-            throw error;
+            throw new Error(error.message || "Something went wrong");
+            // throw error;
         }
     };
 

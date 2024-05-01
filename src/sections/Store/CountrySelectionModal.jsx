@@ -5,8 +5,9 @@ import { Flex, Select } from "antd";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import { hasCookie, setCookie } from "cookies-next";
 import { useUserContext } from "@/contexts/UserContext";
+import Image from "next/image";
 
-function CountrySelectionModal() {
+function CountrySelectionModal({ handleLocation }) {
     const [selectLocation, setSelectLocation] = useState();
     const { locations } = useUserContext();
     const selected_locations = hasCookie("selected_location");
@@ -18,6 +19,7 @@ function CountrySelectionModal() {
 
     const handleSelectLocation = () => {
         setCookie("selected_location", JSON.stringify(selectLocation));
+        handleLocation(selectLocation);
         setSelected(false);
     };
 
@@ -44,7 +46,9 @@ function CountrySelectionModal() {
                         label: (
                             <div className="flex justify-start items-center align-middle text-[#354764] gap-4">
                                 {location.flag && (
-                                    <img
+                                    <Image
+                                        width={1000}
+                                        height={1000}
                                         alt="product-image"
                                         src={`${GET_IMAGE_RENDER}?key=${location.flag}`}
                                         className="w-[30px] h-[20px]"
