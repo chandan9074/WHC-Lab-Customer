@@ -12,6 +12,7 @@ import { getCookie } from "cookies-next";
 import MakeApiCall from "@/services/MakeApiCall";
 import Images from "../../../public/assets/Images";
 import { useAuthContext } from "@/contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const { Text } = Typography;
 
@@ -59,9 +60,10 @@ const ProfileBar = ({ width, data }) => {
                 });
 
                 setUserData(responseData.user);
-                toast.success(responseData.message);
+                // toast.success(responseData.message);
             } catch (error) {
-                console.log("error", error.message);
+                // console.log("error", error.message);
+                toast.error(error?.message);
             } finally {
                 setIsLoading(false);
             }

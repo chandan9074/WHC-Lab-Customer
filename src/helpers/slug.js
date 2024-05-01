@@ -13,6 +13,8 @@ export const FORGOT_PASSWORD_CONFIRMATION_PATH =
     "/forgot-password-confirmation";
 export const CHANGE_EMAIL_VERIFICATION_PATH = "/change-email-verification";
 export const CHANGE_PHONE_VERIFICATION_PATH = "/change-phone-verification";
+export const CHANGE_PASSWORD_VERIFICATION_PATH =
+    "/change-password-verification";
 export const ORDERS_HISTORY_PATH = "/profile/orders-history";
 export const CREDIT_BALANCE_PATH = "/profile/credit-balance";
 export const MY_CART_PATH = "/my-cart";

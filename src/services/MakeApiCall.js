@@ -52,7 +52,7 @@ async function MakeApiCall({
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.message || "Something went wrong");
+            throw new Error(data?.message || data?.error);
         }
 
         return {
@@ -60,9 +60,7 @@ async function MakeApiCall({
             ...data,
         };
     } catch (error) {
-        // console.log(error.message);
-        // toast.error(error.message);
-        throw new Error(error.message || "Something went wrong");
+        throw new Error(error?.message);
     }
 }
 

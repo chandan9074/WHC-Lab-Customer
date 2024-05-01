@@ -66,7 +66,7 @@ import appleLogo from "./appleLogo.svg";
 import googleLogo from "./googleLogo.svg";
 import facebookLogo from "./facebookLogo.svg";
 import grey_bg_profile_avatar from "./grey_bg_profile_avatar.svg";
-import mapMarker from "./map.svg"
+import mapMarker from "./map.svg";
 
 const Icons = {
     mapMarker,

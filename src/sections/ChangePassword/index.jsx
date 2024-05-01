@@ -4,35 +4,36 @@ import { Button, Form, Input, Spin } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import LabelText from "@/components/common/LabelText";
 import Images from "../../../public/assets/Images";
-import { CHANGE_PASSWORD_VERIFICATION_PATH } from "@/helpers/slug";
+import { MY_ACCOUNT_PATH } from "@/helpers/slug";
 import { MethodsStructure } from "../../services/MethodsStructure";
 import MakeApiCall from "@/services/MakeApiCall";
-import { RESET_PASSWORD } from "@/helpers/apiURLS";
+import { CHANGE_PASSWORD } from "@/helpers/apiURLS";
 
-const ForgotPassword = ({ title, description }) => {
+const ChangePassword = ({ title, description }) => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     const onFinish = async (values) => {
         setLoading(true);
         setCookie("temp_email", `${values.email}`);
+        const token = getCookie("accessToken");
 
         try {
             const res = await MakeApiCall({
-                apiUrl: RESET_PASSWORD,
-                body: { ...values },
-                ...MethodsStructure.patchMethod(),
+                apiUrl: CHANGE_PASSWORD,
+                body: values,
+                ...MethodsStructure.patchMethod({ Authorization: `${token}` }),
             });
 
-            console.log(res);
+            // console.log(res);
 
             if (res?.status === 200) {
                 toast.success(res.message);
-                console.log(res);
-                router.push(CHANGE_PASSWORD_VERIFICATION_PATH);
+                // console.log(res);
+                router.push(MY_ACCOUNT_PATH);
             }
         } catch (error) {
             toast.error(error?.message);
@@ -75,29 +76,29 @@ const ForgotPassword = ({ title, description }) => {
                         </h3>
                     </div>
 
-                    <Form.Item
-                        name="email"
-                        label={<LabelText>Enter your e-mail</LabelText>}
-                        rules={[
-                            {
-                                type: "email",
-                                message: "The input is not valid E-mail!",
-                            },
-                            {
-                                required: true,
-                                message: "Please input your e-mail!",
-                            },
-                        ]}
-                        className="w-full text-sm font-medium text-neutral-300 m-0"
-                    >
-                        <Input
-                            autoComplete="off"
-                            placeholder="abc@xyz.us"
-                            className="w-full rounded-sm"
-                        />
-                    </Form.Item>
-
                     <div className="flex flex-col gap-6">
+                        <Form.Item
+                            label={<LabelText>Old password</LabelText>}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input your old password!",
+                                },
+                                {
+                                    min: 8,
+                                    message:
+                                        "Password must be at least 8 characters long.",
+                                },
+                            ]}
+                            name="oldPassword"
+                            className="mb-0"
+                        >
+                            <Input.Password
+                                className="py-3 rounded-sm"
+                                placeholder="Min. 8 characters"
+                            />
+                        </Form.Item>
+
                         <Form.Item
                             label={<LabelText>New password</LabelText>}
                             rules={[
@@ -166,14 +167,13 @@ const ForgotPassword = ({ title, description }) => {
                                 htmlType="submit"
                                 className="w-full bg-brand-blue-500 text-base font-semibold leading-6 rounded-full p-2 h-[52px]"
                             >
-                                Send Verification Code
+                                Change Password Confirm
                             </Button>
                         </Form.Item>
                     </div>
                 </Form>
             </div>
-            <div id="change-mobile-number-captcha" />
         </div>
     );
 };
-export default ForgotPassword;
+export default ChangePassword;
