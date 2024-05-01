@@ -44,7 +44,7 @@ const MyAddressSection = ({ data }) => {
     }, [data]);
 
     const handleActiveAddress = (data) => {
-        const defaults = data.find((item) => item.isDefault);
+        const defaults = data?.find((item) => item.isDefault);
         if (defaults) {
             setValue(defaults._id);
         } else {
@@ -134,7 +134,7 @@ const MyAddressSection = ({ data }) => {
                 />
             </div>
 
-            {addressList.length > 0 ? (
+            {addressList?.length > 0 ? (
                 <Radio.Group
                     onChange={onChange}
                     value={value}

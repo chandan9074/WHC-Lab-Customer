@@ -77,7 +77,8 @@ const SignInForm = () => {
             toast.success(responseData.message);
             router.push("/");
         } catch (error) {
-            console.log("error", error.message);
+            // console.log("error", error.message);
+            toast.error(error?.message);
         } finally {
             setIsLoading(false);
         }

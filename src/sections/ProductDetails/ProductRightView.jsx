@@ -8,56 +8,44 @@ import Icons from "../../../public/assets/Icons";
 import AddToCartSuccession from "./AddToCartSuccession";
 import Link from "next/link";
 import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
-import { getCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "react-toastify";
+import { useWishlistContext } from "@/contexts/WishlistContext";
 
 const ProductRightView = ({
     forModal = false,
     data,
     setOpenQuickViewModal,
 }) => {
-    const [selectedColor, setSelectedColor] = useState(
-        Object.keys(data.variants)[0]
-    );
     const [selectedSize, setSelectedSize] = useState(0);
     const [quantity, setQuantity] = useState(1);
     const [maxLimit, setMaxLimit] = useState(0);
     const [loading, setLoading] = useState(false);
     const { getUpdateCartList, createCartItem } = useCart();
     const [openSuccessionModal, setOpenSuccessionModal] = useState(false);
-    const [wishlistData, setWishlistData] = useState([]);
-    const [wishlistIds, setWishlistIds] = useState([]);
     const router = useRouter();
+    const {
+        createProductWishlist,
+        deleteWishlist,
+        getProductWishlist,
+        checkProductInWishList,
+    } = useWishlistContext();
 
     const token = getCookie("accessToken");
 
-    // const { createProductWishlist, deleteWishlist } =
-    //     useContext(wishlistContext);
-
-    // const getWishlist = useCallback(async () => {
-    //     const wishlists = await WishlistServices.getWishlist(token);
-    //     setWishlistData(wishlists?.body?.docs);
-    //     const ids = wishlists?.body?.docs?.map((wishes) => wishes.productId);
-    //     setWishlistIds(ids);
-    // }, [token]);
-
-    // useEffect(() => {
-    //     getWishlist();
-    //     handelInitialMaxLimit(selectedColor);
-    // }, [getWishlist]);
-
-    // const handlewishlistClick = async () => {
-    //     if (wishlistIds?.includes(data._id)) {
-    //         //delete
-    //         await deleteWishlist(data._id);
-    //         await getWishlist(); // Call getWishlist after delete
-    //     } else {
-    //         //create
-    //         await createProductWishlist(data._id);
-    //         await getWishlist(); // Call getWishlist after create
-    //     }
-    // };
+    const handlewishlistClick = async () => {
+        if (checkProductInWishList(data._id)) {
+            //delete
+            await deleteWishlist(data._id);
+            await getProductWishlist(); // Call getWishlist after delete
+        } else {
+            //create
+            const stockId = data?.variants[0]?.stockId;
+            await createProductWishlist(data._id, stockId);
+            await getProductWishlist(); // Call getWishlist after create
+        }
+    };
 
     const handleCurrentCount = (val) => {
         setQuantity(val);
@@ -144,21 +132,20 @@ const ProductRightView = ({
                 </div>
 
                 <div className="flex gap-x-3">
-                    {/* {hasCookie("accessToken") && ( */}
-                    <Buttons.IconButton
-                        alt="favourite-icon"
-                        height={1000}
-                        width={1000}
-                        icon={
-                            // wishlistIds?.includes(data._id)
-                            //     ? Icons.wishlist_filled
-                            // :
-                            Icons.wishlistIcon
-                        }
-                        className="w-6 h-6"
-                        // onClick={handlewishlistClick}
-                    />
-                    {/* )} */}
+                    {hasCookie("accessToken") && (
+                        <Buttons.IconButton
+                            alt="favourite-icon"
+                            height={1000}
+                            width={1000}
+                            icon={
+                                checkProductInWishList(data._id)
+                                    ? Icons.wishlist_active
+                                    : Icons.wishlist_inactive
+                            }
+                            className="w-6 h-6"
+                            onClick={handlewishlistClick}
+                        />
+                    )}
 
                     {!forModal && (
                         <Buttons.IconButton

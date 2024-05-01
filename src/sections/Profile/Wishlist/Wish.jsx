@@ -6,41 +6,32 @@ import Icons from "../../../../public/assets/Icons";
 // import wishlistContext from "@/contexts/WishlistContext";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 // import { useRouter } from "next/navigation";
-// import { useCart } from "@/contexts/CartContext";
-// import { toast } from "react-toastify";
-// import { getCookie, hasCookie } from "cookies-next";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "react-toastify";
+import { getCookie, hasCookie } from "cookies-next";
 
 const { Text } = Typography;
 
-const Wish = ({
-    image,
-    name,
-    price,
-    inStock,
-    id,
-    handleGetWishList,
-    setLoading,
-}) => {
-    // const { deleteWishlist } = useContext(wishlistContext);
-    // const { getUpdateCartList, createCartItem } = useCart();
-    // const token = getCookie("accessToken");
+const Wish = ({ image, name, price, inStock, id, handleDelete }) => {
+    const { getUpdateCartList, createCartItem } = useCart();
+    const token = getCookie("accessToken");
 
-    const handleDelete = async (id) => {
-        // setLoading(true);
-        // const res = await deleteWishlist(id);
-        // if (res?.status === 200) {
-        //     handleGetWishList();
-        //     toast.success(res?.body?.message);
-        // }
-    };
+    // const handleDelete = async (id) => {
+    //     // setLoading(true);
+    //     // const res = await deleteWishlist(id);
+    //     // if (res?.status === 200) {
+    //     //     handleGetWishList();
+    //     //     toast.success(res?.body?.message);
+    //     // }
+    // };
 
     const handleAddCartItem = async () => {
-        // const res = await createCartItem(id, 1, token);
-        // if (res?.status === 200) {
-        //     toast.success(res?.body?.message);
-        //     handleGetWishList();
-        //     getUpdateCartList();
-        // }
+        const res = await createCartItem(id, 1, token);
+        if (res?.status === 200) {
+            toast.success(res?.message);
+            handleDelete(id);
+            getUpdateCartList();
+        }
     };
 
     return (
@@ -48,8 +39,8 @@ const Wish = ({
             <div className="flex flex-row items-center gap-4">
                 <Image
                     alt={name}
-                    // src={`${GET_IMAGE_RENDER}?key=${image}`}
-                    src={image}
+                    src={`${GET_IMAGE_RENDER}?key=${image}`}
+                    // src={image}
                     width={80}
                     height={80}
                     className="rounded-sm w-[80px] h-[80px]"

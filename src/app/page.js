@@ -11,22 +11,19 @@ import ProductContainer from "@/sections/Home/Product/ProductContainer";
 import TestimonialSection from "@/sections/Home/TestimonialSection/TestimonialSection";
 import HomeService from "@/services/HomeService";
 import ProductService from "@/services/productsService";
-import { getCookie } from "cookies-next";
-import {cookies} from "next/headers"
 
 export default async function Home() {
 
-    const token = getCookie("accessToken",{cookies});
+    const getTestimonials = HomeService.getTestimonials();
 
-    const getTestimonials = HomeService.getTestimonials(token);
-
-    const getMainCategories = HomeService.getMainCategories(token);
+    const getMainCategories = HomeService.getMainCategories();
 
     const getNewProducts = ProductService.getProducts();
 
     const getFeaturedProducts = ProductService.getProducts({isFeatured:true});
 
     const [testimonialsData,mainCategoriesData,featuredProducts,newProducts] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts,getNewProducts]);
+
 
     return (
         <Layouts.Primary>

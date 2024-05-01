@@ -1,6 +1,8 @@
 "use client";
 import { Select } from "antd";
 import React from "react";
+import Icons from "../../../public/assets/Icons";
+import Image from "next/image";
 
 const CountryCategorySelection = () => {
     const handleChange = (value) => {
@@ -9,6 +11,15 @@ const CountryCategorySelection = () => {
     return (
         <div className="space-y-4 md:space-y-9 flex flex-col">
             <Select
+                className="h-[52px]"
+                suffixIcon={
+                    <Image
+                        src={Icons.caretDown}
+                        width={16}
+                        height={16}
+                        alt="caretDown"
+                    />
+                }
                 defaultValue="Select Category"
                 onChange={handleChange}
                 options={[
@@ -33,6 +44,15 @@ const CountryCategorySelection = () => {
             />
 
             <Select
+                className="h-[52px]"
+                suffixIcon={
+                    <Image
+                        src={Icons.caretDown}
+                        width={16}
+                        height={16}
+                        alt="caretDown"
+                    />
+                }
                 defaultValue="Select Country"
                 onChange={handleChange}
                 options={[

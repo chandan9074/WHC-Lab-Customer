@@ -148,6 +148,10 @@ const MyAccountSection = ({ data }) => {
         setIsOpen(false);
     };
 
+    useEffect(() => {
+        setCookie("userInfo", `${JSON.stringify(data)}`);
+    }, [data]);
+
     return (
         <div className="py-12 flex flex-col gap-y-10">
             <div className="w-[296px] lg:w-[400px] flex flex-col items-center">
@@ -246,20 +250,22 @@ const MyAccountSection = ({ data }) => {
                     // isEdit={isEdit}
                     setIsEdit={setIsEdit}
                 />
-                <Form.Item className="pt-4">
-                    <Buttons.OutlinedIconWithLabel
-                        // className="h-[52px] rounded-full mt-4"
-                        width="w-full"
-                        label="Change Password"
-                        leftIcon={Icons.password}
-                        alt="lock-icon"
-                        align="left"
-                        // width={24}
-                        // height={24}
-                        onClick={() => router.push(CHANGE_PASSWORD_PATH)}
-                    />
-                </Form.Item>
+                {/* <Form.Item className="pt-4"> */}
+                {/* </Form.Item> */}
             </Form>
+            <Buttons.OutlinedIconWithLabel
+                // className="h-[52px] rounded-full mt-4"
+                width="w-full"
+                label="Change Password"
+                leftIcon={Icons.password}
+                alt="lock-icon"
+                align="left"
+                // width={24}
+                // height={24}
+                onClick={() => {
+                    router.push(CHANGE_PASSWORD_PATH);
+                }}
+            />
             {/* <Buttons.IconWithLabel
                 className="w-full h-12 border border-neutral-700 rounded-sm mt-4"
                 label="Change Password"

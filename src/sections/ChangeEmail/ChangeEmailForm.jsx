@@ -7,20 +7,38 @@ import Images from "../../../public/assets/Images";
 import Image from "next/image";
 import { LoadingOutlined } from "@ant-design/icons";
 import { CHANGE_EMAIL_VERIFICATION_PATH } from "@/helpers/slug";
+import UserService from "@/services/UserService/UserService";
+import { getCookie, setCookie } from "cookies-next";
+import { toast } from "react-toastify";
 
 const { Title } = Typography;
 
 const ChangeEmailForm = () => {
     const [loading, setLoading] = useState(false);
+    const token = getCookie("accessToken");
 
     const router = useRouter();
 
-    const onFinish = (values) => {
-        router.push(CHANGE_EMAIL_VERIFICATION_PATH);
+    const onFinish = async (values) => {
+        try {
+            setLoading(true);
+            delete values.confirmEmail;
+            const res = await UserService.changeEmail(values, token);
+
+            if (res?.status === 200) {
+                toast.success(res?.message);
+                router.push(CHANGE_EMAIL_VERIFICATION_PATH);
+            }
+        } catch (e) {
+            toast.error(e?.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <div className="w-full flex flex-col items-center justify-center md:pb-[120px] pb-12 pt-6 px-4 md:px-0">
+            <Spin fullscreen spinning={loading} />
             <div className="w-[328px] sm:w-[600px] flex flex-col justify-center gap-6 md:gap-9 rounded-lg border border-black border-opacity-10 md:p-12 p-6 bg-white">
                 <div className="flex w-full justify-center items-center">
                     <Image
@@ -70,7 +88,7 @@ const ChangeEmailForm = () => {
                         <Form.Item
                             className="m-0"
                             label={<LabelText>Enter New email</LabelText>}
-                            name="New email"
+                            name="email"
                             rules={[
                                 {
                                     required: true,
@@ -87,12 +105,27 @@ const ChangeEmailForm = () => {
                         <Form.Item
                             className="m-0"
                             label={<LabelText>Confirm new email</LabelText>}
-                            name="Confirm new email"
+                            name="confirmEmail"
                             rules={[
                                 {
                                     required: true,
                                     message: "Confirm new email is required!",
                                 },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (
+                                            !value ||
+                                            getFieldValue("email") === value
+                                        ) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject(
+                                            new Error(
+                                                "The new email that you entered do not match!"
+                                            )
+                                        );
+                                    },
+                                }),
                             ]}
                         >
                             <Input

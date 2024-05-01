@@ -88,7 +88,11 @@ const ProductListContainer = ({ data, productData, selectedTab }) => {
                 />
             </div>
 
-            <ProductDisplay selectedTab={selectedTab} data={productList} />
+            <ProductDisplay
+                selectedTab={selectedTab}
+                data={productList}
+                productData={productData}
+            />
         </div>
     );
 };
