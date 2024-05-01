@@ -15,9 +15,11 @@ const IconWithLabel = ({
     textHoverColor = "group-hover:text-white",
     width = "sm:w-auto w-full",
     border,
+    ...rest
 }) => {
     return (
         <button
+            {...rest}
             className={`${className} group py-2 md:py-2.5 lg:py-3.5 px-4 md:px-5 lg:px-6 rounded-full ${bgColor} ${bgHoverColor} ${
                 border && border
             } ${width} duration-200 flex items-center gap-2.5 justify-center`}

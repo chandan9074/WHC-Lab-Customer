@@ -1,7 +1,10 @@
+"use client";
 import Buttons from "@/components/Buttons";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const HeroLeftSide = () => {
+    const router = useRouter();
     return (
         <div className="my-auto">
             <h4 className="lg:text-base md:text-sm text-xs font-semibold text-brand-blue-800">
@@ -17,7 +20,10 @@ const HeroLeftSide = () => {
                 next-generation methods to grow yeast, bacteria and to perform
                 analysis on beer, cider, spirits, water and wine.
             </p>
-            <Buttons.IconWithLabel label={"EXPLORE OUR STRAINS"} />
+            <Buttons.IconWithLabel
+                label={"EXPLORE OUR STRAINS"}
+                onClick={() => router.push("/store")}
+            />
         </div>
     );
 };

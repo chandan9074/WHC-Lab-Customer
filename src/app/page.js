@@ -23,7 +23,7 @@ export default async function Home() {
     const getFeaturedProducts = ProductService.getProducts({isFeatured:true});
 
     const [testimonialsData,mainCategoriesData,featuredProducts,newProducts] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts,getNewProducts]);
-
+console.log("products-------------",newProducts);
 
     return (
         <Layouts.Primary>
