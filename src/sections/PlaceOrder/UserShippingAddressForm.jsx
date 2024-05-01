@@ -1,5 +1,5 @@
 "use client";
-import { Radio } from "antd";
+import { Radio, Modal } from "antd";
 import { useEffect, useState } from "react";
 // import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
@@ -8,12 +8,16 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 // import Link from "next/link";
 import Buttons from "@/components/Buttons";
+import AddressModal from "../MyAddressSection/AddressModal";
+import { useUserContext } from "@/contexts/UserContext";
 
 const UserShippingAddressForm = ({ data, setAddress }) => {
     // const [isModalOpen, setIsModalOpen] = useState(false);
     // const [isDetailsOpen, setIsDetailsOpen] = useState(null);
     // const [isNewAddress, setIsNewAddress] = useState(false);
     const [value, setValue] = useState();
+    const [createNewAddressModal, setCreateNewAddressModal] = useState(false);
+    const { locations } = useUserContext();
     // const [isUpdateData, setIsUpdateData] = useState(null);
     // const [openDeleteModal, setOpenDeleteModal] = useState(null);
     const router = useRouter();
@@ -48,7 +52,12 @@ const UserShippingAddressForm = ({ data, setAddress }) => {
     };
 
     const handleAddressPageNavigation = () => {
-        router.push("/profile/my-address");
+        // router.push("/profile/my-address");
+        setCreateNewAddressModal(true);
+    };
+
+    const handleOk = () => {
+        setCreateNewAddressModal(false);
     };
 
     return (
@@ -159,6 +168,33 @@ const UserShippingAddressForm = ({ data, setAddress }) => {
                         }
                     />
                 </div>
+            )}
+            {createNewAddressModal && (
+                <Modal
+                    className="sm:w-[408px]"
+                    title={
+                        <p className="w-full flex justify-center text-neutral-700 border-b border-[#8790AB14] border-opacity-[8%] pb-5">
+                            "Create New Address"
+                        </p>
+                    }
+                    footer={false}
+                    centered
+                    open={createNewAddressModal}
+                    onOk={handleOk}
+                    onCancel={handleOk}
+                >
+                    <AddressModal
+                        onOk={handleOk}
+                        onCancel={handleOk}
+                        data={{}}
+                        addressList={data}
+                        modalInnerTitle={"Create new address"}
+                        buttonTitle={"Create"}
+                        countryList={locations}
+                        // handleDetailsModalOpen={handleDetailsModalOpen}
+                        // getUserAddress={getUserData}
+                    />
+                </Modal>
             )}
         </div>
     );

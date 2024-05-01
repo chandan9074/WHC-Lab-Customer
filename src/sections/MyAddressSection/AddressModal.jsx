@@ -20,17 +20,11 @@ const AddressModal = ({
     buttonTitle,
     handleDetailsModalOpen,
     getUserAddress,
+    countryList,
 }) => {
     const router = useRouter();
     const [selectedCountry, setSelectedCountry] = useState(null);
-    const [countryData, setCountryData] = useState(
-        countriesData.map((item) => {
-            return {
-                value: item.country,
-                label: item.country,
-            };
-        })
-    );
+    const [countryData, setCountryData] = useState(countryList);
     const [selectedState, setSelectedState] = useState([]);
     const token = getCookie("accessToken");
 
@@ -67,7 +61,7 @@ const AddressModal = ({
             });
 
             toast.success(res?.message);
-            getUserAddress();
+            getUserAddress && getUserAddress();
             onOk();
         } else {
             // For update
@@ -174,7 +168,7 @@ const AddressModal = ({
                                 },
                             ]}
                         >
-                            <Select
+                            {/* <Select
                                 // defaultValue={data ? data.state : ""}
                                 placeholder="Select State/District"
                                 className="country-state-select   bg-neutral-10"
@@ -185,6 +179,10 @@ const AddressModal = ({
                                 options={selectedState}
                                 // onChange={handleStateChange}
                                 disabled={!selectedCountry}
+                            /> */}
+                            <Input
+                                className="py-3 rounded-sm border border-neutral-40 bg-neutral-10"
+                                // defaultValue={data ? data.city : ""}
                             />
                         </Form.Item>
 
