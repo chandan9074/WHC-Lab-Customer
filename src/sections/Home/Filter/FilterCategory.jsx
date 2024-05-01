@@ -51,18 +51,20 @@ const FilterCategory = ({ data, setSearchQuery, searchQuery, name }) => {
 
     return (
         <div className="flex items-center">
-            <Tree
-                checkable
-                defaultExpandAll
-                // defaultCheckedKeys={data.map((name) =>
-                //     name._id.toString()
-                // )}
-                switcherIcon={<DownOutlined />}
-                onCheck={handleCheck}
-                checkedKeys={searchQuery["tag"]?.split("&")}
-            >
-                {renderTreeNodes(data)}
-            </Tree>
+            {data.length > 0 && (
+                <Tree
+                    checkable
+                    defaultExpandAll
+                    // defaultCheckedKeys={data.map((name) =>
+                    //     name._id.toString()
+                    // )}
+                    switcherIcon={<DownOutlined />}
+                    onCheck={handleCheck}
+                    checkedKeys={searchQuery["tag"]?.split("&")}
+                >
+                    {renderTreeNodes(data)}
+                </Tree>
+            )}
         </div>
     );
 };
