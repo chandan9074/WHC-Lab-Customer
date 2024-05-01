@@ -112,6 +112,7 @@ export function AuthProvider({ children }) {
         console.log("logout");
         deleteCookie("userInfo");
         deleteCookie("accessToken");
+        deleteCookie("selected_location");
         setUserInfo(null);
         setIsLogin(false);
         signOut(socialAuth);
