@@ -174,7 +174,7 @@ const UserShippingAddressForm = ({ data, setAddress }) => {
                     className="sm:w-[408px]"
                     title={
                         <p className="w-full flex justify-center text-neutral-700 border-b border-[#8790AB14] border-opacity-[8%] pb-5">
-                            "Create New Address"
+                            Create New Address
                         </p>
                     }
                     footer={false}

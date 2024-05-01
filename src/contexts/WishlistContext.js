@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import MakeApiCall from "@/services/MakeApiCall";
@@ -11,7 +11,7 @@ export function WishlistProvider({ children }) {
     const token = getCookie("accessToken");
     const [wishlistIds, setWishlistIds] = useState([]);
 
-    const getProductWishlist = async () => {
+    const getProductWishlist = useCallback(async () => {
         try {
             const res = await MakeApiCall({
                 apiUrl: WISHLISTS_URL,
@@ -26,7 +26,7 @@ export function WishlistProvider({ children }) {
         } catch (e) {
             toast.error(e?.message);
         }
-    };
+    }, [token]);
 
     const createProductWishlist = async (productId, stockId) => {
         try {
@@ -69,7 +69,7 @@ export function WishlistProvider({ children }) {
 
     useEffect(() => {
         token && getProductWishlist();
-    }, [token]);
+    }, [getProductWishlist,token]);
 
     const values = {
         wishlistIds,
