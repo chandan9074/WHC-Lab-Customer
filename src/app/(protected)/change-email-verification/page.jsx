@@ -5,7 +5,7 @@ import VerificationForm from "@/sections/Common/VerificationForm";
 import UserService from "@/services/UserService/UserService";
 import { Spin } from "antd";
 import { getCookie } from "cookies-next";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, use, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { MY_ACCOUNT_PATH } from "@/helpers/slug";
@@ -14,7 +14,7 @@ const ChangePhone = () => {
     const [loading, setLoading] = useState(false);
     const token = getCookie("accessToken");
     const userInfo = getCookie("userInfo");
-    const _userInfo = JSON.parse(userInfo);
+    const _userInfo = userInfo && JSON.parse(userInfo);
     const router = useRouter();
 
     const handleUpdate = async (code) => {
