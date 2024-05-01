@@ -9,10 +9,12 @@ const OutlinedIconWithLabel = ({
     alt,
     label,
     width = "sm:w-auto w-full",
+    ...rest
 }) => {
     return (
         <button
             className={`py-3.5 px-6 rounded-full bg-transparent flex items-center gap-2.5 justify-center border border-brand-blue-500 ${width}`}
+            {...rest}
         >
             {align === "left" && (
                 <Image

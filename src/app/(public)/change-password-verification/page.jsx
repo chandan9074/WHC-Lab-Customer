@@ -8,28 +8,28 @@ import { getCookie } from "cookies-next";
 import React, { Suspense, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { MY_ACCOUNT_PATH } from "@/helpers/slug";
+import { LOGIN_PATH } from "@/helpers/slug";
 
-const ChangePhone = () => {
+const ChangePassword = () => {
     const [loading, setLoading] = useState(false);
-    const token = getCookie("accessToken");
-    const userInfo = getCookie("userInfo");
-    const _userInfo = JSON.parse(userInfo);
+    const email = getCookie("temp_email");
+
     const router = useRouter();
 
     const handleUpdate = async (code) => {
         try {
             setLoading(true);
             const data = {
-                action: "change_email",
+                action: "reset_password",
                 otp: parseInt(code),
-                email: _userInfo.primaryEmail,
+                email,
             };
-            const response = await UserService.verifyOTP(data, token);
+
+            const response = await UserService.verifyOTP(data);
 
             if (response?.status === 200) {
                 toast.success(response?.message);
-                router.push(MY_ACCOUNT_PATH);
+                router.push(LOGIN_PATH);
             }
         } catch (e) {
             toast.error(e?.message);
@@ -54,4 +54,4 @@ const ChangePhone = () => {
     );
 };
 
-export default ChangePhone;
+export default ChangePassword;

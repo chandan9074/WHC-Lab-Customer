@@ -6,6 +6,8 @@ import {
     GET_USER_ADDRESS,
     GET_USER_PROFILE,
     CHANGE_PASSWORD,
+    CHANGE_EMAIL,
+    VERIFY_OTP,
 } from "@/helpers/apiURLS";
 
 export default class UserService {
@@ -91,6 +93,28 @@ export default class UserService {
             body: { ...data },
             ...MethodsStructure.patchMethod({ Authorization: `${token}` }),
         });
+        return res;
+    }
+
+    static async changeEmail(data, token) {
+        const res = await MakeApiCall({
+            apiUrl: CHANGE_EMAIL,
+            body: { ...data },
+            // query: { id },
+            // headers: { Authorization: `Bearer ${token}` },
+            ...MethodsStructure.patchMethod({ Authorization: `${token}` }),
+        });
+        return res;
+    }
+
+    // data like = {action: "change_email", otp:123456, email:"abc@email.com"}
+    static async verifyOTP(data, token) {
+        const res = await MakeApiCall({
+            apiUrl: VERIFY_OTP,
+            body: { ...data },
+            ...MethodsStructure.postMethod({ Authorization: `${token}` }),
+        });
+
         return res;
     }
 }
