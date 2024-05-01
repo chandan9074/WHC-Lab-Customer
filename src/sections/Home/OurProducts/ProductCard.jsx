@@ -3,6 +3,7 @@ import React from "react";
 import Images from "../../../../public/assets/Images";
 import Buttons from "@/components/Buttons";
 import Icons from "../../../../public/assets/Icons";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 const ProductCard = ({ index, data }) => {
     return (
@@ -21,14 +22,14 @@ const ProductCard = ({ index, data }) => {
             </div>
             <div className="relative z-20 p-4 md:p-5 lg:p-6 xl:p-[30px]">
                 <Image
-                    src={Images.our_product_image}
+                    src={`${GET_IMAGE_RENDER}?key=${data.featuredImage}`}
                     alt="product_image"
                     width={1000}
                     height={1000}
-                    className="w-full"
+                    className="w-full h-[218px] object-cover rounded-[9.81px]"
                 />
-                <p className="mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-[30px] text-lg md:text-xl lg:text-2xl xl:text-[32px] text-white left-7 sm:leading-8 md:leading-9 lg:leading-[44px] tracking-[0.285px]">
-                    Blitz Lager-Fast Lager Yeast-Fresh Yeast Pouch
+                <p className="h-24 line-clamp-2 mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-[30px] text-lg md:text-xl lg:text-2xl xl:text-[32px] text-white left-7 sm:leading-8 md:leading-9 lg:leading-[44px] tracking-[0.285px]">
+                    {data.name}
                 </p>
                 <div className="mt-6 flex justify-end">
                     <Buttons.IconWithLabel

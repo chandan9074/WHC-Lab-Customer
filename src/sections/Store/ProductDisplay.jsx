@@ -12,7 +12,7 @@ const ProductDisplay = ({ data, filterData, selectedTab, productData }) => {
     console.log(wishlistIds);
 
     return (
-        <div>
+        <div className="w-full">
             <ProductHeader
                 selectedTab={selectedTab}
                 dataLength={data?.length}

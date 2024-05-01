@@ -12,13 +12,20 @@ const StoreContainer = dynamic(
 
 async function Store() {
     const getProducts = ProductService.getProducts();
+    const getCategories = ProductService.getCategories();
 
-    const [productData] = await Promise.all([getProducts]);
+    const [productData, categoryData] = await Promise.all([
+        getProducts,
+        getCategories,
+    ]);
 
     return (
         <Suspense fallback={null}>
             <Layouts.Primary>
-                <StoreContainer productData={productData?.docs} />
+                <StoreContainer
+                    productData={productData?.docs}
+                    categoryData={categoryData?.docs}
+                />
             </Layouts.Primary>
         </Suspense>
     );
