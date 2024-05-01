@@ -60,3 +60,7 @@ export const TAGS_URL = `${BASEURL}/tags`;
 
 // verify otp
 export const VERIFY_OTP = `${BASEURL}/users/verify-otp`;
+
+// distributors
+
+export const DISTRIBUTORS_URL = `${BASEURL}/distributors`;

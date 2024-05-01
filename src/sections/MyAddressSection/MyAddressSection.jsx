@@ -15,6 +15,7 @@ import Image from "next/image";
 import MakeApiCall from "@/services/MakeApiCall";
 import { MY_ADDRESS_URL } from "@/helpers/apiURLS";
 import { toast } from "react-toastify";
+import { useUserContext } from "@/contexts/UserContext";
 
 const MyAddressSection = ({ data }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,6 +27,7 @@ const MyAddressSection = ({ data }) => {
     const router = useRouter();
     const token = getCookie("accessToken");
     const [addressList, setAddressList] = useState([]);
+    const { locations } = useUserContext();
 
     const getUserData = async () => {
         const userData = await MakeApiCall({
@@ -301,6 +303,7 @@ const MyAddressSection = ({ data }) => {
                     buttonTitle={isUpdateData ? "Update" : "Create"}
                     handleDetailsModalOpen={handleDetailsModalOpen}
                     getUserAddress={getUserData}
+                    countryList={locations}
                 />
             </Modal>
         </div>

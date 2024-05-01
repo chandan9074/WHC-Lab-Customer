@@ -7,7 +7,7 @@ import { hasCookie, setCookie } from "cookies-next";
 import { useUserContext } from "@/contexts/UserContext";
 import Image from "next/image";
 
-function CountrySelectionModal() {
+function CountrySelectionModal({ handleLocation }) {
     const [selectLocation, setSelectLocation] = useState();
     const { locations } = useUserContext();
     const selected_locations = hasCookie("selected_location");
@@ -19,6 +19,7 @@ function CountrySelectionModal() {
 
     const handleSelectLocation = () => {
         setCookie("selected_location", JSON.stringify(selectLocation));
+        handleLocation(selectLocation);
         setSelected(false);
     };
 

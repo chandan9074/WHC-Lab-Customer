@@ -1,13 +1,11 @@
 import { GET_PRODUCTS } from "@/helpers/apiURLS";
 
-
 async function getProducts(query) {
     const url = query
         ? `${GET_PRODUCTS}?${new URLSearchParams({
-            ...query,
-        })}`
+              ...query,
+          })}`
         : `${GET_PRODUCTS}`;
-
 
     const res = await fetch(url, {
         headers: {
@@ -15,15 +13,11 @@ async function getProducts(query) {
         },
     });
 
-    return res.json()
+    return res.json();
 }
-
-
-
 
 const ProductService = {
-    getProducts
-}
-
+    getProducts,
+};
 
 export default ProductService;

@@ -7,9 +7,7 @@ import ProductService from "@/services/productsService";
 
 const ProductListContainer = ({ data, productData, selectedTab }) => {
     const searchParams = useSearchParams();
-    const [productList, setProductList] = useState(
-        searchParams.toString() ? [] : productData
-    );
+    const [productList, setProductList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [firstRender, setFirstRender] = useState(false);
     const [searchQuery, setSearchQuery] = useState({
@@ -21,6 +19,10 @@ const ProductListContainer = ({ data, productData, selectedTab }) => {
     });
     const pathname = usePathname();
     const router = useRouter();
+
+    useEffect(() => {
+        setProductList(searchParams.toString() ? [] : productData);
+    }, [productData]);
 
     const handleSearchProduct = useCallback(async () => {
         setIsLoading(true);
