@@ -12,11 +12,57 @@ import { toast } from "react-toastify";
 import { useAuthContext } from "@/contexts/AuthContext";
 import MakeApiCall from "@/services/MakeApiCall";
 import { useRouter } from "next/navigation";
+import Icons from "../../../public/assets/Icons";
 
 const SignInForm = () => {
     const { handlePageTransition } = useAuthContext();
     const [isLoading, setIsLoading] = useState(false);
+    const [isSocialLoading, setIsSocialLoading] = useState({
+        google: false,
+        facebook: false,
+    });
+    const { googleSingIn, facebookSignIn } = useAuthContext();
     const router = useRouter();
+
+    const loginWithSocialMedia = [
+        {
+            title: "google",
+            icon: Icons.googleLogo,
+            isLoading: isSocialLoading.google,
+        },
+        // { title: "apple", icon: Icons.apple },
+        {
+            title: "facebook",
+            icon: Icons.facebookLogo,
+            isLoading: isSocialLoading.facebook,
+        },
+    ];
+
+    const handleGoogleSignIn = async () => {
+        try {
+            setIsSocialLoading({ ...isSocialLoading, google: true });
+            await googleSingIn();
+            const token = getCookie("accessToken");
+            getUpdateCartList(token);
+            setIsSocialLoading({ ...isSocialLoading, google: false });
+        } catch (e) {
+            setIsSocialLoading({ ...isSocialLoading, google: false });
+            console.log(e);
+        }
+    };
+
+    const handleFaceBookSignIn = async () => {
+        try {
+            setIsSocialLoading({ ...isSocialLoading, facebook: true });
+            await facebookSignIn();
+            const token = getCookie("accessToken");
+            getUpdateCartList(token);
+            setIsSocialLoading({ ...isSocialLoading, facebook: false });
+        } catch (e) {
+            setIsSocialLoading({ ...isSocialLoading, facebook: false });
+            console.log(e);
+        }
+    };
 
     const onFinish = async (values) => {
         delete values.remember;
@@ -163,7 +209,7 @@ const SignInForm = () => {
 
                         <Divider className="m-0 text-neutral-300">or</Divider>
 
-                        {/* <div className="flex flex-row gap-4 justify-between w-full">
+                        <div className="flex flex-row gap-4 justify-between w-full">
                             {loginWithSocialMedia.map((ele, id) => {
                                 const handleSocialMediaLogin = () => {
                                     if (ele.title === "google") {
@@ -192,7 +238,7 @@ const SignInForm = () => {
                                     </button>
                                 );
                             })}
-                        </div> */}
+                        </div>
                     </div>
 
                     <h4 className="text-sm font-medium text-neutral-400 text-center leading-[21px]">
