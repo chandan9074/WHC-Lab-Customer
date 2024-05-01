@@ -32,6 +32,20 @@ const ProductRightView = ({
         checkProductInWishList,
     } = useWishlistContext();
 
+    console.log(data, "data rproidf");
+
+    useEffect(() => {
+        const locationId = JSON.parse(getCookie("selected_location"));
+        if (locationId) {
+            const stock = data?.variants.find(
+                (item) => item.location === locationId
+            );
+            if (stock) {
+                setMaxLimit(stock?.quantity);
+            }
+        }
+    }, [data]);
+
     const token = getCookie("accessToken");
 
     const handlewishlistClick = async () => {
@@ -93,11 +107,11 @@ const ProductRightView = ({
         setMaxLimit(item?.quantity);
     };
 
-    useEffect(() => {
-        if (maxLimit < quantity) {
-            setQuantity((ps) => 1);
-        }
-    }, [maxLimit, quantity]);
+    // useEffect(() => {
+    //     if ( < quantity) {
+    //         setQuantity((ps) => 1);
+    //     }
+    // }, [quantity]);
 
     return (
         <div className={`${forModal ? "" : "w-[486px]"} px-6`}>
