@@ -6,24 +6,27 @@ import { Modal, Spin } from "antd";
 // import QuickViewModalContent from "@/sections/ProductDetails/QuickViewModalContent";
 import Link from "next/link";
 // import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
-// import BannerService from "@/services/bannerService/BannerService";
-// import { hasCookie } from "cookies-next";
+import { hasCookie } from "cookies-next";
 // import wishlistContext from "@/contexts/WishlistContext";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 // import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import Images from "../../../public/assets/Images";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
 import QuickViewModalContent from "@/sections/ProductDetails/QuickViewModalContent";
+import { useWishlistContext } from "@/contexts/WishlistContext";
 
 const ProductCard = ({ data, wishListIds }) => {
-    // const router = useRouter();
+    const router = useRouter();
     const [openModal, setOpenModal] = useState(false);
-    // const [isFavourite, setIsFavourite] = useState(false);
-    // const [loading, setLoading] = useState(false);
+    const {
+        createProductWishlist,
+        deleteWishlist,
+        checkProductInWishList,
+        getProductWishlist,
+    } = useWishlistContext();
 
-    // const { createProductWishlist, deleteWishlist } =
-    //     useContext(wishlistContext);
+    const [loading, setLoading] = useState(false);
 
     const handleOk = () => {
         setOpenModal(false);
@@ -32,32 +35,20 @@ const ProductCard = ({ data, wishListIds }) => {
         setOpenModal(false);
     };
 
-    // const handlewishlistClick = async () => {
-    //     // setIsFavourite(!isFavourite);
-    //     setLoading(true);
-    //     wishListIds?.includes(data._id)
-    //         ? //delete
-    //           await deleteWishlist(data._id)
-    //         : //create
-    //           await createProductWishlist(data._id);
-    //     setLoading(false);
-    //     router.refresh();
-    // };
+    const handlewishlistClick = async () => {
+        // setIsFavourite(!isFavourite);
 
-    // const fetchBanner = useCallback(async () => {
-    //     try {
-    //         const banner = await BannerService.getBannerImage(
-    //             data.featuredImage
-    //         );
-    //         setBannerImage(banner);
-    //     } catch (error) {
-    //         console.error("Error fetching banner:", error);
-    //     }
-    // }, [data]);
-
-    // useEffect(() => {
-    //     fetchBanner();
-    // }, [fetchBanner]);
+        const stockId = data?.variants[0]?.stockId;
+        setLoading(true);
+        checkProductInWishList(data._id)
+            ? //delete
+              await deleteWishlist(data._id)
+            : //create
+              await createProductWishlist(data._id, stockId);
+        setLoading(false);
+        getProductWishlist();
+        router.refresh();
+    };
 
     return (
         <div className="group w-full space-y-4">
@@ -66,35 +57,35 @@ const ProductCard = ({ data, wishListIds }) => {
                     <Image
                         alt="product-image"
                         src={`${GET_IMAGE_RENDER}?key=${data.featuredImage}`}
-                        // src={data.featuredImage}
                         className="w-full h-[214px] lg:h-[400px] object-cover group-hover:scale-110 duration-300"
                         width={1000}
                         height={1000}
                     />
                 </div>
 
-                {/* {hasCookie("accessToken") && ( */}
-                <div
-                    className={`absolute top-4 right-4 ${wishListIds?.includes(data._id) ? "block" : "hidden"
+                {hasCookie("accessToken") && (
+                    <div
+                        className={`absolute top-4 right-4 ${
+                            wishListIds?.includes(data._id) ? "block" : "hidden"
                         } md:group-hover:block  animate-fadeIn cursor-pointer`}
-                // onClick={handlewishlistClick}
-                >
-                    {/* {loading ? (
-                        <Spin spinning={loading} />
-                    ) : ( */}
-                    <Image
-                        alt="wishlist-icon"
-                        // src={
-                        //     wishListIds?.includes(data._id)
-                        //         ? Icons.wishlist_filled
-                        //         : Icons.wishlist_neutral
-                        // }
-                        src={Icons.wishlistIcon}
-                        className="w-[22px] h-[22px] relative"
-                    />
-                    {/* )} */}
-                </div>
-                {/* )} */}
+                        onClick={handlewishlistClick}
+                    >
+                        {loading ? (
+                            <Spin spinning={loading} />
+                        ) : (
+                            <Image
+                                alt="wishlist-icon"
+                                src={
+                                    checkProductInWishList(data._id)
+                                        ? Icons.wishlist_active
+                                        : Icons.wishlist_inactive
+                                }
+                                // src={Icons.wishlist_active}
+                                className="w-[22px] h-[22px] relative"
+                            />
+                        )}
+                    </div>
+                )}
 
                 <div
                     className="absolute bottom-0 left-0 w-full  gap-x-2 justify-center items-center h-12 bg-brand-blue-800 bg-opacity-45 md:group-hover:flex hidden animate-fadeIn cursor-pointer duration-300 rounded-b-2xl"
@@ -121,10 +112,11 @@ const ProductCard = ({ data, wishListIds }) => {
                 </div>
                 <div className="flex gap-x-2">
                     <p
-                        className={`text-sm font-medium ${data.offerPrice
-                            ? "line-through text-neutral-100"
-                            : "text-brand-blue-500"
-                            }`}
+                        className={`text-sm font-medium ${
+                            data.offerPrice
+                                ? "line-through text-neutral-100"
+                                : "text-brand-blue-500"
+                        }`}
                     >
                         ${data.price}
                     </p>
