@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { Form } from "antd";
+import { Form, Input, Modal } from "antd";
 import Buttons from "@/components/Buttons";
 import { useRouter } from "next/navigation";
 import { CHANGE_PASSWORD_PATH } from "@/helpers/slug";
@@ -8,11 +8,20 @@ import Images from "../../../public/assets/Images";
 import Image from "next/image";
 import Icons from "../../../public/assets/Icons";
 import EditableInput from "@/components/common/EditableInput";
-import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
-import { setCookie } from "cookies-next";
+import {
+    GET_IMAGE_RENDER,
+    GET_USER_PROFILE,
+    PROFILE_URL,
+} from "@/helpers/apiURLS";
+import { useUserContext } from "@/contexts/UserContext";
+import { getCookie, setCookie } from "cookies-next";
+import MakeApiCall from "@/services/MakeApiCall";
+import { toast } from "react-toastify";
 
 const MyAccountSection = ({ data }) => {
     console.log(data);
+    const [isOpen, setIsOpen] = useState(false);
+    const { setUserInfo } = useUserContext();
     const [image, setImage] = useState(
         data?.profilePicture
             ? `${GET_IMAGE_RENDER}?key=${data?.profilePicture}`
@@ -22,8 +31,8 @@ const MyAccountSection = ({ data }) => {
     const editFieldRef = useRef();
     const [isEdit, setIsEdit] = useState("");
     const [formValue, setFormValue] = useState({
-        firstName: data?.firstName,
-        lastName: data?.lastName,
+        name: data?.firstName + " " + data?.lastName,
+        // lastName: data?.lastName,
         companyName: data?.companyName,
         primaryEmail: data?.primaryEmail,
         primaryPhone: data?.primaryPhone,
@@ -32,30 +41,30 @@ const MyAccountSection = ({ data }) => {
     const [fields, setFields] = useState([
         {
             id: 1,
-            title: "First Name",
-            value: data?.firstName || "",
+            title: "Name",
+            value: data?.firstName + " " + data?.lastName || "",
             isEditing: false,
         },
+        // {
+        //     id: 2,
+        //     title: "Last Name",
+        //     value: data?.lastName || "",
+        //     isEditing: false,
+        // },
         {
             id: 2,
-            title: "Last Name",
-            value: data?.lastName || "",
-            isEditing: false,
-        },
-        {
-            id: 3,
             title: "Company Name",
             value: data?.companyName || "",
             isEditing: false,
         },
+        // {
+        //     id: 3,
+        //     title: "Phone Number",
+        //     value: data?.primaryPhone || "",
+        //     isEditing: false,
+        // },
         {
-            id: 4,
-            title: "Phone Number",
-            value: data?.primaryPhone || "",
-            isEditing: false,
-        },
-        {
-            id: 5,
+            id: 3,
             title: "Email",
             value: data?.primaryEmail || "",
             isEditing: false,
@@ -123,9 +132,20 @@ const MyAccountSection = ({ data }) => {
     };
 
     const handleNavigate = (name) => {
-        router.push(
-            `${name === "primaryPhone" ? "/change-phone" : "/change-email"}`
-        );
+        console.log("name", name);
+        if (name === "name") {
+            setIsOpen(true);
+        } else {
+            router.push("/change-email");
+        }
+        console.log(isOpen);
+    };
+
+    const handleOk = () => {
+        setIsOpen(false);
+    };
+    const handleCancel = () => {
+        setIsOpen(false);
     };
 
     useEffect(() => {
@@ -183,15 +203,16 @@ const MyAccountSection = ({ data }) => {
                     
                 ))} */}
                 <EditableInput
-                    label={"First Name"}
+                    label={"Name"}
                     formValue={formValue}
                     setFormValue={setFormValue}
-                    name={"firstName"}
+                    name={"name"}
                     forwardedRef={editFieldRef}
-                    isEdit={isEdit}
+                    // isEdit={isEdit}
                     setIsEdit={setIsEdit}
+                    handleNavigate={handleNavigate}
                 />
-                <EditableInput
+                {/* <EditableInput
                     label={"Last Name"}
                     formValue={formValue}
                     setFormValue={setFormValue}
@@ -199,7 +220,7 @@ const MyAccountSection = ({ data }) => {
                     forwardedRef={editFieldRef}
                     isEdit={isEdit}
                     setIsEdit={setIsEdit}
-                />
+                /> */}
 
                 <EditableInput
                     label={"Company Name"}
@@ -211,7 +232,7 @@ const MyAccountSection = ({ data }) => {
                     setIsEdit={setIsEdit}
                 />
 
-                <EditableInput
+                {/* <EditableInput
                     label={"Phone Number"}
                     formValue={formValue}
                     setFormValue={setFormValue}
@@ -219,7 +240,7 @@ const MyAccountSection = ({ data }) => {
                     handleNavigate={handleNavigate}
                     // isEdit={isEdit}
                     setIsEdit={setIsEdit}
-                />
+                /> */}
                 <EditableInput
                     label={"Email"}
                     formValue={formValue}
@@ -254,8 +275,104 @@ const MyAccountSection = ({ data }) => {
                 height={24}
                 onClick={() => router.push(CHANGE_PASSWORD_PATH)}
             /> */}
+
+            <Modal
+                className="sm:w-[408px]"
+                title={
+                    <p className="w-full flex justify-center text-neutral-700 border-b border-[#8790AB14] border-opacity-[8%] pb-5">
+                        New Name
+                    </p>
+                }
+                footer={false}
+                centered
+                open={isOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                <NameCustomModal
+                    data={data}
+                    onSubmit={handleOk}
+                    setUserInfo={setUserInfo}
+                    setFormValue={setFormValue}
+                />
+            </Modal>
         </div>
     );
 };
 
 export default MyAccountSection;
+
+const NameCustomModal = ({ onSubmit, setUserInfo, setFormValue, data }) => {
+    const onFinish = async (values) => {
+        const token = getCookie("accessToken");
+        const response = await MakeApiCall({
+            apiUrl: PROFILE_URL,
+            method: "PATCH",
+            body: values,
+            headers: { Authorization: token },
+        });
+        console.log(response);
+        const userInfo = response.user;
+        setCookie("userInfo", `${JSON.stringify(userInfo)}`);
+        setFormValue({
+            name: userInfo?.firstName + " " + userInfo?.lastName,
+            primaryEmail: userInfo?.primaryEmail,
+            primaryPhone: userInfo?.primaryPhone,
+        });
+        setUserInfo(response.user);
+        toast.success(response.message);
+        onSubmit();
+    };
+    console.log("asddasfsdfsdf-----------", data);
+    return (
+        <Form layout="vertical" onFinish={onFinish} initialValues={{ ...data }}>
+            <Form.Item
+                className="col-span-1"
+                label={
+                    <h3 className="text-neutral-300 text-sm font-medium">
+                        First Name
+                    </h3>
+                }
+                name="firstName"
+                rules={[
+                    {
+                        required: true,
+                        message: "First name is required!",
+                    },
+                ]}
+            >
+                <Input
+                    className="py-3 rounded-sm border border-neutral-40 bg-neutral-10"
+                    // defaultValue={data ? data.city : ""}
+                    placeholder="abc"
+                />
+            </Form.Item>
+            <Form.Item
+                className="col-span-1"
+                label={
+                    <h3 className="text-neutral-300 text-sm font-medium">
+                        Last Name
+                    </h3>
+                }
+                name="lastName"
+                rules={[
+                    {
+                        required: true,
+                        message: "Last name is required!",
+                    },
+                ]}
+            >
+                <Input
+                    className="py-3 rounded-sm border border-neutral-40 bg-neutral-10"
+                    // defaultValue={data ? data.city : ""}
+                    placeholder="abc"
+                />
+            </Form.Item>
+            <Buttons.PrimaryButton
+                label="Change name"
+                className="w-full flex justify-center items-center bg-magenta-600 h-12 text-white font-semibold"
+                // onClick={onOk}
+            />
+        </Form>
+    );
+};

@@ -13,7 +13,9 @@ export const GET_PRODUCTS = `${BASEURL}/products`;
 
 export const GET_IMAGE_RENDER = `${BASEURL}/files/view-image`;
 
-export const GET_USER_PROFILE = `${BASEURL}/profile/1`;
+export const GET_USER_PROFILE = `${BASEURL}/profile`;
+
+export const PROFILE_URL = `${BASEURL}/users/profile`;
 
 export const GET_USER_ADDRESS = `${BASEURL}/addresses`;
 
@@ -23,7 +25,7 @@ export const RESET_PASSWORD = `${BASEURL}/users/reset-password`;
 
 export const CHANGE_EMAIL = `${BASEURL}/users/change-email`;
 
-export const VERIFY_OTP = `${BASEURL}/users/verify-otp`;
+// export const VERIFY_OTP = `${BASEURL}/users/verify-otp`;
 
 //Signin
 export const SIGN_IN_URL = `${BASEURL}/users/login`;
@@ -53,3 +55,8 @@ export const GET_TESTIMONIALS = `${BASEURL}/testimonials`;
 export const GET_MAIN_CATEGORIES = `${BASEURL}/categories`;
 // FAQ
 export const FAQ_URL = `${BASEURL}/faqs`;
+// TAGS
+export const TAGS_URL = `${BASEURL}/tags`;
+
+// verify otp
+export const VERIFY_OTP = `${BASEURL}/users/verify-otp`;

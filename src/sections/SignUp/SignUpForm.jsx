@@ -53,7 +53,7 @@ const SignInForm = () => {
 
     const loginWithSocialMedia = [
         { title: "google", icon: Icons.googleLogo },
-        { title: "Apple", icon: Icons.appleLogo },
+        // { title: "Apple", icon: Icons.appleLogo },
         {
             title: "facebook",
             icon: Icons.facebookLogo,
@@ -147,9 +147,11 @@ const SignInForm = () => {
             const token = getCookie("accessToken");
             // getUpdateCartList(token);
             setIsSocialLoading({ ...isSocialLoading, google: false });
-        } catch (e) {
+            router.push("/");
+        } catch (error) {
             setIsSocialLoading({ ...isSocialLoading, google: false });
-            console.log(e);
+            toast.error(error.message);
+            // console.log(e);
         }
     };
 

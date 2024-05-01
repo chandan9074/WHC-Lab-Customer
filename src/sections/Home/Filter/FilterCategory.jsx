@@ -12,7 +12,7 @@ const FilterCategory = ({ data, setSearchQuery, searchQuery, name }) => {
 
     const renderTreeNodes = (data) => {
         return data?.map((item) => {
-            const isNodeChecked = searchQuery[name]
+            const isNodeChecked = searchQuery["tag"]
                 ?.split("&")
                 .includes(item.name);
             const nodeClass = isNodeChecked ? "font-semibold" : "font-normal";
@@ -46,23 +46,25 @@ const FilterCategory = ({ data, setSearchQuery, searchQuery, name }) => {
                 searchStr += "&";
             }
         }
-        setSearchQuery({ ...searchQuery, [name]: searchStr });
+        setSearchQuery({ ...searchQuery, tag: searchStr });
     };
 
     return (
         <div className="flex items-center">
-            <Tree
-                checkable
-                defaultExpandAll
-                // defaultCheckedKeys={data.map((name) =>
-                //     name._id.toString()
-                // )}
-                switcherIcon={<DownOutlined />}
-                onCheck={handleCheck}
-                checkedKeys={searchQuery[name]?.split("&")}
-            >
-                {renderTreeNodes(data)}
-            </Tree>
+            {data.length > 0 && (
+                <Tree
+                    checkable
+                    defaultExpandAll
+                    // defaultCheckedKeys={data.map((name) =>
+                    //     name._id.toString()
+                    // )}
+                    switcherIcon={<DownOutlined />}
+                    onCheck={handleCheck}
+                    checkedKeys={searchQuery["tag"]?.split("&")}
+                >
+                    {renderTreeNodes(data)}
+                </Tree>
+            )}
         </div>
     );
 };
