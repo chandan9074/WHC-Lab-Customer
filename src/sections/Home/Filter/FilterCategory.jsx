@@ -12,7 +12,7 @@ const FilterCategory = ({ data, setSearchQuery, searchQuery, name }) => {
 
     const renderTreeNodes = (data) => {
         return data?.map((item) => {
-            const isNodeChecked = searchQuery[name]
+            const isNodeChecked = searchQuery["tag"]
                 ?.split("&")
                 .includes(item.name);
             const nodeClass = isNodeChecked ? "font-semibold" : "font-normal";
@@ -46,7 +46,7 @@ const FilterCategory = ({ data, setSearchQuery, searchQuery, name }) => {
                 searchStr += "&";
             }
         }
-        setSearchQuery({ ...searchQuery, [name]: searchStr });
+        setSearchQuery({ ...searchQuery, tag: searchStr });
     };
 
     return (
@@ -59,7 +59,7 @@ const FilterCategory = ({ data, setSearchQuery, searchQuery, name }) => {
                 // )}
                 switcherIcon={<DownOutlined />}
                 onCheck={handleCheck}
-                checkedKeys={searchQuery[name]?.split("&")}
+                checkedKeys={searchQuery["tag"]?.split("&")}
             >
                 {renderTreeNodes(data)}
             </Tree>

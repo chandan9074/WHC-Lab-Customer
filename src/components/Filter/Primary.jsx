@@ -1,12 +1,32 @@
 "use client";
 import FilterOptions from "@/sections/Home/Filter";
 import { Collapse } from "antd";
-import React, { Fragment } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import { filterData } from "@/libs/productData";
 import Image from "next/image";
+import TagService from "@/services/TagService";
 
 const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
+    const [tagsData, setTagsData] = useState([]);
+
+    const getTags = async () => {
+        const response = await TagService.getTags();
+        setTagsData(response.docs);
+    };
+
+    useEffect(() => {
+        getTags();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const yeastTypeTags = tagsData.filter((tag) => tag.type === "Yeast Type");
+    const beerStyleTags = tagsData.filter((tag) => tag.type === "Beer Style");
+    const flocculationTags = tagsData.filter(
+        (tag) => tag.type === "Flocculation"
+    );
+    // console.log("tags---------------------", flocculationTags);
+
     const text = `
   A dog is a type of domesticated animal.
   Known for its loyalty and faithfulness,
@@ -18,7 +38,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
             label: "Yeast Type",
             component: (
                 <FilterOptions.FilterCategory
-                    data={filterData["yeastType"]}
+                    data={yeastTypeTags}
                     setSearchQuery={setSearchQuery}
                     searchQuery={searchQuery}
                     name="yeastType"
@@ -30,7 +50,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
             label: "Beer Style",
             component: (
                 <FilterOptions.FilterCategory
-                    data={filterData["beerStyle"]}
+                    data={beerStyleTags}
                     setSearchQuery={setSearchQuery}
                     searchQuery={searchQuery}
                     name="beerStyle"
@@ -46,7 +66,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
             label: "Flocculation",
             component: (
                 <FilterOptions.FilterCategory
-                    data={filterData["flocculation"]}
+                    data={flocculationTags}
                     setSearchQuery={setSearchQuery}
                     searchQuery={searchQuery}
                 />
@@ -134,8 +154,9 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
                             width={1000}
                             height={1000}
                             alt="caretDown"
-                            className={`w-4 h-4 duration-300 ${isActive ? "rotate-0" : "-rotate-90"
-                                }`}
+                            className={`w-4 h-4 duration-300 ${
+                                isActive ? "rotate-0" : "-rotate-90"
+                            }`}
                         />
                     )}
                     className="divide-y divide-[#EBEDF0]"

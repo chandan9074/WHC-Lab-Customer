@@ -49,6 +49,8 @@ export const GET_TESTIMONIALS = `${BASEURL}/testimonials`;
 export const GET_MAIN_CATEGORIES = `${BASEURL}/categories`;
 // FAQ
 export const FAQ_URL = `${BASEURL}/faqs`;
+// TAGS
+export const TAGS_URL = `${BASEURL}/tags`;
 
 // verify otp
 export const VERIFY_OTP = `${BASEURL}/users/verify-otp`;
