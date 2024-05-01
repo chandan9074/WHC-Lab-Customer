@@ -12,9 +12,11 @@ import { toast } from "react-toastify";
 import { useAuthContext } from "@/contexts/AuthContext";
 import MakeApiCall from "@/services/MakeApiCall";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/contexts/CartContext";
 
 const SignInForm = () => {
     const { handlePageTransition } = useAuthContext();
+    const { getUpdateCartList } = useCart();
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
@@ -27,9 +29,13 @@ const SignInForm = () => {
                 method: "POST",
                 body: values,
             });
-            handlePageTransition(responseData);
-            toast.success(responseData.message);
-            router.push("/");
+
+            if (responseData.status === 200) {
+                handlePageTransition(responseData);
+                toast.success(responseData.message);
+                getUpdateCartList(responseData.token);
+                router.push("/");
+            }
         } catch (error) {
             // console.log("error", error.message);
             toast.error(error?.message);
