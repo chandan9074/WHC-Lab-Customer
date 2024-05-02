@@ -19,7 +19,13 @@ async function DistilledResources() {
                         DISTILLING RESOURCES
                     </h3>
 
-                    <div className="flex items-center justify-center">
+                    <div
+                        className={` ${
+                            getResources?.docs?.length > 0
+                                ? ""
+                                : "flex items-center justify-center"
+                        }`}
+                    >
                         {getResources?.docs?.length > 0 ? (
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 {getResources?.docs?.map((data, index) => (
