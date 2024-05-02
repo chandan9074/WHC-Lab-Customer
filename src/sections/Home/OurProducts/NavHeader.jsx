@@ -1,8 +1,10 @@
 import Buttons from "@/components/Buttons";
 import React from "react";
 import Icons from "../../../../public/assets/Icons";
+import { useRouter } from "next/navigation";
 
 const NavHeader = ({ activeTab, setActiveTab, handleNavChange }) => {
+    const router = useRouter();
     const navButtons = [
         {
             _id: 1,
@@ -44,6 +46,7 @@ const NavHeader = ({ activeTab, setActiveTab, handleNavChange }) => {
                     hoverIcon={Icons.arrow_up_right_white}
                     bgColor="bg-white"
                     textColor="text-brand-blue-800"
+                    onClick={() => router.push("/store")}
                 />
             </div>
         </div>

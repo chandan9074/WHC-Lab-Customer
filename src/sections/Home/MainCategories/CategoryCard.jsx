@@ -6,9 +6,11 @@ import Icons from "../../../../public/assets/Icons";
 import Image from "next/image";
 import Buttons from "@/components/Buttons";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
+import { useRouter } from "next/navigation";
 
 const CategoryCard = ({ data }) => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
+    const router = useRouter();
 
     const handleMouseEnter = (index) => {
         setHoveredIndex(index);
@@ -33,7 +35,7 @@ const CategoryCard = ({ data }) => {
 
             <div
                 className="cursor-pointer"
-                onClick={() => console.log("Navigating to another page")}
+                onClick={() => router.push("/store")}
             >
                 <figure
                     className={`${styles.snip0025} ${

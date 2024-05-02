@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import pioneeringGIF from "../../../../public/pioneeringGIF.gif";
 import Buttons from "@/components/Buttons";
 import Icons from "../../../../public/assets/Icons";
+import { useRouter } from "next/navigation";
 const PioneeringExcellenceContainer = () => {
     const [selectedCarousel, setSelectedCarousel] = useState(0);
     const [sectionHeight, setSectionHeight] = useState(0);
+    const router = useRouter();
 
     useEffect(() => {
         if (window.innerWidth > 768) {
@@ -59,6 +61,7 @@ const PioneeringExcellenceContainer = () => {
                                 bgHoverColor="hover:bg-brand-blue-500"
                                 textHoverColor="group-hover:text-white"
                                 rightIcon={Icons.arrow_up_right_blue}
+                                onClick={() => router.push("/store")}
                             />
                         </div>
                     </div>
