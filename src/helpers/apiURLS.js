@@ -67,3 +67,7 @@ export const DISTRIBUTORS_URL = `${BASEURL}/distributors`;
 
 // category
 export const CATEGORY_URL = `${BASEURL}/categories`;
+
+//Blogs
+export const BLOG_URL = `${BASEURL}/blogs`;
+

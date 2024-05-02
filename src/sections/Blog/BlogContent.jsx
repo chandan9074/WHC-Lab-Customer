@@ -3,11 +3,13 @@ import Image from "next/image";
 import React from "react";
 import Images from "../../../public/assets/Images";
 
-function BlogContent() {
+function BlogContent({ data }) {
     return (
         <div className="flex flex-col gap-4">
-            <Text.Secondary>Introduction</Text.Secondary>
-            <Text.TextContainer>
+            <div dangerouslySetInnerHTML={{ __html: data.content }} />
+
+            {/* <Text.Secondary>Introduction</Text.Secondary> */}
+            {/* <Text.TextContainer>
                 <p>
                     WHC Lab is a biotechnology business, focused on fermentation
                     in Newcastle, Co. Wicklow, Ireland. We use the latest
@@ -99,7 +101,7 @@ function BlogContent() {
                     consequat quam sed. Nisl at scelerisque amet nulla purus
                     habitasse.
                 </p>
-            </Text.TextContainer>
+            </Text.TextContainer> */}
         </div>
     );
 }

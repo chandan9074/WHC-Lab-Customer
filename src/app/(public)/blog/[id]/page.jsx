@@ -14,27 +14,38 @@ import Text from "@/components/Text";
 import { blogsData } from "../page";
 import BlogContainer from "@/sections/Blog/BlogContainer";
 import BlogService from "@/services/BlogService";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
-async function BlogDetails() {
-    // const getBlogs = BlogService.getBlogs();
+async function BlogDetails({ params }) {
+    const blogsData = await BlogService.getBlogs();
 
-    // const [blogsData] = await Promise.all([getBlogs]);
+    const singleBlogData = blogsData?.docs?.find(
+        (blog) => blog?._id === params?.id
+    );
+    // console.log("single------------------", singleBlogData);
 
-    // const router = useRouter();
+    const currentIndex = blogsData.docs.findIndex(
+        (blog) => blog._id === singleBlogData?._id
+    );
 
-    // console.log(router.query.slug);
+    // Find the previous and next blog posts
+    const prevBlog = currentIndex > 0 ? blogsData.docs[currentIndex - 1] : null;
+    const nextBlog =
+        currentIndex < blogsData.docs.length - 1
+            ? blogsData.docs[currentIndex + 1]
+            : null;
 
-    // console.log("blogs----------------", blogsData);
+    console.log("Previous Blog:", prevBlog);
+    console.log("Next Blog:", nextBlog);
 
     return (
         <Layouts.Secondary breadcrumb={false}>
-            <PageHeaderWithNameAndBgImage pageHeading="Thermotolerant yeast and efficient fermentation solutions" />
+            <PageHeaderWithNameAndBgImage pageHeading={singleBlogData?.title} />
             <InfoPagesContainer>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-12">
                     <div className="flex flex-col gap-12 col-span-2">
                         {/* blog content */}
-                        <BlogContent />
+                        <BlogContent data={singleBlogData} />
 
                         {/* Author info and share option */}
                         <div className="flex flex-col md:flex-row justify-between items-start gap-6">
@@ -47,8 +58,11 @@ async function BlogDetails() {
 
                         {/* navigator  previous & Next*/}
                         <div className="flex justify-between items-center gap-5">
-                            <PreviousNextNavigator />
-                            <PreviousNextNavigator next={true} />
+                            <PreviousNextNavigator data={prevBlog} />
+                            <PreviousNextNavigator
+                                next={true}
+                                data={nextBlog}
+                            />
                         </div>
 
                         {/* divider */}
@@ -61,8 +75,8 @@ async function BlogDetails() {
 
                     {/* blog page sidebar */}
                     <div className="flex flex-col gap-8 w-full">
-                        <RecentPost />
-                        <TagLists />
+                        <RecentPost data={blogsData.docs} />
+                        <TagLists data={singleBlogData.tags} />
                     </div>
                 </div>
 
@@ -71,7 +85,7 @@ async function BlogDetails() {
                     <Text.Secondary className="text-2xl md:text-4xl">
                         Recent Blogs
                     </Text.Secondary>
-                    {/* <BlogContainer blogsData={blogsData.docs} /> */}
+                    <BlogContainer blogsData={blogsData.docs.slice(0, 3)} />
                 </div>
             </InfoPagesContainer>
         </Layouts.Secondary>
