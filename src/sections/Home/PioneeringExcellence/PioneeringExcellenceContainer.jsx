@@ -56,7 +56,8 @@ const PioneeringExcellenceContainer = () => {
                         <div className="absolute top-[46px] md:right-[19px]  hidden md:block">
                             <Buttons.IconWithLabel
                                 label="Explore Our All Strains"
-                                icon={Icons.arrow_up_right_blue}
+                                rightIcon={Icons.arrow_up_right_blue}
+                                hoverIcon={Icons.arrow_up_right_white}
                                 bgColor="bg-white"
                                 textColor="text-brand-blue-800"
                                 onClick={() => router.push("/store")}
