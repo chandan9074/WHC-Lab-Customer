@@ -7,6 +7,8 @@ const StoreTabButtonsSection = ({
     setSelectedTab,
     categoryData,
     handleTabButtonClick,
+    searchQuery,
+    setSearchQuery,
 }) => {
     return (
         <div className="w-full flex gap-4 md:gap-6 py-4 md:py-6 overflow-scroll tab-scroll">
@@ -18,16 +20,23 @@ const StoreTabButtonsSection = ({
                             label={item.name}
                             borderColor="border-brand-blue-500"
                             textColor={
-                                selectedTab.name === item.name
+                                selectedTab?.name === item.name
                                     ? "text-white"
                                     : "text-brand-blue-500"
                             }
                             bgColor={
-                                selectedTab.name === item.name
+                                selectedTab?.name === item.name
                                     ? "bg-brand-blue-500"
                                     : "bg-white"
                             }
-                            onClick={() => setSelectedTab(item)}
+                            onClick={() => {
+                                setSelectedTab(item);
+                                handleTabButtonClick(item);
+                                setSearchQuery({
+                                    ...searchQuery,
+                                    category: item.name,
+                                });
+                            }}
                         />
                     )}
                 </>

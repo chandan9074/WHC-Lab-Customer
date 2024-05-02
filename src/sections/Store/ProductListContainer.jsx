@@ -6,18 +6,18 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ProductService from "@/services/productsService";
 import { getCookie } from "cookies-next";
 
-const ProductListContainer = ({ data, productData, selectedTab }) => {
+const ProductListContainer = ({
+    data,
+    productData,
+    selectedTab,
+    searchQuery,
+    setSearchQuery,
+}) => {
     const searchParams = useSearchParams();
     const [productList, setProductList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [firstRender, setFirstRender] = useState(false);
-    const [searchQuery, setSearchQuery] = useState({
-        yeastType: "",
-        beerStyle: "",
-        flocculation: "",
-        maxPrice: 0,
-        minPrice: 0,
-    });
+
     const pathname = usePathname();
     const router = useRouter();
 
@@ -38,12 +38,12 @@ const ProductListContainer = ({ data, productData, selectedTab }) => {
 
         const response = await ProductService.getProducts({
             ...paramData,
-            category: selectedTab.name,
+            // category: selectedTab.name,
             locationId: _selectedLocation,
         });
         setProductList(response?.docs);
         setIsLoading(false);
-    }, [searchParams, selectedTab.name]);
+    }, [searchParams]);
 
     const handleProductLoading = useCallback(() => {
         setIsLoading(true);

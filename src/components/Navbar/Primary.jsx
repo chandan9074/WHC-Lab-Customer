@@ -103,13 +103,13 @@ export default Primary;
 function MobileMenuItem({ isLogin, cartItem }) {
     return (
         <div className="flex gap-3 sm:gap-4 items-center">
-            <Image
+            {/* <Image
                 src={Icons.search_blue}
                 alt="search"
                 width={1000}
                 height={1000}
                 className="w-5 sm:w-[30px] h-5 sm:h-[30px] cursor-pointer"
-            />
+            /> */}
             {isLogin && (
                 <>
                     <Image
