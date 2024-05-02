@@ -35,7 +35,7 @@ const CategoryCard = ({ data }) => {
 
             <div
                 className="cursor-pointer"
-                onClick={() => router.push("/store")}
+                onClick={() => router.push(`/store?category=${data.name}`)}
             >
                 <figure
                     className={`${styles.snip0025} ${
