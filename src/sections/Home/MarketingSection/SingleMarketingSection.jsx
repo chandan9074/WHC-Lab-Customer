@@ -1,8 +1,11 @@
+"use client";
 import Buttons from "@/components/Buttons";
 import SectionHeader from "@/components/common/SectionHeader";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function SingleMarketingSection({ data, index }) {
+    const router = useRouter();
     return (
         <div
             className={`flex gap-9 justify-between ${
@@ -37,7 +40,10 @@ function SingleMarketingSection({ data, index }) {
                         EXPLORE OUR STRAINS
                     </button> */}
                     <div className="w-full md:w-[283px]">
-                        <Buttons.IconWithLabel label={"EXPLORE OUR STRAINS "} />
+                        <Buttons.IconWithLabel
+                            label={"EXPLORE OUR STRAINS "}
+                            onClick={() => router.push("/store")}
+                        />
                     </div>
                 </div>
             </div>

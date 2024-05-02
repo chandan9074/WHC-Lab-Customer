@@ -10,9 +10,11 @@ const StoreContainer = dynamic(
     }
 );
 
-async function Store() {
+async function Store(params) {
     const getProducts = ProductService.getProducts();
     const getCategories = ProductService.getCategories();
+
+    console.log(params, "params value");
 
     const [productData, categoryData] = await Promise.all([
         getProducts,

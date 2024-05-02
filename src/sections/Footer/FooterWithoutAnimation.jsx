@@ -51,7 +51,7 @@ const FooterWithoutAnimation = ({ navLinks, socialLinks }) => {
                                 </button>
                             </div>
                         </div> */}
-                        <div className="space-y-[15px]">
+                        {/* <div className="space-y-[15px]">
                             <p className="text-[#9194A6] text-[13.5px] font-medium leading-5">
                                 Drop us a line
                             </p>
@@ -81,7 +81,7 @@ const FooterWithoutAnimation = ({ navLinks, socialLinks }) => {
                                     className="w-[15px] h-[15px] hidden group-hover:block"
                                 />
                             </button>
-                        </div>
+                        </div> */}
                         <div className="space-y-[15px]">
                             <p className="text-[#9194A6] text-[13.5px] font-medium leading-5">
                                 Stay up-to date
