@@ -23,7 +23,7 @@ const ProductListContainer = ({ data, productData, selectedTab }) => {
 
     useEffect(() => {
         setProductList(searchParams.toString() ? [] : productData);
-    }, [productData]);
+    }, [searchParams, productData]);
 
     const handleSearchProduct = useCallback(async () => {
         setIsLoading(true);
@@ -43,7 +43,7 @@ const ProductListContainer = ({ data, productData, selectedTab }) => {
         });
         setProductList(response?.docs);
         setIsLoading(false);
-    }, [searchParams]);
+    }, [searchParams, selectedTab.name]);
 
     const handleProductLoading = useCallback(() => {
         setIsLoading(true);

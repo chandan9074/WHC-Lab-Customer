@@ -2,7 +2,7 @@
 import { useWishlistContext } from "@/contexts/WishlistContext";
 import Wishlists from "@/sections/Profile/Wishlist/Wishlists";
 
-const MyWishLists = async () => {
+const MyWishLists = () => {
     const { wishlistIds, deleteWishlist } = useWishlistContext();
 
     return (

@@ -77,13 +77,15 @@ const HeroRightSide = () => {
         //         <Environment preset="sunset" />
         //     </Canvas>
         // </div>
-        <video
-            src={petriDishVideo}
-            autoPlay
-            muted
-            loop
-            className="w-full h-[600px] object-cover"
-        />
+        <div className="flex justify-center items-center h-full">
+            <video
+                src={petriDishVideo}
+                autoPlay
+                muted
+                loop
+                className="w-full h-[320px] sm:h-[400px] md:h-[300px] xl:h-[500px] 2xl:h-[600px] object-cover"
+            />
+        </div>
     );
 };
 
