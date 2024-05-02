@@ -50,6 +50,7 @@ const SignInForm = () => {
         } catch (e) {
             setIsSocialLoading({ ...isSocialLoading, google: false });
             console.log(e);
+            toast.error(e.message);
         }
     };
 
