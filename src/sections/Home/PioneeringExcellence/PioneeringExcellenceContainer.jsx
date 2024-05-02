@@ -53,12 +53,11 @@ const PioneeringExcellenceContainer = () => {
                         </div>
                         <div className="absolute top-[46px] md:right-[19px]  hidden md:block">
                             <Buttons.IconWithLabel
-                                label={"EXPLORE OUR ALL STRAINS"}
+                                label="Explore Our All Strains"
+                                rightIcon={Icons.arrow_up_right_blue}
+                                hoverIcon={Icons.arrow_up_right_white}
                                 bgColor="bg-white"
                                 textColor="text-brand-blue-800"
-                                bgHoverColor="hover:bg-brand-blue-500"
-                                textHoverColor="group-hover:text-white"
-                                rightIcon={Icons.arrow_up_right_blue}
                             />
                         </div>
                     </div>
