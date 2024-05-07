@@ -144,11 +144,15 @@ const SignInForm = () => {
                                             message:
                                                 "Please insert your Email!",
                                         },
+                                        {
+                                            type: "email",
+                                            message:
+                                                "Please insert valid Email!",
+                                        },
                                     ]}
                                     className="w-full text-base font-medium text-neutral-400 m-0"
                                 >
                                     <Input
-                                        type="email"
                                         className="w-full py-[13px] text-base font-normal leading-6"
                                         placeholder="abc@gmail.com"
                                     />
@@ -170,7 +174,7 @@ const SignInForm = () => {
                                     <Input.Password
                                         autoComplete="off"
                                         placeholder="Min. 8 characters"
-                                        className="w-full py-3 rounded-sm text-[#7a8699] text-sm"
+                                        className="w-full rounded-sm text-[#7a8699] text-sm"
                                     />
                                 </Form.Item>
 
