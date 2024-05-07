@@ -6,12 +6,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import AddToCartSuccession from "./AddToCartSuccession";
-import Link from "next/link";
 import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
 import { getCookie, hasCookie } from "cookies-next";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "react-toastify";
 import { useWishlistContext } from "@/contexts/WishlistContext";
+import { usePathname } from "next/navigation";
 
 const ProductRightView = ({
     forModal = false,
@@ -31,8 +31,7 @@ const ProductRightView = ({
         getProductWishlist,
         checkProductInWishList,
     } = useWishlistContext();
-
-    console.log(data, "data rproidf");
+    const pathname = usePathname();
 
     useEffect(() => {
         const locationId = JSON.parse(getCookie("selected_location"));
@@ -268,7 +267,9 @@ const ProductRightView = ({
                             onClick={() => {
                                 token
                                     ? handleAddToCart()
-                                    : router.push("/log-in");
+                                    : router.push(
+                                          `/log-in?redirect=${pathname}`
+                                      );
                             }}
                         />
                         {openSuccessionModal && (

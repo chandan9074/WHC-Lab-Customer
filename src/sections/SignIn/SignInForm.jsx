@@ -14,6 +14,7 @@ import MakeApiCall from "@/services/MakeApiCall";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
 import Icons from "../../../public/assets/Icons";
+import { useSearchParams } from "next/navigation";
 
 const SignInForm = () => {
     const { handlePageTransition } = useAuthContext();
@@ -25,6 +26,8 @@ const SignInForm = () => {
     });
     const { googleSingIn, facebookSignIn } = useAuthContext();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirect = searchParams.get("redirect");
 
     const loginWithSocialMedia = [
         {
@@ -81,7 +84,13 @@ const SignInForm = () => {
                 handlePageTransition(responseData);
                 toast.success(responseData.message);
                 getUpdateCartList(responseData.token);
-                router.push("/");
+
+                // You can use the router to navigate to another page
+                if (redirect) {
+                    router.push(redirect);
+                } else {
+                    router.push("/");
+                }
             }
         } catch (error) {
             // console.log("error", error.message);
