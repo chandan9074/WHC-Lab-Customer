@@ -7,12 +7,24 @@ import CountrySelectionModal from "./CountrySelectionModal";
 import ProductService from "@/services/productsService";
 import { getCookie } from "cookies-next";
 
-const StoreContainer = ({ productData, categoryData }) => {
-    const [selectedTab, setSelectedTab] = useState(categoryData[0]);
+const StoreContainer = ({ productData, categoryData, initialCategory }) => {
+    const [selectedTab, setSelectedTab] = useState(
+        initialCategory
+            ? categoryData.find((item) => item.name === initialCategory)
+            : categoryData[0]
+    );
     const [productList, setProductList] = useState(productData || []);
-    const locationId = getCookie("selected_location");
+    const [searchQuery, setSearchQuery] = useState({
+        yeastType: "",
+        beerStyle: "",
+        flocculation: "",
+        maxPrice: 0,
+        minPrice: 0,
+        category: "",
+    });
 
-    const handleLocation = async (locationId, category) => {
+    const handleLocation = async (locationId) => {
+        const category = selectedTab.name;
         const response = await ProductService.getProducts({
             locationId,
             category,
@@ -22,15 +34,26 @@ const StoreContainer = ({ productData, categoryData }) => {
         setProductList(response?.docs);
     };
 
-    const handleTabButtonClick = () => {};
+    const handleTabButtonClick = async (data) => {
+        const _selectedLocation = getCookie("selected_location");
+        const locationId = _selectedLocation && JSON.parse(_selectedLocation);
 
-    useEffect(() => {
-        const locationId = getCookie("selected_location");
-        const _selectedLocation = locationId && JSON.parse(locationId);
+        const response = await ProductService.getProducts({
+            locationId,
+            category: data.name,
+        });
+        // console.log(response, "reposnse----");
+        console.log({ response });
+        setProductList(response?.docs);
+    };
 
-        _selectedLocation &&
-            handleLocation(_selectedLocation, selectedTab.name);
-    }, [selectedTab]);
+    // useEffect(() => {
+    //     const locationId = getCookie("selected_location");
+    //     const _selectedLocation = locationId && JSON.parse(locationId);
+
+    //     _selectedLocation &&
+    //         handleLocation(_selectedLocation, selectedTab.name);
+    // }, [selectedTab]);
 
     return (
         <div className="container mx-auto space-y-[14.5px] px-4 md:px-0 pb-0 md:pb-20">
@@ -39,11 +62,15 @@ const StoreContainer = ({ productData, categoryData }) => {
                 setSelectedTab={setSelectedTab}
                 categoryData={categoryData}
                 handleTabButtonClick={handleTabButtonClick}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
             />
 
             <ProductListContainer
                 selectedTab={selectedTab}
                 productData={productList}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
             />
 
             <CountrySelectionModal handleLocation={handleLocation} />

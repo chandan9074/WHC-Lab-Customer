@@ -73,3 +73,5 @@ export const RESOURCES = `${BASEURL}/resources`;
 
 // DOWNLOAD Resources
 export const DOWNLOAD_RESOURCE = `${BASEURL}/files/view-image?key=`;
+//Blogs
+export const BLOG_URL = `${BASEURL}/blogs`;
