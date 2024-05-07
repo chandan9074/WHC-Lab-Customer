@@ -248,7 +248,7 @@ const AddressModal = ({
                             placeholder="maxLength is 6"
                             maxLength={1000}
                             showCount
-                            className="text-neutral-400 text-sm font-medium mb-6"
+                            className="text-neutral-400 text-sm font-medium "
                         />
                         {/* <Input
                             // defaultValue={data ? data.street : ""}
@@ -256,13 +256,15 @@ const AddressModal = ({
                             placeholder="e.g. Road no., Building no., Floor no. etc"
                         /> */}
                     </Form.Item>
-                    <Buttons.PrimaryButton
-                        label={buttonTitle}
-                        className="flex justify-center items-center h-12 text-white font-semibold"
-                        width="w-full"
-                        type="submit"
-                        // onClick={onOk}
-                    />
+                    <div className="pt-6">
+                        <Buttons.PrimaryButton
+                            label={buttonTitle}
+                            className="flex justify-center items-center h-12 text-white font-semibold"
+                            width="w-full"
+                            type="submit"
+                            // onClick={onOk}
+                        />
+                    </div>
                 </Form>
             </div>
         </div>
