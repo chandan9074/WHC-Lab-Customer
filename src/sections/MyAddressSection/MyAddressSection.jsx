@@ -96,6 +96,7 @@ const MyAddressSection = ({ data }) => {
                 body: { isDefault: true },
                 headers: { Authorization: token },
             });
+            await getUserData();
             toast.success("Default address updated successfully!");
         } catch (error) {
             console.error("Error updating default address:", error);
