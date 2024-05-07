@@ -27,9 +27,12 @@ const ForgotPassword = ({ title, description }) => {
                 ...MethodsStructure.patchMethod(),
             });
 
-            console.log(res);
+            console.log("response---------", res);
+
+            // setCookie();
 
             if (res?.status === 200) {
+                setCookie("temp_whc_forget_pass_info", JSON.stringify(values));
                 toast.success(res.message);
                 console.log(res);
                 router.push(CHANGE_PASSWORD_VERIFICATION_PATH);
@@ -115,7 +118,7 @@ const ForgotPassword = ({ title, description }) => {
                             className="mb-0"
                         >
                             <Input.Password
-                                className="py-3 rounded-sm"
+                                className="rounded-sm"
                                 placeholder="Min. 8 characters"
                             />
                         </Form.Item>
@@ -153,7 +156,7 @@ const ForgotPassword = ({ title, description }) => {
                             className="mb-0"
                         >
                             <Input.Password
-                                className="py-3 rounded-sm"
+                                className="rounded-sm"
                                 placeholder="Min. 8 characters"
                             />
                         </Form.Item>

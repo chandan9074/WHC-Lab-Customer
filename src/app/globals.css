@@ -19,6 +19,7 @@
     color: #7a8699 !important;
     font-size: 16px;
     font-family: var(--font-poppins);
+    height: 52px !important;
 }
 
 /* antd input outline */
