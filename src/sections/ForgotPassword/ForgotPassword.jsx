@@ -115,7 +115,7 @@ const ForgotPassword = ({ title, description }) => {
                             className="mb-0"
                         >
                             <Input.Password
-                                className="py-3 rounded-sm"
+                                className="rounded-sm"
                                 placeholder="Min. 8 characters"
                             />
                         </Form.Item>
@@ -153,7 +153,7 @@ const ForgotPassword = ({ title, description }) => {
                             className="mb-0"
                         >
                             <Input.Password
-                                className="py-3 rounded-sm"
+                                className="rounded-sm"
                                 placeholder="Min. 8 characters"
                             />
                         </Form.Item>
