@@ -9,16 +9,21 @@ import React, { Suspense, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { LOGIN_PATH } from "@/helpers/slug";
+import { RESET_PASSWORD } from "@/helpers/apiURLS";
+import MakeApiCall from "@/services/MakeApiCall";
+import { MethodsStructure } from "@/services/MethodsStructure";
 
 const ChangePassword = () => {
     const [loading, setLoading] = useState(false);
     const email = getCookie("temp_email");
+    const [verifying, setVerifying] = useState(false);
 
     const router = useRouter();
 
     const handleUpdate = async (code) => {
         try {
             setLoading(true);
+            setVerifying(true);
             const data = {
                 action: "reset_password",
                 otp: parseInt(code),
@@ -33,8 +38,22 @@ const ChangePassword = () => {
             }
         } catch (e) {
             toast.error(e?.message);
+            setVerifying(false);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleResendCode = async () => {
+        const tempPassword = JSON.parse(getCookie("temp_whc_forget_pass_info"));
+        const res = await MakeApiCall({
+            apiUrl: RESET_PASSWORD,
+            body: { ...tempPassword },
+            ...MethodsStructure.patchMethod(),
+        });
+
+        if (res?.status === 200) {
+            toast.success(res.message);
         }
     };
 
@@ -45,8 +64,11 @@ const ChangePassword = () => {
                 <section className="container mx-auto py-6 px-4 flex justify-center">
                     <VerificationForm
                         title="email address"
-                        verifyShortForm="asdasdasavc@gamil.com"
+                        verifyShortForm={email}
                         handleUpdate={handleUpdate}
+                        loading={loading}
+                        verifying={verifying}
+                        handleResendCode={handleResendCode}
                     />
                 </section>
             </Layouts.Primary>

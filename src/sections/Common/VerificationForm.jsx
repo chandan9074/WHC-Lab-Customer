@@ -7,8 +7,15 @@ import Images from "../../../public/assets/Images";
 import TimerDisplay from "./TimerDisplay";
 import { setCookie } from "cookies-next";
 
-const VerificationForm = ({ title, handleUpdate, verifyShortForm }) => {
-    const timer = 180;
+const VerificationForm = ({
+    title,
+    handleUpdate,
+    verifyShortForm,
+    loading,
+    verifying,
+    handleResendCode,
+}) => {
+    const timer = 150;
     const [verificationCode, setVerificationCode] = useState("");
     const [hiddenMail, setHiddenMail] = useState("");
     const [timeRemaining, setTimeRemaining] = useState(timer);
@@ -18,6 +25,7 @@ const VerificationForm = ({ title, handleUpdate, verifyShortForm }) => {
     const resetTimer = useCallback(() => {
         setCookie("timeRemaining", timer);
         setTimeRemaining(timer);
+        handleResendCode();
     }, [setTimeRemaining]);
 
     function hideEmail(email) {
@@ -48,6 +56,7 @@ const VerificationForm = ({ title, handleUpdate, verifyShortForm }) => {
     //         : "/";
 
     const handleFinish = () => {
+        console.log("clock");
         handleUpdate && handleUpdate(verificationCode);
     };
 
@@ -120,14 +129,24 @@ const VerificationForm = ({ title, handleUpdate, verifyShortForm }) => {
 
                     <button
                         onClick={handleFinish}
-                        disabled={verificationCode.length < 6}
+                        disabled={
+                            verificationCode.length < 6
+                                ? true
+                                : verifying
+                                ? true
+                                : false
+                        }
                         className={`w-full flex justify-center items-center text-white h-[52px]  ${
                             verificationCode.length < 6
                                 ? "bg-neutral-50"
                                 : "bg-brand-blue-500"
                         } rounded-full text-base font-semibold duration-300`}
                     >
-                        Verify {title}
+                        {loading
+                            ? "Please wait verifying..."
+                            : verifying
+                            ? "Redirecting..."
+                            : `Verify ${title}`}
                     </button>
                 </div>
             </div>
