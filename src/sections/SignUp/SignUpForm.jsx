@@ -264,11 +264,16 @@ const SignInForm = () => {
                                         required: true,
                                         message: "Please insert your Email!",
                                     },
+                                    {
+                                        type: "email",
+                                        message:
+                                            "The input is not valid email!",
+                                        // warningOnly: true,
+                                    },
                                 ]}
                                 className="w-full text-base font-medium text-neutral-400 m-0"
                             >
                                 <Input
-                                    type="email"
                                     className="w-full py-[13px] text-base font-normal leading-6"
                                     placeholder="abc@gmail.com"
                                 />
