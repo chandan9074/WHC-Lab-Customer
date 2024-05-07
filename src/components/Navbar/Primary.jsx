@@ -133,7 +133,7 @@ function MobileMenuItem({ isLogin, cartItem }) {
                             <p className="text-brand-blue-500 text-sm sm:text-base leading-6">
                                 My Cart
                             </p>
-                            <p className="py-[1px] sm:py-[3px] px-[5px] sm:px-2 bg-brand-blue-500 text-white text-xs sm:text-sm rounded-full">
+                            <p className="w-8 h-8 flex justify-center items-center bg-brand-blue-500 text-white text-xs sm:text-sm rounded-full">
                                 {cartItem}
                             </p>
                         </button>

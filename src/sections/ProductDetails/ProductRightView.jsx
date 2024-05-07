@@ -247,7 +247,7 @@ const ProductRightView = ({
                             // <Link href={PRODUCT_DETAILS_PATH + data?._id}>
                             <Buttons.OutlinedButton
                                 label="View Details"
-                                className="w-full h-12 hover:text-white"
+                                className="w-full h-12 font-semibold hover:text-white"
                                 onClick={() => {
                                     router.push(
                                         PRODUCT_DETAILS_PATH + data?._id

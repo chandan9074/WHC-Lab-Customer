@@ -25,7 +25,7 @@ const CounterBtn = ({
 
     return (
         <div
-            className={`flex justify-between items-center w-[120px] lg:w-40 h-14 rounded-lg bg-transparent border border-brand-blue-100 px-4 ${className}`}
+            className={`flex justify-between items-center w-[120px] lg:w-40 h-14 rounded-full bg-transparent border border-brand-blue-100 px-4 ${className}`}
         >
             <button onClick={() => counter > 1 && setCounter(counter - 1)}>
                 <Image
