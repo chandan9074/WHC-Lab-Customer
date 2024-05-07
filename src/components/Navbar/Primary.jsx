@@ -7,7 +7,11 @@ import MegaMenu from "../common/MegaMenu";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { MY_ACCOUNT_PATH, MY_CART_PATH } from "@/helpers/slug";
+import {
+    MY_ACCOUNT_PATH,
+    MY_CART_PATH,
+    MY_WISHLIST_PATH,
+} from "@/helpers/slug";
 import { useCart } from "@/contexts/CartContext";
 
 const Primary = () => {
@@ -112,13 +116,15 @@ function MobileMenuItem({ isLogin, cartItem }) {
             /> */}
             {isLogin && (
                 <>
-                    <Image
-                        src={Icons.wishlistIcon_blue}
-                        alt="search"
-                        width={1000}
-                        height={1000}
-                        className="w-5 sm:w-[30px] h-5 sm:h-[30px] cursor-pointer"
-                    />
+                    <Link href={MY_WISHLIST_PATH}>
+                        <Image
+                            src={Icons.wishlistIcon_blue}
+                            alt="search"
+                            width={1000}
+                            height={1000}
+                            className="w-5 sm:w-[30px] h-5 sm:h-[30px] cursor-pointer"
+                        />
+                    </Link>
                     <Link href={MY_ACCOUNT_PATH}>
                         <Image
                             src={Icons.grey_bg_profile_avatar}
