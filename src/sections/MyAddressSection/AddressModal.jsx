@@ -47,39 +47,47 @@ const AddressModal = ({
     const onFinish = async (values) => {
         if (Object.keys(data).length === 0) {
             // For create
-            let body = {};
-            if (addressList.length > 0) {
-                body = { ...values, isDefault: false };
-            } else {
-                body = { ...values, isDefault: true };
-            }
-            const res = await MakeApiCall({
-                apiUrl: MY_ADDRESS_URL,
-                method: "POST",
-                body: body,
-                headers: { Authorization: token },
-            });
+            try {
+                let body = {};
+                if (addressList.length > 0) {
+                    body = { ...values, isDefault: false };
+                } else {
+                    body = { ...values, isDefault: true };
+                }
+                const res = await MakeApiCall({
+                    apiUrl: MY_ADDRESS_URL,
+                    method: "POST",
+                    body: body,
+                    headers: { Authorization: token },
+                });
 
-            toast.success(res?.message);
-            getUserAddress && getUserAddress();
-            onOk();
+                toast.success(res?.message);
+                getUserAddress && getUserAddress();
+                onOk();
+            } catch (error) {
+                toast.error(error.message);
+            }
         } else {
             // For update
-            console.log(values);
-            const res = await MakeApiCall({
-                apiUrl: MY_ADDRESS_URL,
-                method: "PATCH",
-                query: { id: data._id },
-                body: { ...values },
-                headers: { Authorization: token },
-            });
-            console.log(res);
+            try {
+                console.log(values);
+                const res = await MakeApiCall({
+                    apiUrl: MY_ADDRESS_URL,
+                    method: "PATCH",
+                    query: { id: data._id },
+                    body: { ...values },
+                    headers: { Authorization: token },
+                });
+                console.log(res);
 
-            handleDetailsModalOpen(null);
-            toast.success(res?.message);
-            // router.refresh();
-            getUserAddress();
-            onOk();
+                handleDetailsModalOpen(null);
+                toast.success(res?.message);
+                // router.refresh();
+                getUserAddress();
+                onOk();
+            } catch (error) {
+                toast.error(error.message);
+            }
         }
     };
 
@@ -114,6 +122,11 @@ const AddressModal = ({
                             {
                                 required: true,
                                 message: "Address name is required!",
+                            },
+                            {
+                                min: 2,
+                                message:
+                                    "Address name must be 2 characters long!",
                             },
                         ]}
                     >
@@ -166,6 +179,11 @@ const AddressModal = ({
                                     required: true,
                                     message: "State/District is required!",
                                 },
+                                {
+                                    min: 2,
+                                    message:
+                                        "State/District must be 2 characters long!",
+                                },
                             ]}
                         >
                             {/* <Select
@@ -199,6 +217,10 @@ const AddressModal = ({
                                     required: true,
                                     message: "City is required!",
                                 },
+                                {
+                                    min: 2,
+                                    message: "City must be 2 characters long!",
+                                },
                             ]}
                         >
                             <Input
@@ -219,6 +241,11 @@ const AddressModal = ({
                                 {
                                     required: true,
                                     message: "ZIP/Postal code is required!",
+                                },
+                                {
+                                    min: 2,
+                                    message:
+                                        "ZIP/Postal code must be 2 characters long!",
                                 },
                             ]}
                         >
@@ -241,6 +268,11 @@ const AddressModal = ({
                                 required: true,
                                 message: "Street address is required!",
                             },
+                            {
+                                min: 2,
+                                message:
+                                    "Street address must be 2 characters long!",
+                            },
                         ]}
                     >
                         <TextArea
@@ -248,7 +280,7 @@ const AddressModal = ({
                             placeholder="maxLength is 6"
                             maxLength={1000}
                             showCount
-                            className="text-neutral-400 text-sm font-medium mb-6"
+                            className="text-neutral-400 text-sm font-medium "
                         />
                         {/* <Input
                             // defaultValue={data ? data.street : ""}
@@ -256,13 +288,15 @@ const AddressModal = ({
                             placeholder="e.g. Road no., Building no., Floor no. etc"
                         /> */}
                     </Form.Item>
-                    <Buttons.PrimaryButton
-                        label={buttonTitle}
-                        className="flex justify-center items-center h-12 text-white font-semibold"
-                        width="w-full"
-                        type="submit"
-                        // onClick={onOk}
-                    />
+                    <div className="pt-6">
+                        <Buttons.PrimaryButton
+                            label={buttonTitle}
+                            className="flex justify-center items-center h-12 text-white font-semibold"
+                            width="w-full"
+                            type="submit"
+                            // onClick={onOk}
+                        />
+                    </div>
                 </Form>
             </div>
         </div>
