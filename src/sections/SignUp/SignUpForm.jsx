@@ -87,7 +87,7 @@ const SignInForm = () => {
                 firstName: values.firstName,
                 lastName: values.lastName,
                 primaryEmail: values.primaryEmail,
-                company: values.company,
+                companyName: values.companyName,
                 password: values.password,
                 confirmPassword: values.confirmPassword,
             };
