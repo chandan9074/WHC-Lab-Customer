@@ -1,10 +1,23 @@
 import Layouts from "@/layouts";
-import ProductDetailsSection from "@/sections/ProductDetails/ProductDetailsSection";
 import ProductView from "@/sections/ProductDetails/ProductView";
-import RecentlyViewedSlideShowSection from "@/sections/ProductDetails/RecentlyViewedSlideShowSection";
 import ProductService from "@/services/productsService";
+import dynamic from "next/dynamic";
 
-const page = async ({ params }) => {
+const ProductDetailsSection = dynamic(
+    () => import("@/sections/ProductDetails/ProductDetailsSection"),
+    {
+        ssr: false,
+    }
+);
+
+const RecentlyViewedSlideShowSection = dynamic(
+    () => import("@/sections/ProductDetails/RecentlyViewedSlideShowSection"),
+    {
+        ssr: false,
+    }
+);
+
+const Page = async ({ params }) => {
     // const token = getCookie("accessToken", { cookies });
 
     const getSingleProduct = ProductService.getProducts({ id: params.slug });
@@ -28,7 +41,7 @@ const page = async ({ params }) => {
                 <ProductDetailsSection data={singleProductData?.doc} />
                 <RecentlyViewedSlideShowSection
                     data={productData?.docs}
-                // wishListIds={wishListIds}
+                    // wishListIds={wishListIds}
                 />
             </section>
         </Layouts.Primary>
@@ -36,4 +49,4 @@ const page = async ({ params }) => {
     );
 };
 
-export default page;
+export default Page;

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import Icons from "../../../public/assets/Icons";
+import { TERMS_AND_CONDITIONS } from "@/helpers/slug";
 
 const AnimatedFooter = ({ navLinks, socialLinks }) => {
     return (
@@ -145,9 +146,13 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                 viewport={{ once: true }}
             >
                 <div className="flex gap-x-3 text-[#D9D9D9] text-xs font-semibold leading-4 items-center">
-                    <p>Privacy Policy</p>
+                    <Link href={TERMS_AND_CONDITIONS}>
+                        <p>Privacy Policy</p>
+                    </Link>
                     <div className="w-[4.5px] h-[4.5px] bg-[#9194A6] rounded-full" />
-                    <p>Terms of services</p>
+                    <Link href={TERMS_AND_CONDITIONS}>
+                        <p>Terms of services</p>
+                    </Link>
                 </div>
                 <p className="text-[#9194A6] font-normal text-xs leading-4">
                     © 2024 WHC Lab. All rights reserved.{" "}
