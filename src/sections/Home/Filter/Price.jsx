@@ -18,20 +18,20 @@ const Price = ({ setSearchQuery, searchQuery }) => {
     const handleChange = (newValue) => {
         setMinValue(newValue[0]);
         setMaxValue(newValue[1]);
-        // setSearchQuery((prev) => ({
-        //     ...prev,
-        //     minPrice: newValue[0],
-        //     maxPrice: newValue[1],
-        // }));
+        setSearchQuery((prev) => ({
+            ...prev,
+            minPrice: newValue[0],
+            maxPrice: newValue[1],
+        }));
     };
 
     const handleInputFieldChange = (e, type) => {
         if (type === "min") {
             setMinValue(e.target.value);
-            // setSearchQuery((prev) => ({ ...prev, minPrice: e.target.value }));
+            setSearchQuery((prev) => ({ ...prev, minPrice: e.target.value }));
         } else {
             setMaxValue(e.target.value);
-            // setSearchQuery((prev) => ({ ...prev, maxPrice: e.target.value }));
+            setSearchQuery((prev) => ({ ...prev, maxPrice: e.target.value }));
         }
     };
 
@@ -44,11 +44,11 @@ const Price = ({ setSearchQuery, searchQuery }) => {
     };
 
     const handleSliderComplete = (newValue) => {
-        // setSearchQuery((prev) => ({
-        //     ...prev,
-        //     minPrice: newValue[0],
-        //     maxPrice: newValue[1],
-        // }));
+        setSearchQuery((prev) => ({
+            ...prev,
+            minPrice: newValue[0],
+            maxPrice: newValue[1],
+        }));
     };
     return (
         <div>

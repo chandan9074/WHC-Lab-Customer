@@ -19,3 +19,4 @@ export const ORDERS_HISTORY_PATH = "/profile/orders-history";
 export const CREDIT_BALANCE_PATH = "/profile/credit-balance";
 export const MY_CART_PATH = "/my-cart";
 export const ORDER_CONFIRM_PATH = "/order-confirmation";
+export const TERMS_AND_CONDITIONS = "/terms-conditions";

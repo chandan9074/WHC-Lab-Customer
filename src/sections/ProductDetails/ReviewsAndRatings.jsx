@@ -327,10 +327,7 @@ const RightSidecontent = ({
                         Seller
                     </p>
 
-                    <Link
-                        href={SELLER_INFORMATION_PATH}
-                        className="flex gap-x-3 cursor-pointer"
-                    >
+                    <div className="flex gap-x-3">
                         <Image
                             alt="seller-avatar"
                             src={Images.productImage}
@@ -366,7 +363,7 @@ const RightSidecontent = ({
                                 </p>
                             </div>
                         </div>
-                    </Link>
+                    </div>
                 </div>
             </div>
         </div>
