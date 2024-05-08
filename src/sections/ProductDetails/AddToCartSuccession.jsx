@@ -83,12 +83,13 @@ const AddToCartSuccession = ({
                     </div>
 
                     <div className="flex flex-col gap-y-4 lg:gap-y-5 pt-6 lg:pt-12">
-                        <Link href={MY_CART_PATH}>
-                            <Buttons.IconWithLabel
-                                label={"GO TO CART"}
-                                className="w-full h-12 bg-magenta-600 text-white font-semibold rounded-sm"
-                            />
-                        </Link>
+                        {/* <Link href={MY_CART_PATH}> */}
+                        <Buttons.IconWithLabel
+                            label={"GO TO CART"}
+                            className="w-full h-12 bg-magenta-600 text-white font-semibold rounded-full"
+                            onClick={() => router.push(MY_CART_PATH)}
+                        />
+                        {/* </Link> */}
                         {/* <Link href={PRODUCTS_PATH}> */}
                         <Buttons.OutlinedButton
                             label="CONTINUE SHOPPING"

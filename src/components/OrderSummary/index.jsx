@@ -46,10 +46,12 @@ function OrderSummary({
     };
 
     return (
-        <div className={`bg-white p-4 flex flex-col gap-4 ${className}`}>
-            <Title level={5} className="text-center">
+        <div
+            className={`bg-neutral-10 pb-9 px-4 flex flex-col gap-4 border border-neutral-30 rounded-lg ${className}`}
+        >
+            <h5 className="text-center text-base font-semibold leading-6 text-brand-blue-800 px-4 pt-4">
                 ORDER SUMMERY
-            </Title>
+            </h5>
             <Summary
                 total={summaryCalculate?.total || 0}
                 subTotal={summaryCalculate?.subtotal || 0}
@@ -60,22 +62,25 @@ function OrderSummary({
                 showTotalItemCount={true}
             />
             {/* coupon code  */}
-            <div className="flex flex-col gap-2 border-2 p-6">
+            <div className="flex flex-col gap-2 border-2 p-6 rounded-lg">
                 <Text>
-                    Coupon code <span>(Optional)</span>
+                    Coupon code{" "}
+                    <span className="text-neutral-300">(Optional)</span>
                 </Text>
                 <div className="flex flex-row gap-2 ">
                     <Input
-                        placeholder="Basic usage"
+                        placeholder="e.g. WHClab40"
                         onChange={(e) => handleChangeCouponCode(e)}
                         value={couponCode}
+                        className="coupon-input"
                     />
                     <Buttons.PrimaryButton
                         onClick={handleAddCouponCode}
                         label={"Apply"}
                         className={
-                            "md:py-3 py-2 md:px-9 px-6 bg-magenta-600 rounded-sm text-white md:text-base text-sm font-semibold"
+                            "bg-magenta-600 rounded-full text-white md:text-base text-sm font-semibold"
                         }
+                        width="w-[100px]"
                     />
                 </div>
             </div>
@@ -84,7 +89,7 @@ function OrderSummary({
             <Buttons.PrimaryButton
                 label="CHECKOUT"
                 className={
-                    "w-full h-[52px] mt-9 mb-6 md:px-9 px-6 bg-magenta-600 rounded-sm text-white md:text-base text-sm font-semibold disabled:bg-magenta-300"
+                    "w-full h-[52px] mt-9 mb-6 md:px-9 px-6 bg-magenta-600 rounded-full text-white md:text-base text-sm font-semibold disabled:bg-magenta-300"
                 }
                 onClick={checkIfLoggedIn}
                 // disabled={orderItem.length === 0}
