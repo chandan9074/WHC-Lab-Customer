@@ -4,10 +4,13 @@ import { Form, Select } from "antd";
 function PhoneNumberPrefix() {
     const { Option } = Select;
     return (
-        <Form.Item name={"prefix"} noStyle>
+        <Form.Item name={"prefix"} noStyle className="outline-none">
             <Select
                 defaultValue={"+880"}
-                className="flex items-center w-20 h-full"
+                className="flex items-center w-20 focus:border-none"
+                style={{
+                    height: "52px",
+                }}
             >
                 <Option value="+880" className="text-red-800">
                     <span className="text-[#505F79]">+880</span>

@@ -19,7 +19,7 @@
     color: #7a8699 !important;
     font-size: 16px;
     font-family: var(--font-poppins);
-    height: 52px !important;
+    height: 52px;
 }
 
 /* antd input outline */
@@ -51,7 +51,7 @@
 }
 
 .ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
-    border-radius: 2px;
+    border-radius: 4px;
 }
 
 .ant-select-focused:where(
@@ -350,4 +350,9 @@
 /* coupon code */
 .coupon-input{
     border-radius: 25px;
+}
+
+.ant-input-password {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
