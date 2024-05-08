@@ -1,8 +1,4 @@
-// import { isPalloiError } from "./httpGuard";
 
-// const domain = process.env.PALOOI_API_DOMAIN
-//     ? process.env.PALOOI_API_DOMAIN
-//     : "";
 
 export async function whcFetch({
     endpoint, // Include the 'endpoint' parameter
