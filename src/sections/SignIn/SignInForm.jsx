@@ -14,6 +14,7 @@ import MakeApiCall from "@/services/MakeApiCall";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
 import Icons from "../../../public/assets/Icons";
+import { useSearchParams } from "next/navigation";
 
 const SignInForm = () => {
     const { handlePageTransition } = useAuthContext();
@@ -25,6 +26,8 @@ const SignInForm = () => {
     });
     const { googleSingIn, facebookSignIn } = useAuthContext();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirect = searchParams.get("redirect");
 
     const loginWithSocialMedia = [
         {
@@ -81,7 +84,13 @@ const SignInForm = () => {
                 handlePageTransition(responseData);
                 toast.success(responseData.message);
                 getUpdateCartList(responseData.token);
-                router.push("/");
+
+                // You can use the router to navigate to another page
+                if (redirect) {
+                    router.push(redirect);
+                } else {
+                    router.push("/");
+                }
             }
         } catch (error) {
             // console.log("error", error.message);
@@ -144,11 +153,15 @@ const SignInForm = () => {
                                             message:
                                                 "Please insert your Email!",
                                         },
+                                        {
+                                            type: "email",
+                                            message:
+                                                "Please insert valid Email!",
+                                        },
                                     ]}
                                     className="w-full text-base font-medium text-neutral-400 m-0"
                                 >
                                     <Input
-                                        type="email"
                                         className="w-full py-[13px] text-base font-normal leading-6"
                                         placeholder="abc@gmail.com"
                                     />
@@ -170,7 +183,7 @@ const SignInForm = () => {
                                     <Input.Password
                                         autoComplete="off"
                                         placeholder="Min. 8 characters"
-                                        className="w-full py-3 rounded-sm text-[#7a8699] text-sm"
+                                        className="w-full rounded-sm text-[#7a8699] text-sm"
                                     />
                                 </Form.Item>
 

@@ -67,3 +67,11 @@ export const DISTRIBUTORS_URL = `${BASEURL}/distributors`;
 
 // category
 export const CATEGORY_URL = `${BASEURL}/categories`;
+
+// GET Resources
+export const RESOURCES = `${BASEURL}/resources`;
+
+// DOWNLOAD Resources
+export const DOWNLOAD_RESOURCE = `${BASEURL}/files/view-image?key=`;
+//Blogs
+export const BLOG_URL = `${BASEURL}/blogs`;

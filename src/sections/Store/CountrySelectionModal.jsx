@@ -6,6 +6,7 @@ import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import { hasCookie, setCookie } from "cookies-next";
 import { useUserContext } from "@/contexts/UserContext";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 function CountrySelectionModal({ handleLocation }) {
     const [selectLocation, setSelectLocation] = useState();
@@ -18,9 +19,13 @@ function CountrySelectionModal({ handleLocation }) {
     };
 
     const handleSelectLocation = () => {
-        setCookie("selected_location", JSON.stringify(selectLocation));
-        handleLocation(selectLocation);
-        setSelected(false);
+        if (!!selectLocation) {
+            setCookie("selected_location", JSON.stringify(selectLocation));
+            handleLocation(selectLocation);
+            setSelected(false);
+        } else {
+            toast.info("Please select your country first.");
+        }
     };
 
     return (
@@ -30,6 +35,11 @@ function CountrySelectionModal({ handleLocation }) {
             footer={null}
             wrapClassName="custom-modal"
             centered={true}
+            onCancel={() =>
+                !!selectLocation
+                    ? ""
+                    : toast.info("Please select your country first.")
+            }
         >
             <Flex vertical={"column"} align="end" gap={20} className="mt-10">
                 <Select

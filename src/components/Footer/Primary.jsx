@@ -19,12 +19,12 @@ const Primary = () => {
         {
             _id: 3,
             label: "Our Products",
-            path: "/",
+            path: "/store",
         },
         {
             _id: 4,
             label: "Buy Online",
-            path: "/",
+            path: "/store",
         },
         {
             _id: 5,
