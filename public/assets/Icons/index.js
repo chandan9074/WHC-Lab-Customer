@@ -67,8 +67,10 @@ import googleLogo from "./googleLogo.svg";
 import facebookLogo from "./facebookLogo.svg";
 import grey_bg_profile_avatar from "./grey_bg_profile_avatar.svg";
 import mapMarker from "./map.svg";
+import check_circle from "./CheckCircle.svg"
 
 const Icons = {
+    check_circle,
     mapMarker,
     grey_bg_profile_avatar,
     search_blue,
