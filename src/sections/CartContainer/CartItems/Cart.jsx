@@ -152,7 +152,7 @@ function Cart({
 
                     {/* handle quantity */}
                     <div className="col-span-2">
-                        <div className="flex flex-row justify-between items-center border-[1px] border-black-500 p- rounded-sm w-[7.5rem]">
+                        <div className="flex flex-row justify-between items-center border-[1px] border-black-500 p- rounded-full w-[7.5rem]">
                             <button
                                 className="cursor-pointer p-2"
                                 onClick={() => {
@@ -205,8 +205,8 @@ function Cart({
                                 <Image
                                     src={Icons.trash}
                                     alt="PALOOI-TRASH-ICON"
-                                    height={30}
-                                    width={30}
+                                    height={20}
+                                    width={20}
                                 />
                             }
                             className="border-none"
@@ -246,7 +246,7 @@ function Cart({
                                     {product?.productCode}
                                 </Text>
                             </div>
-                            <div className="flex flex-row justify-between items-center border-[1px] border-black-500 p-2 rounded-sm w-[7.5rem]">
+                            <div className="flex flex-row justify-between items-center border-[1px] border-black-500 p-2 rounded-full w-[7.5rem]">
                                 <button
                                     className=" cursor-pointer"
                                     onClick={() =>
