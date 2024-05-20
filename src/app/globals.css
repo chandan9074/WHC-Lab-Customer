@@ -16,7 +16,7 @@
 
 /* andt input */
 .ant-input {
-    color: #7a8699 !important;
+    color: #bdbdbd !important;
     font-size: 16px;
     font-family: var(--font-poppins);
     height: 52px !important;
@@ -63,7 +63,12 @@
     box-shadow: none !important;
 }
 
-.ant-select-focused:where(.css-dev-only-do-not-override-usln0u).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector{
+.ant-select-focused:where(
+        .css-dev-only-do-not-override-usln0u
+    ).ant-select-outlined:not(.ant-select-disabled):not(
+        .ant-select-customize-input
+    ):not(.ant-pagination-size-changer)
+    .ant-select-selector {
     border-color: #0b2848 !important;
     box-shadow: none !important;
     outline: none !important;
@@ -323,31 +328,40 @@
     width: 100%;
     color: white !important;
     /* border-radius: 2rem; */
-  }
+}
 
-  @media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     .leaflet-container {
-      height: 400px; /* Height for small screens */
+        height: 400px; /* Height for small screens */
     }
-  }
+}
 
-  /* Leaflet */
-  .leaflet-popup-content{
+/* Leaflet */
+.leaflet-popup-content {
     margin: 0px 0px 0px 0px !important;
-  }
+}
 
-  .leaflet-popup-content-wrapper {
+.leaflet-popup-content-wrapper {
     border-radius: 2px !important;
     width: 300px !important;
     padding: 0px 0px 0px 0px !important;
 }
 
-
-.leaflet-control-attribution{
+.leaflet-control-attribution {
     display: none !important;
 }
 
 /* coupon code */
-.coupon-input{
+.coupon-input {
     border-radius: 25px;
+}
+
+.ant-input-outlined:focus-within {
+    outline: none !important;
+    border-color: #ebedf0 !important;
+}
+
+.ant-input-outlined:hover {
+    outline: none !important;
+    border-color: #ebedf0 !important;
 }

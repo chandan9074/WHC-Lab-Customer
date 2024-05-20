@@ -2,13 +2,14 @@
 import Buttons from "@/components/Buttons";
 import Text from "@/components/Text";
 import BlogService from "@/services/BlogService";
-import { Form, Spin } from "antd";
-import TextArea from "antd/es/input/TextArea";
+import { Form, Spin, Input } from "antd";
+// import TextArea from "antd/es/input/TextArea";
 import { getCookie } from "cookies-next";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+const { TextArea } = Input;
 
 function CommentForm({ blogId }) {
     const _userInfo = getCookie("userInfo");
@@ -55,8 +56,9 @@ function CommentForm({ blogId }) {
                     ]}
                 >
                     <TextArea
-                        rows={5}
+                        rows={4}
                         placeholder="Please write comment here..."
+                        autoSize={{ minRows: 5, maxRows: 8 }}
                     />
                 </Form.Item>
 
