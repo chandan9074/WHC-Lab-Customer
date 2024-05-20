@@ -1,11 +1,17 @@
 "use client";
 import Buttons from "@/components/Buttons";
-import { DatePicker, Select, Space, Table, Tag } from "antd";
-import React from "react";
+import { DatePicker, Select, Space, Spin, Table, Tag } from "antd";
+import React, { useEffect, useState } from "react";
 import Icons from "../../../../../public/assets/Icons";
 import Image from "next/image";
+import CreditService from "@/services/CreditBalanceService";
+import { getCookie } from "cookies-next";
 
 const CreditBalance = () => {
+    const [creditBalance, setCreditBalance] = useState([]);
+    const [page, setPage] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const token = getCookie("accessToken");
     const columns = [
         {
             title: "No",
@@ -18,7 +24,7 @@ const CreditBalance = () => {
         },
         {
             title: "Order ID",
-            dataIndex: "orderId",
+            dataIndex: "orderNumber",
             key: "orderId",
             width: 174.5,
             render: (text) => (
@@ -27,7 +33,7 @@ const CreditBalance = () => {
         },
         {
             title: "Date",
-            dataIndex: "date",
+            dataIndex: "createdAt",
             key: "date",
             width: 174.5,
             render: (text) => (
@@ -69,6 +75,24 @@ const CreditBalance = () => {
             ),
         },
     ];
+
+    const handleGetCreditBalance = async () => {
+        try {
+            setLoading(true);
+            const res = await CreditService.getCredits(page, token);
+            console.log(res);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        handleGetCreditBalance();
+        console.log("asdf");
+    }, [page]);
+
     const data = [
         {
             key: "1",
@@ -162,8 +186,10 @@ const CreditBalance = () => {
     const onMonthChange = (date, dateString) => {
         console.log(date, dateString);
     };
+
     return (
         <div className="p-4 md:p-8 flex flex-col gap-y-5 md:gap-y-6">
+            <Spin spinning={loading} fullscreen />
             <div className="p-0 px-4 py-6 md:p-8 flex flex-col md:flex-row gap-y-6 md:justify-between md:items-center">
                 <div className="px-4 py-6 flex justify-between md:gap-x-12">
                     <div className="space-y-1">
@@ -274,7 +300,11 @@ const CreditBalance = () => {
                     columns={columns}
                     dataSource={data}
                     pagination={{
-                        pageSize: 50,
+                        total: 100,
+                        pageSize: 5,
+                        onChange: (page) => {
+                            setPage(page);
+                        },
                     }}
                     scroll={{
                         y: 340,
