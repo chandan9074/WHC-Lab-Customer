@@ -2,10 +2,16 @@ const { CREDIT_BALANCE_URL, MAKE_PAYMENT } = require("@/helpers/apiURLS");
 const { default: MakeApiCall } = require("../MakeApiCall");
 import { MethodsStructure } from "../MethodsStructure";
 
-async function getCredits(page, token) {
+async function getCredits(page, search, token) {
+    // Construct query object conditionally
+    const query = { page };
+    if (search) {
+        query.search = search;
+    }
+
     return await MakeApiCall({
         apiUrl: CREDIT_BALANCE_URL,
-        query: { page },
+        query,
         ...MethodsStructure.getMethod({ Authorization: `${token}` }),
     });
 }
