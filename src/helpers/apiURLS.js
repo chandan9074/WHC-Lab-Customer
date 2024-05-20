@@ -77,3 +77,5 @@ export const DOWNLOAD_RESOURCE = `${BASEURL}/files/view-image?key=`;
 export const BLOG_URL = `${BASEURL}/blogs`;
 // credit-balance
 export const CREDIT_BALANCE_URL = `${BASEURL}/orders/credit-orders`;
+// payment using stripe
+export const MAKE_PAYMENT = `${BASEURL}/orders/send-payment-link`;
