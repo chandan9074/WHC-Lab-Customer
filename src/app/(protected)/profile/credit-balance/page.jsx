@@ -1,11 +1,70 @@
 "use client";
 import Buttons from "@/components/Buttons";
-import { DatePicker, Select, Space, Table, Tag } from "antd";
-import React from "react";
-import Icons from "../../../../../public/assets/Icons";
-import Image from "next/image";
+import { Spin, Table, Input } from "antd";
+import { useEffect, useState } from "react";
+import CreditService from "@/services/CreditBalanceService";
+import { getCookie } from "cookies-next";
+import { toast } from "react-toastify";
+
+const { Search } = Input;
 
 const CreditBalance = () => {
+    const [creditBalance, setCreditBalance] = useState([]);
+    const [page, setPage] = useState(0);
+    const [search, setSearch] = useState("");
+    const [loading, setLoading] = useState(false);
+    const token = getCookie("accessToken");
+
+    // Function to format the date
+    const formatDate = (dateString) => {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        const date = new Date(dateString);
+        return new Intl.DateTimeFormat("en-US", options).format(date);
+    };
+
+    const handleGetCreditBalance = async () => {
+        try {
+            setLoading(true);
+            const res = await CreditService.getCredits(page, token);
+            if (res?.status === 200) {
+                console.log(res);
+                const updatedDocs = res.docs.map((doc, index) => ({
+                    ...doc,
+                    key: index + 1, // Adding the 'key' property
+                    createdAt: formatDate(doc.createdAt),
+                }));
+                res.docs = updatedDocs;
+                setCreditBalance(res);
+            }
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handlePay = async (number) => {
+        try {
+            setLoading(true);
+            const res = await CreditService.makePayment(number, token);
+
+            if (res?.status === 200) {
+                toast.success(res?.message);
+                const paymentLink = res?.link;
+
+                if (paymentLink) {
+                    window.open(paymentLink, "_blank");
+                } else {
+                    toast.error("Payment link not found.");
+                }
+            }
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const columns = [
         {
             title: "No",
@@ -17,8 +76,8 @@ const CreditBalance = () => {
             ),
         },
         {
-            title: "Order ID",
-            dataIndex: "orderId",
+            title: "Order Number",
+            dataIndex: "orderNumber",
             key: "orderId",
             width: 174.5,
             render: (text) => (
@@ -27,7 +86,7 @@ const CreditBalance = () => {
         },
         {
             title: "Date",
-            dataIndex: "date",
+            dataIndex: "createdAt",
             key: "date",
             width: 174.5,
             render: (text) => (
@@ -44,9 +103,7 @@ const CreditBalance = () => {
                 <div className="flex justify-center">
                     <p
                         className={`py-1 px-4 text-sm font-medium leading-[21px] rounded-sm ${
-                            record.status === "On Progress"
-                                ? "bg-[#FDF7F4] text-[#FFB020]"
-                                : record.status === "Order Shipped"
+                            record.status === "unpaid"
                                 ? "bg-[#E8F6FC] text-[#16A6DF]"
                                 : "bg-[#F6FAF0] text-[#A8C866]"
                         }`}
@@ -68,102 +125,47 @@ const CreditBalance = () => {
                 </a>
             ),
         },
-    ];
-    const data = [
         {
-            key: "1",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 648.00",
-            status: "On Progress",
-        },
-        {
-            key: "2",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 508.00",
-            status: "Order Shipped",
-        },
-        {
-            key: "3",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 158.00",
-            status: "Delivered",
-        },
-        {
-            key: "4",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 648.00",
-            status: "On Progress",
-        },
-        {
-            key: "5",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 508.00",
-            status: "Order Shipped",
-        },
-        {
-            key: "6",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 158.00",
-            status: "Delivered",
-        },
-        {
-            key: "7",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 648.00",
-            status: "On Progress",
-        },
-        {
-            key: "8",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 508.00",
-            status: "Order Shipped",
-        },
-        {
-            key: "9",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 158.00",
-            status: "Delivered",
-        },
-        {
-            key: "10",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 648.00",
-            status: "On Progress",
-        },
-        {
-            key: "11",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 508.00",
-            status: "Order Shipped",
-        },
-        {
-            key: "12",
-            orderId: "13a5s4dfa6dsf2",
-            date: "Jan 24,2024",
-            amount: "$ 158.00",
-            status: "Delivered",
+            title: "Action",
+            align: "center",
+            width: 0,
+            render: (_, record) => {
+                return (
+                    <>
+                        <button
+                            onClick={() => handlePay(record?.orderNumber)}
+                            className="py-2 px-4 bg-brand-blue-500 text-white rounded-md font-medium text-center text-sm"
+                        >
+                            Pay now
+                        </button>
+                    </>
+                );
+            },
         },
     ];
+
+    useEffect(() => {
+        handleGetCreditBalance();
+    }, [page]);
 
     const handleStatusChange = (value) => {
         console.log(`selected ${value}`);
     };
+
     const onMonthChange = (date, dateString) => {
         console.log(date, dateString);
     };
+
+    const handleChange = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+    };
+
+    console.log(creditBalance);
+
     return (
         <div className="p-4 md:p-8 flex flex-col gap-y-5 md:gap-y-6">
+            <Spin spinning={loading} fullscreen />
             <div className="p-0 px-4 py-6 md:p-8 flex flex-col md:flex-row gap-y-6 md:justify-between md:items-center">
                 <div className="px-4 py-6 flex justify-between md:gap-x-12">
                     <div className="space-y-1">
@@ -192,16 +194,19 @@ const CreditBalance = () => {
             </div>
 
             <div className="p-8 border border-[#EBEDF0] rounded-[4px] space-y-6">
-                <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                    <h4 className="leading-6 text-neutral-500 whitespace-nowrap">
-                        Total Transactions:{" "}
-                        <span className="text-brand-blue-500 font-medium">
-                            04
-                        </span>
-                    </h4>
-
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                     <div className="flex flex-col lg:flex-row gap-6">
-                        <Select
+                        <div>
+                            <input
+                                placeholder="input order number"
+                                className="border py-[7px] px-2"
+                                onChange={(e) => handleChange(e)}
+                            />
+                            <button className="py-2 px-4 bg-brand-blue-500 text-white rounded-e-md font-medium text-center text-sm">
+                                Search
+                            </button>
+                        </div>
+                        {/* <Select
                             className="w-full lg:w-[100px] xl:w-[166px]"
                             style={{
                                 height: "40px",
@@ -221,16 +226,12 @@ const CreditBalance = () => {
                             defaultValue="Status"
                             options={[
                                 {
-                                    value: "On Progress",
-                                    label: "On Progress",
+                                    value: "paid",
+                                    label: "Paid",
                                 },
                                 {
-                                    value: "Order Shipped",
-                                    label: "Order Shipped",
-                                },
-                                {
-                                    value: "Delivered",
-                                    label: "Delivered",
+                                    value: "unpaid",
+                                    label: "Unpaid",
                                 },
                             ]}
                             onChange={handleStatusChange}
@@ -266,19 +267,30 @@ const CreditBalance = () => {
                                     className="w-3 h-3"
                                 />
                             }
-                        />
+                        /> */}
                     </div>
+
+                    <h4 className="leading-6 text-neutral-500 whitespace-nowrap">
+                        Total Transactions:{" "}
+                        <span className="text-brand-blue-500 font-medium">
+                            {creditBalance?.totalDocuments}
+                        </span>
+                    </h4>
                 </div>
                 <Table
                     className="tab-scroll"
                     columns={columns}
-                    dataSource={data}
+                    dataSource={creditBalance?.docs}
                     pagination={{
-                        pageSize: 50,
+                        total: creditBalance?.totalDocuments,
+                        pageSize: 10,
+                        onChange: (page) => {
+                            setPage(page);
+                        },
                     }}
-                    scroll={{
-                        y: 340,
-                    }}
+                    // scroll={{
+                    //     y: 340,
+                    // }}
                 />
             </div>
         </div>
