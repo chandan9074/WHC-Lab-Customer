@@ -8,28 +8,35 @@ import { getCookie } from "cookies-next";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 function CommentForm({ blogId }) {
-    const userInfo = JSON.parse(getCookie("userInfo"));
+    const _userInfo = getCookie("userInfo");
+    const userInfo = _userInfo && JSON.parse(_userInfo);
     const token = getCookie("accessToken");
     const router = useRouter();
+    const pathname = usePathname();
     const [loading, setLoading] = useState(false);
 
     const handleMakeComment = async (values) => {
-        setLoading(true);
-        values.blogId = blogId;
-        values.author = {
-            _id: userInfo._id,
-            authorName: userInfo?.firstName + " " + userInfo?.lastName,
-        };
+        if (token) {
+            setLoading(true);
+            values.blogId = blogId;
+            values.author = {
+                _id: userInfo._id,
+                authorName: userInfo?.firstName + " " + userInfo?.lastName,
+            };
 
-        const res = await BlogService.createBlogs(values, token);
+            const res = await BlogService.createBlogs(values, token);
 
-        if (res?.status === 200) {
-            toast.success(res?.message);
-            router.refresh();
+            if (res?.status === 200) {
+                toast.success(res?.message);
+                router.refresh();
+            }
+            setLoading(false);
+        } else {
+            router.push(`/log-in?redirect=${pathname}`);
         }
-        setLoading(false);
     };
 
     return (
