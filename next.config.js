@@ -42,6 +42,12 @@ const nextConfig = {
                 port: "5003",
                 pathname: "/**",
             },
+            {
+                protocol: "http",
+                hostname: "192.168.10.117",
+                port: "5002",
+                pathname: "/**",
+            },
         ],
     },
     reactStrictMode: false,
