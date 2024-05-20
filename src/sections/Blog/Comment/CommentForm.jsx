@@ -18,6 +18,7 @@ function CommentForm({ blogId }) {
     const router = useRouter();
     const pathname = usePathname();
     const [loading, setLoading] = useState(false);
+    const [form] = Form.useForm();
 
     const handleMakeComment = async (values) => {
         if (token) {
@@ -32,6 +33,7 @@ function CommentForm({ blogId }) {
 
             if (res?.status === 200) {
                 toast.success(res?.message);
+                form.resetFields();
                 router.refresh();
             }
             setLoading(false);
@@ -45,7 +47,7 @@ function CommentForm({ blogId }) {
             <Spin spinning={loading} fullscreen />
             <Text.Secondary>Leave a Comment</Text.Secondary>
 
-            <Form layout="vertical" onFinish={handleMakeComment}>
+            <Form layout="vertical" onFinish={handleMakeComment} form={form}>
                 <Form.Item
                     name="commentText"
                     rules={[
