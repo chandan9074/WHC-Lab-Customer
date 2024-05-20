@@ -72,7 +72,7 @@ async function BlogDetails({ params }) {
 
                         {/* comment section */}
                         <CommentList comment={singleBlogData?.comment} />
-                        <CommentForm />
+                        <CommentForm blogId={singleBlogData?._id} />
                     </div>
 
                     {/* blog page sidebar */}
