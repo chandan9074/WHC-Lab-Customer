@@ -73,26 +73,34 @@ const ProductRightView = ({
     };
 
     const handleAddToCart = async () => {
-        const stockId = data?.variants[0].stockId;
-        console.log(stockId);
-        try {
-            const res = await createCartItem(
-                data?._id,
-                quantity,
-                stockId,
-                token
+        console.log(data);
+        if (data.inStock) {
+            const locationId = JSON.parse(getCookie("selected_location"));
+            const variant = data.variants.find(
+                (item) => item.location._id === locationId
             );
-            setLoading(true);
-
-            if (res?.status === 200) {
-                toast.success(res?.message);
-                getUpdateCartList(token);
-                setOpenSuccessionModal(true);
+            const stockId = variant.stockId;
+            try {
+                const res = await createCartItem(
+                    data?._id,
+                    quantity,
+                    stockId,
+                    variant.location.currency,
+                    token
+                );
+                setLoading(true);
+                if (res?.status === 200) {
+                    toast.success(res?.message);
+                    getUpdateCartList(token);
+                    setOpenSuccessionModal(true);
+                }
+            } catch (e) {
+                toast.error(e?.message);
+            } finally {
+                setLoading(false);
             }
-        } catch (e) {
-            toast.error(e?.message);
-        } finally {
-            setLoading(false);
+        } else {
+            toast.error("This product is out of stock");
         }
     };
 

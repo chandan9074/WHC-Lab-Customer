@@ -23,6 +23,7 @@ import {
 } from "@/helpers/utils";
 import MakeApiCall from "@/services/MakeApiCall";
 import { ORDERS_URL } from "@/helpers/apiURLS";
+import CreditService from "@/services/CreditBalanceService";
 const GuestAddressForm = dynamic(() => import("./GuestAddressForm"), {
     ssr: false,
 });
@@ -48,14 +49,47 @@ function PlaceOrderContainer({ addressData }) {
     const onFinish = (values) => {
         // console.log("values", values);
 
-        const orderIds = orderItem.map((item) => item._id);
-        const body = {
-            paymentMethod: paymentMethod,
-            cartId: orderIds,
-        };
-        handlePlaceOrder(body);
-        console.log(orderIds, "order item");
+        console.log(orderItem, "order item");
+
+        const stockOutProduct = orderItem.filter(
+            (item) => orderItem.inStock === false
+        );
+
+        if (orderItem.length > 0 && stockOutProduct.length === 0) {
+            const orderIds = orderItem.map((item) => item._id);
+            const body = {
+                paymentMethod: paymentMethod,
+                cartId: orderIds,
+            };
+            handlePlaceOrder(body);
+        } else {
+            toast.error("Some products are stock out. Please remove those!!");
+        }
+
+        // console.log(orderIds, "order item");
     };
+
+    // const handlePay = async (number) => {
+    //     try {
+    //         setLoading(true);
+    //         const res = await CreditService.makePayment(number, token);
+
+    //         if (res?.status === 200) {
+    //             toast.success(res?.message);
+    //             const paymentLink = res?.link;
+
+    //             if (paymentLink) {
+    //                 window.open(paymentLink, "_blank");
+    //             } else {
+    //                 toast.error("Payment link not found.");
+    //             }
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
     const handlePlaceOrder = async (body) => {
         try {
@@ -68,6 +102,15 @@ function PlaceOrderContainer({ addressData }) {
 
             if (response.status === 200) {
                 toast.success(response.message);
+                toast.success(response?.message);
+                console.log(response.doc.link);
+                const paymentLink = response?.doc.link;
+
+                if (paymentLink) {
+                    window.location.href = paymentLink;
+                } else {
+                    toast.error("Payment link not found.");
+                }
             }
         } catch (error) {
             toast.error(error.message);
