@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Spin, Typography } from "antd";
 import { useCart } from "@/contexts/CartContext";
 import Link from "next/link";
@@ -7,6 +7,8 @@ import Buttons from "@/components/Buttons";
 import CartList from "./CartItems";
 import { PRODUCTS_PATH } from "@/helpers/slug";
 import OrderSummary from "@/components/OrderSummary";
+import io from "socket.io-client";
+import { WHC_LAB_SOCKET_CONNECTION } from "@/utils/constant";
 
 const { Text, Title } = Typography;
 
@@ -15,6 +17,11 @@ function CartContainer() {
         useCart();
     const [orderItem, setOrderItem] = useState([]);
     const [summaryCalculate, setSummaryCalculate] = useState();
+    const socket = io(WHC_LAB_SOCKET_CONNECTION);
+
+    const calculateOrder = () => {
+        console.log(cartItem);
+    };
 
     const addOrderItem = (newCartItem, checked, quantity) => {
         if (checked) {
@@ -71,6 +78,9 @@ function CartContainer() {
     };
 
     console.log(orderItem);
+    useEffect(() => {
+        calculateOrder();
+    }, [orderItem]);
 
     return (
         <div>

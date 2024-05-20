@@ -53,7 +53,7 @@ const CreditBalance = () => {
                 const paymentLink = res?.link;
 
                 if (paymentLink) {
-                    window.open(paymentLink, "_blank");
+                    window.location.href = paymentLink;
                 } else {
                     toast.error("Payment link not found.");
                 }
