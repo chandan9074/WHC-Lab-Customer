@@ -73,8 +73,14 @@ const ProductRightView = ({
     };
 
     const handleAddToCart = async () => {
+        const stockId = data?.variants[0].stockId;
         try {
-            const res = await createCartItem(data?._id, quantity, token);
+            const res = await createCartItem(
+                data?._id,
+                quantity,
+                stockId,
+                token
+            );
             setLoading(true);
 
             if (res?.status === 200) {
