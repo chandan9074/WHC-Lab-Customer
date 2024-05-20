@@ -74,6 +74,7 @@ const ProductRightView = ({
 
     const handleAddToCart = async () => {
         const stockId = data?.variants[0].stockId;
+        console.log(stockId);
         try {
             const res = await createCartItem(
                 data?._id,

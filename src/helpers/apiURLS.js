@@ -77,3 +77,5 @@ export const DOWNLOAD_RESOURCE = `${BASEURL}/files/view-image?key=`;
 export const BLOG_URL = `${BASEURL}/blogs`;
 // Comments
 export const COMMENTS = `${BASEURL}/comments`;
+//apply for credit balance
+export const APPLY_FOR_CREDIT_BALANCE = `${BASEURL}/users/apply-for-credit`;
