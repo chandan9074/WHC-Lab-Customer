@@ -38,6 +38,8 @@ async function BlogDetails({ params }) {
     console.log("Previous Blog:", prevBlog);
     console.log("Next Blog:", nextBlog);
 
+    console.log({ singleBlogData });
+
     return (
         <Layouts.Secondary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading={singleBlogData?.title} />
@@ -69,7 +71,7 @@ async function BlogDetails({ params }) {
                         <div className="h-[1px] bg-stroke-new w-full"></div>
 
                         {/* comment section */}
-                        <CommentList />
+                        <CommentList comment={singleBlogData?.comment} />
                         <CommentForm />
                     </div>
 
