@@ -12,6 +12,7 @@ import { useCart } from "@/contexts/CartContext";
 import { toast } from "react-toastify";
 import { useWishlistContext } from "@/contexts/WishlistContext";
 import { usePathname } from "next/navigation";
+import { useUserContext } from "@/contexts/UserContext";
 
 const ProductRightView = ({
     forModal = false,
@@ -24,6 +25,7 @@ const ProductRightView = ({
     const [loading, setLoading] = useState(false);
     const { getUpdateCartList, createCartItem } = useCart();
     const [openSuccessionModal, setOpenSuccessionModal] = useState(false);
+    const { currency } = useUserContext();
     const router = useRouter();
     const {
         createProductWishlist,
@@ -194,15 +196,16 @@ const ProductRightView = ({
             </div>
 
             <div className="flex items-center text-center gap-x-2">
-                {data?.offerPrice && (
-                    <p className="text-neutral-300 line-through font-medium">
-                        $ {data?.price}
+                {data[currency.field] && (
+                    <p className="text-brand-blue-500 font-semibold text-xl">
+                        {currency.icon}
+                        {data[currency.field]}
                     </p>
                 )}
 
-                <p className="text-brand-blue-500 font-semibold text-xl">
+                {/* <p className="text-brand-blue-500 font-semibold text-xl">
                     $ {data?.offerPrice ? data?.offerPrice : data?.price}
-                </p>
+                </p> */}
             </div>
 
             <div className="my-10 w-full h-[1px] bg-[#EBEDF0]" />
@@ -279,13 +282,8 @@ const ProductRightView = ({
                         )}
                         <Buttons.PrimaryButton
                             label={`ADD TO CART - $ ${
-                                data.offerPrice
-                                    ? formatToTwoDecimalPlaces(
-                                          data.offerPrice * quantity
-                                      )
-                                    : formatToTwoDecimalPlaces(
-                                          data.price * quantity
-                                      )
+                                data[currency.field] &&
+                                data[currency.field] * quantity
                             }`}
                             className="h-[52px] bg-magenta-600 text-white font-semibold"
                             width="w-full"

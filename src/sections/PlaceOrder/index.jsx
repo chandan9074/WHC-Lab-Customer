@@ -24,6 +24,7 @@ import {
 import MakeApiCall from "@/services/MakeApiCall";
 import { ORDERS_URL } from "@/helpers/apiURLS";
 import CreditService from "@/services/CreditBalanceService";
+import { useUserContext } from "@/contexts/UserContext";
 const GuestAddressForm = dynamic(() => import("./GuestAddressForm"), {
     ssr: false,
 });
@@ -42,6 +43,7 @@ function PlaceOrderContainer({ addressData }) {
     const [orderItem, setOrderItem] = useState([]);
     const router = useRouter();
     const token = getCookie("accessToken");
+    const { currency } = useUserContext();
 
     const searchParams = useSearchParams();
     const userType = `${searchParams}`.split("=")[1];
@@ -101,15 +103,14 @@ function PlaceOrderContainer({ addressData }) {
             });
 
             if (response.status === 200) {
-                toast.success(response.message);
                 toast.success(response?.message);
                 console.log(response.doc.link);
                 const paymentLink = response?.doc.link;
 
                 if (paymentLink) {
                     window.location.href = paymentLink;
-                } else {
-                    toast.error("Payment link not found.");
+                } else if (body.paymentMethod === "creditBalance") {
+                    router.push(`${ORDER_CONFIRM_PATH}/${response.doc.number}`);
                 }
             }
         } catch (error) {

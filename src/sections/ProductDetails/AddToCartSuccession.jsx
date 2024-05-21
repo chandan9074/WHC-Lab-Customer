@@ -1,3 +1,4 @@
+"use client";
 import Buttons from "@/components/Buttons";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import Image from "next/image";
@@ -5,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Icons from "../../../public/assets/Icons";
 import { MY_ACCOUNT_PATH, MY_CART_PATH, PRODUCTS_PATH } from "@/helpers/slug";
+import { useUserContext } from "@/contexts/UserContext";
 
 const AddToCartSuccession = ({
     data,
@@ -13,6 +15,7 @@ const AddToCartSuccession = ({
     setOpenSuccessionModal,
 }) => {
     const router = useRouter();
+    const { currency } = useUserContext();
     return (
         <div className="p-3">
             <div className="flex items-center gap-x-2">
@@ -67,18 +70,17 @@ const AddToCartSuccession = ({
                             <span className="font-medium text-base">
                                 Unit Price:
                             </span>{" "}
-                            ${" "}
-                            {data?.offerPrice ? data?.offerPrice : data?.price}
+                            {currency.icon}
+                            {data[currency.field] && data[currency.field]}
                         </h3>
 
                         <h3 className="text-neutral-700 font-normal text-sm">
                             <span className="font-medium text-base">
                                 Sub Total:
                             </span>{" "}
-                            ${" "}
-                            {data?.offerPrice
-                                ? data?.offerPrice * quantity
-                                : data?.price * quantity}
+                            {currency.icon}
+                            {data[currency.field] &&
+                                data[currency.field] * quantity}
                         </h3>
                     </div>
 
