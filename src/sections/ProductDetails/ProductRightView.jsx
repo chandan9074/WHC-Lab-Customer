@@ -36,9 +36,11 @@ const ProductRightView = ({
     useEffect(() => {
         const locationId = JSON.parse(getCookie("selected_location"));
         if (locationId) {
+            console.log({ locationId, data });
             const stock = data?.variants.find(
-                (item) => item.location === locationId
+                (item) => item.location._id === locationId
             );
+
             if (stock) {
                 setMaxLimit(stock?.quantity);
             }
@@ -73,19 +75,34 @@ const ProductRightView = ({
     };
 
     const handleAddToCart = async () => {
-        try {
-            const res = await createCartItem(data?._id, quantity, token);
-            setLoading(true);
-
-            if (res?.status === 200) {
-                toast.success(res?.message);
-                getUpdateCartList(token);
-                setOpenSuccessionModal(true);
+        console.log(data);
+        if (data.inStock) {
+            const locationId = JSON.parse(getCookie("selected_location"));
+            const variant = data.variants.find(
+                (item) => item.location._id === locationId
+            );
+            const stockId = variant.stockId;
+            try {
+                const res = await createCartItem(
+                    data?._id,
+                    quantity,
+                    stockId,
+                    variant.location.currency,
+                    token
+                );
+                setLoading(true);
+                if (res?.status === 200) {
+                    toast.success(res?.message);
+                    getUpdateCartList(token);
+                    setOpenSuccessionModal(true);
+                }
+            } catch (e) {
+                toast.error(e?.message);
+            } finally {
+                setLoading(false);
             }
-        } catch (e) {
-            toast.error(e?.message);
-        } finally {
-            setLoading(false);
+        } else {
+            toast.error("This product is out of stock");
         }
     };
 
@@ -111,6 +128,10 @@ const ProductRightView = ({
     //         setQuantity((ps) => 1);
     //     }
     // }, [quantity]);
+
+    function formatToTwoDecimalPlaces(value) {
+        return Number(value.toFixed(2));
+    }
 
     return (
         <div className={`${forModal ? "" : "w-[486px]"} px-6`}>
@@ -259,8 +280,12 @@ const ProductRightView = ({
                         <Buttons.PrimaryButton
                             label={`ADD TO CART - $ ${
                                 data.offerPrice
-                                    ? data.offerPrice * quantity
-                                    : data.price * quantity
+                                    ? formatToTwoDecimalPlaces(
+                                          data.offerPrice * quantity
+                                      )
+                                    : formatToTwoDecimalPlaces(
+                                          data.price * quantity
+                                      )
                             }`}
                             className="h-[52px] bg-magenta-600 text-white font-semibold"
                             width="w-full"

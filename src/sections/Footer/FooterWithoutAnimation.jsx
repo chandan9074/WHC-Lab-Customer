@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import Icons from "../../../public/assets/Icons";
+import { TERMS_AND_CONDITIONS } from "@/helpers/slug";
 
 const FooterWithoutAnimation = ({ navLinks, socialLinks }) => {
     return (
@@ -112,9 +113,13 @@ const FooterWithoutAnimation = ({ navLinks, socialLinks }) => {
             </div>
             <div className="text-white border-t border-[#2B2E3A] py-[30px] w-full flex flex-col md:flex-row gap-y-9 items-center justify-center md:justify-between">
                 <div className="flex gap-x-3 text-[#D9D9D9] text-xs font-semibold leading-4 items-center">
-                    <p>Privacy Policy</p>
+                    <Link href={TERMS_AND_CONDITIONS}>
+                        <p>Privacy Policy</p>
+                    </Link>
                     <div className="w-[4.5px] h-[4.5px] bg-[#9194A6] rounded-full" />
-                    <p>Terms of services</p>
+                    <Link href={TERMS_AND_CONDITIONS}>
+                        <p>Terms of services</p>
+                    </Link>
                 </div>
                 <p className="text-[#9194A6] font-normal text-xs leading-4">
                     © 2024 WHC Lab. All rights reserved.{" "}

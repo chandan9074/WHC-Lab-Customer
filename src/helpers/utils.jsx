@@ -94,3 +94,38 @@ export const debounce = (func, delay) => {
         }, delay);
     };
 };
+
+export function calculateOrderItemsTotalPrice(
+    orderItems,
+    taxRate,
+    returnTax = false
+) {
+    const totalPrice = orderItems?.reduce(
+        (acc, item) =>
+            acc +
+            (item?.product?.offerPrice
+                ? item?.product?.offerPrice
+                : item?.product?.price || 0) *
+                (item?.quantity || 0),
+        0
+    );
+    if (returnTax) {
+        return (totalPrice * 0.05).toFixed(2);
+    } else {
+        const totalTax = totalPrice * taxRate;
+        return (totalPrice + totalTax).toFixed(2);
+    }
+}
+export function calculateOrderItemsSubTotalPrice(orderItems) {
+    const subTotalPrice = orderItems?.reduce(
+        (total, item) =>
+            total +
+            (item?.product?.offerPrice
+                ? item?.product?.offerPrice
+                : item?.product?.price || 0) *
+                (item?.quantity || 0),
+
+        0
+    );
+    return subTotalPrice;
+}
