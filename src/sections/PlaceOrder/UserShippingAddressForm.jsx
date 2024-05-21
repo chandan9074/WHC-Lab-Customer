@@ -164,7 +164,7 @@ const UserShippingAddressForm = ({ data, setAddress }) => {
                         label={"Add New Address"}
                         onClick={handleAddressPageNavigation}
                         className={
-                            "md:py-3 py-2 md:px-9 px-6 bg-magenta-600 rounded-sm text-white md:text-base text-sm font-semibold"
+                            "md:py-3 py-2 md:px-9 px-6 bg-magenta-600 rounded-full text-white md:text-base text-sm font-semibold"
                         }
                     />
                 </div>

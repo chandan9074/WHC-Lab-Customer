@@ -9,6 +9,7 @@ import { PRODUCTS_PATH } from "@/helpers/slug";
 import OrderSummaryWithDetails from "./OrderSummaryWithDetails";
 import { getCookie, hasCookie, deleteCookie } from "cookies-next";
 import { usePathname, useRouter } from "next/navigation";
+import Buttons from "@/components/Buttons";
 
 const { Text } = Typography;
 
@@ -26,15 +27,10 @@ const OrderConfirmation = ({ orderSummary }) => {
     return (
         <div className="container mx-auto px-6 sm:px-0 py-12 flex flex-col gap-8">
             <div>
-                <div className="border-b-2 pb-4 mb-4">
-                    <Text className="font-bold text-2xl text-neutral-700">
-                        Order Confirmation
-                    </Text>
-                </div>
                 <div className="flex flex-col items-center justify-center gap-4">
                     <Image
                         alt="order confirmation icon"
-                        src={Icons.order_confirmation}
+                        src={Icons.order_confirm}
                         height={140}
                         width={190}
                     />
@@ -52,14 +48,14 @@ const OrderConfirmation = ({ orderSummary }) => {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col gap-4">
-                <div className="hidden md:block border-b-2 pb-4 mb-4">
+            <div className="flex flex-col gap-4 bg-neutral-10 rounded-lg border border-stroke-new">
+                <div className="hidden md:block border-b p-6 mb-4">
                     <Text className="font-bold text-2xl text-neutral-700">
                         Order Summary
                     </Text>
                 </div>
 
-                <div className="py-6 px-4 md:py-12 md:px-6 bg-white flex flex-col justify-end gap-y-6 md:gap-y-12">
+                <div className="py-6 px-4 md:py-12 md:px-6  flex flex-col justify-end gap-y-6 md:gap-y-12">
                     <div className="grid  sm:grid-cols-1 md:grid-cols-2 gap-4">
                         <OrderSummaryWithDetails
                             orderSummary={orderSummary?.lineItems}
@@ -76,12 +72,21 @@ const OrderConfirmation = ({ orderSummary }) => {
                         />
                     </div>
 
-                    <Link
+                    {/* <Link
                         href={PRODUCTS_PATH}
-                        className="text-base font-semibold text-neutral-700 leading-6 border border-neutral-700 rounded-sm p-4 ml-auto w-full md:w-auto flex justify-center"
+                        className="text-base font-semibold text-neutral-700 leading-6 border border-neutral-700 rounded-full p-4 ml-auto w-full md:w-auto flex justify-center"
                     >
                         CONTINUE SHOPPING
-                    </Link>
+                    </Link> */}
+                    <div className="flex w-full justify-end">
+                        <Buttons.OutlinedButton
+                            label="Continue Shopping"
+                            className="h-12 font-semibold hover:text-white"
+                            onClick={() => {
+                                router.push("/store");
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

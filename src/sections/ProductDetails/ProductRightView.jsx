@@ -281,7 +281,7 @@ const ProductRightView = ({
                             // </Link>
                         )}
                         <Buttons.PrimaryButton
-                            label={`ADD TO CART - $ ${
+                            label={`ADD TO CART - ${currency.icon} ${
                                 data[currency.field] &&
                                 data[currency.field] * quantity
                             }`}
