@@ -9,8 +9,8 @@ export const handleInactiveFontColor = (props, value) =>
 
 const ShippingMethod = ({ shippingMethod, onChange }) => {
     return (
-        <div className="mt-5">
-            <div className="bg-[#EBEDF0] p-4 rounded-t-sm">
+        <div className="border border-stroke-new rounded-lg">
+            <div className="bg-[#EBEDF0] p-4 rounded-t-lg">
                 <Title
                     level={4}
                     className="m-0 text-sm md:text-lg text-neutral-700"
@@ -18,7 +18,7 @@ const ShippingMethod = ({ shippingMethod, onChange }) => {
                     2. SHIPPING METHOD
                 </Title>
             </div>
-            <div className="bg-white p-4">
+            <div className="bg-white p-4 rounded-lg">
                 {/* <Space direction="vertical" gap={10}> */}
                 <Radio.Group
                     onChange={onChange}

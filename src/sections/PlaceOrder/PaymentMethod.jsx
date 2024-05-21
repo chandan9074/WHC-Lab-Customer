@@ -38,8 +38,8 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
     };
 
     return (
-        <div className="">
-            <div className="bg-[#EBEDF0] p-4 rounded-t-sm">
+        <div className="border border-stroke-new rounded-lg">
+            <div className="bg-[#EBEDF0] p-4 rounded-t-lg">
                 <Title
                     level={4}
                     className="m-0 text-sm md:text-lg text-neutral-700"
@@ -47,7 +47,7 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
                     3. PAYMENT METHOD
                 </Title>
             </div>
-            <div className="bg-white p-4">
+            <div className="bg-white p-4 rounded-lg">
                 <Radio.Group className="w-full" defaultValue={paymentMethod}>
                     <div className="flex flex-col gap-4">
                         {/* <Radio

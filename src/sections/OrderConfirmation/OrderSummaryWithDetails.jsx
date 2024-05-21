@@ -5,9 +5,8 @@ import { Typography } from "antd";
 const { Text } = Typography;
 
 const OrderSummaryWithDetails = ({ orderSummary }) => {
-    console.log("order---------------", orderSummary);
     return (
-        <div className="border p-4 bg-white">
+        <div className="border p-4 rounded-lg">
             <div className="flex items-center justify-between border-b pb-2 mb-4">
                 <Text className="font-bold text-neutral-700">
                     Total items ({orderSummary.length} items)

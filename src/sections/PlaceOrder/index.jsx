@@ -159,7 +159,7 @@ function PlaceOrderContainer({ addressData }) {
 
     return (
         <div>
-            <Divider className="m-1" />
+            <Divider className="mb-9" />
             <Spin spinning={loading} fullscreen />
 
             <Form
@@ -169,46 +169,48 @@ function PlaceOrderContainer({ addressData }) {
                 onFinish={onFinish}
                 className="grid md:grid-cols-3 grid-cols-1  gap-0 md:gap-4"
             >
-                <div className="col-span-2 ">
+                <div className="col-span-2 space-y-6">
                     {/* Address Form */}
-                    <div className="bg-[#EBEDF0] p-4 rounded-t-sm">
-                        <Title
-                            level={4}
-                            className="m-0 text-sm md:text-lg text-neutral-700"
-                        >
-                            1. SHIPPING ADDRESS
-                        </Title>
-                    </div>
+                    <div className="rounded-lg border border-stroke-new">
+                        <div className="bg-[#EBEDF0] p-4">
+                            <Title
+                                level={4}
+                                className="m-0 text-sm md:text-lg text-neutral-700"
+                            >
+                                1. SHIPPING ADDRESS
+                            </Title>
+                        </div>
 
-                    {userType === "guest" ? (
-                        <>
-                            <GuestAddressForm
-                                inputStyle={inputStyle}
-                                onToggleChange={onToggleChange}
-                                billingAddress={false}
-                            />
-                            {!sameAddress && (
+                        {userType === "guest" ? (
+                            <>
                                 <GuestAddressForm
                                     inputStyle={inputStyle}
-                                    billingAddress={true}
+                                    onToggleChange={onToggleChange}
+                                    billingAddress={false}
                                 />
-                            )}
-                        </>
-                    ) : (
-                        <div className="flex flex-col justify-center rounded-sm p-4 lg:py-12 lg:px-[58px] bg-white">
-                            <UserShippingAddressForm
-                                data={addressData}
-                                setAddress={setAddress}
-                            />
-
-                            {!sameAddress && (
+                                {!sameAddress && (
+                                    <GuestAddressForm
+                                        inputStyle={inputStyle}
+                                        billingAddress={true}
+                                    />
+                                )}
+                            </>
+                        ) : (
+                            <div className="flex flex-col justify-center p-4 lg:py-12 lg:px-[58px] bg-white rounded-lg">
                                 <UserShippingAddressForm
                                     data={addressData}
-                                    setAddress={setBillingAddress}
+                                    setAddress={setAddress}
                                 />
-                            )}
-                        </div>
-                    )}
+
+                                {!sameAddress && (
+                                    <UserShippingAddressForm
+                                        data={addressData}
+                                        setAddress={setBillingAddress}
+                                    />
+                                )}
+                            </div>
+                        )}
+                    </div>
 
                     {/* Shipping Form */}
                     <Form.Item name="shippingMethod">
