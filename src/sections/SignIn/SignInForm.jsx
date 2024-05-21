@@ -183,7 +183,7 @@ const SignInForm = () => {
                                     <Input.Password
                                         autoComplete="off"
                                         placeholder="Min. 8 characters"
-                                        className="w-full rounded-sm text-[#7a8699] text-sm"
+                                        className="w-full rounded-sm text-[#7a8699] text-sm py-0"
                                     />
                                 </Form.Item>
 

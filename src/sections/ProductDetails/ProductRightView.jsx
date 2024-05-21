@@ -38,9 +38,11 @@ const ProductRightView = ({
     useEffect(() => {
         const locationId = JSON.parse(getCookie("selected_location"));
         if (locationId) {
+            console.log({ locationId, data });
             const stock = data?.variants.find(
-                (item) => item.location === locationId
+                (item) => item.location._id === locationId
             );
+
             if (stock) {
                 setMaxLimit(stock?.quantity);
             }
@@ -128,6 +130,10 @@ const ProductRightView = ({
     //         setQuantity((ps) => 1);
     //     }
     // }, [quantity]);
+
+    function formatToTwoDecimalPlaces(value) {
+        return Number(value.toFixed(2));
+    }
 
     return (
         <div className={`${forModal ? "" : "w-[486px]"} px-6`}>
@@ -275,7 +281,7 @@ const ProductRightView = ({
                             // </Link>
                         )}
                         <Buttons.PrimaryButton
-                            label={`ADD TO CART - $ ${
+                            label={`ADD TO CART - ${currency.icon} ${
                                 data[currency.field] &&
                                 data[currency.field] * quantity
                             }`}

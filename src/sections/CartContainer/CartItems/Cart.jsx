@@ -165,7 +165,7 @@ function Cart({
                             >
                                 <Image
                                     src={Icons.minus}
-                                    alt="PALOOI-MINUS-ICON"
+                                    alt="WHC-MINUS-ICON"
                                     width={20}
                                     height={5}
                                 />
@@ -181,7 +181,7 @@ function Cart({
                             >
                                 <Image
                                     src={Icons.plus}
-                                    alt="PALOOI-PLUS-ICON"
+                                    alt="WHC-PLUS-ICON"
                                     width={18}
                                     height={5}
                                 />
@@ -204,7 +204,7 @@ function Cart({
                             icon={
                                 <Image
                                     src={Icons.trash}
-                                    alt="PALOOI-TRASH-ICON"
+                                    alt="WHC-TRASH-ICON"
                                     height={20}
                                     width={20}
                                 />
@@ -256,7 +256,7 @@ function Cart({
                                 >
                                     <Image
                                         src={Icons.minus}
-                                        alt="PALOOI-MINUS-ICON"
+                                        alt="WHC-MINUS-ICON"
                                         width={20}
                                         height={5}
                                     />
@@ -271,7 +271,7 @@ function Cart({
                                 >
                                     <Image
                                         src={Icons.plus}
-                                        alt="PALOOI-PLUS-ICON"
+                                        alt="WHC-PLUS-ICON"
                                         width={18}
                                         height={5}
                                     />
@@ -291,7 +291,7 @@ function Cart({
                             icon={
                                 <Image
                                     src={Icons.trash}
-                                    alt="PALOOI-TRASH-ICON"
+                                    alt="WHC-TRASH-ICON"
                                     height={30}
                                     width={30}
                                 />
