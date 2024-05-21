@@ -27,11 +27,11 @@ function OrderSummary({
             // localStorage.setItem("orderDate", JSON.stringify(orderItem));
             setCookie("orderData", JSON.stringify(orderItem));
 
-            if (accessToken) {
-                router.push("place-order/?userType=login");
-            } else {
-                setGuestLoginFormModal(true);
-            }
+            router.push("place-order/?userType=login");
+            // if (accessToken) {
+            // } else {
+            //     setGuestLoginFormModal(true);
+            // }
         } else {
             toast.error("Please check items you want to checkout with!");
         }
