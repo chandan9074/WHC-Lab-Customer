@@ -68,8 +68,10 @@ import facebookLogo from "./facebookLogo.svg";
 import grey_bg_profile_avatar from "./grey_bg_profile_avatar.svg";
 import mapMarker from "./map.svg";
 import check_circle from "./CheckCircle.svg"
+import order_confirm from "./order_confirm.svg"
 
 const Icons = {
+    order_confirm,
     check_circle,
     mapMarker,
     grey_bg_profile_avatar,

@@ -114,6 +114,8 @@ export function AuthProvider({ children }) {
         deleteCookie("userInfo");
         deleteCookie("accessToken");
         deleteCookie("selected_location");
+        deleteCookie("selected_location");
+        deleteCookie("selected_currency");
         setUserInfo(null);
         setIsLogin(false);
         signOut(socialAuth);

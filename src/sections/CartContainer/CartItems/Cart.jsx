@@ -10,6 +10,7 @@ import { useCart } from "@/contexts/CartContext";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
+import { useUserContext } from "@/contexts/UserContext";
 
 const { Text } = Typography;
 
@@ -29,6 +30,8 @@ function Cart({
     const [loading, setLoading] = useState(false);
     const { setLoadingCalculateData } = useCart();
     let newQuantity;
+
+    const { currency } = useUserContext();
 
     const handleQuantityChange = (operation) => {
         setQuantity((prevQuantity) => {
@@ -143,10 +146,8 @@ function Cart({
                     {/* product price */}
                     <div className="col-span-2">
                         <Text className="whitespace-nowrap">
-                            $
-                            {product?.offerPrice
-                                ? product?.offerPrice
-                                : product?.price}
+                            {currency.icon}
+                            {product[currency.field] && product[currency.field]}
                         </Text>
                     </div>
 
@@ -191,10 +192,9 @@ function Cart({
                     {/* total price */}
                     <div className="col-span-2">
                         <Text className="whitespace-nowrap col-span-2">
-                            $&nbsp;
-                            {product?.offerPrice
-                                ? product?.offerPrice * quantity
-                                : product?.price * quantity}
+                            {currency.icon}
+                            {product[currency.field] &&
+                                product[currency.field] * quantity}
                         </Text>
                     </div>
 
