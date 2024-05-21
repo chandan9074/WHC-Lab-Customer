@@ -20,10 +20,7 @@ function CartContainer() {
     const socket = io(WHC_LAB_SOCKET_CONNECTION);
 
     const calculateOrder = (couponCode) => {
-        console.log({ cartItem });
-        console.log({ orderItem });
         const ids = orderItem.map((item) => item._id);
-        console.log({ ids });
 
         socket.emit(
             "order:calculate",
@@ -36,7 +33,6 @@ function CartContainer() {
         // Listen for response from the server
         socket.on("order:calculated", (data) => {
             setSummaryCalculate(data);
-            console.log({ data });
         });
 
         return () => {

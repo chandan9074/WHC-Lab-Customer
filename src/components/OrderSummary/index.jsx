@@ -6,7 +6,7 @@ import Summary from "./Summary";
 import { Typography, Input } from "antd";
 import Buttons from "../Buttons";
 
-const { Text, Title } = Typography;
+const { Text } = Typography;
 
 function OrderSummary({
     cartSummary,
@@ -15,17 +15,17 @@ function OrderSummary({
     summaryCalculate,
     calculateOrder,
 }) {
-    const [guestLoginFormModal, setGuestLoginFormModal] = useState(false);
+    // const [guestLoginFormModal, setGuestLoginFormModal] = useState(false);
     const [couponCode, setCouponCode] = useState("");
-    const { tax, subtotal, total, discountAmount, shippingCharge } =
-        cartSummary;
+    const { discountAmount, shippingCharge } = cartSummary;
     const router = useRouter();
 
     const checkIfLoggedIn = () => {
         if (orderItem.length > 0) {
-            const accessToken = getCookie("accessToken");
+            // const accessToken = getCookie("accessToken");
             // localStorage.setItem("orderDate", JSON.stringify(orderItem));
             setCookie("orderData", JSON.stringify(orderItem));
+            setCookie("calculatedOrderData", JSON.stringify(summaryCalculate));
 
             router.push("place-order/?userType=login");
             // if (accessToken) {

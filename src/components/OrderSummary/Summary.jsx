@@ -1,3 +1,4 @@
+import { useUserContext } from "@/contexts/UserContext";
 import { Flex, Typography } from "antd";
 import React from "react";
 
@@ -12,6 +13,7 @@ function Summary({
     total,
     showTotalItemCount,
 }) {
+    const { currency } = useUserContext();
     return (
         <div className="border p-4 bg-neutral-10 rounded-lg">
             {showTotalItemCount && (
@@ -19,6 +21,7 @@ function Summary({
                     <Container
                         content={`Total Items`}
                         value={totalItems}
+                        currency={currency}
                         contentStyle="font-bold text-neutral-700"
                         valueStyle="font-bold text-neutral-700"
                     />
@@ -28,6 +31,7 @@ function Summary({
                 <Container
                     content={"Sub total"}
                     value={subTotal ? subTotal : 0}
+                    currency={currency}
                     // value={
                     //     calculateData?.subtotal ? calculateData?.subtotal : 0
                     // }
@@ -37,6 +41,7 @@ function Summary({
                 <Container
                     content={"Vat"}
                     value={tax ? tax : 0}
+                    currency={currency}
                     contentStyle="text-neutral-300"
                     valueStyle="text-neutral-300"
                 />
@@ -55,6 +60,7 @@ function Summary({
                 <Container
                     content={"Total"}
                     value={total}
+                    currency={currency}
                     containerStyle="border-t-2 py-2 border-dashed"
                     contentStyle="text-neutral-700 font-semibold"
                     valueStyle="text-neutral-700 font-semibold"
@@ -69,6 +75,7 @@ export default Summary;
 const Container = ({
     content,
     value,
+    currency,
     contentStyle,
     valueStyle,
     containerStyle,
@@ -76,7 +83,7 @@ const Container = ({
     <Flex horizontal="true" justify="space-between" className={containerStyle}>
         <Text className={contentStyle}>{content}</Text>
         <Text className={valueStyle}>{`${content === "Discount" ? "- " : ""}${
-            content.includes("Total Items") ? "" : "$"
+            content.includes("Total Items") ? "" : `${currency.icon}`
         }${value}`}</Text>
     </Flex>
 );

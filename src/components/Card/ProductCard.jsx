@@ -123,7 +123,7 @@ const ProductCard = ({ data, wishListIds }) => {
                     >
                         {data.price}
                     </p> */}
-                    {data[currency?.field] && (
+                    {data[currency.field] && (
                         <p className="text-brand-blue-500 text-sm font-semibold">
                             {currency.icon}
                             {data[currency.field]}
