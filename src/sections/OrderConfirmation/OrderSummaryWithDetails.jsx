@@ -1,41 +1,43 @@
 "use client";
 import React from "react";
 import { Typography } from "antd";
-import { useUserContext } from "@/contexts/UserContext";
 
 const { Text } = Typography;
 
-const OrderSummaryWithProduct = ({ orderItem, total }) => {
-    const { currency } = useUserContext();
+const OrderSummaryWithDetails = ({ orderSummary }) => {
     return (
-        <div className="border p-4 bg-white rounded-sm">
-            <div className="flex items-center justify-between border-b pb-2 mb-2">
+        <div className="border p-4 rounded-lg">
+            <div className="flex items-center justify-between border-b pb-2 mb-4">
                 <Text className="font-bold text-neutral-700">
-                    Total items ({orderItem.length} items){" "}
+                    Total items ({orderSummary.length} items)
                 </Text>
                 <Text className="font-bold text-neutral-700">
-                    {currency.icon} {total}
+                    ${" "}
+                    {orderSummary.reduce(
+                        (acc, pro) => acc + pro.price * pro.quantity,
+                        0
+                    )}
                 </Text>
             </div>
             <div className="flex flex-col gap-4">
-                {orderItem?.map((ele, index) => {
+                {orderSummary?.map((ele, index) => {
                     return (
                         <div
                             key={index}
-                            className="flex items-start justify-between border-b-2 border-dashed pb-3"
+                            className="flex items-center justify-between border-b-2 border-dashed pb-3 last:border-none"
                         >
                             <div className="flex flex-col ">
                                 <Text className="text-neutral-600 text-sm">
                                     {ele?.name}
                                 </Text>
                                 <Text className="whitespace-nowrap text-sm text-neutral-300">
-                                    {ele?.quantity} x {currency.icon}
-                                    {ele?.offerPrice || ele?.price}
+                                    {ele?.quantity} x $
+                                    {ele?.price || ele?.price}
                                 </Text>
                             </div>
                             <Text className="whitespace-nowrap text-base text-neutral-600">
-                                {currency.icon}
-                                {ele?.quantity * ele?.offerPrice || ele?.price}
+                                $&nbsp;
+                                {ele?.quantity * ele?.price || ele?.price}
                             </Text>
                         </div>
                     );
@@ -45,4 +47,4 @@ const OrderSummaryWithProduct = ({ orderItem, total }) => {
     );
 };
 
-export default OrderSummaryWithProduct;
+export default OrderSummaryWithDetails;

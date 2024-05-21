@@ -10,6 +10,7 @@ import { useCart } from "@/contexts/CartContext";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
+import { useUserContext } from "@/contexts/UserContext";
 
 const { Text } = Typography;
 
@@ -29,6 +30,8 @@ function Cart({
     const [loading, setLoading] = useState(false);
     const { setLoadingCalculateData } = useCart();
     let newQuantity;
+
+    const { currency } = useUserContext();
 
     const handleQuantityChange = (operation) => {
         setQuantity((prevQuantity) => {
@@ -143,10 +146,8 @@ function Cart({
                     {/* product price */}
                     <div className="col-span-2">
                         <Text className="whitespace-nowrap">
-                            $
-                            {product?.offerPrice
-                                ? product?.offerPrice
-                                : product?.price}
+                            {currency.icon}
+                            {product[currency.field] && product[currency.field]}
                         </Text>
                     </div>
 
@@ -164,7 +165,7 @@ function Cart({
                             >
                                 <Image
                                     src={Icons.minus}
-                                    alt="PALOOI-MINUS-ICON"
+                                    alt="WHC-MINUS-ICON"
                                     width={20}
                                     height={5}
                                 />
@@ -180,7 +181,7 @@ function Cart({
                             >
                                 <Image
                                     src={Icons.plus}
-                                    alt="PALOOI-PLUS-ICON"
+                                    alt="WHC-PLUS-ICON"
                                     width={18}
                                     height={5}
                                 />
@@ -191,10 +192,9 @@ function Cart({
                     {/* total price */}
                     <div className="col-span-2">
                         <Text className="whitespace-nowrap col-span-2">
-                            $&nbsp;
-                            {product?.offerPrice
-                                ? product?.offerPrice * quantity
-                                : product?.price * quantity}
+                            {currency.icon}
+                            {product[currency.field] &&
+                                product[currency.field] * quantity}
                         </Text>
                     </div>
 
@@ -204,7 +204,7 @@ function Cart({
                             icon={
                                 <Image
                                     src={Icons.trash}
-                                    alt="PALOOI-TRASH-ICON"
+                                    alt="WHC-TRASH-ICON"
                                     height={20}
                                     width={20}
                                 />
@@ -256,7 +256,7 @@ function Cart({
                                 >
                                     <Image
                                         src={Icons.minus}
-                                        alt="PALOOI-MINUS-ICON"
+                                        alt="WHC-MINUS-ICON"
                                         width={20}
                                         height={5}
                                     />
@@ -271,7 +271,7 @@ function Cart({
                                 >
                                     <Image
                                         src={Icons.plus}
-                                        alt="PALOOI-PLUS-ICON"
+                                        alt="WHC-PLUS-ICON"
                                         width={18}
                                         height={5}
                                     />
@@ -291,7 +291,7 @@ function Cart({
                             icon={
                                 <Image
                                     src={Icons.trash}
-                                    alt="PALOOI-TRASH-ICON"
+                                    alt="WHC-TRASH-ICON"
                                     height={30}
                                     width={30}
                                 />

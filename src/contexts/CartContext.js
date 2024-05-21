@@ -38,9 +38,9 @@ export function CartProvider({ children }) {
         }
     }, []);
 
-    const createCartItem = async (id, quantity = 1, token) => {
+    const createCartItem = async (id, quantity = 1, stockId, currency, token) => {
         return await CartService.createCart(
-            { productId: id, quantity: JSON.stringify(quantity) },
+            { productId: id, stockId, quantity: JSON.stringify(quantity), currency: currency },
             token
         );
     };

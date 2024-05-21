@@ -12,6 +12,7 @@ import { useCart } from "@/contexts/CartContext";
 import { toast } from "react-toastify";
 import { useWishlistContext } from "@/contexts/WishlistContext";
 import { usePathname } from "next/navigation";
+import { useUserContext } from "@/contexts/UserContext";
 
 const ProductRightView = ({
     forModal = false,
@@ -24,6 +25,7 @@ const ProductRightView = ({
     const [loading, setLoading] = useState(false);
     const { getUpdateCartList, createCartItem } = useCart();
     const [openSuccessionModal, setOpenSuccessionModal] = useState(false);
+    const { currency } = useUserContext();
     const router = useRouter();
     const {
         createProductWishlist,
@@ -36,9 +38,11 @@ const ProductRightView = ({
     useEffect(() => {
         const locationId = JSON.parse(getCookie("selected_location"));
         if (locationId) {
+            console.log({ locationId, data });
             const stock = data?.variants.find(
-                (item) => item.location === locationId
+                (item) => item.location._id === locationId
             );
+
             if (stock) {
                 setMaxLimit(stock?.quantity);
             }
@@ -73,19 +77,34 @@ const ProductRightView = ({
     };
 
     const handleAddToCart = async () => {
-        try {
-            const res = await createCartItem(data?._id, quantity, token);
-            setLoading(true);
-
-            if (res?.status === 200) {
-                toast.success(res?.message);
-                getUpdateCartList(token);
-                setOpenSuccessionModal(true);
+        console.log(data);
+        if (data.inStock) {
+            const locationId = JSON.parse(getCookie("selected_location"));
+            const variant = data.variants.find(
+                (item) => item.location._id === locationId
+            );
+            const stockId = variant.stockId;
+            try {
+                const res = await createCartItem(
+                    data?._id,
+                    quantity,
+                    stockId,
+                    variant.location.currency,
+                    token
+                );
+                setLoading(true);
+                if (res?.status === 200) {
+                    toast.success(res?.message);
+                    getUpdateCartList(token);
+                    setOpenSuccessionModal(true);
+                }
+            } catch (e) {
+                toast.error(e?.message);
+            } finally {
+                setLoading(false);
             }
-        } catch (e) {
-            toast.error(e?.message);
-        } finally {
-            setLoading(false);
+        } else {
+            toast.error("This product is out of stock");
         }
     };
 
@@ -111,6 +130,10 @@ const ProductRightView = ({
     //         setQuantity((ps) => 1);
     //     }
     // }, [quantity]);
+
+    function formatToTwoDecimalPlaces(value) {
+        return Number(value.toFixed(2));
+    }
 
     return (
         <div className={`${forModal ? "" : "w-[486px]"} px-6`}>
@@ -173,15 +196,16 @@ const ProductRightView = ({
             </div>
 
             <div className="flex items-center text-center gap-x-2">
-                {data?.offerPrice && (
-                    <p className="text-neutral-300 line-through font-medium">
-                        $ {data?.price}
+                {data[currency.field] && (
+                    <p className="text-brand-blue-500 font-semibold text-xl">
+                        {currency.icon}
+                        {data[currency.field]}
                     </p>
                 )}
 
-                <p className="text-brand-blue-500 font-semibold text-xl">
+                {/* <p className="text-brand-blue-500 font-semibold text-xl">
                     $ {data?.offerPrice ? data?.offerPrice : data?.price}
-                </p>
+                </p> */}
             </div>
 
             <div className="my-10 w-full h-[1px] bg-[#EBEDF0]" />
@@ -257,10 +281,9 @@ const ProductRightView = ({
                             // </Link>
                         )}
                         <Buttons.PrimaryButton
-                            label={`ADD TO CART - $ ${
-                                data.offerPrice
-                                    ? data.offerPrice * quantity
-                                    : data.price * quantity
+                            label={`ADD TO CART - ${currency.icon} ${
+                                data[currency.field] &&
+                                data[currency.field] * quantity
                             }`}
                             className="h-[52px] bg-magenta-600 text-white font-semibold"
                             width="w-full"

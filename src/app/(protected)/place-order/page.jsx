@@ -8,6 +8,7 @@ import UserService from "@/services/UserService/UserService";
 async function PlaceOrder() {
     const token = getCookie("accessToken", { cookies });
     const orderData = getCookie("orderData", { cookies });
+
     let userAddress;
 
     if (token) {
