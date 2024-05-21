@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Divider, Form, Input, Spin, Typography } from "antd";
 import { useSearchParams } from "next/navigation";
-import { getCookie, hasCookie } from "cookies-next";
+import { deleteCookie, getCookie, hasCookie } from "cookies-next";
 import Buttons from "@/components/Buttons";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -13,17 +13,10 @@ import "./PlaceOrder.css";
 import UserShippingAddressForm from "./UserShippingAddressForm";
 import ShippingMethod from "./ShippingMethod";
 import PaymentMethodSelection from "./PaymentMethod";
-import CardForm from "./CardForm";
-import BankAccountForm from "./BankAccountForm";
 import OrderSummaryWithProduct from "../Profile/Orders/OrderSummary/OrderSummaryWithProduct";
 import Summary from "../Profile/Orders/OrderSummary/Summary";
-import {
-    calculateOrderItemsSubTotalPrice,
-    calculateOrderItemsTotalPrice,
-} from "@/helpers/utils";
 import MakeApiCall from "@/services/MakeApiCall";
 import { ORDERS_URL } from "@/helpers/apiURLS";
-import CreditService from "@/services/CreditBalanceService";
 import { useUserContext } from "@/contexts/UserContext";
 const GuestAddressForm = dynamic(() => import("./GuestAddressForm"), {
     ssr: false,
@@ -44,14 +37,15 @@ function PlaceOrderContainer({ addressData }) {
     const router = useRouter();
     const token = getCookie("accessToken");
     const { currency } = useUserContext();
+    const _calculateOrderData = getCookie("calculatedOrderData");
+    const calculatedOrderData =
+        _calculateOrderData && JSON.parse(_calculateOrderData);
 
     const searchParams = useSearchParams();
     const userType = `${searchParams}`.split("=")[1];
 
     const onFinish = (values) => {
         // console.log("values", values);
-
-        console.log(orderItem, "order item");
 
         const stockOutProduct = orderItem.filter(
             (item) => orderItem.inStock === false
@@ -67,6 +61,8 @@ function PlaceOrderContainer({ addressData }) {
         } else {
             toast.error("Some products are stock out. Please remove those!!");
         }
+
+        deleteCookie("calculatedOrderData");
 
         // console.log(orderIds, "order item");
     };
@@ -136,6 +132,7 @@ function PlaceOrderContainer({ addressData }) {
         if (hasCookie("orderData")) {
             let item = JSON.parse(getCookie("orderData"));
             setOrderItem(item);
+            console.log(item);
         } else {
             router.push("/my-cart");
         }
@@ -253,23 +250,26 @@ function PlaceOrderContainer({ addressData }) {
                         ORDER REVIEW
                     </Text>
 
-                    <OrderSummaryWithProduct orderItem={orderItem} />
+                    <OrderSummaryWithProduct
+                        orderItem={calculatedOrderData?.lineItems}
+                        total={calculatedOrderData?.total}
+                    />
 
                     <Summary
-                        total={calculateOrderItemsTotalPrice(orderItem, 0.05)}
-                        subTotal={calculateOrderItemsSubTotalPrice(orderItem)}
-                        totalItems={orderItem?.length}
+                        total={calculatedOrderData?.total}
+                        subTotal={calculatedOrderData?.subtotal}
+                        totalItems={calculatedOrderData?.lineItems?.length}
                         // shippingCharge={shippingCharge}
                         // discount={discountAmount}
-                        tax={
-                            orderItem?.length !== 0
-                                ? calculateOrderItemsTotalPrice(
-                                      orderItem,
-                                      0.05,
-                                      true
-                                  )
-                                : 0
-                        }
+                        // tax={
+                        //     orderItem?.length !== 0
+                        //         ? calculateOrderItemsTotalPrice(
+                        //               orderItem,
+                        //               0.05,
+                        //               true
+                        //           )
+                        //         : 0
+                        // }
                         showTotalItemCount={true}
                     />
 
@@ -308,7 +308,7 @@ function PlaceOrderContainer({ addressData }) {
                         label="PLACE ORDER"
                         type="submit"
                         className={
-                            "w-full md:py-3 py-2 md:px-9 px-6 bg-magenta-600 rounded-sm text-white md:text-base text-sm font-semibold"
+                            "w-full md:py-3 py-2 md:px-9 px-6 rounded-full text-white md:text-base text-sm font-semibold"
                         }
                         // onClick={handlePlaceOrder}
                     />

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Spin, Typography } from "antd";
 import { useCart } from "@/contexts/CartContext";
 import Link from "next/link";
@@ -7,6 +7,8 @@ import Buttons from "@/components/Buttons";
 import CartList from "./CartItems";
 import { PRODUCTS_PATH } from "@/helpers/slug";
 import OrderSummary from "@/components/OrderSummary";
+import io from "socket.io-client";
+import { WHC_LAB_SOCKET_CONNECTION } from "@/utils/constant";
 
 const { Text, Title } = Typography;
 
@@ -15,6 +17,28 @@ function CartContainer() {
         useCart();
     const [orderItem, setOrderItem] = useState([]);
     const [summaryCalculate, setSummaryCalculate] = useState();
+    const socket = io(WHC_LAB_SOCKET_CONNECTION);
+
+    const calculateOrder = (couponCode) => {
+        const ids = orderItem.map((item) => item._id);
+
+        socket.emit(
+            "order:calculate",
+            JSON.stringify({
+                cartId: ids,
+                couponCode,
+            })
+        );
+
+        // Listen for response from the server
+        socket.on("order:calculated", (data) => {
+            setSummaryCalculate(data);
+        });
+
+        return () => {
+            socket.disconnect();
+        };
+    };
 
     const addOrderItem = (newCartItem, checked, quantity) => {
         if (checked) {
@@ -70,7 +94,10 @@ function CartContainer() {
         });
     };
 
-    console.log(orderItem);
+    useEffect(() => {
+        calculateOrder();
+        // console.log(summaryCalculate);
+    }, [orderItem]);
 
     return (
         <div>
@@ -134,7 +161,7 @@ function CartContainer() {
                                             : ""
                                     }`}
                                     summaryCalculate={summaryCalculate}
-                                    // calculateOrder={calculateOrder}
+                                    calculateOrder={calculateOrder}
                                 />
                                 <Spin
                                     className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"

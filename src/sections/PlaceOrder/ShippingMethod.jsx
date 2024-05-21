@@ -1,6 +1,7 @@
 import { Radio, Typography } from "antd";
 import React from "react";
 import "./ShippingMethod.css";
+import { useUserContext } from "@/contexts/UserContext";
 
 const { Title } = Typography;
 
@@ -8,6 +9,7 @@ export const handleInactiveFontColor = (props, value) =>
     `${props !== value ? "text-neutral-300" : "text-neutral-700"}`;
 
 const ShippingMethod = ({ shippingMethod, onChange }) => {
+    const { currency } = useUserContext();
     return (
         <div className="border border-stroke-new rounded-lg">
             <div className="bg-[#EBEDF0] p-4 rounded-t-lg">
@@ -57,7 +59,7 @@ const ShippingMethod = ({ shippingMethod, onChange }) => {
                                     )}
                                     `}
                                 >
-                                    $ 6.99
+                                    {currency.icon} 6.99
                                 </h2>
                             </div>
                         </Radio>
@@ -93,7 +95,7 @@ const ShippingMethod = ({ shippingMethod, onChange }) => {
                                         "express"
                                     )}`}
                                 >
-                                    $ 12.99
+                                    {currency.icon} 12.99
                                 </h2>
                             </div>
                         </Radio>

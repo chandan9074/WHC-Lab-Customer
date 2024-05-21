@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
 import { Typography } from "antd";
-import { calculateOrderItemsSubTotalPrice } from "@/helpers/utils";
+import { useUserContext } from "@/contexts/UserContext";
 
 const { Text } = Typography;
 
-const OrderSummaryWithProduct = ({ orderItem }) => {
+const OrderSummaryWithProduct = ({ orderItem, total }) => {
+    const { currency } = useUserContext();
     return (
         <div className="border p-4 bg-white rounded-sm">
             <div className="flex items-center justify-between border-b pb-2 mb-2">
@@ -13,7 +14,7 @@ const OrderSummaryWithProduct = ({ orderItem }) => {
                     Total items ({orderItem.length} items){" "}
                 </Text>
                 <Text className="font-bold text-neutral-700">
-                    $ {calculateOrderItemsSubTotalPrice(orderItem)}
+                    {currency.icon} {total}
                 </Text>
             </div>
             <div className="flex flex-col gap-4">
@@ -25,18 +26,16 @@ const OrderSummaryWithProduct = ({ orderItem }) => {
                         >
                             <div className="flex flex-col ">
                                 <Text className="text-neutral-600 text-sm">
-                                    {ele?.product?.name}
+                                    {ele?.name}
                                 </Text>
                                 <Text className="whitespace-nowrap text-sm text-neutral-300">
-                                    {ele?.quantity} x $
-                                    {ele?.product?.offerPrice ||
-                                        ele?.product?.price}
+                                    {ele?.quantity} x {currency.icon}
+                                    {ele?.offerPrice || ele?.price}
                                 </Text>
                             </div>
                             <Text className="whitespace-nowrap text-base text-neutral-600">
-                                $
-                                {ele?.quantity * ele?.product?.offerPrice ||
-                                    ele?.product?.price}
+                                {currency.icon}
+                                {ele?.quantity * ele?.offerPrice || ele?.price}
                             </Text>
                         </div>
                     );
