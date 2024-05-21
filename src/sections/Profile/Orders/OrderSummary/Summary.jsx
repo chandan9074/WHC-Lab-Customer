@@ -35,12 +35,12 @@ const Summary = ({
                     contentStyle="text-neutral-300"
                     valueStyle="text-neutral-300"
                 />
-                <Container
+                {/* <Container
                     content={"Vat"}
                     value={tax ? tax : 0}
                     contentStyle="text-neutral-300"
                     valueStyle="text-neutral-300"
-                />
+                /> */}
                 {/* <Container
                     content={"Shipping cost"}
                     value={shippingCharge ? shippingCharge : 0}

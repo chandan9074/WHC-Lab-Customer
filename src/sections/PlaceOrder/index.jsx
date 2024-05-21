@@ -135,6 +135,7 @@ function PlaceOrderContainer({ addressData }) {
         if (hasCookie("orderData")) {
             let item = JSON.parse(getCookie("orderData"));
             setOrderItem(item);
+            console.log(item);
         } else {
             router.push("/my-cart");
         }
@@ -253,20 +254,20 @@ function PlaceOrderContainer({ addressData }) {
                     <OrderSummaryWithProduct orderItem={orderItem} />
 
                     <Summary
-                        total={calculateOrderItemsTotalPrice(orderItem, 0.05)}
+                        total={orderItem?.length}
                         subTotal={calculateOrderItemsSubTotalPrice(orderItem)}
                         totalItems={orderItem?.length}
                         // shippingCharge={shippingCharge}
                         // discount={discountAmount}
-                        tax={
-                            orderItem?.length !== 0
-                                ? calculateOrderItemsTotalPrice(
-                                      orderItem,
-                                      0.05,
-                                      true
-                                  )
-                                : 0
-                        }
+                        // tax={
+                        //     orderItem?.length !== 0
+                        //         ? calculateOrderItemsTotalPrice(
+                        //               orderItem,
+                        //               0.05,
+                        //               true
+                        //           )
+                        //         : 0
+                        // }
                         showTotalItemCount={true}
                     />
 
