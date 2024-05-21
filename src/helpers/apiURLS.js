@@ -81,3 +81,5 @@ export const CREDIT_BALANCE_URL = `${BASEURL}/orders/credit-orders`;
 export const MAKE_PAYMENT = `${BASEURL}/orders/send-payment-link`;
 // Comments
 export const COMMENTS = `${BASEURL}/comments`;
+//apply for credit balance
+export const APPLY_FOR_CREDIT_BALANCE = `${BASEURL}/users/apply-for-credit`;

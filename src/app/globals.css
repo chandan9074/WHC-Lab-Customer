@@ -19,7 +19,7 @@
     color: #bdbdbd !important;
     font-size: 16px;
     font-family: var(--font-poppins);
-    height: 52px !important;
+    height: 52px;
 }
 
 /* antd input outline */
@@ -51,7 +51,7 @@
 }
 
 .ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
-    border-radius: 2px;
+    border-radius: 4px;
 }
 
 .ant-select-focused:where(
@@ -356,6 +356,10 @@
     border-radius: 25px;
 }
 
+.ant-input-password {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
 .ant-input-outlined:focus-within {
     outline: none !important;
     border-color: #ebedf0 !important;

@@ -1,17 +1,16 @@
 "use client";
 import Buttons from "@/components/Buttons";
-import { Spin, Table, Input } from "antd";
+import { Spin, Table } from "antd";
 import { useEffect, useState } from "react";
 import CreditService from "@/services/CreditBalanceService";
 import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
 
-const { Search } = Input;
-
 const CreditBalance = () => {
     const [creditBalance, setCreditBalance] = useState([]);
     const [page, setPage] = useState(0);
-    const [search, setSearch] = useState("");
+    const [inputSearch, setInputSearch] = useState("");
+    const [search, setSearch] = useState(null);
     const [loading, setLoading] = useState(false);
     const token = getCookie("accessToken");
 
@@ -25,9 +24,8 @@ const CreditBalance = () => {
     const handleGetCreditBalance = async () => {
         try {
             setLoading(true);
-            const res = await CreditService.getCredits(page, token);
+            const res = await CreditService.getCredits(page, search, token);
             if (res?.status === 200) {
-                console.log(res);
                 const updatedDocs = res.docs.map((doc, index) => ({
                     ...doc,
                     key: index + 1, // Adding the 'key' property
@@ -35,6 +33,7 @@ const CreditBalance = () => {
                 }));
                 res.docs = updatedDocs;
                 setCreditBalance(res);
+                // setInputSearch("");
             }
         } catch (e) {
             console.log(e);
@@ -147,7 +146,7 @@ const CreditBalance = () => {
 
     useEffect(() => {
         handleGetCreditBalance();
-    }, [page]);
+    }, [page, search]);
 
     const handleStatusChange = (value) => {
         console.log(`selected ${value}`);
@@ -159,10 +158,12 @@ const CreditBalance = () => {
 
     const handleChange = (e) => {
         e.preventDefault();
-        console.log(e.target.value);
+        setInputSearch(e.target.value);
     };
 
-    console.log(creditBalance);
+    const handleSearch = () => {
+        setSearch(inputSearch);
+    };
 
     return (
         <div className="p-4 md:p-8 flex flex-col gap-y-5 md:gap-y-6">
@@ -201,9 +202,13 @@ const CreditBalance = () => {
                             <input
                                 placeholder="input order number"
                                 className="border py-[7px] px-2"
+                                value={inputSearch}
                                 onChange={(e) => handleChange(e)}
                             />
-                            <button className="py-2 px-4 bg-brand-blue-500 text-white rounded-e-md font-medium text-center text-sm">
+                            <button
+                                onClick={handleSearch}
+                                className="py-2 px-4 bg-brand-blue-500 text-white rounded-e-md font-medium text-center text-sm"
+                            >
                                 Search
                             </button>
                         </div>
