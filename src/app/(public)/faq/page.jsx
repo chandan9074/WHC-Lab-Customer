@@ -8,10 +8,12 @@ import Buttons from "@/components/Buttons";
 import InfoPagesContainer from "@/components/common/InfoPagesContainer";
 import { whcFetch } from "@/services/BaseWHCHTTP";
 import { FAQ_URL } from "@/helpers/apiURLS";
+import { useRouter } from "next/navigation";
 
 export default function FAQ() {
     const [collapse, setCollapse] = useState("01");
     const [faqs, setFaqs] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -84,6 +86,7 @@ export default function FAQ() {
                         <Buttons.PrimaryButton
                             label={"Contact Us"}
                             className="whitespace-nowrap px-14"
+                            onClick={() => router.push("/contact-us")}
                         />
                     </div>
                 </div>
