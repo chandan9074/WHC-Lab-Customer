@@ -21,7 +21,7 @@ const OrderDetails = ({ params: { orderId } }) => {
 
     const getSingleOrder = async () => {
         try {
-            const res = await OrderService.getOrderData(orderId, token);
+            const res = await OrderService.getOrderData("id", orderId, token);
             if (res?.status === 200) {
                 setData(res?.doc);
             }
