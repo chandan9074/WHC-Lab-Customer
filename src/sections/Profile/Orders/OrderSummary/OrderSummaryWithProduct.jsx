@@ -11,10 +11,10 @@ const OrderSummaryWithProduct = ({ orderItem, total }) => {
         <div className="border p-4 bg-white rounded-sm">
             <div className="flex items-center justify-between border-b pb-2 mb-2">
                 <Text className="font-bold text-neutral-700">
-                    Total items ({orderItem.length} items){" "}
+                    Total items ({orderItem?.length} items){" "}
                 </Text>
                 <Text className="font-bold text-neutral-700">
-                    {currency.icon} {total}
+                    {currency?.icon} {total}
                 </Text>
             </div>
             <div className="flex flex-col gap-4">
@@ -29,12 +29,12 @@ const OrderSummaryWithProduct = ({ orderItem, total }) => {
                                     {ele?.name}
                                 </Text>
                                 <Text className="whitespace-nowrap text-sm text-neutral-300">
-                                    {ele?.quantity} x {currency.icon}
+                                    {ele?.quantity} x {currency?.icon}
                                     {ele?.offerPrice || ele?.price}
                                 </Text>
                             </div>
                             <Text className="whitespace-nowrap text-base text-neutral-600">
-                                {currency.icon}
+                                {currency?.icon}
                                 {ele?.quantity * ele?.offerPrice || ele?.price}
                             </Text>
                         </div>

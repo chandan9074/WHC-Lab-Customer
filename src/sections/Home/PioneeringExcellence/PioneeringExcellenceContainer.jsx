@@ -60,7 +60,9 @@ const PioneeringExcellenceContainer = () => {
                                 hoverIcon={Icons.arrow_up_right_white}
                                 bgColor="bg-white"
                                 textColor="text-brand-blue-800"
-                                onClick={() => router.push("/store")}
+                                onClick={() =>
+                                    router.push("/store?category=Brewing+Yeast")
+                                }
                             />
                         </div>
                     </div>

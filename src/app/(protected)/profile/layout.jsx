@@ -21,11 +21,11 @@ import { Suspense } from "react";
 export default async function ProfileLayout({
     children, // will be a page or nested layout
 }) {
-    const userInfo = getCookie("userInfo", { cookies });
-    const user = userInfo && JSON.parse(userInfo);
+    // const userInfo = getCookie("userInfo", { cookies });
+    // const user = userInfo && JSON.parse(userInfo);
 
-    const userData = await UserService.getUserInfo(1);
-    console.log(accountData);
+    // const userData = await UserService.getUserInfo(1);
+    // console.log(accountData);
 
     return (
         <Suspense fallback={<Loader />}>

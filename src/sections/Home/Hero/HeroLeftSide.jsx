@@ -22,7 +22,7 @@ const HeroLeftSide = () => {
             </p>
             <Buttons.IconWithLabel
                 label={"EXPLORE OUR STRAINS"}
-                onClick={() => router.push("/store")}
+                onClick={() => router.push("/store?category=Brewing+Yeast")}
             />
         </div>
     );
