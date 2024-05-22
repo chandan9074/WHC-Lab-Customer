@@ -11,7 +11,6 @@ import ProfileBar from "@/components/Profile/ProfileBar";
 import Loader from "@/components/common/Loader";
 import Layouts from "@/layouts";
 import { profileData } from "@/libs/data";
-import { accountData } from "@/libs/myAccountData";
 import TitleBar from "@/sections/Profile/TitleBar";
 import UserService from "@/services/UserService/UserService";
 import { getCookie } from "cookies-next";
@@ -25,7 +24,7 @@ export default async function ProfileLayout({
     const user = userInfo && JSON.parse(userInfo);
 
     const userData = await UserService.getUserInfo(1);
-    console.log(accountData);
+    // console.log(accountData);
 
     return (
         <Suspense fallback={<Loader />}>

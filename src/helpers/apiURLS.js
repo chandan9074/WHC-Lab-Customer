@@ -13,6 +13,8 @@ export const GET_PRODUCTS = `${BASEURL}/products`;
 
 export const GET_IMAGE_RENDER = `${BASEURL}/files/view-image`;
 
+export const IMAGE_UPLOAD = `${BASEURL}/files/images`;
+
 export const GET_USER_PROFILE = `${BASEURL}/profile`;
 
 export const PROFILE_URL = `${BASEURL}/users/profile`;
