@@ -4,10 +4,16 @@ import React from "react";
 import Icons from "../../../public/assets/Icons";
 import Image from "next/image";
 
-const CountryCategorySelection = () => {
+const CountryCategorySelection = ({ data }) => {
     const handleChange = (value) => {
         console.log(`selected ${value}`);
     };
+
+    const options = data.map((doc) => ({
+        value: doc.name,
+        label: doc.name,
+    }));
+
     return (
         <div className="space-y-4 md:space-y-9 flex flex-col">
             <Select
@@ -24,21 +30,12 @@ const CountryCategorySelection = () => {
                 onChange={handleChange}
                 options={[
                     {
-                        value: "jack",
-                        label: "Jack",
+                        value: "commercial",
+                        label: "Commercial",
                     },
                     {
-                        value: "lucy",
-                        label: "Lucy",
-                    },
-                    {
-                        value: "Yiminghe",
-                        label: "yiminghe",
-                    },
-                    {
-                        value: "disabled",
-                        label: "Disabled",
-                        disabled: true,
+                        value: "homebrewing",
+                        label: "Homebrewing",
                     },
                 ]}
             />
@@ -55,25 +52,7 @@ const CountryCategorySelection = () => {
                 }
                 defaultValue="Select Country"
                 onChange={handleChange}
-                options={[
-                    {
-                        value: "jack",
-                        label: "Jack",
-                    },
-                    {
-                        value: "lucy",
-                        label: "Lucy",
-                    },
-                    {
-                        value: "Yiminghe",
-                        label: "yiminghe",
-                    },
-                    {
-                        value: "disabled",
-                        label: "Disabled",
-                        disabled: true,
-                    },
-                ]}
+                options={options}
             />
         </div>
     );
