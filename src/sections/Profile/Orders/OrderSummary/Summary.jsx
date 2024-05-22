@@ -18,7 +18,7 @@ const Summary = ({
 }) => {
     const { currency } = useUserContext();
     return (
-        <div className="border p-4 bg-white rounded-sm">
+        <div className="border p-4  rounded-lg">
             {showTotalItemCount && (
                 <div className="border-b-2 pb-2 border-dashed mb-4">
                     <Container
