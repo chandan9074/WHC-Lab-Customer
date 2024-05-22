@@ -13,6 +13,10 @@ const CreditBalance = () => {
     const [search, setSearch] = useState(null);
     const [loading, setLoading] = useState(false);
     const token = getCookie("accessToken");
+    const _userInfo = getCookie("userInfo");
+    const userInfo = _userInfo && JSON.parse(_userInfo);
+
+    console.log(userInfo);
 
     // Function to format the date
     const formatDate = (dateString) => {
@@ -52,7 +56,8 @@ const CreditBalance = () => {
                 const paymentLink = res?.link;
 
                 if (paymentLink) {
-                    window.open(paymentLink, "_blank");
+                    // window.open(paymentLink, "_blank");
+                    window.location.href = paymentLink;
                 } else {
                     toast.error("Payment link not found.");
                 }
@@ -174,7 +179,7 @@ const CreditBalance = () => {
                             Credit Limit
                         </p>
                         <p className="text-brand-blue-500 text-xl md:text-2xl font-medium leading-[30px] md:leading-9">
-                            €8000
+                            €{userInfo?.creditBalanceLimit}
                         </p>
                     </div>
 
@@ -183,15 +188,20 @@ const CreditBalance = () => {
                             Credit Balance
                         </p>
                         <p className="text-brand-blue-500 text-xl md:text-2xl font-medium leading-[30px] md:leading-9">
-                            €4320.80
+                            €{userInfo?.creditBalance}
                         </p>
                     </div>
                 </div>
-
-                <Buttons.PrimaryButton
-                    label={"Apply for Credit"}
-                    className="h-12 whitespace-nowrap"
-                />
+                {userInfo?.appliedForCreditBalance ? (
+                    <div className=" text-brand-blue-800 px-8 py-4 rounded-md border">
+                        <h3>Applied</h3>
+                    </div>
+                ) : (
+                    <Buttons.PrimaryButton
+                        label={"Apply for Credit"}
+                        className="h-12 whitespace-nowrap"
+                    />
+                )}
             </div>
 
             <div className="p-8 border border-[#EBEDF0] rounded-[4px] space-y-6">

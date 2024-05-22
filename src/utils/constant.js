@@ -1,0 +1,2 @@
+export const WHC_LAB_SOCKET_CONNECTION =
+    process.env.NEXT_PUBLIC_WHC_LAB_SOCKET_DOMAIN;

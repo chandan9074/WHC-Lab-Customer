@@ -7,20 +7,30 @@ import { hasCookie, setCookie } from "cookies-next";
 import { useUserContext } from "@/contexts/UserContext";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import { currencyData } from "@/libs/common";
 
 function CountrySelectionModal({ handleLocation }) {
     const [selectLocation, setSelectLocation] = useState();
-    const { locations } = useUserContext();
+    const { locations, currency, setCurrency } = useUserContext();
     const selected_locations = hasCookie("selected_location");
     const [selected, setSelected] = useState(true);
 
     const handleChange = (value) => {
+        console.log(value, locations);
         setSelectLocation(value);
+        // const locationObj = locations.find((item) => item._id === value);
+        // console.log(locationObj, "lcoation");
     };
 
     const handleSelectLocation = () => {
         if (!!selectLocation) {
+            const locationObj = locations.find(
+                (item) => item.value === selectLocation
+            );
             setCookie("selected_location", JSON.stringify(selectLocation));
+            setCookie("selected_currency", locationObj.currency);
+            const getCurrencyKey = currencyData[locationObj.currency];
+            setCurrency(getCurrencyKey);
             handleLocation(selectLocation);
             setSelected(false);
         } else {

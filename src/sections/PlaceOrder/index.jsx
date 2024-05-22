@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Divider, Form, Input, Spin, Typography } from "antd";
 import { useSearchParams } from "next/navigation";
-import { getCookie, hasCookie } from "cookies-next";
+import { deleteCookie, getCookie, hasCookie } from "cookies-next";
 import Buttons from "@/components/Buttons";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -13,17 +13,11 @@ import "./PlaceOrder.css";
 import UserShippingAddressForm from "./UserShippingAddressForm";
 import ShippingMethod from "./ShippingMethod";
 import PaymentMethodSelection from "./PaymentMethod";
-import CardForm from "./CardForm";
-import BankAccountForm from "./BankAccountForm";
 import OrderSummaryWithProduct from "../Profile/Orders/OrderSummary/OrderSummaryWithProduct";
 import Summary from "../Profile/Orders/OrderSummary/Summary";
-import {
-    calculateOrderItemsSubTotalPrice,
-    calculateOrderItemsTotalPrice,
-} from "@/helpers/utils";
 import MakeApiCall from "@/services/MakeApiCall";
 import { ORDERS_URL } from "@/helpers/apiURLS";
-import CreditService from "@/services/CreditBalanceService";
+import { useUserContext } from "@/contexts/UserContext";
 const GuestAddressForm = dynamic(() => import("./GuestAddressForm"), {
     ssr: false,
 });
@@ -42,14 +36,16 @@ function PlaceOrderContainer({ addressData }) {
     const [orderItem, setOrderItem] = useState([]);
     const router = useRouter();
     const token = getCookie("accessToken");
+    const { currency } = useUserContext();
+    const _calculateOrderData = getCookie("calculatedOrderData");
+    const calculatedOrderData =
+        _calculateOrderData && JSON.parse(_calculateOrderData);
 
     const searchParams = useSearchParams();
     const userType = `${searchParams}`.split("=")[1];
 
     const onFinish = (values) => {
         // console.log("values", values);
-
-        console.log(orderItem, "order item");
 
         const stockOutProduct = orderItem.filter(
             (item) => orderItem.inStock === false
@@ -65,6 +61,8 @@ function PlaceOrderContainer({ addressData }) {
         } else {
             toast.error("Some products are stock out. Please remove those!!");
         }
+
+        deleteCookie("calculatedOrderData");
 
         // console.log(orderIds, "order item");
     };
@@ -101,15 +99,14 @@ function PlaceOrderContainer({ addressData }) {
             });
 
             if (response.status === 200) {
-                toast.success(response.message);
                 toast.success(response?.message);
                 console.log(response.doc.link);
                 const paymentLink = response?.doc.link;
 
                 if (paymentLink) {
                     window.location.href = paymentLink;
-                } else {
-                    toast.error("Payment link not found.");
+                } else if (body.paymentMethod === "creditBalance") {
+                    router.push(`${ORDER_CONFIRM_PATH}/${response.doc.number}`);
                 }
             }
         } catch (error) {
@@ -135,6 +132,7 @@ function PlaceOrderContainer({ addressData }) {
         if (hasCookie("orderData")) {
             let item = JSON.parse(getCookie("orderData"));
             setOrderItem(item);
+            console.log(item);
         } else {
             router.push("/my-cart");
         }
@@ -158,7 +156,7 @@ function PlaceOrderContainer({ addressData }) {
 
     return (
         <div>
-            <Divider className="m-1" />
+            <Divider className="mb-9" />
             <Spin spinning={loading} fullscreen />
 
             <Form
@@ -168,46 +166,48 @@ function PlaceOrderContainer({ addressData }) {
                 onFinish={onFinish}
                 className="grid md:grid-cols-3 grid-cols-1  gap-0 md:gap-4"
             >
-                <div className="col-span-2 ">
+                <div className="col-span-2 space-y-6">
                     {/* Address Form */}
-                    <div className="bg-[#EBEDF0] p-4 rounded-t-sm">
-                        <Title
-                            level={4}
-                            className="m-0 text-sm md:text-lg text-neutral-700"
-                        >
-                            1. SHIPPING ADDRESS
-                        </Title>
-                    </div>
+                    <div className="rounded-lg border border-stroke-new">
+                        <div className="bg-[#EBEDF0] p-4">
+                            <Title
+                                level={4}
+                                className="m-0 text-sm md:text-lg text-neutral-700"
+                            >
+                                1. SHIPPING ADDRESS
+                            </Title>
+                        </div>
 
-                    {userType === "guest" ? (
-                        <>
-                            <GuestAddressForm
-                                inputStyle={inputStyle}
-                                onToggleChange={onToggleChange}
-                                billingAddress={false}
-                            />
-                            {!sameAddress && (
+                        {userType === "guest" ? (
+                            <>
                                 <GuestAddressForm
                                     inputStyle={inputStyle}
-                                    billingAddress={true}
+                                    onToggleChange={onToggleChange}
+                                    billingAddress={false}
                                 />
-                            )}
-                        </>
-                    ) : (
-                        <div className="flex flex-col justify-center rounded-sm p-4 lg:py-12 lg:px-[58px] bg-white">
-                            <UserShippingAddressForm
-                                data={addressData}
-                                setAddress={setAddress}
-                            />
-
-                            {!sameAddress && (
+                                {!sameAddress && (
+                                    <GuestAddressForm
+                                        inputStyle={inputStyle}
+                                        billingAddress={true}
+                                    />
+                                )}
+                            </>
+                        ) : (
+                            <div className="flex flex-col justify-center p-4 lg:py-12 lg:px-[58px] bg-white rounded-lg">
                                 <UserShippingAddressForm
                                     data={addressData}
-                                    setAddress={setBillingAddress}
+                                    setAddress={setAddress}
                                 />
-                            )}
-                        </div>
-                    )}
+
+                                {!sameAddress && (
+                                    <UserShippingAddressForm
+                                        data={addressData}
+                                        setAddress={setBillingAddress}
+                                    />
+                                )}
+                            </div>
+                        )}
+                    </div>
 
                     {/* Shipping Form */}
                     <Form.Item name="shippingMethod">
@@ -250,23 +250,26 @@ function PlaceOrderContainer({ addressData }) {
                         ORDER REVIEW
                     </Text>
 
-                    <OrderSummaryWithProduct orderItem={orderItem} />
+                    <OrderSummaryWithProduct
+                        orderItem={calculatedOrderData?.lineItems}
+                        total={calculatedOrderData?.total}
+                    />
 
                     <Summary
-                        total={calculateOrderItemsTotalPrice(orderItem, 0.05)}
-                        subTotal={calculateOrderItemsSubTotalPrice(orderItem)}
-                        totalItems={orderItem?.length}
+                        total={calculatedOrderData?.total}
+                        subTotal={calculatedOrderData?.subtotal}
+                        totalItems={calculatedOrderData?.lineItems?.length}
                         // shippingCharge={shippingCharge}
                         // discount={discountAmount}
-                        tax={
-                            orderItem?.length !== 0
-                                ? calculateOrderItemsTotalPrice(
-                                      orderItem,
-                                      0.05,
-                                      true
-                                  )
-                                : 0
-                        }
+                        // tax={
+                        //     orderItem?.length !== 0
+                        //         ? calculateOrderItemsTotalPrice(
+                        //               orderItem,
+                        //               0.05,
+                        //               true
+                        //           )
+                        //         : 0
+                        // }
                         showTotalItemCount={true}
                     />
 
@@ -305,7 +308,7 @@ function PlaceOrderContainer({ addressData }) {
                         label="PLACE ORDER"
                         type="submit"
                         className={
-                            "w-full md:py-3 py-2 md:px-9 px-6 bg-magenta-600 rounded-sm text-white md:text-base text-sm font-semibold"
+                            "w-full md:py-3 py-2 md:px-9 px-6 rounded-full text-white md:text-base text-sm font-semibold"
                         }
                         // onClick={handlePlaceOrder}
                     />

@@ -91,3 +91,10 @@ export const orderStatusColor = [
     { title: "Delivered", color: "#0ACF83", bgColor: "#0acf8314" },
     { title: "Canceled", color: "#D9333F", bgColor: "#d9333f14" },
 ];
+
+
+export const currencyData = {
+    "USD":{field: "dollarPrice", icon: "$"},
+    "EUR":{field: "euroPrice",  icon: "€"},
+    "GBP":{field: "poundPrice",  icon: "£"},
+}

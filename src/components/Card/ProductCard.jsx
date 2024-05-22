@@ -6,7 +6,7 @@ import { Modal, Spin } from "antd";
 // import QuickViewModalContent from "@/sections/ProductDetails/QuickViewModalContent";
 import Link from "next/link";
 // import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
-import { hasCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 // import wishlistContext from "@/contexts/WishlistContext";
 import { useRouter } from "next/navigation";
 // import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
@@ -15,6 +15,7 @@ import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
 import QuickViewModalContent from "@/sections/ProductDetails/QuickViewModalContent";
 import { useWishlistContext } from "@/contexts/WishlistContext";
+import { useUserContext } from "@/contexts/UserContext";
 
 const ProductCard = ({ data, wishListIds }) => {
     const router = useRouter();
@@ -25,6 +26,8 @@ const ProductCard = ({ data, wishListIds }) => {
         checkProductInWishList,
         getProductWishlist,
     } = useWishlistContext();
+
+    const { currency } = useUserContext();
 
     const [loading, setLoading] = useState(false);
 
@@ -38,13 +41,24 @@ const ProductCard = ({ data, wishListIds }) => {
     const handlewishlistClick = async () => {
         // setIsFavourite(!isFavourite);
 
-        const stockId = data?.variants[0]?.stockId;
+        const locationId = JSON.parse(getCookie("selected_location"));
+
+        const variant = data.variants.find(
+            (item) => item.location._id === locationId
+        );
+
+        const stockId = variant.stockId;
+        console.log(data, "data console");
         setLoading(true);
         checkProductInWishList(data._id)
             ? //delete
               await deleteWishlist(data._id)
             : //create
-              await createProductWishlist(data._id, stockId);
+              await createProductWishlist(
+                  data._id,
+                  stockId,
+                  variant.location.currency
+              );
         setLoading(false);
         getProductWishlist();
         router.refresh();
@@ -111,18 +125,19 @@ const ProductCard = ({ data, wishListIds }) => {
                     </h2>
                 </div>
                 <div className="flex gap-x-2">
-                    <p
+                    {/* <p
                         className={`text-sm font-medium ${
                             data.offerPrice
                                 ? "line-through text-neutral-100"
                                 : "text-brand-blue-500"
                         }`}
                     >
-                        ${data.price}
-                    </p>
-                    {data.offerPrice && (
+                        {data.price}
+                    </p> */}
+                    {data[currency?.field] && (
                         <p className="text-brand-blue-500 text-sm font-semibold">
-                            ${data.offerPrice}
+                            {currency.icon}
+                            {data[currency.field]}
                         </p>
                     )}
                 </div>
