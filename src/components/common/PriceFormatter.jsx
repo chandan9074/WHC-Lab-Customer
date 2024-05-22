@@ -1,3 +1,4 @@
+import { currencyData } from "@/libs/common";
 import React from "react";
 
 const PriceFormatter = ({
@@ -7,6 +8,7 @@ const PriceFormatter = ({
     price,
     fontWeight,
     className,
+    currency,
 }) => {
     const priceVariant = {
         default: ` ${fontSize ? fontSize : "text-[15px] lg:text-base"} ${
@@ -23,7 +25,7 @@ const PriceFormatter = ({
             <p
                 className={`whitespace-nowrap ${className} ${priceVariant[variant]}`}
             >
-                $ {price}
+                {currencyData[currency]?.icon} {price}
             </p>
         </div>
     );

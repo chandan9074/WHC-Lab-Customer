@@ -1,26 +1,38 @@
 "use client";
 import { trackOrderData } from "@/libs/data";
 import TrackOrderedItem from "@/sections/Profile/Orders/OrderHistory/TrackOrderedItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrderInfo from "../OrderInfo";
 import ItemReview from "../ItemReview";
 import ItemReviewForm from "../ItemReviewForm";
 import Summary from "@/sections/Profile/Orders/OrderSummary/Summary";
 import CustomModal from "@/components/common/CustomModal";
+import OrderService from "@/services/OrderService";
+import { getCookie } from "cookies-next";
+import ProductService from "@/services/productsService";
+import { toast } from "react-toastify";
 
 const OrderDetails = ({ params: { orderId } }) => {
-    const _data = trackOrderData.filter((item) => item._id === orderId);
-    console.log(_data);
-    const [data, setData] = useState(_data[0]);
-
+    const [data, setData] = useState({});
+    const token = getCookie("accessToken");
     const [singleProduct, setSingleProduct] = useState(null);
-
     const [isWriteReview, setIsWriteReview] = useState(false);
-
     const [isReview, setIsReview] = useState(false);
 
-    const { tax, subtotal, total, discountAmount, shippingCharge } =
-        data.invoice;
+    const getSingleOrder = async () => {
+        try {
+            const res = await OrderService.getOrderData(orderId, token);
+            if (res?.status === 200) {
+                setData(res?.doc);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    useEffect(() => {
+        getSingleOrder();
+    }, []);
 
     const handleTrackOrder = () => {
         console.log("track order");
@@ -43,9 +55,17 @@ const OrderDetails = ({ params: { orderId } }) => {
     };
 
     // product review rating submit
-    const handleAddProductReview = (values) => {
-        console.log("review values - ", values);
-        setIsWriteReview(false);
+    const handleAddProductReview = async (values) => {
+        values.orderId = orderId;
+
+        try {
+            const res = await ProductService.postProductReview(values, token);
+            console.log(res);
+        } catch (e) {
+            toast.error(e?.message);
+        } finally {
+            setIsWriteReview(false);
+        }
     };
 
     return (
@@ -54,7 +74,7 @@ const OrderDetails = ({ params: { orderId } }) => {
                 <span className="text-neutral-300 text-base font-medium">
                     Order id{" "}
                     <span className="text-neutral-700 font-bold">
-                        #{orderId}
+                        #{data?.number}
                     </span>
                 </span>
             </div>
@@ -79,13 +99,14 @@ const OrderDetails = ({ params: { orderId } }) => {
                             Order summery
                         </p>
                         <Summary
-                            total={total}
-                            subTotal={subtotal}
-                            totalItems={data.lineItems.length}
-                            shippingCharge={shippingCharge}
-                            discount={discountAmount}
-                            tax={tax}
+                            total={data?.total}
+                            subTotal={data?.subtotal}
+                            totalItems={data?.lineItems?.length}
+                            // shippingCharge={shippingCharge}
+                            // discount={discountAmount}
+                            // tax={tax}
                             showTotalItemCount={true}
+                            orderCurrency={data?.currency}
                         />
                     </div>
 
@@ -100,7 +121,9 @@ const OrderDetails = ({ params: { orderId } }) => {
 
             <CustomModal
                 title={
-                    <h4 className="w-full flex justify-center">Items Review</h4>
+                    <h4 className="w-full flex justify-center">
+                        Items Review asdf
+                    </h4>
                 }
                 open={isReview}
                 onCancel={() => setIsReview(false)}
@@ -125,7 +148,7 @@ const OrderDetails = ({ params: { orderId } }) => {
                 <ItemReviewForm
                     data={singleProduct}
                     submit={handleAddProductReview}
-                    image={singleProduct && singleProduct.image}
+                    image={singleProduct && singleProduct.featuredImage}
                     productName={singleProduct && singleProduct.name}
                     category={singleProduct && singleProduct.brand}
                 />

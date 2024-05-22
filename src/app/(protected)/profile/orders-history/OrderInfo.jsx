@@ -6,48 +6,48 @@ const OrderInfo = ({ data }) => {
         <div className="w-full px-[30px] py-6 bg-white border border-neutral-30 rounded-lg">
             <OrderInfoDetails
                 heading="Order Id"
-                subHeading={`#${data._id}`}
+                subHeading={`#${data?._id}`}
                 isLine={true}
             />
 
             <OrderInfoDetails
                 heading="Date"
-                subHeading={formatDate(data.createdAt)}
+                subHeading={formatDate(data?.createdAt)}
                 isLine={true}
             />
 
             <OrderInfoDetails
                 heading="Phone Number"
-                subHeading={data.customerInfo.phoneNumber}
+                subHeading={data?.customerInfo?.phoneNumber}
                 isLine={true}
             />
 
             <OrderInfoDetails
                 heading="Email"
-                subHeading={data.customerInfo.email}
+                subHeading={data?.customerInfo?.email}
                 isLine={true}
             />
 
             <OrderInfoDetails
                 heading="Delivery Address"
-                subHeading={data.customerInfo.deliveryAddress}
+                subHeading={data?.customerInfo?.deliveryAddress}
                 isLine={true}
             />
 
             <OrderInfoDetails
                 heading="Billing Address"
-                subHeading={data.customerInfo.billingAddress}
+                subHeading={data?.customerInfo?.billingAddress}
                 isLine={true}
             />
 
             <OrderInfoDetails
                 heading="Payment method"
-                subHeading={data.customerInfo.paymentMethod}
+                subHeading={data?.customerInfo?.paymentMethod}
                 isLine={true}
             />
             <OrderInfoDetails
                 heading="Order Note"
-                subHeading={data.customerInfo.note}
+                subHeading={data?.customerInfo?.note}
                 isLine={false}
             />
         </div>

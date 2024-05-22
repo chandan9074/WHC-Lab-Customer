@@ -1,5 +1,6 @@
-import { CATEGORY_URL, GET_PRODUCTS } from "@/helpers/apiURLS";
+import { CATEGORY_URL, GET_PRODUCTS, REVIEW_URL } from "@/helpers/apiURLS";
 import MakeApiCall from "../MakeApiCall";
+import { MethodsStructure } from "../MethodsStructure";
 
 async function getProducts(query) {
     const url = query
@@ -29,9 +30,18 @@ async function getCategories() {
     return res;
 }
 
+async function postProductReview(data, token) {
+    return MakeApiCall({
+        apiUrl: REVIEW_URL,
+        body: { ...data },
+        ...MethodsStructure.postMethod({ Authorization: `${token}` }),
+    });
+}
+
 const ProductService = {
     getProducts,
     getCategories,
+    postProductReview,
 };
 
 export default ProductService;

@@ -2,8 +2,16 @@ import { formatDate, formatTime } from "@/helpers/utils";
 import Badges from "@/components/Badges";
 import Image from "next/image";
 import Icons from "../../../../public/assets/Icons";
+import { currencyData } from "@/libs/common";
 
-const OrderItem = ({ createdAt, orderId, state, lineItemCount, total }) => {
+const OrderItem = ({
+    createdAt,
+    orderId,
+    state,
+    lineItemCount,
+    total,
+    currency,
+}) => {
     const createdAtDate = new Date(createdAt);
 
     return (
@@ -17,7 +25,7 @@ const OrderItem = ({ createdAt, orderId, state, lineItemCount, total }) => {
                 </div>
                 <p>
                     <span className="text-neutral-300 text-sm font-medium">
-                        Order id &nbsp;
+                        Order number &nbsp;
                     </span>
                     <span className="font-semibold text-neutral-700">
                         #{orderId}
@@ -36,7 +44,7 @@ const OrderItem = ({ createdAt, orderId, state, lineItemCount, total }) => {
                     {lineItemCount} items
                 </p>
                 <p className="text-neutral-700 font-semibold text-base">
-                    $ {total}
+                    {currencyData[currency].icon} {total}
                 </p>
             </div>
         </div>
