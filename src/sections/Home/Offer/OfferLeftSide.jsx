@@ -14,7 +14,7 @@ const OfferLeftSide = () => {
             <div className="lg:block hidden">
                 <Buttons.IconWithLabel
                     label={"EXPLORE OUR ALL STRAINS "}
-                    onClick={() => router.push("/store")}
+                    onClick={() => router.push("/store?category=Brewing+Yeast")}
                 />
             </div>
         </div>

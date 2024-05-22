@@ -42,7 +42,9 @@ function SingleMarketingSection({ data, index }) {
                     <div className="w-full md:w-[283px]">
                         <Buttons.IconWithLabel
                             label={"EXPLORE OUR STRAINS "}
-                            onClick={() => router.push("/store")}
+                            onClick={() =>
+                                router.push("/store?category=Brewing+Yeast")
+                            }
                         />
                     </div>
                 </div>
