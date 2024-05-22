@@ -43,7 +43,6 @@ export function AuthProvider({ children }) {
         setCookie("accessToken", token);
         setCookie("userInfo", JSON.stringify(userInfo));
 
-        toast.success("Successfully logged in!")
 
         // You can use the router to navigate to home page
         router.push("/");
@@ -75,6 +74,9 @@ export function AuthProvider({ children }) {
                         user?.accessToken,
                         GOOGLE_LOGIN_URL
                     );
+
+        toast.success("Successfully logged in!")
+
                     // console.log(res,"-----------------res");
                     // if(res.status === 200){
                     //     toast.success(res.message)
@@ -121,7 +123,6 @@ export function AuthProvider({ children }) {
         console.log("logout");
         deleteCookie("userInfo");
         deleteCookie("accessToken");
-        deleteCookie("selected_location");
         deleteCookie("selected_location");
         deleteCookie("selected_currency");
         setUserInfo(null);
