@@ -25,6 +25,7 @@ const ProductRightView = ({
     const [loading, setLoading] = useState(false);
     const { getUpdateCartList, createCartItem } = useCart();
     const [openSuccessionModal, setOpenSuccessionModal] = useState(false);
+    const [status, setStatus] = useState(null);
     const { currency } = useUserContext();
     const router = useRouter();
     const {
@@ -34,6 +35,8 @@ const ProductRightView = ({
         checkProductInWishList,
     } = useWishlistContext();
     const pathname = usePathname();
+
+    console.log(data, "data log");
 
     useEffect(() => {
         const locationId = JSON.parse(getCookie("selected_location"));
@@ -45,6 +48,7 @@ const ProductRightView = ({
 
             if (stock) {
                 setMaxLimit(stock?.quantity);
+                setStatus(stock?.status);
             }
         }
     }, [data]);
@@ -195,11 +199,16 @@ const ProductRightView = ({
                 </div>
             </div>
 
-            <div className="flex items-center text-center gap-x-2">
+            <div className="flex flex-col items-start text-center gap-x-2">
                 {data[currency.field] && (
                     <p className="text-brand-blue-500 font-semibold text-xl">
                         {currency.icon}
                         {data[currency.field]}
+                    </p>
+                )}
+                {status !== "active" && (
+                    <p className="py-1 px-2 bg-red-400 mt-2 text-white font-semibold rounded">
+                        Out of Stock
                     </p>
                 )}
 
@@ -261,6 +270,7 @@ const ProductRightView = ({
                         <Buttons.CounterBtn
                             maxLimit={maxLimit}
                             handleCurrentCount={handleCurrentCount}
+                            disabled={status !== "active"}
                             current={quantity}
                         />
                     </div>
@@ -285,6 +295,7 @@ const ProductRightView = ({
                                 data[currency.field] &&
                                 data[currency.field] * quantity
                             }`}
+                            disabled={status !== "active"}
                             className="h-[52px] bg-magenta-600 text-white font-semibold"
                             width="w-full"
                             onClick={() => {
