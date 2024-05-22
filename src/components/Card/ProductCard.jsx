@@ -41,13 +41,24 @@ const ProductCard = ({ data, wishListIds }) => {
     const handlewishlistClick = async () => {
         // setIsFavourite(!isFavourite);
 
-        const stockId = data?.variants[0]?.stockId;
+        const locationId = JSON.parse(getCookie("selected_location"));
+
+        const variant = data.variants.find(
+            (item) => item.location._id === locationId
+        );
+
+        const stockId = variant.stockId;
+        console.log(data, "data console");
         setLoading(true);
         checkProductInWishList(data._id)
             ? //delete
               await deleteWishlist(data._id)
             : //create
-              await createProductWishlist(data._id, stockId);
+              await createProductWishlist(
+                  data._id,
+                  stockId,
+                  variant.location.currency
+              );
         setLoading(false);
         getProductWishlist();
         router.refresh();

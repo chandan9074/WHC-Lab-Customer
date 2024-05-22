@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import {
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import MakeApiCall from "@/services/MakeApiCall";
@@ -28,11 +34,11 @@ export function WishlistProvider({ children }) {
         }
     }, [token]);
 
-    const createProductWishlist = async (productId, stockId) => {
+    const createProductWishlist = async (productId, stockId, currency) => {
         try {
             const res = await MakeApiCall({
                 apiUrl: WISHLISTS_URL,
-                body: { productId, stockId },
+                body: { productId, stockId, currency },
                 ...MethodsStructure.postMethod({ Authorization: `${token}` }),
             });
             console.log(res);
@@ -69,7 +75,7 @@ export function WishlistProvider({ children }) {
 
     useEffect(() => {
         token && getProductWishlist();
-    }, [getProductWishlist,token]);
+    }, [getProductWishlist, token]);
 
     const values = {
         wishlistIds,

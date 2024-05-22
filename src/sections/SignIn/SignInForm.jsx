@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
 import Icons from "../../../public/assets/Icons";
 import { useSearchParams } from "next/navigation";
+import { getCookie } from "cookies-next";
 
 const SignInForm = () => {
     const { handlePageTransition } = useAuthContext();
