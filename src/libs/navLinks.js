@@ -7,7 +7,7 @@ export const megaMenuMainLinks = [
     {
         _id: 2,
         name: "STORE",
-        path: "/store",
+        path: "/store?category=Brewing+Yeast",
     },
     {
         _id: 3,
