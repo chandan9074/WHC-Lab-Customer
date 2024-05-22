@@ -115,7 +115,6 @@ const ItemReviewForm = ({ submit, productName, category, image, data }) => {
                         label="Submit"
                         variant="primary"
                         width="w-full"
-                        onClick={() => form.submit()}
                     />
                 </div>
             </Form>

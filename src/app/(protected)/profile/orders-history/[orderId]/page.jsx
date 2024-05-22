@@ -61,6 +61,7 @@ const OrderDetails = ({ params: { orderId } }) => {
         try {
             const res = await ProductService.postProductReview(values, token);
             console.log(res);
+            toast.success(res?.message);
         } catch (e) {
             toast.error(e?.message);
         } finally {
@@ -135,24 +136,27 @@ const OrderDetails = ({ params: { orderId } }) => {
                     handleWriteReview={handleWriteReview}
                 />
             </CustomModal>
-
-            <CustomModal
-                title={
-                    <h4 className="w-full flex justify-center">Write Review</h4>
-                }
-                open={isWriteReview}
-                onCancel={() => setIsWriteReview(false)}
-                footer={null}
-                wrapClassName="custom-modal"
-            >
-                <ItemReviewForm
-                    data={singleProduct}
-                    submit={handleAddProductReview}
-                    image={singleProduct && singleProduct.featuredImage}
-                    productName={singleProduct && singleProduct.name}
-                    category={singleProduct && singleProduct.brand}
-                />
-            </CustomModal>
+            {isWriteReview && (
+                <CustomModal
+                    title={
+                        <h4 className="w-full flex justify-center">
+                            Write Review
+                        </h4>
+                    }
+                    open={isWriteReview}
+                    onCancel={() => setIsWriteReview(false)}
+                    footer={null}
+                    wrapClassName="custom-modal"
+                >
+                    <ItemReviewForm
+                        data={singleProduct}
+                        submit={handleAddProductReview}
+                        image={singleProduct && singleProduct.featuredImage}
+                        productName={singleProduct && singleProduct.name}
+                        category={singleProduct && singleProduct.brand}
+                    />
+                </CustomModal>
+            )}
         </div>
     );
 };

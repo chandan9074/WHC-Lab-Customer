@@ -6,6 +6,7 @@ import { allRatingReviewers } from "@/libs/reviewData";
 
 const ProductDetailsSection = ({ data }) => {
     const [selectedTab, setSelectedTab] = useState(0);
+    console.log({ data });
     return (
         <div className="flex flex-col w-full">
             <div className="flex flex-col gap-y-6 mb-20 rounded-lg p-6 bg-[#F3F5F6]">
@@ -39,7 +40,7 @@ const ProductDetailsSection = ({ data }) => {
                 {selectedTab === 0 ? (
                     <ProductDetails />
                 ) : (
-                    <ReviewsAndRatings data={allRatingReviewers} />
+                    <ReviewsAndRatings data={data?.review?.list || []} />
                 )}
             </div>
         </div>

@@ -9,6 +9,7 @@ import Link from "next/link";
 import { SELLER_INFORMATION_PATH } from "@/helpers/slug";
 import Images from "../../../public/assets/Images";
 import Icons from "../../../public/assets/Icons";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 const ReviewsAndRatings = ({ data }) => {
     const ratings = [
@@ -38,6 +39,8 @@ const ReviewsAndRatings = ({ data }) => {
             reviewer: 20,
         },
     ];
+
+    console.log({ review: data });
 
     // Calculate the total number of reviewers
     const totalReviewers = ratings.reduce(
@@ -87,11 +90,9 @@ const LeftSideContent = ({ ratings, data }) => {
     const handleSelection = (value) => {
         setSelectedRating(value);
         if (value === "All") {
-            setFilteredData(allRatingReviewers);
+            setFilteredData(data);
         } else {
-            const newArray = allRatingReviewers.filter(
-                (item) => item.rating === value
-            );
+            const newArray = data.filter((item) => item.rating === value);
             setFilteredData(newArray);
         }
     };
@@ -193,6 +194,12 @@ const LeftSideContent = ({ ratings, data }) => {
 };
 
 const Comments = ({ data }) => {
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const options = { day: "numeric", month: "long", year: "numeric" };
+        return new Intl.DateTimeFormat("en-GB", options).format(date);
+    }
+
     return (
         <div className="animate-fadeIn w-full space-y-[33px]">
             {data.length > 0 &&
@@ -205,16 +212,19 @@ const Comments = ({ data }) => {
                             alt={item.name}
                             width={1000}
                             height={1000}
-                            src={item.image}
+                            // src={item.image}
+                            src={`${GET_IMAGE_RENDER}?key=${item.featuredImage}`}
                             className="w-10 h-10 md:w-10 md:h-10 rounded-full"
                         />
                         <div className="w-full lg:w-[500px] xl:w-[642px]">
                             <div className="flex justify-between items-center">
                                 <h1 className="text-neutral-700 text-sm font-medium">
-                                    {item.name}
+                                    {item.user.firstName +
+                                        " " +
+                                        item.user.lastName}
                                 </h1>
                                 <p className="text-neutral-300 text-[13px]">
-                                    {item.time}
+                                    {formatDate(item.createdAt)}
                                 </p>
                             </div>
                             <div className="pt-1 flex items-center gap-x-2 md:gap-x-2.5">
