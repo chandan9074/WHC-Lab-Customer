@@ -10,6 +10,7 @@ import { socialAuth } from "@/config/firebase";
 import { useRouter } from "next/navigation";
 import { FACEBOOK_LOGIN_URL, GOOGLE_LOGIN_URL } from "@/helpers/apiURLS";
 import MakeApiCall from "@/services/MakeApiCall";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -42,6 +43,8 @@ export function AuthProvider({ children }) {
         setCookie("accessToken", token);
         setCookie("userInfo", JSON.stringify(userInfo));
 
+        toast.success("Successfully logged in!")
+
         // You can use the router to navigate to home page
         router.push("/");
     };
@@ -68,11 +71,16 @@ export function AuthProvider({ children }) {
                 const user = result.user;
                 console.log(user);
                 if (user) {
-                    await handleSocialLogin(
+                    const res = await handleSocialLogin(
                         user?.accessToken,
                         GOOGLE_LOGIN_URL
                     );
+                    // console.log(res,"-----------------res");
+                    // if(res.status === 200){
+                    //     toast.success(res.message)
+                    // }
                 }
+
             }
         } catch (error) {
             throw new Error(error.message || "Something went wrong");
@@ -117,6 +125,7 @@ export function AuthProvider({ children }) {
         setUserInfo(null);
         setIsLogin(false);
         signOut(socialAuth);
+        toast.success("Successfully logged out!")
         router.push("/");
     };
 
