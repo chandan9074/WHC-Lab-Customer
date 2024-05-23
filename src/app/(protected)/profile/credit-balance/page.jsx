@@ -209,6 +209,8 @@ const CreditBalance = () => {
         setInputSearch(e.target.value);
     };
 
+    console.log({ userInfo });
+
     const handleSearch = () => {
         setSearch(inputSearch);
     };
@@ -239,13 +241,26 @@ const CreditBalance = () => {
                             </p>
                         </div>
                     </div>
-                    {userInfo?.appliedForCreditBalance ? (
+                    {/* {userInfo?.appliedForCreditBalance ? (
                         <div className=" text-brand-blue-800 px-8 py-4 rounded-md border">
                             <h3>Applied</h3>
                         </div>
                     ) : (
                         <Buttons.PrimaryButton
                             label={"Apply for Credit"}
+                            className="h-12 whitespace-nowrap"
+                            onClick={handleApplyCreditBalance}
+                        />
+                    )} */}
+                    {userInfo?.appliedForCreditBalance ? (
+                        userInfo?.creditBalance > 0 ? null : (
+                            <div className="text-brand-blue-800 px-8 py-4 rounded-md border">
+                                <h3>Applied</h3>
+                            </div>
+                        )
+                    ) : (
+                        <Buttons.PrimaryButton
+                            label="Apply for Credit"
                             className="h-12 whitespace-nowrap"
                             onClick={handleApplyCreditBalance}
                         />
