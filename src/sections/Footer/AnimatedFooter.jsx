@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import Icons from "../../../public/assets/Icons";
-import { TERMS_AND_CONDITIONS } from "@/helpers/slug";
+import { PRIVACY_AND_POLICY, TERMS_AND_CONDITIONS } from "@/helpers/slug";
 
 const AnimatedFooter = ({ navLinks, socialLinks }) => {
     return (
@@ -146,7 +146,7 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                 viewport={{ once: true }}
             >
                 <div className="flex gap-x-3 text-[#D9D9D9] text-xs font-semibold leading-4 items-center">
-                    <Link href={TERMS_AND_CONDITIONS}>
+                    <Link href={PRIVACY_AND_POLICY}>
                         <p>Privacy Policy</p>
                     </Link>
                     <div className="w-[4.5px] h-[4.5px] bg-[#9194A6] rounded-full" />

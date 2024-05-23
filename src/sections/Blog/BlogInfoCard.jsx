@@ -6,6 +6,7 @@ import React from "react";
 import Images from "../../../public/assets/Images";
 
 function BlogInfoCard({ data }) {
+    console.log(data);
     return (
         <Link href={`/blog/${data?._id}`}>
             <div className="border border-stroke-new rounded-2xl bg-white group">
@@ -22,7 +23,7 @@ function BlogInfoCard({ data }) {
                 <div className="p-6 flex flex-col gap-5">
                     <div className="flex justify-between items-center text-sm">
                         <p className="text-brand-blue-500 bg-stroke-white px-2 py-[1px] rounded">
-                            {data?.category}
+                            {data?.categoryName}
                         </p>
                         <p className="text-brand-blue-300">
                             {formatDate(data?.createdAt)}
@@ -37,24 +38,24 @@ function BlogInfoCard({ data }) {
                     <div className="flex gap-4 items-center">
                         <Image
                             src={
-                                data?.author?.image
-                                    ? `${GET_IMAGE_RENDER}?key=${data?.author?.image}`
+                                data?.authorDetails?.profilePicture
+                                    ? `${GET_IMAGE_RENDER}?key=${data?.authorDetails?.profilePicture}`
                                     : Images.profile_avatar
                             }
                             alt="search"
                             width={1000}
                             height={1000}
-                            className={`w-[48px] h-[48px] cursor-pointer `}
+                            className={`w-[48px] h-[48px] cursor-pointer rounded-full`}
                         />
                         <p className="font-montserrat text-base font-semibold text-brand-blue-800">
                             {" "}
                             {`${
-                                data?.author?.firstName
-                                    ? data?.author?.firstName
+                                data?.authorDetails?.firstName
+                                    ? data?.authorDetails?.firstName
                                     : "--"
                             } ${
-                                data?.author?.lastName
-                                    ? data?.author?.lastName
+                                data?.authorDetails?.lastName
+                                    ? data?.authorDetails?.lastName
                                     : "--"
                             }`}{" "}
                         </p>

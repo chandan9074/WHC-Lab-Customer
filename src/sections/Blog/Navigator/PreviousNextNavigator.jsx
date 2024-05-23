@@ -1,12 +1,17 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import Icons from "../../../../public/assets/Icons";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function PreviousNextNavigator({ next = false, data }) {
+    const router = useRouter();
     return (
-        <Link
-            href={`/blog/${data?._id}`}
+        <button
+            // href={`/blog/${data?._id}`}
+            onClick={() => router.push(`/blog/${data?._id}`)}
+            disabled={data?._id ? false : true}
             className={`flex ${
                 next ? "flex-row-reverse" : "justify-start"
             } w-full md:w-1/2 gap-4 items-center text-left`}
@@ -30,7 +35,7 @@ function PreviousNextNavigator({ next = false, data }) {
                     {data?.title}
                 </p>
             </div>
-        </Link>
+        </button>
     );
 }
 

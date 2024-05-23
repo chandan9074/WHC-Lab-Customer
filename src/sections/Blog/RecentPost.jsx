@@ -4,6 +4,7 @@ import Images from "../../../public/assets/Images";
 import Text from "@/components/Text";
 import Image from "next/image";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
+import Link from "next/link";
 
 function RecentPost({ data }) {
     const recentPosts = data.slice(0, 4);
@@ -14,7 +15,11 @@ function RecentPost({ data }) {
 
             <div className="flex flex-col gap-6">
                 {recentPosts?.map((post, index) => (
-                    <div className="flex gap-3 items-start" key={index}>
+                    <Link
+                        href={`/blog/${post?._id}`}
+                        className="flex gap-3 items-start"
+                        key={index}
+                    >
                         <Image
                             src={`${GET_IMAGE_RENDER}?key=${post.featuredImage}`}
                             alt="Icon"
@@ -30,7 +35,7 @@ function RecentPost({ data }) {
                                 {formatDate(post.createdAt)}
                             </p>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

@@ -8,6 +8,7 @@ const CounterBtn = ({
     handleCurrentCount,
     maxLimit,
     current,
+    disabled,
     rest,
 }) => {
     const [counter, setCounter] = useState(current || 1);
@@ -27,7 +28,10 @@ const CounterBtn = ({
         <div
             className={`flex justify-between items-center w-[120px] lg:w-40 h-14 rounded-full bg-transparent border border-brand-blue-100 px-4 ${className}`}
         >
-            <button onClick={() => counter > 1 && setCounter(counter - 1)}>
+            <button
+                onClick={() => counter > 1 && setCounter(counter - 1)}
+                disabled={disabled}
+            >
                 <Image
                     width={1000}
                     height={1000}
@@ -42,6 +46,7 @@ const CounterBtn = ({
 
             <button
                 onClick={() => counter < maxLimit && setCounter(counter + 1)}
+                disabled={disabled}
             >
                 <Image
                     width={1000}

@@ -36,7 +36,10 @@ function Cart({
     const handleQuantityChange = (operation) => {
         setQuantity((prevQuantity) => {
             // let newQuantity;
-            if (operation === "increment") {
+            if (
+                operation === "increment" &&
+                prevQuantity < product.variants[0].quantity
+            ) {
                 newQuantity = prevQuantity + 1;
             } else if (operation === "decrement" && prevQuantity > 1) {
                 newQuantity = prevQuantity - 1;
@@ -102,6 +105,8 @@ function Cart({
         setQuantity(cart?.quantity);
     }, [cart]);
 
+    console.log(product, "product data");
+
     return (
         <div className="border-b">
             <Spin spinning={loading} fullscreen />
@@ -136,7 +141,7 @@ function Cart({
                                         <span className="text-neutral-300 text-sm whitespace-nowrap">
                                             Product Code:
                                         </span>
-                                        {product?.sku}
+                                        {product?.variants[0].sku}
                                     </Text>
                                 </div>
                             </Link>
@@ -153,40 +158,48 @@ function Cart({
 
                     {/* handle quantity */}
                     <div className="col-span-2">
-                        <div className="flex flex-row justify-between items-center border-[1px] border-black-500 p- rounded-full w-[7.5rem]">
-                            <button
-                                className="cursor-pointer p-2"
-                                onClick={() => {
-                                    // handleDecrement();
-                                    handleQuantityChange("decrement");
-                                    // handleUpdateCartItem();
-                                }}
-                                disabled={quantity <= 1}
-                            >
-                                <Image
-                                    src={Icons.minus}
-                                    alt="WHC-MINUS-ICON"
-                                    width={20}
-                                    height={5}
-                                />
-                            </button>
-                            <Text className="text-[14px]">{quantity}</Text>
-                            <button
-                                className="cursor-pointer p-2"
-                                onClick={() => {
-                                    // handleIncrement();
-                                    handleQuantityChange("increment");
-                                    // handleUpdateCartItem();
-                                }}
-                            >
-                                <Image
-                                    src={Icons.plus}
-                                    alt="WHC-PLUS-ICON"
-                                    width={18}
-                                    height={5}
-                                />
-                            </button>
-                        </div>
+                        {product.variants[0].status === "active" ? (
+                            <div className="flex flex-row justify-between items-center border-[1px] border-black-500 p- rounded-full w-[7.5rem]">
+                                <button
+                                    className="cursor-pointer p-2"
+                                    onClick={() => {
+                                        // handleDecrement();
+                                        handleQuantityChange("decrement");
+                                        // handleUpdateCartItem();
+                                    }}
+                                    disabled={quantity <= 1}
+                                >
+                                    <Image
+                                        src={Icons.minus}
+                                        alt="WHC-MINUS-ICON"
+                                        width={20}
+                                        height={5}
+                                    />
+                                </button>
+                                <Text className="text-[14px]">{quantity}</Text>
+                                <button
+                                    className="cursor-pointer p-2"
+                                    onClick={() => {
+                                        // handleIncrement();
+                                        handleQuantityChange("increment");
+                                        // handleUpdateCartItem();
+                                    }}
+                                >
+                                    <Image
+                                        src={Icons.plus}
+                                        alt="WHC-PLUS-ICON"
+                                        width={18}
+                                        height={5}
+                                    />
+                                </button>
+                            </div>
+                        ) : (
+                            <div>
+                                <p className="text-[#EF4444] py-1 px-2.5 rounded-3xl bg-[#FEF2F2]">
+                                    Out of Stock
+                                </p>
+                            </div>
+                        )}
                     </div>
 
                     {/* total price */}
