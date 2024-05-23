@@ -8,8 +8,7 @@ import ProductHeader from "./ProductHeader";
 import { useWishlistContext } from "@/contexts/WishlistContext";
 
 const ProductDisplay = ({ data, filterData, selectedTab, productData }) => {
-    const { wishlistIds } = useWishlistContext();
-    console.log(wishlistIds);
+    const { wishlistItems } = useWishlistContext();
 
     return (
         <div className="w-full">
@@ -23,7 +22,7 @@ const ProductDisplay = ({ data, filterData, selectedTab, productData }) => {
                         <div className="col-span-1" key={index}>
                             <ProductCard
                                 data={item}
-                                wishListIds={wishlistIds}
+                                wishListIds={wishlistItems}
                             />
                         </div>
                     ))}

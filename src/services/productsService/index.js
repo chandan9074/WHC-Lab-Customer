@@ -5,14 +5,15 @@ import { MethodsStructure } from "../MethodsStructure";
 async function getProducts(query) {
     const url = query
         ? `${GET_PRODUCTS}?${new URLSearchParams({
-              ...query,
-          })}`
+            ...query,
+        })}`
         : `${GET_PRODUCTS}`;
 
-    const res = await fetch(url, {
+    const res = await fetch(url, { cache: 'no-store' }, {
         headers: {
             "Content-Type": "application/json",
         },
+
     });
 
     return res.json();

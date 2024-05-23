@@ -52,3 +52,35 @@ export const isImageInvalid = async (file) => {
 
     return false;
 };
+
+
+// export const formatPrice = (price, currency) => {
+//     let currencySymbol = '';
+//     switch (currency) {
+//       case 'USD':
+//         currencySymbol = '$';
+//         break;
+//       case 'EUR':
+//         currencySymbol = '€';
+//         break;
+//       case 'GBP':
+//         currencySymbol = '£';
+//         break;
+//       default:
+//         currencySymbol = '';
+//     }
+//     return `${currencySymbol} ${price}`;
+//   };
+
+  export function formatPrice(prices, currency) {
+    switch (currency) {
+        case 'USD':
+            return `$ ${prices.dollarPrice || 0}`;
+        case 'EUR':
+            return `€ ${prices.euroPrice || 0}`;
+        case 'GBP':
+            return `£ ${prices.poundPrice || 0}`;
+        default:
+            return `$ ${prices.dollarPrice || 0}`;
+    }
+}
