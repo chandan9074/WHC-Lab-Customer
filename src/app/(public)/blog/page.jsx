@@ -1,20 +1,21 @@
 import InfoPagesContainer from "@/components/common/InfoPagesContainer";
 import PageHeaderWithNameAndBgImage from "@/components/common/PageHeaderWithNameAndBgImage";
 import Layouts from "@/layouts";
-import React from "react";
-import Images from "../../../../public/assets/Images";
 import BlogContainer from "@/sections/Blog/BlogContainer";
 import BlogService from "@/services/BlogService";
 
 async function page() {
     const blogsData = await BlogService.getBlogs();
-    console.log("blogs----------------", blogsData);
 
     return (
         <Layouts.Secondary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="Blog" />
             <InfoPagesContainer>
-                <BlogContainer blogsData={blogsData.docs} />
+                <BlogContainer
+                    blogsData={blogsData.docs}
+                    blogDataTotalPage={blogsData.totalPages}
+                    blogDataLimit={blogsData.limit}
+                />
             </InfoPagesContainer>
         </Layouts.Secondary>
     );

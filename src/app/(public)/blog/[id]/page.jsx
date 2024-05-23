@@ -1,7 +1,6 @@
 import InfoPagesContainer from "@/components/common/InfoPagesContainer";
 import PageHeaderWithNameAndBgImage from "@/components/common/PageHeaderWithNameAndBgImage";
 import Layouts from "@/layouts";
-import React from "react";
 import AuthorInfo from "@/sections/Blog/AuthorInfo";
 import SocialMediaShare from "@/sections/Blog/SocialMediaShare";
 import PreviousNextNavigator from "@/sections/Blog/Navigator/PreviousNextNavigator";
@@ -11,7 +10,6 @@ import TagLists from "@/sections/Blog/TagLists";
 import CommentList from "@/sections/Blog/Comment/CommentList";
 import CommentForm from "@/sections/Blog/Comment/CommentForm";
 import Text from "@/components/Text";
-import { blogsData } from "../page";
 import BlogContainer from "@/sections/Blog/BlogContainer";
 import BlogService from "@/services/BlogService";
 // import { useRouter } from "next/router";
@@ -22,7 +20,7 @@ async function BlogDetails({ params }) {
     const singleBlogData = blogsData?.docs?.find(
         (blog) => blog?._id === params?.id
     );
-    console.log("single------------------", singleBlogData);
+    // console.log("single------------------", singleBlogData);
 
     const currentIndex = blogsData.docs.findIndex(
         (blog) => blog._id === singleBlogData?._id
