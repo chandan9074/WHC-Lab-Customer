@@ -1,9 +1,5 @@
 "use client";
-import React from "react";
-import { Typography, Table, Button, message } from "antd";
-import Image from "next/image";
-import Icons from "../../../../public/assets/Icons";
-import { getCookie } from "cookies-next";
+import { Typography } from "antd";
 import Cart from "./Cart";
 import Link from "next/link";
 import Buttons from "@/components/Buttons";

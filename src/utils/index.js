@@ -75,12 +75,26 @@ export const isImageInvalid = async (file) => {
   export function formatPrice(prices, currency) {
     switch (currency) {
         case 'USD':
-            return `$ ${prices.dollarPrice || 0}`;
+            return `$ ${prices.dollarPrice || '--'}`;
         case 'EUR':
-            return `€ ${prices.euroPrice || 0}`;
+            return `€ ${prices.euroPrice || '--'}`;
         case 'GBP':
-            return `£ ${prices.poundPrice || 0}`;
+            return `£ ${prices.poundPrice || '--'}`;
         default:
-            return `$ ${prices.dollarPrice || 0}`;
+            return `$ ${prices.dollarPrice || '--'}`;
     }
+}
+
+
+export function checkStock(product, locationId) { 
+    const variant = product.variants.find(variant => variant.location._id === locationId);
+
+    if (!variant) {
+        return false;
+    }
+
+    if (variant.status !== 'active' || variant.quantity <= 0) {
+        return false;
+    }
+    return true;
 }
