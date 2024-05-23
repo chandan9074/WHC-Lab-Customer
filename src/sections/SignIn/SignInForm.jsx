@@ -54,7 +54,9 @@ const SignInForm = () => {
         } catch (e) {
             setIsSocialLoading({ ...isSocialLoading, google: false });
             console.log(e);
-            toast.error(e.message);
+            if (e.message !== "Firebase: Error (auth/popup-closed-by-user).") {
+                toast.error(e.message);
+            }
         }
     };
 
