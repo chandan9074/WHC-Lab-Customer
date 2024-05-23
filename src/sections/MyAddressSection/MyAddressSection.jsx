@@ -86,7 +86,6 @@ const MyAddressSection = ({ data }) => {
         // If the selected address is not the default address, update it
         try {
             // Make the API call to update the address
-            console.log(e.target.value);
             setValue(e.target.value);
             const res = await MakeApiCall({
                 method: "PATCH",
@@ -98,13 +97,11 @@ const MyAddressSection = ({ data }) => {
             await getUserData();
             toast.success("Default address updated successfully!");
         } catch (error) {
-            console.error("Error updating default address:", error);
             toast.error("Failed to update default address");
         }
     };
 
     const handleNewAddressBtn = () => {
-        console.log("heelo");
         setIsNewAddress(true);
         setIsModalOpen(true);
     };
@@ -146,11 +143,10 @@ const MyAddressSection = ({ data }) => {
                     {addressList?.map((address, index) => (
                         <div
                             key={address._id}
-                            className={`${
-                                value === address._id
+                            className={`${value === address._id
                                     ? "border-magenta-600  bg-white"
                                     : "border-transparent bg-neutral-10"
-                            } border flex justify-between items-start lg:items-center px-4 py-4 lg:px-6 lg:py-5 rounded-sm`}
+                                } border flex justify-between items-start lg:items-center px-4 py-4 lg:px-6 lg:py-5 rounded-sm`}
                         >
                             <div className="flex flex-1 items-start">
                                 <Radio
@@ -162,11 +158,10 @@ const MyAddressSection = ({ data }) => {
                                     <div className="space-y-2">
                                         <div className="flex gap-x-2 items-center">
                                             <h2
-                                                className={`font-semibold ${
-                                                    value === address._id
+                                                className={`font-semibold ${value === address._id
                                                         ? "text-brand-blue-500"
                                                         : "text-neutral-700"
-                                                }`}
+                                                    }`}
                                             >
                                                 {address.name}
                                             </h2>
@@ -224,9 +219,8 @@ const MyAddressSection = ({ data }) => {
                                     height="h-6"
                                     type="button"
                                     onClick={() => {
-                                        console.log("ASdf");
-                                        setOpenDeleteModal(address._id);
-                                        // handleAddressDelete(address.id);
+                                        address.isDefault ? toast.warning(`Default address cannot be deleted. Change the default first. ${address.isDefault}`) : setOpenDeleteModal(address._id);;
+
                                     }}
                                 />
                             </div>
@@ -339,7 +333,7 @@ export const ThreeDotsMenu = ({
             />
             <div
                 className="absolute z-20 top-10 -left-36 w-48 bg-white animate-fadeIn py-4 px-5 shadow-md rounded-sm"
-                // onClick={handleDetailsModalOpen}
+            // onClick={handleDetailsModalOpen}
             >
                 {/* <Buttons.IconWithLabel
                     alt="edit-icon"

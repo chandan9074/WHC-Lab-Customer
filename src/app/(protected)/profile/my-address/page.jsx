@@ -20,7 +20,6 @@ async function getAddress(token) {
 
 const MyAddress = async () => {
     const token = getCookie("accessToken", { cookies });
-    // console.log(token);
     const addressData = await getAddress(token);
 
     return (
