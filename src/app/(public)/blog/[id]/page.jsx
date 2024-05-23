@@ -74,7 +74,7 @@ async function BlogDetails({ params }) {
                         <div className="h-[1px] bg-stroke-new w-full"></div>
 
                         {/* comment section */}
-                        <CommentList comment={singleBlogData?.comment} />
+                        <CommentList comments={singleBlogData?.comment} />
                         <CommentForm blogId={singleBlogData?._id} />
                     </div>
 

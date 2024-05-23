@@ -2,20 +2,35 @@
 import Text from "@/components/Text";
 import { formatDate } from "@/utils";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Icons from "../../../../public/assets/Icons";
+import Buttons from "@/components/Buttons";
 
-function CommentList({ comment }) {
+function CommentList({ comments }) {
     // const comments = Array(4).fill();
+    const initialDisplayCount = 3;
+    const [displayCount, setDisplayCount] = useState(initialDisplayCount);
+    const [commentList, setCommentList] = useState([]);
+
+    const handleShowMore = () => {
+        setDisplayCount((prevCount) => prevCount + initialDisplayCount);
+    };
+    const handleShowLess = () => {
+        setDisplayCount(initialDisplayCount);
+    };
+
+    useEffect(() => {
+        setCommentList(comments);
+    }, [comments]);
 
     return (
         <div>
             <Text.Secondary>Comment</Text.Secondary>
 
-            {comment.map((comment, index) => (
+            {commentList.slice(0, displayCount).map((comment, index) => (
                 <div
                     className={`py-6 flex gap-6 ${
-                        index !== comment.length - 1
+                        index !== comments.length - 1
                             ? "border-b border-stroke-new"
                             : ""
                     }`}
@@ -41,6 +56,21 @@ function CommentList({ comment }) {
                     </div>
                 </div>
             ))}
+            <div className="w-full flex justify-center mt-6">
+                {commentList.length > displayCount ? (
+                    <Buttons.OutlinedButton
+                        label="Show more"
+                        onClick={handleShowMore}
+                    />
+                ) : (
+                    commentList.length > initialDisplayCount && (
+                        <Buttons.OutlinedButton
+                            label="Show less"
+                            onClick={handleShowLess}
+                        />
+                    )
+                )}
+            </div>
         </div>
     );
 }
