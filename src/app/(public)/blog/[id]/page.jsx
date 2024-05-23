@@ -52,7 +52,7 @@ async function BlogDetails({ params }) {
                         {/* Author info and share option */}
                         <div className="flex flex-col md:flex-row justify-between items-start gap-6">
                             {/* author info */}
-                            <AuthorInfo />
+                            <AuthorInfo data={singleBlogData.authorDetails} />
 
                             {/* social media share */}
                             <SocialMediaShare

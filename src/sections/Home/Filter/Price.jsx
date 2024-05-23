@@ -1,3 +1,4 @@
+import { useUserContext } from "@/contexts/UserContext";
 import { Input, InputNumber, Slider } from "antd";
 import React, { useEffect, useState } from "react";
 
@@ -5,6 +6,8 @@ const Price = ({ setSearchQuery, searchQuery }) => {
     // const [inputValue, setInputValue] = useState([0, 20]);
     const [maxValue, setMaxValue] = useState(0);
     const [minValue, setMinValue] = useState(0);
+
+    const { currency } = useUserContext();
 
     useEffect(() => {
         if (searchQuery?.maxPrice) {
@@ -70,7 +73,7 @@ const Price = ({ setSearchQuery, searchQuery }) => {
                     onPressEnter={(e) => handlePressEnter(e, "min")}
                     prefix={
                         <span className="text-[#262626] text-sm font-medium">
-                            $
+                            {currency?.icon}
                         </span>
                     }
                 />
@@ -83,7 +86,7 @@ const Price = ({ setSearchQuery, searchQuery }) => {
                     onPressEnter={(e) => handlePressEnter(e, "max")}
                     prefix={
                         <span className="text-[#262626] text-sm font-medium">
-                            $
+                            {currency?.icon}
                         </span>
                     }
                 />
