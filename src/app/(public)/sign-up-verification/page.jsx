@@ -48,6 +48,13 @@ const SignUpVerification = () => {
             toast.error(error.message);
         }
     };
+
+    const handleResendCode =()=>{
+        console.log('userDetails',userDetails);
+        console.log('resend code');
+    }
+
+
     return (
         <Suspense fallback={<Loader />}>
             <Layouts.Primary>
@@ -57,6 +64,7 @@ const SignUpVerification = () => {
                             title="sign up"
                             verifyShortForm={userDetails?.primaryEmail}
                             handleUpdate={handleSubmit}
+                            handleResendCode={handleResendCode}
                         />
                     )}
                 </section>
