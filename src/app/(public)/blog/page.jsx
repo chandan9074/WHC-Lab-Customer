@@ -8,7 +8,7 @@ import BlogService from "@/services/BlogService";
 
 async function page() {
     const blogsData = await BlogService.getBlogs();
-    // console.log("blogs----------------", blogsData);
+    console.log("blogs----------------", blogsData);
 
     return (
         <Layouts.Secondary breadcrumb={false}>

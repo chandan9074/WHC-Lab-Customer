@@ -28,6 +28,7 @@ function CommentForm({ blogId }) {
                 _id: userInfo._id,
                 authorName: userInfo?.firstName + " " + userInfo?.lastName,
             };
+            values.author.profilePicture = userInfo?.profilePicture;
 
             const res = await BlogService.createBlogs(values, token);
 

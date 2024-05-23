@@ -9,7 +9,6 @@ import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 function CommentList({ comments }) {
     // const comments = Array(4).fill();
-    console.log(comments, "hello");
     const initialDisplayCount = 3;
     const [displayCount, setDisplayCount] = useState(initialDisplayCount);
     const [commentList, setCommentList] = useState([]);
@@ -39,7 +38,11 @@ function CommentList({ comments }) {
                     key={index}
                 >
                     <Image
-                        src={`${GET_IMAGE_RENDER}?key=${comment?.author?.profilePic}`}
+                        src={
+                            comment?.author?.profilePicture
+                                ? `${GET_IMAGE_RENDER}?key=${comment?.author?.profilePicture}`
+                                : Icons.user_avatar
+                        }
                         alt="Icon"
                         width={1000}
                         height={1000}
