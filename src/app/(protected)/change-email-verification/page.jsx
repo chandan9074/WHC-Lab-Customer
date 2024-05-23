@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { MY_ACCOUNT_PATH } from "@/helpers/slug";
 
-const ChangePhone = () => {
+const ChangeEmailVarification = () => {
     const [loading, setLoading] = useState(false);
     const token = getCookie("accessToken");
     const userInfo = getCookie("userInfo");
@@ -38,6 +38,11 @@ const ChangePhone = () => {
         }
     };
 
+    const handleResendCode =()=>{
+        console.log('userDetails',userDetails);
+        console.log('resend code');
+    }
+
     return (
         <Suspense fallback={<Loader />}>
             <Layouts.Primary>
@@ -47,6 +52,7 @@ const ChangePhone = () => {
                         title="email address"
                         verifyShortForm="asdasdasavc@gamil.com"
                         handleUpdate={handleUpdate}
+                        handleResendCode={handleResendCode}
                     />
                 </section>
             </Layouts.Primary>
@@ -54,4 +60,4 @@ const ChangePhone = () => {
     );
 };
 
-export default ChangePhone;
+export default ChangeEmailVarification;

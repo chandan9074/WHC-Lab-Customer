@@ -16,8 +16,6 @@ const SignUpVerification = () => {
     const { setUserInfo, setIsLogin } = useAuthContext();
     const [token, setToken] = useState(null);
 
-    console.log(userDetails, "data-----");
-
     useEffect(() => {
         const userInfo = JSON.parse(getCookie("temp_userInfo"));
         const tokenData = getCookie("temp_accessToken");
@@ -50,6 +48,13 @@ const SignUpVerification = () => {
             toast.error(error.message);
         }
     };
+
+    const handleResendCode =()=>{
+        console.log('userDetails',userDetails);
+        console.log('resend code');
+    }
+
+
     return (
         <Suspense fallback={<Loader />}>
             <Layouts.Primary>
@@ -59,6 +64,7 @@ const SignUpVerification = () => {
                             title="sign up"
                             verifyShortForm={userDetails?.primaryEmail}
                             handleUpdate={handleSubmit}
+                            handleResendCode={handleResendCode}
                         />
                     )}
                 </section>

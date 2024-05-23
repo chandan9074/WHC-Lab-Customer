@@ -100,7 +100,6 @@ function PlaceOrderContainer({ addressData }) {
 
             if (response.status === 200) {
                 toast.success(response?.message);
-                console.log(response.doc.link);
                 const paymentLink = response?.doc.link;
 
                 if (paymentLink) {
@@ -132,7 +131,6 @@ function PlaceOrderContainer({ addressData }) {
         if (hasCookie("orderData")) {
             let item = JSON.parse(getCookie("orderData"));
             setOrderItem(item);
-            console.log(item);
         } else {
             router.push("/my-cart");
         }

@@ -81,7 +81,6 @@ const MyAddressSection = ({ data }) => {
     };
 
     const onChange = async (e) => {
-        console.log("radio checked", e.target.value);
         // setValue(e.target.value);
 
         // If the selected address is not the default address, update it

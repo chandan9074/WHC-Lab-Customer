@@ -48,7 +48,6 @@ const ProductCard = ({ data, wishListIds }) => {
         );
 
         const stockId = variant.stockId;
-        console.log(data, "data console");
         setLoading(true);
         checkProductInWishList(data._id)
             ? //delete
