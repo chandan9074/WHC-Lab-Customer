@@ -12,7 +12,7 @@ async function BreweryResources() {
     console.log({ getResources });
 
     return (
-        <Layouts.Secondary breadcrumb={false}>
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="BREWING RESOURCES" />
             <InfoPagesContainer>
                 <div className="flex flex-col gap-6">

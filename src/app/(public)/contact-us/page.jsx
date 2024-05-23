@@ -12,7 +12,7 @@ import Buttons from "@/components/Buttons";
 
 function Contact() {
     return (
-        <Layouts.Secondary breadcrumb={false}>
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="Contact Us" />
             <InfoPagesContainer>
                 <div className="flex flex-col gap-12 md:flex-row">

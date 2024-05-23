@@ -26,7 +26,7 @@ export default async function Home() {
 console.log("products-------------",newProducts);
 
     return (
-        <Layouts.Primary>
+        <Layouts.Primary breadcrumb={false}>
             <HeroContainer />
             <ProductContainer featuredProducts={featuredProducts.docs}/>
             <MainCategoriesContainer mainCategoriesData={mainCategoriesData.docs}/>

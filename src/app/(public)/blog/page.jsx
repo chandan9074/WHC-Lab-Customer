@@ -8,7 +8,7 @@ async function page() {
     const blogsData = await BlogService.getBlogs();
 
     return (
-        <Layouts.Secondary breadcrumb={false}>
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="Blog" />
             <InfoPagesContainer>
                 <BlogContainer
@@ -17,7 +17,7 @@ async function page() {
                     blogDataLimit={blogsData.limit}
                 />
             </InfoPagesContainer>
-        </Layouts.Secondary>
+        </Layouts.Primary>
     );
 }
 

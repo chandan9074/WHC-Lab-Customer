@@ -12,7 +12,7 @@ async function LabAnalysisResources() {
     console.log("lab-- ", getResources);
 
     return (
-        <Layouts.Secondary breadcrumb={false}>
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="Lab Analysis Resources" />
             <InfoPagesContainer>
                 <div className="flex flex-col gap-6">

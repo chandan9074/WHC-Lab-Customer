@@ -39,7 +39,7 @@ async function BlogDetails({ params }) {
     // console.log({ singleBlogData });
 
     return (
-        <Layouts.Secondary breadcrumb={false}>
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading={singleBlogData?.title} />
             <InfoPagesContainer>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-12">
@@ -91,7 +91,7 @@ async function BlogDetails({ params }) {
                     <BlogContainer blogsData={blogsData.docs.slice(0, 3)} />
                 </div>
             </InfoPagesContainer>
-        </Layouts.Secondary>
+        </Layouts.Primary>
     );
 }
 
