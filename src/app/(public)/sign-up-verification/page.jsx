@@ -16,8 +16,6 @@ const SignUpVerification = () => {
     const { setUserInfo, setIsLogin } = useAuthContext();
     const [token, setToken] = useState(null);
 
-    console.log(userDetails, "data-----");
-
     useEffect(() => {
         const userInfo = JSON.parse(getCookie("temp_userInfo"));
         const tokenData = getCookie("temp_accessToken");

@@ -60,7 +60,6 @@ const OrderDetails = ({ params: { orderId } }) => {
 
         try {
             const res = await ProductService.postProductReview(values, token);
-            console.log(res);
             toast.success(res?.message);
         } catch (e) {
             toast.error(e?.message);

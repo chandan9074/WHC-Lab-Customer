@@ -16,7 +16,6 @@ const CreditBalance = () => {
     const _userInfo = getCookie("userInfo");
     const userInfo = _userInfo && JSON.parse(_userInfo);
 
-    console.log(userInfo);
 
     // Function to format the date
     const formatDate = (dateString) => {

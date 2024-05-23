@@ -23,9 +23,7 @@ export function WishlistProvider({ children }) {
                 apiUrl: WISHLISTS_URL,
                 ...MethodsStructure.getMethod({ Authorization: `${token}` }),
             });
-            console.log(res);
             if (res?.status === 200) {
-                console.log(res?.docs);
                 setWishlistIds(res?.docs);
                 // toast.success(res?.message);
             }
@@ -41,7 +39,6 @@ export function WishlistProvider({ children }) {
                 body: { productId, stockId, currency },
                 ...MethodsStructure.postMethod({ Authorization: `${token}` }),
             });
-            console.log(res);
             if (res.status === 200) {
                 toast.success(res?.message);
             }
@@ -57,7 +54,6 @@ export function WishlistProvider({ children }) {
                 query: { id },
                 ...MethodsStructure.deleteMethod({ Authorization: `${token}` }),
             });
-            console.log(res);
             if (res.status === 200) {
                 toast.success(res?.message);
                 getProductWishlist();

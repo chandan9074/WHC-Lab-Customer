@@ -56,7 +56,6 @@ const VerificationForm = ({
     //         : "/";
 
     const handleFinish = () => {
-        console.log("clock");
         handleUpdate && handleUpdate(verificationCode);
     };
 

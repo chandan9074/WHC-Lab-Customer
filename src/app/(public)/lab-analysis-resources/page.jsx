@@ -9,7 +9,6 @@ async function LabAnalysisResources() {
     const getResources = await ResourceService.getResources(
         "LAB_ANALYSIS_RESOURCES"
     );
-    console.log("lab-- ", getResources);
 
     return (
         <Layouts.Secondary breadcrumb={false}>

@@ -70,7 +70,6 @@ const AddressModal = ({
         } else {
             // For update
             try {
-                console.log(values);
                 const res = await MakeApiCall({
                     apiUrl: MY_ADDRESS_URL,
                     method: "PATCH",
@@ -78,7 +77,6 @@ const AddressModal = ({
                     body: { ...values },
                     headers: { Authorization: token },
                 });
-                console.log(res);
 
                 handleDetailsModalOpen(null);
                 toast.success(res?.message);

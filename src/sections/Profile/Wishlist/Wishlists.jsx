@@ -3,7 +3,6 @@ import NoDataFound from "@/components/common/NoDataFound";
 import Wish from "./Wish";
 
 const Wishlists = ({ wishLists, handleDelete, createCartItem }) => {
-    console.log(wishLists);
 
     return (
         <div className={`flex flex-col gap-0`}>

@@ -13,7 +13,6 @@ const TrackOrderedItem = ({ data, leaveItemReview }) => {
     const [isCollapse, setIsCollapse] = useState(true);
 
     const [isSellerRating, setIsSellerRating] = useState(false);
-    console.log({ data });
 
     useEffect(() => {
         // Get the screen width
@@ -33,7 +32,6 @@ const TrackOrderedItem = ({ data, leaveItemReview }) => {
 
     // seller rating submit
     const handleAddSellerRating = (values) => {
-        console.log("review values - ", values);
         setIsWriteReview(false);
     };
 

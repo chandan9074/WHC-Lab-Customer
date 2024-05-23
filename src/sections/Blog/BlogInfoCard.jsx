@@ -6,7 +6,6 @@ import React from "react";
 import Images from "../../../public/assets/Images";
 
 function BlogInfoCard({ data }) {
-    console.log(data);
     return (
         <Link href={`/blog/${data?._id}`}>
             <div className="border border-stroke-new rounded-2xl bg-white group">
