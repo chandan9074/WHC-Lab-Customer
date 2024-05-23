@@ -22,7 +22,7 @@ async function BlogDetails({ params }) {
     const singleBlogData = blogsData?.docs?.find(
         (blog) => blog?._id === params?.id
     );
-    // console.log("single------------------", singleBlogData);
+    console.log("single------------------", singleBlogData);
 
     const currentIndex = blogsData.docs.findIndex(
         (blog) => blog._id === singleBlogData?._id
@@ -35,10 +35,10 @@ async function BlogDetails({ params }) {
             ? blogsData.docs[currentIndex + 1]
             : null;
 
-    console.log("Previous Blog:", prevBlog);
-    console.log("Next Blog:", nextBlog);
+    // console.log("Previous Blog:", prevBlog);
+    // console.log("Next Blog:", nextBlog);
 
-    console.log({ singleBlogData });
+    // console.log({ singleBlogData });
 
     return (
         <Layouts.Secondary breadcrumb={false}>
@@ -55,7 +55,10 @@ async function BlogDetails({ params }) {
                             <AuthorInfo data={singleBlogData.authorDetails} />
 
                             {/* social media share */}
-                            <SocialMediaShare />
+                            <SocialMediaShare
+                                quote={singleBlogData?.title}
+                                hashtag={singleBlogData?.tags}
+                            />
                         </div>
 
                         {/* navigator  previous & Next*/}

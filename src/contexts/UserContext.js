@@ -1,6 +1,6 @@
 import LocationService from "@/services/LocationService";
 import { createContext, useContext, useEffect, useState } from "react";
-import { getCookie, hasCookie } from "cookies-next";
+import { getCookie, hasCookie, setCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { currencyData } from "@/libs/common";
 
@@ -17,10 +17,13 @@ export function UserProvider({ children }) {
         if (hasCookie("userInfo")) {
             setUserInfo(JSON.parse(getCookie("userInfo")));
         }
-        if (hasCookie("selected_currency")) {
-            const currencyValue = getCookie("selected_currency");
-            setCurrency(currencyValue);
+        if(hasCookie("selected_currency")){
+            const currencyValue = getCookie("selected_currency")
             const getCurrencyKey = currencyData[currencyValue];
+            setCurrency(getCurrencyKey);
+        }else{
+            setCookie("selected_currency","GBP")
+            const getCurrencyKey = currencyData["GBP"];
             setCurrency(getCurrencyKey);
         }
     }, []);

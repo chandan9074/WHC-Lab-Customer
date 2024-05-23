@@ -7,12 +7,13 @@ import { useEffect, useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import AddToCartSuccession from "./AddToCartSuccession";
 import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
-import { getCookie, hasCookie } from "cookies-next";
+import { getCookie, hasCookie, setCookie } from "cookies-next";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "react-toastify";
 import { useWishlistContext } from "@/contexts/WishlistContext";
 import { usePathname } from "next/navigation";
 import { useUserContext } from "@/contexts/UserContext";
+import CountrySelectionModal from "../Store/CountrySelectionModal";
 
 const ProductRightView = ({
     forModal = false,
@@ -40,7 +41,25 @@ const ProductRightView = ({
     console.log(data, "data log");
 
     useEffect(() => {
-        const locationId = JSON.parse(getCookie("selected_location"));
+        if (hasCookie("selected_location")) {
+            const locationId = JSON.parse(getCookie("selected_location"));
+            if (locationId) {
+                console.log({ locationId, data });
+                const stock = data?.variants.find(
+                    (item) => item.location._id === locationId
+                );
+
+                if (stock) {
+                    setMaxLimit(stock?.quantity);
+                }
+            }
+        }
+    }, [data]);
+
+    console.log(data, "data");
+
+    const handleLocation = async (locationId) => {
+        setCookie("selected_location", JSON.stringify(locationId));
         if (locationId) {
             console.log({ locationId, data });
             const stock = data?.variants.find(
@@ -52,7 +71,7 @@ const ProductRightView = ({
                 setStatus(stock?.status);
             }
         }
-    }, [data]);
+    };
 
     const token = getCookie("accessToken");
 
@@ -343,6 +362,8 @@ const ProductRightView = ({
                     </div>
                 </div>
             </div>
+
+            <CountrySelectionModal handleLocation={handleLocation} />
         </div>
     );
 };

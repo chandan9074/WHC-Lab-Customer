@@ -25,7 +25,9 @@ const OurDistributors = async () => {
                             <h1 className="text-5xl font-semibold text-brand-blue-800 leading-[62.4px]">
                                 Know Our Distributors
                             </h1>
-                            <CountryCategorySelection />
+                            <CountryCategorySelection
+                                data={distributorsData.docs}
+                            />
                         </div>
                         <div className="col-span-12 md:col-span-8 relative z-0">
                             <Map data={distributorsData.docs} />

@@ -30,211 +30,210 @@ const markers = [
     },
 ];
 function Map({ data }) {
-    console.log("data------", data);
     const router = useRouter();
     const mapRef = useRef();
     const [map, setMap] = useState(null);
     // const [openPopups, setOpenPopups] = useState([]);
 
-    useEffect(() => {
-        if (mapRef.current) {
-            const map = mapRef.current.leafletElement;
-            const styles = [
-                // The provided JSON styles
-                [
-                    {
-                        featureType: "all",
-                        elementType: "labels.text.fill",
-                        stylers: [
-                            {
-                                saturation: 36,
-                            },
-                            {
-                                color: "#333333",
-                            },
-                            {
-                                lightness: 40,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "all",
-                        elementType: "labels.text.stroke",
-                        stylers: [
-                            {
-                                visibility: "on",
-                            },
-                            {
-                                color: "#ffffff",
-                            },
-                            {
-                                lightness: 16,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "all",
-                        elementType: "labels.icon",
-                        stylers: [
-                            {
-                                visibility: "off",
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "administrative",
-                        elementType: "geometry.fill",
-                        stylers: [
-                            {
-                                color: "#fefefe",
-                            },
-                            {
-                                lightness: 20,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "administrative",
-                        elementType: "geometry.stroke",
-                        stylers: [
-                            {
-                                color: "#fefefe",
-                            },
-                            {
-                                lightness: 17,
-                            },
-                            {
-                                weight: 1.2,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "landscape",
-                        elementType: "geometry",
-                        stylers: [
-                            {
-                                color: "#f5f5f5",
-                            },
-                            {
-                                lightness: 20,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "poi",
-                        elementType: "geometry",
-                        stylers: [
-                            {
-                                color: "#f5f5f5",
-                            },
-                            {
-                                lightness: 21,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "poi.park",
-                        elementType: "geometry",
-                        stylers: [
-                            {
-                                color: "#dedede",
-                            },
-                            {
-                                lightness: 21,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "road.highway",
-                        elementType: "geometry.fill",
-                        stylers: [
-                            {
-                                color: "#ffffff",
-                            },
-                            {
-                                lightness: 17,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "road.highway",
-                        elementType: "geometry.stroke",
-                        stylers: [
-                            {
-                                color: "#ffffff",
-                            },
-                            {
-                                lightness: 29,
-                            },
-                            {
-                                weight: 0.2,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "road.arterial",
-                        elementType: "geometry",
-                        stylers: [
-                            {
-                                color: "#ffffff",
-                            },
-                            {
-                                lightness: 18,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "road.local",
-                        elementType: "geometry",
-                        stylers: [
-                            {
-                                color: "#ffffff",
-                            },
-                            {
-                                lightness: 16,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "transit",
-                        elementType: "geometry",
-                        stylers: [
-                            {
-                                color: "#f2f2f2",
-                            },
-                            {
-                                lightness: 19,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "water",
-                        elementType: "geometry",
-                        stylers: [
-                            {
-                                color: "#e9e9e9",
-                            },
-                            {
-                                lightness: 17,
-                            },
-                        ],
-                    },
-                    {
-                        featureType: "water",
-                        elementType: "geometry.fill",
-                        stylers: [
-                            {
-                                color: "#b3d46d",
-                            },
-                        ],
-                    },
-                ],
-                // Add other styles here...
-            ];
+    // useEffect(() => {
+    //     if (mapRef.current) {
+    //         const map = mapRef.current.leafletElement;
+    //         const styles = [
+    //             // The provided JSON styles
+    //             [
+    //                 {
+    //                     featureType: "all",
+    //                     elementType: "labels.text.fill",
+    //                     stylers: [
+    //                         {
+    //                             saturation: 36,
+    //                         },
+    //                         {
+    //                             color: "#333333",
+    //                         },
+    //                         {
+    //                             lightness: 40,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "all",
+    //                     elementType: "labels.text.stroke",
+    //                     stylers: [
+    //                         {
+    //                             visibility: "on",
+    //                         },
+    //                         {
+    //                             color: "#ffffff",
+    //                         },
+    //                         {
+    //                             lightness: 16,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "all",
+    //                     elementType: "labels.icon",
+    //                     stylers: [
+    //                         {
+    //                             visibility: "off",
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "administrative",
+    //                     elementType: "geometry.fill",
+    //                     stylers: [
+    //                         {
+    //                             color: "#fefefe",
+    //                         },
+    //                         {
+    //                             lightness: 20,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "administrative",
+    //                     elementType: "geometry.stroke",
+    //                     stylers: [
+    //                         {
+    //                             color: "#fefefe",
+    //                         },
+    //                         {
+    //                             lightness: 17,
+    //                         },
+    //                         {
+    //                             weight: 1.2,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "landscape",
+    //                     elementType: "geometry",
+    //                     stylers: [
+    //                         {
+    //                             color: "#f5f5f5",
+    //                         },
+    //                         {
+    //                             lightness: 20,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "poi",
+    //                     elementType: "geometry",
+    //                     stylers: [
+    //                         {
+    //                             color: "#f5f5f5",
+    //                         },
+    //                         {
+    //                             lightness: 21,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "poi.park",
+    //                     elementType: "geometry",
+    //                     stylers: [
+    //                         {
+    //                             color: "#dedede",
+    //                         },
+    //                         {
+    //                             lightness: 21,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "road.highway",
+    //                     elementType: "geometry.fill",
+    //                     stylers: [
+    //                         {
+    //                             color: "#ffffff",
+    //                         },
+    //                         {
+    //                             lightness: 17,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "road.highway",
+    //                     elementType: "geometry.stroke",
+    //                     stylers: [
+    //                         {
+    //                             color: "#ffffff",
+    //                         },
+    //                         {
+    //                             lightness: 29,
+    //                         },
+    //                         {
+    //                             weight: 0.2,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "road.arterial",
+    //                     elementType: "geometry",
+    //                     stylers: [
+    //                         {
+    //                             color: "#ffffff",
+    //                         },
+    //                         {
+    //                             lightness: 18,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "road.local",
+    //                     elementType: "geometry",
+    //                     stylers: [
+    //                         {
+    //                             color: "#ffffff",
+    //                         },
+    //                         {
+    //                             lightness: 16,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "transit",
+    //                     elementType: "geometry",
+    //                     stylers: [
+    //                         {
+    //                             color: "#f2f2f2",
+    //                         },
+    //                         {
+    //                             lightness: 19,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "water",
+    //                     elementType: "geometry",
+    //                     stylers: [
+    //                         {
+    //                             color: "#e9e9e9",
+    //                         },
+    //                         {
+    //                             lightness: 17,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     featureType: "water",
+    //                     elementType: "geometry.fill",
+    //                     stylers: [
+    //                         {
+    //                             color: "#b3d46d",
+    //                         },
+    //                     ],
+    //                 },
+    //             ],
+    //             // Add other styles here...
+    //         ];
 
-            map.setStyle(styles);
-        }
-    }, []);
+    //         map.setStyle(styles);
+    //     }
+    // }, []);
 
     // const closePopup = (index) => {
     //     // Find the marker by its index
