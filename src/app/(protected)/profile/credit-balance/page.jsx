@@ -3,10 +3,11 @@ import Buttons from "@/components/Buttons";
 import { Spin, Table } from "antd";
 import { Suspense, useEffect, useState } from "react";
 import CreditService from "@/services/CreditBalanceService";
-import { getCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import Loader from "@/components/common/Loader";
 import { useUserContext } from "@/contexts/UserContext";
+import UserService from "@/services/UserService/UserService";
 
 const CreditBalance = () => {
     const [creditBalance, setCreditBalance] = useState([]);
@@ -15,9 +16,10 @@ const CreditBalance = () => {
     const [search, setSearch] = useState(null);
     const [loading, setLoading] = useState(false);
     const token = getCookie("accessToken");
-    const _userInfo = getCookie("userInfo");
-    const userInfo = _userInfo && JSON.parse(_userInfo);
+    // const _userInfo = getCookie("userInfo");
+    // const userInfo = _userInfo && JSON.parse(_userInfo);
     const { currency } = useUserContext();
+    const [userInfo, setUserInfo] = useState(null);
 
     // Function to format the date
     const formatDate = (dateString) => {
@@ -26,10 +28,28 @@ const CreditBalance = () => {
         return new Intl.DateTimeFormat("en-US", options).format(date);
     };
 
+    const handleGetUserProfile = async () => {
+        setLoading(true);
+        try {
+            const res = await UserService.fetchUserInfo(token);
+
+            if (res?.status === 200) {
+                setUserInfo(res?.user);
+                setCookie("userInfo", res?.user);
+            }
+        } catch (e) {
+            console.log(e);
+            console.log(e?.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const handleGetCreditBalance = async () => {
         try {
             setLoading(true);
             const res = await CreditService.getCredits(page, search, token);
+
             if (res?.status === 200) {
                 const updatedDocs = res.docs.map((doc, index) => ({
                     ...doc,
@@ -62,6 +82,8 @@ const CreditBalance = () => {
                 } else {
                     toast.error("Payment link not found.");
                 }
+                handleGetUserProfile();
+                handleGetCreditBalance();
             }
         } catch (e) {
             console.log(e);
@@ -77,6 +99,7 @@ const CreditBalance = () => {
 
             if (res?.status === 200) {
                 toast.success(res?.message);
+                handleGetUserProfile();
             }
         } catch (e) {
             console.log(e, "message..");
@@ -168,6 +191,10 @@ const CreditBalance = () => {
     useEffect(() => {
         handleGetCreditBalance();
     }, [page, search]);
+
+    useEffect(() => {
+        handleGetUserProfile();
+    }, []);
 
     const handleStatusChange = (value) => {
         console.log(`selected ${value}`);
