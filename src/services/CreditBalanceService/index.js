@@ -1,4 +1,8 @@
-const { CREDIT_BALANCE_URL, MAKE_PAYMENT } = require("@/helpers/apiURLS");
+const {
+    CREDIT_BALANCE_URL,
+    MAKE_PAYMENT,
+    APPLY_FOR_CREDIT_BALANCE,
+} = require("@/helpers/apiURLS");
 const { default: MakeApiCall } = require("../MakeApiCall");
 import { MethodsStructure } from "../MethodsStructure";
 
@@ -31,10 +35,18 @@ async function makePayment(number, token) {
     });
 }
 
+async function applyForCreditBalance(token) {
+    return await MakeApiCall({
+        apiUrl: APPLY_FOR_CREDIT_BALANCE,
+        ...MethodsStructure.postMethod({ Authorization: `${token}` }),
+    });
+}
+
 const CreditService = {
     getCredits,
     applyForCredit,
     makePayment,
+    applyForCreditBalance,
 };
 
 export default CreditService;

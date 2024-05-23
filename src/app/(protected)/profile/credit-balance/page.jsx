@@ -19,7 +19,6 @@ const CreditBalance = () => {
     const userInfo = _userInfo && JSON.parse(_userInfo);
     const { currency } = useUserContext();
 
-
     // Function to format the date
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "long", day: "numeric" };
@@ -66,6 +65,22 @@ const CreditBalance = () => {
             }
         } catch (e) {
             console.log(e);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleApplyCreditBalance = async () => {
+        try {
+            setLoading(true);
+            const res = await CreditService.applyForCreditBalance(token);
+
+            if (res?.status === 200) {
+                toast.success(res?.message);
+            }
+        } catch (e) {
+            console.log(e, "message..");
+            toast.error(e?.message);
         } finally {
             setLoading(false);
         }
@@ -205,6 +220,7 @@ const CreditBalance = () => {
                         <Buttons.PrimaryButton
                             label={"Apply for Credit"}
                             className="h-12 whitespace-nowrap"
+                            onClick={handleApplyCreditBalance}
                         />
                     )}
                 </div>
