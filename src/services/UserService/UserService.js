@@ -8,6 +8,8 @@ import {
     CHANGE_PASSWORD,
     CHANGE_EMAIL,
     VERIFY_OTP,
+    IMAGE_UPLOAD,
+    PROFILE_URL,
 } from "@/helpers/apiURLS";
 
 export default class UserService {
@@ -116,5 +118,44 @@ export default class UserService {
         });
 
         return res;
+    }
+
+    static async convertImageToImageUrl(data, token) {
+        try {
+            const response = await fetch(IMAGE_UPLOAD, {
+                method: "POST",
+                body: data,
+                headers: {
+                    // Do not set Content-Type header, let the browser set it automatically
+                    // "Content-Type": "multipart/form-data",
+                    Authorization: `${token}`,
+                },
+            });
+
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error("Error:", error);
+            return error;
+        }
+    }
+
+    static async updateUserProfileImage(data, token) {
+        const res = await MakeApiCall({
+            apiUrl: PROFILE_URL,
+            body: { ...data },
+            ...MethodsStructure.patchMethod({ Authorization: `${token}` }),
+        });
+
+        return res;
+    }
+
+    static async fetchUserInfo(token) {
+        const responseData = await MakeApiCall({
+            apiUrl: PROFILE_URL,
+            ...MethodsStructure.getMethod({ Authorization: `${token}` }),
+        });
+
+        return responseData;
     }
 }
