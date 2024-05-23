@@ -158,7 +158,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
                 >
                     {items.map((item) => (
                         <Fragment key={item.key}>
-                            {getVisibility(item.label, selectedTab.name) && (
+                            {getVisibility(item.label, selectedTab?.name) && (
                                 <Collapse.Panel
                                     header={
                                         <h6 className="text-sm font-semibold text-brand-blue-800 leading-5">

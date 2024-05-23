@@ -14,7 +14,7 @@ const OurDistributors = async () => {
     const getDistributors = DistributorsService.getDistributors();
 
     const [distributorsData] = await Promise.all([getDistributors]);
-    console.log("dist-----------", distributorsData);
+    console.log(distributorsData);
 
     return (
         <Suspense fallback={null}>
