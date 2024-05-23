@@ -5,9 +5,11 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Icons from "../../../../public/assets/Icons";
 import Buttons from "@/components/Buttons";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 function CommentList({ comments }) {
     // const comments = Array(4).fill();
+    console.log(comments, "hello");
     const initialDisplayCount = 3;
     const [displayCount, setDisplayCount] = useState(initialDisplayCount);
     const [commentList, setCommentList] = useState([]);
@@ -29,28 +31,28 @@ function CommentList({ comments }) {
 
             {commentList.slice(0, displayCount).map((comment, index) => (
                 <div
-                    className={`py-6 flex gap-6 ${
-                        index !== comments.length - 1
+                    className={`py-6 flex gap-5 ${
+                        index !== commentList.slice(0, displayCount).length - 1
                             ? "border-b border-stroke-new"
                             : ""
                     }`}
                     key={index}
                 >
                     <Image
-                        src={Icons.user_avatar}
+                        src={`${GET_IMAGE_RENDER}?key=${comment?.author?.profilePic}`}
                         alt="Icon"
                         width={1000}
                         height={1000}
-                        className="w-[50px] h-[50px] rounded-full"
+                        className="w-[48px] h-[48px] rounded-full"
                     />
                     <div className="flex flex-col gap-1">
-                        <p className="text-brand-blue-500 text-base font-medium">
+                        <p className="text-brand-blue-500 text-base font-medium leading-6">
                             {comment?.author?.authorName}
                         </p>
-                        <p className="text-brand-blue-800 text-sm font-normal">
+                        <p className="text-[#474D66] text-sm font-normal leading-5">
                             {formatDate(comment?.createdAt)}
                         </p>
-                        <p className="text-brand-blue-400 text-base font-normal mt-2">
+                        <p className="text-neutral-400 text-base font-normal leading-6 mt-2">
                             {comment.commentText}
                         </p>
                     </div>

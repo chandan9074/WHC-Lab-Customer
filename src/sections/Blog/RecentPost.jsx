@@ -11,7 +11,9 @@ function RecentPost({ data }) {
     // console.log("ungabunga----------", recentPosts);
     return (
         <div className="p-6 border border-stroke-new rounded-2xl bg-white flex flex-col gap-8 md:gap-9">
-            <Text.Secondary>Recent Post</Text.Secondary>
+            <h1 className="text-brand-blue-500 text-2xl leading-8 font-semibold">
+                Recent Post
+            </h1>
 
             <div className="flex flex-col gap-6">
                 {recentPosts?.map((post, index) => (
@@ -25,13 +27,13 @@ function RecentPost({ data }) {
                             alt="Icon"
                             width={1000}
                             height={1000}
-                            className="w-[50px] h-[100%]"
+                            className="w-[79px] h-[74px] rounded-[4px]"
                         />
                         <div>
-                            <p className="text-base font-medium clamp cursor-pointer text-brand-blue-800">
+                            <p className="text-base font-semibold leading-6 line-clamp-2 cursor-pointer text-brand-blue-500">
                                 {post.title}
                             </p>
-                            <p className="text-neutral-400">
+                            <p className="text-neutral-400 text-sm leading-5">
                                 {formatDate(post.createdAt)}
                             </p>
                         </div>
