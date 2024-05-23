@@ -16,7 +16,7 @@
 
 /* andt input */
 .ant-input {
-    color: #bdbdbd !important;
+    color: #7a8699 !important;
     font-size: 16px;
     font-family: var(--font-poppins);
     height: 52px;
@@ -25,12 +25,12 @@
 /* antd input outline */
 .ant-input-outlined,
 .ant-input-number-input {
-    border-color: #ebedf0;
+    /* border-color: #ebedf0; */
     /* padding: 13px 12px !important; */
     line-height: 24px;
     font-weight: 400;
     border-radius: 4px;
-    color: #7a8699 !important;
+    /* color: #7a8699 !important; */
     font-size: 16px;
     font-family: var(--font-poppins);
 }
@@ -99,6 +99,7 @@
 
 .ant-input-outlined:focus-within {
     border-color: #0b2848 !important;
+    box-shadow:none !important
 }
 
 .ant-select-outlined:not(.ant-select-disabled):not(
@@ -175,6 +176,9 @@
 
 .ant-input-number-outlined:hover {
     border-color: #0b2848;
+}
+.ant-select-selector:hover {
+    border-color: #ebedf0 !important;
 }
 
 .ant-input-number-outlined:focus,
