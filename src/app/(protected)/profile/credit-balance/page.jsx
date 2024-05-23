@@ -176,12 +176,18 @@ const CreditBalance = () => {
             render: (_, record) => {
                 return (
                     <>
-                        <button
-                            onClick={() => handlePay(record?.orderNumber)}
-                            className="py-2 px-4 bg-brand-blue-500 text-white rounded-md font-medium text-center text-sm"
-                        >
-                            Pay now
-                        </button>
+                        {record?.status === "paid" ? (
+                            <h4 className="font-semibold text-md text-green-600">
+                                Paid
+                            </h4>
+                        ) : (
+                            <button
+                                onClick={() => handlePay(record?.orderNumber)}
+                                className="py-2 px-4 bg-brand-blue-500 text-white rounded-md font-medium text-center text-sm"
+                            >
+                                Pay now
+                            </button>
+                        )}
                     </>
                 );
             },
