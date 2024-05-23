@@ -35,7 +35,7 @@ const CreditBalance = () => {
 
             if (res?.status === 200) {
                 setUserInfo(res?.user);
-                setCookie("userInfo", res?.user);
+                setCookie("userInfo", JSON.stringify(res?.user));
             }
         } catch (e) {
             console.log(e);
