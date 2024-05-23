@@ -14,10 +14,11 @@ const OrderHistory = ({ orderHistoryList }) => {
                         <OrderItem
                             key={index}
                             createdAt={createdAtDate}
-                            orderId={ele?._id}
+                            orderId={ele?.number}
                             state={ele.state}
                             lineItemCount={ele.lineItems.length}
                             total={ele.total}
+                            currency={ele?.currency}
                         />
                     );
                 })

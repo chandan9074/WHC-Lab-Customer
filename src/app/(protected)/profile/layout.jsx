@@ -11,7 +11,6 @@ import ProfileBar from "@/components/Profile/ProfileBar";
 import Loader from "@/components/common/Loader";
 import Layouts from "@/layouts";
 import { profileData } from "@/libs/data";
-import { accountData } from "@/libs/myAccountData";
 import TitleBar from "@/sections/Profile/TitleBar";
 import UserService from "@/services/UserService/UserService";
 import { getCookie } from "cookies-next";

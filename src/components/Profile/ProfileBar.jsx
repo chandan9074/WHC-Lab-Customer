@@ -13,6 +13,8 @@ import MakeApiCall from "@/services/MakeApiCall";
 import Images from "../../../public/assets/Images";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { toast } from "react-toastify";
+import UserService from "@/services/UserService/UserService";
+import { useUserContext } from "@/contexts/UserContext";
 
 const { Text } = Typography;
 
@@ -44,6 +46,7 @@ const ProfileBar = ({ width, data }) => {
     );
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const { userProfileInfo, setUserProfileInfo } = useUserContext();
     // const [image, setImage] = useState(
     //     userData?.profilePicture
     //         ? `${GET_IMAGE_RENDER}?key=${userData?.profilePicture}`
@@ -54,12 +57,10 @@ const ProfileBar = ({ width, data }) => {
         const getUserData = async () => {
             try {
                 setIsLoading(true);
-                const responseData = await MakeApiCall({
-                    apiUrl: MY_ACCOUNT_URL,
-                    headers: { Authorization: token },
-                });
+                const responseData = await UserService.fetchUserInfo(token);
 
                 setUserData(responseData.user);
+                setUserProfileInfo(responseData.user);
                 // toast.success(responseData.message);
             } catch (error) {
                 // console.log("error", error.message);
@@ -233,8 +234,8 @@ const ProfileBar = ({ width, data }) => {
                         <Image
                             alt="profile"
                             src={
-                                userData?.profilePicture
-                                    ? `${GET_IMAGE_RENDER}?key=${userData?.profilePicture}`
+                                userProfileInfo?.profilePicture
+                                    ? `${GET_IMAGE_RENDER}?key=${userProfileInfo?.profilePicture}`
                                     : Images.profile_avatar
                             }
                             width={1000}
@@ -242,7 +243,8 @@ const ProfileBar = ({ width, data }) => {
                             className="w-12 h-12 rounded-full mb-2"
                         />
                         <p className="w-[170px] truncate text-neutral-700 text-base font-medium">
-                            {userData?.firstName} {userData?.lastName}
+                            {userProfileInfo?.firstName}{" "}
+                            {userProfileInfo?.lastName}
                         </p>
                     </div>
                 )}

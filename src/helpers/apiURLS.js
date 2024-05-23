@@ -13,6 +13,8 @@ export const GET_PRODUCTS = `${BASEURL}/products`;
 
 export const GET_IMAGE_RENDER = `${BASEURL}/files/view-image`;
 
+export const IMAGE_UPLOAD = `${BASEURL}/files/images`;
+
 export const GET_USER_PROFILE = `${BASEURL}/profile`;
 
 export const PROFILE_URL = `${BASEURL}/users/profile`;
@@ -83,3 +85,5 @@ export const MAKE_PAYMENT = `${BASEURL}/orders/send-payment-link`;
 export const COMMENTS = `${BASEURL}/comments`;
 //apply for credit balance
 export const APPLY_FOR_CREDIT_BALANCE = `${BASEURL}/users/apply-for-credit`;
+// Review url
+export const REVIEW_URL = `${BASEURL}/reviews`;

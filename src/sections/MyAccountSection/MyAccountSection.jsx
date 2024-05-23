@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { Form, Input, Modal } from "antd";
+import { Form, Input, Modal, Spin } from "antd";
 import Buttons from "@/components/Buttons";
 import { useRouter } from "next/navigation";
 import { CHANGE_PASSWORD_PATH } from "@/helpers/slug";
@@ -8,18 +8,16 @@ import Images from "../../../public/assets/Images";
 import Image from "next/image";
 import Icons from "../../../public/assets/Icons";
 import EditableInput from "@/components/common/EditableInput";
-import {
-    GET_IMAGE_RENDER,
-    GET_USER_PROFILE,
-    PROFILE_URL,
-} from "@/helpers/apiURLS";
+import { GET_IMAGE_RENDER, PROFILE_URL } from "@/helpers/apiURLS";
 import { useUserContext } from "@/contexts/UserContext";
 import { getCookie, setCookie } from "cookies-next";
 import MakeApiCall from "@/services/MakeApiCall";
 import { toast } from "react-toastify";
+import webpfy from "webpfy";
+import { isImageInvalid } from "@/utils";
+import UserService from "@/services/UserService/UserService";
 
 const MyAccountSection = ({ data }) => {
-    console.log(data);
     const [isOpen, setIsOpen] = useState(false);
     const { setUserInfo } = useUserContext();
     const [image, setImage] = useState(
@@ -30,6 +28,8 @@ const MyAccountSection = ({ data }) => {
     const inputRef = useRef(null);
     const editFieldRef = useRef();
     const [isEdit, setIsEdit] = useState("");
+    const token = getCookie("accessToken");
+    const [loading, setLoading] = useState(false);
     const [formValue, setFormValue] = useState({
         name: data?.firstName + " " + data?.lastName,
         // lastName: data?.lastName,
@@ -37,6 +37,7 @@ const MyAccountSection = ({ data }) => {
         primaryEmail: data?.primaryEmail,
         primaryPhone: data?.primaryPhone,
     });
+    const { setUserProfileInfo } = useUserContext();
 
     const [fields, setFields] = useState([
         {
@@ -73,14 +74,74 @@ const MyAccountSection = ({ data }) => {
 
     const router = useRouter();
 
-    const handleImageChange = (e) => {
+    const handleImageUpload = async (imageUrl, imageName) => {
+        setLoading(true);
+        try {
+            // make a image key.
+            const newFormData = new FormData();
+            newFormData.append("images", imageUrl, imageName);
+
+            // Convert image to image URL
+            const res = await UserService.convertImageToImageUrl(
+                newFormData,
+                token
+            );
+            if (res?.keys?.length > 0) {
+                const imageKey = res.keys[0];
+
+                // Update user profile image
+                const userUpdate = await UserService.updateUserProfileImage(
+                    { profilePicture: imageKey },
+                    token
+                );
+                if (userUpdate?.status === 200) {
+                    toast.success(userUpdate?.message);
+                    setUserProfileInfo(userUpdate.user);
+                }
+            }
+        } catch (e) {
+            toast.error(
+                e?.message || "An error occurred while uploading the image."
+            );
+        } finally {
+            setLoading(false);
+        }
+
+        // upload this image to user profile
+    };
+
+    const handleImageChange = async (e) => {
         const selectedImage = e.target.files[0];
-        if (selectedImage) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                setImage(reader.result);
+
+        const errorMessage = await isImageInvalid(selectedImage);
+
+        if (errorMessage) {
+            toast.error(errorMessage);
+            e.target.value = null;
+            return;
+        }
+
+        // if (selectedImage) {
+        //     const reader = new FileReader();
+        //     reader.onload = () => {
+        //         console.log(reader.result);
+        //         setImage(reader.result);
+        //     };
+        //     reader.readAsDataURL(selectedImage);
+        // }
+        try {
+            const { webpBlob, fileName } = await webpfy({
+                image: selectedImage,
+            });
+            // convert image to base64 and pass the webpBlob, fileName and base64 file to the parent component
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                handleImageUpload(webpBlob, fileName);
+                setImage(e.target.result);
             };
-            reader.readAsDataURL(selectedImage);
+            reader.readAsDataURL(e.target.files[0]);
+        } catch (error) {
+            alert("Error converting image to WebP");
         }
     };
 
@@ -154,6 +215,7 @@ const MyAccountSection = ({ data }) => {
 
     return (
         <div className="py-12 flex flex-col gap-y-10">
+            <Spin spinning={loading} fullscreen />
             <div className="w-[296px] lg:w-[400px] flex flex-col items-center">
                 <div className="relative">
                     {image ? (

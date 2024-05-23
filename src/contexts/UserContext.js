@@ -10,7 +10,8 @@ export function UserProvider({ children }) {
     const [locations, setLocations] = useState([]);
     // const token = getCookie("accessToken");
     const [userInfo, setUserInfo] = useState(null);
-    const [currency, setCurrency] = useState(null)
+    const [currency, setCurrency] = useState(null);
+    const [userProfileInfo, setUserProfileInfo] = useState(null);
 
     useEffect(() => {
         if (hasCookie("userInfo")) {
@@ -35,7 +36,7 @@ export function UserProvider({ children }) {
                 label: location.name,
                 value: location._id,
                 flag: location.flag,
-                currency: location.currency
+                currency: location.currency,
             }));
 
             setLocations(formattedLocations);
@@ -48,7 +49,16 @@ export function UserProvider({ children }) {
         getLocation();
     }, []);
 
-    const values = { locations, setLocations,userInfo,setUserInfo, setCurrency, currency };
+    const values = {
+        locations,
+        setLocations,
+        userInfo,
+        setUserInfo,
+        setCurrency,
+        currency,
+        userProfileInfo,
+        setUserProfileInfo,
+    };
     return (
         <userContext.Provider value={values}>{children}</userContext.Provider>
     );

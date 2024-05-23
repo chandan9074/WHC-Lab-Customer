@@ -1,9 +1,10 @@
 import Buttons from "@/components/Buttons";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import { getTextShort } from "@/helpers/utils";
 import Image from "next/image";
 
 const ItemReview = ({ data, handleWriteReview }) => {
-    console.log(data);
+    // console.log(data);
     return (
         <div className="px-3 pb-10">
             {data &&
@@ -13,7 +14,8 @@ const ItemReview = ({ data, handleWriteReview }) => {
                             <div className="flex items-center gap-x-4">
                                 <Image
                                     alt="avatar"
-                                    src={item.image}
+                                    // src={item.image}
+                                    src={`${GET_IMAGE_RENDER}?key=${item?.featuredImage}`}
                                     width={1000}
                                     height={1000}
                                     className="w-12 h-12"

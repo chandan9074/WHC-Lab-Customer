@@ -4,17 +4,16 @@ import { useEffect, useState } from "react";
 import Icons from "../../../../../public/assets/Icons";
 import Badges from "@/components/Badges";
 import Buttons from "@/components/Buttons";
-import CustomModal from "@/components/common/CustomModal";
-import ItemReviewForm from "@/app/(protected)/profile/orders-history/ItemReviewForm";
 import { getTextShort } from "@/helpers/utils";
-import Images from "../../../../../public/assets/Images";
 import PriceFormatter from "@/components/common/PriceFormatter";
+import { currencyData } from "@/libs/common";
 
-const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
+const TrackOrderedItem = ({ data, leaveItemReview }) => {
     const pathName = usePathname();
     const [isCollapse, setIsCollapse] = useState(true);
 
     const [isSellerRating, setIsSellerRating] = useState(false);
+    console.log({ data });
 
     useEffect(() => {
         // Get the screen width
@@ -28,9 +27,9 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
         }
     }, []);
 
-    const handleSellerRatingOpen = () => {
-        setIsSellerRating(true);
-    };
+    // const handleSellerRatingOpen = () => {
+    //     setIsSellerRating(true);
+    // };
 
     // seller rating submit
     const handleAddSellerRating = (values) => {
@@ -47,10 +46,10 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
                         onClick={() => setIsCollapse(!isCollapse)}
                         className={`text-neutral-700 text-sm font-medium cursor-pointer mb-2`}
                     >
-                        #{data._id}
+                        #{data.number}
                     </p>
 
-                    {data.state && <Badges.Primary title={data.state} />}
+                    {data?.state && <Badges.Primary title={data?.state} />}
                 </div>
 
                 <div className="flex items-center gap-x-5">
@@ -58,7 +57,11 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
                         <p className="text-neutral-300 text-sm font-medium mb-2 text-end">
                             {data.lineItems && data.lineItems.length} items
                         </p>
-                        <PriceFormatter price={1515.15} variant="default" />
+                        <PriceFormatter
+                            price={data?.total}
+                            variant="default"
+                            currency={data?.currency}
+                        />
                     </div>
                     <Image
                         src={
@@ -92,16 +95,17 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
                                 </p>
 
                                 <div className="text-neutral-400 leading-[19.5px] text-[13px] font-medium">
-                                    {item.quantity} x ${item.salePrice}
+                                    {item.quantity} x&nbsp;
+                                    {currencyData[data?.currency]?.icon}
+                                    {item.price}
                                 </div>
                             </div>
 
                             <div className="w-[40%] md:max-w-fit md:block flex justify-end">
                                 <PriceFormatter
-                                    price={
-                                        Number(item.quantity) * item.salePrice
-                                    }
+                                    price={Number(item.quantity) * item.price}
                                     variant="default"
+                                    currency={data?.currency}
                                 />
                             </div>
                         </div>
@@ -119,8 +123,8 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
                 />
             </div>
 
-            <CustomModal
-                title="Write review"
+            {/* <CustomModal
+                title="Write review asdf"
                 open={isSellerRating}
                 onCancel={() => setIsSellerRating(false)}
                 footer={null}
@@ -133,7 +137,7 @@ const TrackOrderedItem = ({ data, leaveItemReview, trackOrder }) => {
                     productName={"Gadget Electronics"}
                     // category={singleProduct && singleProduct.brand}
                 />
-            </CustomModal>
+            </CustomModal> */}
         </div>
     );
 };

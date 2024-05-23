@@ -11,7 +11,11 @@ export default async function OrderConfirmationPage({ params }) {
     const orderNumber = params.slug;
 
     // const [orderData] = await Promise.all([getOrderData(orderNumber, token)]);
-    const orderData = await OrderService.getOrderData(orderNumber, token);
+    const orderData = await OrderService.getOrderData(
+        "number",
+        orderNumber,
+        token
+    );
 
     return (
         <Suspense fallback={<Loader />}>

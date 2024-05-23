@@ -4626,6 +4626,11 @@ webgl-sdf-generator@1.1.1:
   resolved "https://registry.yarnpkg.com/webgl-sdf-generator/-/webgl-sdf-generator-1.1.1.tgz#3e1b422b3d87cd3cc77f2602c9db63bc0f6accbd"
   integrity sha512-9Z0JcMTFxeE+b2x1LJTdnaT8rT8aEp7MVxkNwoycNmJWwPdzoXzMh0BjJSh/AEFP+KPYZUli814h8bJZFIZ2jA==
 
+webpfy@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/webpfy/-/webpfy-1.0.9.tgz#8963e306a232d3c4979c8f02c1b090bf81be7cdd"
+  integrity sha512-5k6+y+v/hK4+svBenkqSXS3jruw6Kl+/3PQ6LdENJ7ZCH8xa4TAyjYxemmxjh96Kzoo4LuUKwfuZSyS/tky8NA==
+
 websocket-driver@>=0.5.1:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/websocket-driver/-/websocket-driver-0.7.4.tgz#89ad5295bbf64b480abcba31e4953aca706f5760"
