@@ -1,53 +1,41 @@
 "use client";
-import { allRatingReviewers } from "@/libs/reviewData";
 import { Rate } from "antd";
 import Image from "next/image";
 import React, { useState } from "react";
-// import Images from "../../../public/assets/images";
-// import Icons from "../../../public/assets/Icons";
 import Link from "next/link";
 import { SELLER_INFORMATION_PATH } from "@/helpers/slug";
 import Images from "../../../public/assets/Images";
 import Icons from "../../../public/assets/Icons";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
+import NoDataFound from "@/components/common/NoDataFound";
 
-const ReviewsAndRatings = ({ data }) => {
-    const ratings = [
-        {
-            id: 1,
-            rating: 5,
-            reviewer: 561,
-        },
-        {
-            id: 2,
-            rating: 4,
-            reviewer: 70,
-        },
-        {
-            id: 3,
-            rating: 3,
-            reviewer: 211,
-        },
-        {
-            id: 4,
-            rating: 2,
-            reviewer: 12,
-        },
-        {
-            id: 5,
-            rating: 1,
-            reviewer: 20,
-        },
-    ];
+const ReviewsAndRatings = ({ rating, data }) => {
+    // make rating object for all values like, 1 start, 2 start 3 start and so on....
+    const mergedRatings = Array.from(
+        new Map(
+            [
+                { rating: 1, count: 0 },
+                { rating: 2, count: 0 },
+                { rating: 3, count: 0 },
+                { rating: 4, count: 0 },
+                { rating: 5, count: 0 },
+                ...(rating?.count || []).map(({ rating, count }) => ({
+                    rating,
+                    count,
+                })),
+            ].map((obj) => [obj.rating, obj])
+        ).values()
+    );
 
     // Calculate the total number of reviewers
-    const totalReviewers = ratings.reduce(
-        (acc, curr) => acc + curr.reviewer,
+    const totalReviewers = mergedRatings?.reduce(
+        (acc, curr) => acc + curr.count,
         0
     );
 
     // Calculate the sum of (Rating * Number of Reviewers for that Rating)
-    const sumOfWeightedRatings = ratings.reduce(
-        (acc, curr) => acc + curr.rating * curr.reviewer,
+    const sumOfWeightedRatings = mergedRatings?.reduce(
+        (acc, curr) => acc + curr.rating * curr.count,
         0
     );
 
@@ -55,22 +43,20 @@ const ReviewsAndRatings = ({ data }) => {
     const averageRating = (sumOfWeightedRatings / totalReviewers).toFixed(1);
 
     // Calculate the divWidth for each item in ratings
-    const ratingsWithDivWidth = ratings.map((item) => ({
+    const ratingsWithDivWidth = mergedRatings?.map((item) => ({
         ...item,
-        divWidth: (item.reviewer / totalReviewers) * 100,
+        divWidth: rating ? (item.count / totalReviewers) * 100 : 0,
     }));
 
     return (
         <div className="flex flex-col lg:flex-row w-full justify-between gap-x-6">
             <div className="order-2 lg:order-1">
-                <LeftSideContent ratings={ratings} data={data} />
+                <LeftSideContent ratings={mergedRatings} data={data} />
             </div>
             <div className="order-1 lg:order-2">
                 <RightSidecontent
-                    averageRating={averageRating}
-                    ratings={ratings}
-                    totalReviewers={totalReviewers}
                     ratingsWithDivWidth={ratingsWithDivWidth}
+                    rating={rating}
                 />
             </div>
         </div>
@@ -87,11 +73,9 @@ const LeftSideContent = ({ ratings, data }) => {
     const handleSelection = (value) => {
         setSelectedRating(value);
         if (value === "All") {
-            setFilteredData(allRatingReviewers);
+            setFilteredData(data);
         } else {
-            const newArray = allRatingReviewers.filter(
-                (item) => item.rating === value
-            );
+            const newArray = data.filter((item) => item.rating === value);
             setFilteredData(newArray);
         }
     };
@@ -193,10 +177,16 @@ const LeftSideContent = ({ ratings, data }) => {
 };
 
 const Comments = ({ data }) => {
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return date.toLocaleDateString("en-US", options);
+    };
+
     return (
         <div className="animate-fadeIn w-full space-y-[33px]">
-            {data.length > 0 &&
-                data.map((item) => (
+            {data?.length > 0 ? (
+                data?.map((item) => (
                     <div
                         key={item.id}
                         className="w-full flex gap-x-3 md:gap-x-4"
@@ -205,16 +195,22 @@ const Comments = ({ data }) => {
                             alt={item.name}
                             width={1000}
                             height={1000}
-                            src={item.image}
+                            src={
+                                item?.user?.image
+                                    ? item?.user?.image
+                                    : Images.profile_avatar
+                            }
                             className="w-10 h-10 md:w-10 md:h-10 rounded-full"
                         />
                         <div className="w-full lg:w-[500px] xl:w-[642px]">
                             <div className="flex justify-between items-center">
                                 <h1 className="text-neutral-700 text-sm font-medium">
-                                    {item.name}
+                                    {item?.user?.firstName +
+                                        " " +
+                                        item?.user?.lastName}
                                 </h1>
                                 <p className="text-neutral-300 text-[13px]">
-                                    {item.time}
+                                    {formatDate(item?.createdAt)}
                                 </p>
                             </div>
                             <div className="pt-1 flex items-center gap-x-2 md:gap-x-2.5">
@@ -235,24 +231,25 @@ const Comments = ({ data }) => {
                             </p>
                         </div>
                     </div>
-                ))}
+                ))
+            ) : (
+                <NoDataFound
+                    message="No Reviews Yet!"
+                    className="w-full lg:w-[500px] xl:w-[600px] 2xl:w-[1000px] text-red-400 bg-red-100"
+                />
+            )}
         </div>
     );
 };
 
-const RightSidecontent = ({
-    ratings,
-    totalReviewers,
-    ratingsWithDivWidth,
-    averageRating,
-}) => {
+const RightSidecontent = ({ ratingsWithDivWidth, rating }) => {
     return (
         <div className="animate-fadeIn flex flex-row justify-between md:justify-start items-center md:flex-col md:gap-y-4">
             <div className="flex flex-col gap-y-4 w-full">
                 <div className="mx-2 flex flex-col items-center w-full">
                     <div className="flex items-end">
                         <h1 className="text-black-1000 text-[32px] font-medium">
-                            {averageRating}
+                            {rating?.average || 0}
                         </h1>
                         <span className="text-neutral-300 text-xl font-normal mb-1.5 ml-1">
                             /
@@ -265,7 +262,7 @@ const RightSidecontent = ({
                     <div className="md:hidden mt-3 mb-2">
                         <Rate
                             disabled
-                            defaultValue={averageRating}
+                            value={rating?.average}
                             style={{
                                 color: "#F08200",
                                 fontSize: "12px",
@@ -275,7 +272,8 @@ const RightSidecontent = ({
                     <div className="hidden md:block mt-2 mb-2.5">
                         <Rate
                             disabled
-                            defaultValue={averageRating}
+                            // defaultValue={5}
+                            value={rating?.average}
                             style={{
                                 color: "#F08200",
                                 fontSize: "12px",
@@ -283,12 +281,12 @@ const RightSidecontent = ({
                         />
                     </div>
                     <p className="text-neutral-300 text-base  font-normal">
-                        {totalReviewers} reviews
+                        {rating?.total || 0} reviews
                     </p>
                 </div>
 
                 <div className="flex flex-col gap-y-2 md:gap-y-3 pb-10">
-                    {ratingsWithDivWidth.map((item) => (
+                    {ratingsWithDivWidth?.map((item) => (
                         <div
                             key={item.id}
                             className="flex items-center px-5 gap-x-2"
@@ -302,7 +300,7 @@ const RightSidecontent = ({
                                     fontSize: "12px",
                                 }}
                             />
-                            <p className="text-neutral-300 text-sm font-medium pl-2">
+                            <p className="text-neutral-300 text-sm font-medium pl-2 w-8">
                                 {item.rating}
                             </p>
                             <div className="w-full lg:w-[300px] h-1 bg-white rounded mx-3 md:mx-4">
@@ -310,11 +308,12 @@ const RightSidecontent = ({
                                     style={{
                                         width: `${item.divWidth}%`, // Set the width based on the divWidth field
                                     }}
-                                    className={`h-1 bg-[#F08200] rounded`}
+                                    className={`h-1 bg-star rounded`}
                                 />
+                                {/* <Progress percent={100} showInfo={false} /> */}
                             </div>
                             <p className="text-black-1000 text-sm font-medium">
-                                {item.reviewer}
+                                {item.count}
                             </p>
                         </div>
                     ))}
@@ -327,10 +326,13 @@ const RightSidecontent = ({
                         Seller
                     </p>
 
-                    <div className="flex gap-x-3">
+                    <Link
+                        href={SELLER_INFORMATION_PATH}
+                        className="flex gap-x-3 cursor-pointer"
+                    >
                         <Image
                             alt="seller-avatar"
-                            src={Images.productImage}
+                            src={Images.profile_avatar}
                             className="rounded-full w-10 h-10"
                         />
 
@@ -363,7 +365,7 @@ const RightSidecontent = ({
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </div>

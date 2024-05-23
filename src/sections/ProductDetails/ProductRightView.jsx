@@ -34,6 +34,7 @@ const ProductRightView = ({
         checkProductInWishList,
     } = useWishlistContext();
     const pathname = usePathname();
+    console.log({ details: data });
 
     useEffect(() => {
         const locationId = JSON.parse(getCookie("selected_location"));
@@ -151,18 +152,20 @@ const ProductRightView = ({
                 <div className="flex gap-x-2.5 items-center">
                     <Rate
                         disabled
-                        defaultValue={4}
+                        defaultValue={data?.review?.summary?.average}
                         style={{ color: "#F08200", fontSize: 12 }}
                     />
 
-                    <p className="text-neutral-700 text-sm font-medium">4.0</p>
+                    <p className="text-neutral-700 text-sm font-medium">
+                        {data?.review?.summary?.average}
+                    </p>
 
                     <p className="text-[#8790AB] text-sm font-medium">.</p>
 
                     <p className="text-neutral-700 text-sm font-medium">
-                        12,345{" "}
+                        {data?.review?.summary?.total}
                         <span className="text-neutral-200 text-sm font-medium">
-                            reviews
+                            &nbsp; reviews
                         </span>
                     </p>
                 </div>

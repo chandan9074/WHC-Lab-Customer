@@ -4,8 +4,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Icons from "../../../../../public/assets/Icons";
 import TextArea from "antd/es/input/TextArea";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
-const ItemReviewForm = ({ submit, productName, category, image }) => {
+const ItemReviewForm = ({ submit, productName, category, image, data }) => {
     const [form] = Form.useForm();
     const [selectedRating, setSelectedRating] = useState(null);
 
@@ -16,7 +17,8 @@ const ItemReviewForm = ({ submit, productName, category, image }) => {
     const onFinish = (values) => {
         const _data = {
             ...values,
-            rating: selectedRating,
+            rating: selectedRating || 1,
+            productId: data?._id,
         };
         submit(_data);
     };
@@ -37,7 +39,8 @@ const ItemReviewForm = ({ submit, productName, category, image }) => {
                     <div className="flex flex-col items-center">
                         <Image
                             alt="avatar"
-                            src={image ? image : ""}
+                            // src={image ? image : ""}
+                            src={`${GET_IMAGE_RENDER}?key=${image}`}
                             width={1000}
                             height={1000}
                             className="h-[120px] w-[120px]"
@@ -84,7 +87,7 @@ const ItemReviewForm = ({ submit, productName, category, image }) => {
                             </p>
 
                             <Form.Item
-                                name="review"
+                                name="comment"
                                 rules={[
                                     {
                                         required: false,
@@ -112,7 +115,6 @@ const ItemReviewForm = ({ submit, productName, category, image }) => {
                         label="Submit"
                         variant="primary"
                         width="w-full"
-                        onClick={() => form.submit()}
                     />
                 </div>
             </Form>

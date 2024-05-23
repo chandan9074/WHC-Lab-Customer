@@ -83,3 +83,5 @@ export const MAKE_PAYMENT = `${BASEURL}/orders/send-payment-link`;
 export const COMMENTS = `${BASEURL}/comments`;
 //apply for credit balance
 export const APPLY_FOR_CREDIT_BALANCE = `${BASEURL}/users/apply-for-credit`;
+// Review url
+export const REVIEW_URL = `${BASEURL}/reviews`;
