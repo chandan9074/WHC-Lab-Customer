@@ -25,7 +25,6 @@ const VerificationForm = ({
     const resetTimer = useCallback(() => {
         setCookie("timeRemaining", timer);
         setTimeRemaining(timer);
-        console.log('click');
         handleResendCode && handleResendCode()
     }, [setTimeRemaining]);
 
