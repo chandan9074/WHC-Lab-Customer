@@ -209,8 +209,6 @@ const CreditBalance = () => {
         setInputSearch(e.target.value);
     };
 
-    console.log({ userInfo });
-
     const handleSearch = () => {
         setSearch(inputSearch);
     };
