@@ -69,6 +69,7 @@ const ChangePassword = () => {
                         loading={loading}
                         verifying={verifying}
                         handleResendCode={handleResendCode}
+                        verificationType={"reset_password"}
                     />
                 </section>
             </Layouts.Primary>
