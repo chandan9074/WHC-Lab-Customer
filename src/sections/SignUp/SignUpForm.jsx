@@ -5,11 +5,8 @@ import {
     Form,
     Input,
     Typography,
-    Divider,
-    message,
-    Spin,
-    Select,
-    Flex,
+    Divider, Spin,
+    Select
 } from "antd";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,7 +18,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 // } from "@/helpers/slug";
 import { useRouter } from "next/navigation";
 // import AuthService from "@/services/AuthService/AuthService";
-import { useContext, useState } from "react";
+import { useState } from "react";
 // import { userContext } from "@/contexts/UserContext";
 // import { RecaptchaVerifier } from "firebase/auth";
 // import { socialAuth } from "@/config/firebase";
@@ -29,13 +26,11 @@ import { useContext, useState } from "react";
 // import { formatPhoneNumberWithCountryCode } from "../../helpers/utils";
 // import { toast } from "react-toastify";
 import LabelText from "@/components/common/LabelText";
-import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Icons from "../../../public/assets/Icons";
 import Images from "../../../public/assets/Images";
 import { LOGIN_PATH } from "@/helpers/slug";
-import { getCookie, hasCookie, setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { whcFetch } from "@/services/BaseWHCHTTP";
 import { SIGN_UP_URL } from "@/helpers/apiURLS";
 import { toast } from "react-toastify";
 import MakeApiCall from "@/services/MakeApiCall";
