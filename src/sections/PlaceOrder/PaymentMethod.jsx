@@ -6,6 +6,7 @@ import { getCookie, setCookie } from "cookies-next";
 import MakeApiCall from "@/services/MakeApiCall";
 import { APPLY_FOR_CREDIT_BALANCE } from "@/helpers/apiURLS";
 import { toast } from "react-toastify";
+import CreditService from "@/services/CreditBalanceService";
 
 const { Title } = Typography;
 
@@ -19,11 +20,7 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
 
     const handleApplyForCredit = async () => {
         try {
-            const response = await MakeApiCall({
-                apiUrl: APPLY_FOR_CREDIT_BALANCE,
-                method: "POST",
-                headers: { authorization: token },
-            });
+            const response = await CreditService.applyForCredit(token);
 
             if (response.status === 200) {
                 toast.success(response.message);
