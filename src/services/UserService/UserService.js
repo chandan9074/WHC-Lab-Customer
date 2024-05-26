@@ -1,22 +1,20 @@
-import { whcFetch } from "../BaseWHCHTTP";
 import MakeApiCall from "../MakeApiCall";
 import { MethodsStructure } from "../MethodsStructure";
 import {
-    GET_USER_INFO,
     GET_USER_ADDRESS,
     GET_USER_PROFILE,
     CHANGE_PASSWORD,
     CHANGE_EMAIL,
     VERIFY_OTP,
     IMAGE_UPLOAD,
-    PROFILE_URL,
+    PROFILE_URL
 } from "@/helpers/apiURLS";
 
 export default class UserService {
     static async getUserInfo(id, token) {
         try {
-            const res = await whcFetch({
-                endpoint: GET_USER_PROFILE,
+            const res = await MakeApiCall({
+                apiUrl: GET_USER_PROFILE,
                 query: { id },
                 ...MethodsStructure.getMethod({ Authorization: `${token}` }),
             });
@@ -29,8 +27,6 @@ export default class UserService {
     static async getUserAddress(token) {
         const res = await MakeApiCall({
             apiUrl: GET_USER_ADDRESS,
-            // query: { id },
-            // headers: { Authorization: `Bearer ${token}` },
             ...MethodsStructure.getMethod({ Authorization: `${token}` }),
         });
 
@@ -39,11 +35,9 @@ export default class UserService {
 
     static async createUserAddress(data, token) {
         try {
-            const res = await whcFetch({
-                endpoint: GET_USER_ADDRESS,
+            const res = await MakeApiCall({
+                apiUrl: GET_USER_ADDRESS,
                 body: { ...data },
-
-                // headers: { Authorization: `Bearer ${token}` },
                 ...MethodsStructure.postMethod({ Authorization: `${token}` }),
             });
             if (res?.status === 200) {
@@ -51,31 +45,28 @@ export default class UserService {
             }
         } catch (error) {
             console.error("Error in createUserAddress:", error);
-            // Handle error appropriately, e.g., throw or return an error object.
         }
     }
 
     static async deleteUserAddress(id, token) {
         try {
-            const res = await whcFetch({
-                endpoint: GET_USER_ADDRESS,
+            const res = await MakeApiCall({
+                apiUrl: GET_USER_ADDRESS,
                 query: { id },
-                // headers: { Authorization: `Bearer ${token}` },
                 ...MethodsStructure.deleteMethod({ Authorization: `${token}` }),
             });
             if (res?.status === 200) {
                 return res;
             }
         } catch (error) {
-            console.error("Error in createUserAddress:", error);
             // Handle error appropriately, e.g., throw or return an error object.
         }
     }
 
     static async updateUserAddress(id, data, token) {
         try {
-            const res = await whcFetch({
-                endpoint: GET_USER_ADDRESS,
+            const res = await MakeApiCall({
+                apiUrl: GET_USER_ADDRESS,
                 query: { id },
                 body: { ...data },
                 ...MethodsStructure.patchMethod({ Authorization: `${token}` }),
@@ -84,14 +75,13 @@ export default class UserService {
                 return res;
             }
         } catch (error) {
-            console.error("Error in createUserAddress:", error);
             // Handle error appropriately, e.g., throw or return an error object.
         }
     }
 
     static async changePassword(data, token) {
-        const res = await whcFetch({
-            endpoint: CHANGE_PASSWORD,
+        const res = await MakeApiCall({
+            apiUrl: CHANGE_PASSWORD,
             body: { ...data },
             ...MethodsStructure.patchMethod({ Authorization: `${token}` }),
         });
@@ -124,6 +114,7 @@ export default class UserService {
         try {
             const response = await fetch(IMAGE_UPLOAD, {
                 method: "POST",
+                cache: "no-store",
                 body: data,
                 headers: {
                     // Do not set Content-Type header, let the browser set it automatically

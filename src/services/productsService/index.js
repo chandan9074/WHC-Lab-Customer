@@ -9,24 +9,11 @@ async function getProducts(query) {
         })}`
         : `${GET_PRODUCTS}`;
 
-    const res = await fetch(url, { cache: 'no-store' }, {
-        headers: {
-            "Content-Type": "application/json",
-        },
-
-    });
-
-    return res.json();
+    const res = await MakeApiCall({ apiUrl: url, method: "GET" });
+    return res;
 }
 
 async function getCategories() {
-    // const res = await fetch(url, {
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    // });
-
-    // return res.json();
     const res = await MakeApiCall({ apiUrl: CATEGORY_URL, method: "GET" });
     return res;
 }
