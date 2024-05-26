@@ -38,11 +38,13 @@ const ProductRightView = ({
         checkProductInWishList,
     } = useWishlistContext();
     const pathname = usePathname();
-    const locationId = JSON.parse(getCookie("selected_location"));
-    const stockStatus = checkStock(data, locationId)
+    const [stockStatus, setStockStatus] = useState(null);
 
     useEffect(() => {
         if (hasCookie("selected_location")) {
+            const locationId = JSON.parse(getCookie("selected_location"));
+            const stockStatusData = checkStock(data, locationId);
+            setStockStatus(stockStatusData);
             if (locationId) {
                 const stock = data?.variants.find(
                     (item) => item.location._id === locationId
@@ -54,12 +56,10 @@ const ProductRightView = ({
                 }
             }
         }
-
     }, [data]);
 
-
     const handleLocation = async (locationId) => {
-        setCookie("selected_location", locationId);
+        setCookie("selected_location", JSON.stringify(locationId));
         if (locationId) {
             const stock = data?.variants.find(
                 (item) => item.location._id === locationId
@@ -291,8 +291,6 @@ const ProductRightView = ({
                         />
                     </div>
 
-
-
                     <div className={`pb-6 ${forModal && "space-y-5"}`}>
                         {forModal && (
                             // <Link href={PRODUCT_DETAILS_PATH + data?._id}>
@@ -309,18 +307,26 @@ const ProductRightView = ({
                             // </Link>
                         )}
                         <Buttons.PrimaryButton
-                            label={`ADD TO CART ${stockStatus ? `- ${currency.icon} ${data[currency.field] &&
-                                data[currency.field] * quantity
-                                }` : ''} `}
+                            label={`ADD TO CART ${
+                                stockStatus
+                                    ? `- ${currency.icon} ${
+                                          data[currency.field] &&
+                                          data[currency.field] * quantity
+                                      }`
+                                    : ""
+                            } `}
                             disabled={status !== "active"}
-                            className={`h-[52px] ${!stockStatus && 'bg-brand-blue-300 hover:bg-brand-blue-300'}  text-white font-semibold`}
+                            className={`h-[52px] ${
+                                !stockStatus &&
+                                "bg-brand-blue-300 hover:bg-brand-blue-300"
+                            }  text-white font-semibold`}
                             width="w-full"
                             onClick={() => {
                                 token
                                     ? handleAddToCart()
                                     : router.push(
-                                        `/log-in?redirect=${pathname}`
-                                    );
+                                          `/log-in?redirect=${pathname}`
+                                      );
                             }}
                         />
                         {openSuccessionModal && (
