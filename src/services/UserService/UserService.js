@@ -7,7 +7,9 @@ import {
     CHANGE_EMAIL,
     VERIFY_OTP,
     IMAGE_UPLOAD,
-    PROFILE_URL
+    PROFILE_URL,
+    CONTACTS,
+
 } from "@/helpers/apiURLS";
 
 export default class UserService {
@@ -148,5 +150,13 @@ export default class UserService {
         });
 
         return responseData;
+    }
+
+    static async makeAContact(data) {
+        return await MakeApiCall({
+            apiUrl: CONTACTS,
+            body: { ...data },
+            ...MethodsStructure.postMethod(),
+        });
     }
 }

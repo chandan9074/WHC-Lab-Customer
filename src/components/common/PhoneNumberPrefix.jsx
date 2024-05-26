@@ -10,6 +10,7 @@ function PhoneNumberPrefix() {
                 className="flex items-center w-20 focus:border-none"
                 style={{
                     height: "52px",
+                    width: "90px",
                 }}
             >
                 <Option value="+880" className="text-red-800">
