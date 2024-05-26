@@ -17,17 +17,7 @@ const Wishlists = ({ wishLists, handleDelete, createCartItem }) => {
                             className="border-b last:border-none py-4 sm:py-5"
                         >
                             <Wish
-                                image={wish.productFeaturedImage}
-                                name={wish.productName}
-                                price={
-                                    wish.productOfferPrice
-                                        ? wish.productOfferPrice
-                                        : wish.productPrice
-                                }
-                                inStock={wish.inStock}
-                                id={wish.productId}
-                                // handleGetWishList={handleGetWishList}
-                                // setLoading={setLoading}
+                                wishData={wish}
                                 handleDelete={handleDelete}
                             />
                         </div>
