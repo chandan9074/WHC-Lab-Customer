@@ -90,6 +90,8 @@ function PlaceOrderContainer({ addressData }) {
     // };
 
     const handlePlaceOrder = async (body) => {
+        setLoading(true);
+
         try {
             const response = await MakeApiCall({
                 apiUrl: ORDERS_URL,
@@ -97,11 +99,9 @@ function PlaceOrderContainer({ addressData }) {
                 headers: { authorization: token },
                 body: body,
             });
-
             if (response.status === 200) {
                 toast.success(response?.message);
                 const paymentLink = response?.doc.link;
-
                 if (paymentLink) {
                     window.location.href = paymentLink;
                 } else if (body.paymentMethod === "creditBalance") {
@@ -110,6 +110,8 @@ function PlaceOrderContainer({ addressData }) {
             }
         } catch (error) {
             toast.error(error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
