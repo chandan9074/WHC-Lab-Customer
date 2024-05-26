@@ -15,7 +15,7 @@ const wishlistContext = createContext();
 
 export function WishlistProvider({ children }) {
     const token = getCookie("accessToken");
-    const [wishlistIds, setWishlistIds] = useState([]);
+    const [wishlistItems, setWishlistItems] = useState([]);
 
     const getProductWishlist = useCallback(async () => {
         try {
@@ -24,7 +24,7 @@ export function WishlistProvider({ children }) {
                 ...MethodsStructure.getMethod({ Authorization: `${token}` }),
             });
             if (res?.status === 200) {
-                setWishlistIds(res?.docs);
+                setWishlistItems(res?.docs);
                 // toast.success(res?.message);
             }
         } catch (e) {
@@ -64,7 +64,7 @@ export function WishlistProvider({ children }) {
     };
 
     function checkProductInWishList(productIdToCheck) {
-        return wishlistIds?.some(
+        return wishlistItems?.some(
             (product) => product.productId === productIdToCheck
         );
     }
@@ -74,7 +74,7 @@ export function WishlistProvider({ children }) {
     }, [getProductWishlist, token]);
 
     const values = {
-        wishlistIds,
+        wishlistItems,
         createProductWishlist,
         deleteWishlist,
         getProductWishlist,

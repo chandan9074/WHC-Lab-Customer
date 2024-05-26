@@ -69,7 +69,7 @@ const TrackOrderedItem = ({ data, leaveItemReview }) => {
                         }
                         width={1000}
                         height={1000}
-                        alt=""
+                        alt="collaps"
                         className="w-6 h-6 cursor-pointer"
                         onClick={() => setIsCollapse(!isCollapse)}
                     />

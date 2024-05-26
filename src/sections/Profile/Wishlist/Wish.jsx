@@ -1,66 +1,75 @@
 "use client";
-import React, { useContext } from "react";
+import { Button, Typography } from "antd";
 import Image from "next/image";
-import { Typography, Button, Spin } from "antd";
 import Icons from "../../../../public/assets/Icons";
 // import wishlistContext from "@/contexts/WishlistContext";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 // import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
+import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
-import { getCookie, hasCookie } from "cookies-next";
+import Link from "next/link";
+import { formatPrice } from "@/utils";
 
 const { Text } = Typography;
 
-const Wish = ({ image, name, price, inStock, id, handleDelete }) => {
+const Wish = ({ wishData, handleDelete }) => {
     const { getUpdateCartList, createCartItem } = useCart();
     const token = getCookie("accessToken");
-
-    // const handleDelete = async (id) => {
-    //     // setLoading(true);
-    //     // const res = await deleteWishlist(id);
-    //     // if (res?.status === 200) {
-    //     //     handleGetWishList();
-    //     //     toast.success(res?.body?.message);
-    //     // }
-    // };
+    const currency = getCookie('selected_currency')
 
     const handleAddCartItem = async () => {
-        const res = await createCartItem(id, 1, token);
-        if (res?.status === 200) {
-            toast.success(res?.message);
-            handleDelete(id);
-            getUpdateCartList();
+        if (wishData?.stockId) {
+            try {
+                const res = await createCartItem(wishData?._id, 1, wishData?.stockId, currency, token);
+                if (res?.status === 200) {
+                    toast.success(res?.message);
+                    handleDelete(wishData?._id);
+                    getUpdateCartList();
+                }
+            } catch (error) {
+                toast.error(error?.message)
+            }
+        } else {
+            toast.warning('This product is currently out of stock.')
         }
+
     };
 
     return (
         <div className="w-full flex flex-row items-center justify-between p-2 ">
             <div className="flex flex-row items-center gap-4">
                 <Image
-                    alt={name}
-                    src={`${GET_IMAGE_RENDER}?key=${image}`}
-                    // src={image}
+                    alt={wishData?.productName}
+                    src={`${GET_IMAGE_RENDER}?key=${wishData?.productFeaturedImage}`}
                     width={80}
                     height={80}
                     className="rounded-sm w-[80px] h-[80px]"
                 />
                 <div className="flex flex-col">
-                    <Text className="w-32  md:w-32 lg:w-full text-base text-neutral-700">
-                        {name}
+                    <Link
+                        href={`/store/product-details/${wishData?._id}`}
+                    >
+                        <Text className="w-32  md:w-32 lg:w-full text-base text-neutral-700">
+                            {wishData?.productName}
+                        </Text>
+                    </Link>
+
+                    <Text className="text-neutral-300 font-medium text-base">
+                        {formatPrice(
+                            {
+                                "dollarPrice": wishData?.dollarPrice,
+                                "euroPrice": wishData?.euroPrice,
+                                "poundPrice": wishData?.poundPrice,
+                            },
+                            currency)}
                     </Text>
-                    {inStock ? (
-                        <Text className="text-neutral-300 font-medium text-base">
-                            $ {price}
-                        </Text>
-                    ) : (
-                        <Text
-                            type="danger"
-                            className="font-medium text-error-500"
-                        >
-                            Out of Stock
-                        </Text>
-                    )}
+                    <Text
+                        // type="success"
+                        className={`font-semibold ${wishData?.inStock ? 'text-green-500' : 'text-error-50'}`}
+                    >
+                        {wishData?.inStock ? 'In stock' : 'Out of stock'}
+                    </Text>
                 </div>
             </div>
             <div className="flex flex-col gap-0 items-start">
@@ -68,7 +77,7 @@ const Wish = ({ image, name, price, inStock, id, handleDelete }) => {
                     size="small"
                     type="text"
                     className="px-2 py-4 flex items-center justify-center rounded-full"
-                    onClick={() => handleDelete(id)}
+                    onClick={() => handleDelete(wishData?._id)}
                 >
                     <Image
                         alt="trash"
@@ -81,12 +90,12 @@ const Wish = ({ image, name, price, inStock, id, handleDelete }) => {
                     className="px-2 py-4 flex items-center justify-center rounded-full w-full"
                     size="small"
                     type="text"
-                    disabled={!inStock}
+                    // disabled={!wishData.inStock}
                     onClick={handleAddCartItem}
                 >
                     <Image
                         alt="add"
-                        src={inStock ? Icons.plus : Icons.disabled_plus}
+                        src={wishData?.inStock ? Icons.plus : Icons.disabled_plus}
                         width={18}
                         height={18}
                     />

@@ -13,6 +13,8 @@ import page_header_bg from "./page_header_bg.png";
 import aboutBanner from "./aboutBanner.png";
 import profile_avatar from "./profile_avatar.svg";
 import noImageFound from "./noImageFound.svg"
+import something_went_wrong from "./something_went_wrong.svg";
+import page_not_found from "./page-not-found.svg";
 
 const Images = {
     logo,
@@ -30,7 +32,9 @@ const Images = {
     page_header_bg,
     aboutBanner,
     profile_avatar,
-    noImageFound
+    noImageFound,
+    something_went_wrong,
+    page_not_found,
 };
 
 export default Images;

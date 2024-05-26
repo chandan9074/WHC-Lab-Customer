@@ -14,6 +14,7 @@ import { useWishlistContext } from "@/contexts/WishlistContext";
 import { usePathname } from "next/navigation";
 import { useUserContext } from "@/contexts/UserContext";
 import CountrySelectionModal from "../Store/CountrySelectionModal";
+import { checkStock } from "@/utils";
 
 const ProductRightView = ({
     forModal = false,
@@ -28,6 +29,7 @@ const ProductRightView = ({
     const [openSuccessionModal, setOpenSuccessionModal] = useState(false);
     const [status, setStatus] = useState(null);
     const { currency } = useUserContext();
+
     const router = useRouter();
     const {
         createProductWishlist,
@@ -36,10 +38,11 @@ const ProductRightView = ({
         checkProductInWishList,
     } = useWishlistContext();
     const pathname = usePathname();
+    const locationId = JSON.parse(getCookie("selected_location"));
+    const stockStatus = checkStock(data, locationId)
 
     useEffect(() => {
         if (hasCookie("selected_location")) {
-            const locationId = JSON.parse(getCookie("selected_location"));
             if (locationId) {
                 const stock = data?.variants.find(
                     (item) => item.location._id === locationId
@@ -47,14 +50,16 @@ const ProductRightView = ({
 
                 if (stock) {
                     setMaxLimit(stock?.quantity);
+                    setStatus(stock?.status);
                 }
             }
         }
+
     }, [data]);
 
 
     const handleLocation = async (locationId) => {
-        setCookie("selected_location", JSON.stringify(locationId));
+        setCookie("selected_location", locationId);
         if (locationId) {
             const stock = data?.variants.find(
                 (item) => item.location._id === locationId
@@ -221,15 +226,11 @@ const ProductRightView = ({
                         {data[currency.field]}
                     </p>
                 )}
-                {status !== "active" && (
+                {!stockStatus && (
                     <p className="py-1 px-2 bg-red-400 mt-2 text-white font-semibold rounded">
                         Out of Stock
                     </p>
                 )}
-
-                {/* <p className="text-brand-blue-500 font-semibold text-xl">
-                    $ {data?.offerPrice ? data?.offerPrice : data?.price}
-                </p> */}
             </div>
 
             <div className="my-10 w-full h-[1px] bg-[#EBEDF0]" />
@@ -285,10 +286,12 @@ const ProductRightView = ({
                         <Buttons.CounterBtn
                             maxLimit={maxLimit}
                             handleCurrentCount={handleCurrentCount}
-                            disabled={status !== "active"}
+                            disabled={!stockStatus}
                             current={quantity}
                         />
                     </div>
+
+
 
                     <div className={`pb-6 ${forModal && "space-y-5"}`}>
                         {forModal && (
@@ -306,19 +309,18 @@ const ProductRightView = ({
                             // </Link>
                         )}
                         <Buttons.PrimaryButton
-                            label={`ADD TO CART - ${currency.icon} ${
-                                data[currency.field] &&
+                            label={`ADD TO CART ${stockStatus ? `- ${currency.icon} ${data[currency.field] &&
                                 data[currency.field] * quantity
-                            }`}
+                                }` : ''} `}
                             disabled={status !== "active"}
-                            className="h-[52px] bg-magenta-600 text-white font-semibold"
+                            className={`h-[52px] ${!stockStatus && 'bg-brand-blue-300 hover:bg-brand-blue-300'}  text-white font-semibold`}
                             width="w-full"
                             onClick={() => {
                                 token
                                     ? handleAddToCart()
                                     : router.push(
-                                          `/log-in?redirect=${pathname}`
-                                      );
+                                        `/log-in?redirect=${pathname}`
+                                    );
                             }}
                         />
                         {openSuccessionModal && (
