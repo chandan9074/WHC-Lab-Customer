@@ -152,7 +152,7 @@ function PlaceOrderContainer({ addressData }) {
         setExpiredDate(date);
     };
 
-    const inputStyle = `active:text-black  focus:border-magenta-500 hover:#505f79`;
+    const inputStyle = `text-black`;
 
     return (
         <div>
@@ -289,12 +289,13 @@ function PlaceOrderContainer({ addressData }) {
                             maxLength={300}
                             rows={5}
                             // minRows={5}
-                            // style={{
-                            //     resize: "none",
-                            //     borderRadius: "2px",
-                            //     backgroundColor: "#FAFBFB",
-                            // }}
-                            // className={`${inputStyle}`}
+                            style={{
+                                resize: "none",
+                                borderRadius: "4px",
+                                color: "#000",
+                                // backgroundColor: "#FAFBFB",
+                            }}
+                            className={`${inputStyle} `}
                         />
                     </Form.Item>
 
