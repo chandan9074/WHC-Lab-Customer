@@ -105,7 +105,6 @@ function Cart({
         setQuantity(cart?.quantity);
     }, [cart]);
 
-    console.log(product, "product data");
 
     return (
         <div className="border-b">

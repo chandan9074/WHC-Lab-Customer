@@ -30,7 +30,6 @@ export function AuthProvider({ children }) {
     }, []);
 
     const handlePageTransition = (response) => {
-        console.log("handlePageTransition(response);");
         // Assuming your API returns a token in the response
         const token = response.token;
         const userInfo = response.user;
@@ -52,7 +51,6 @@ export function AuthProvider({ children }) {
         try {
             let url = `${apiEndPoint}?firebaseToken=${firebaseToken}`;
             const res = await MakeApiCall({ apiUrl: url, method: "POST" });
-            console.log(res);
             handlePageTransition(res);
         } catch (error) {
             // console.error("Error in makeFacebookLogin:", error.message);
@@ -68,7 +66,6 @@ export function AuthProvider({ children }) {
             if (socialAuth) {
                 const result = await signInWithPopup(socialAuth, provider);
                 const user = result.user;
-                console.log(user);
                 if (user) {
                     const res = await handleSocialLogin(
                         user?.accessToken,
@@ -77,7 +74,6 @@ export function AuthProvider({ children }) {
 
         toast.success("Successfully logged in!")
 
-                    // console.log(res,"-----------------res");
                     // if(res.status === 200){
                     //     toast.success(res.message)
                     // }
@@ -106,7 +102,6 @@ export function AuthProvider({ children }) {
                 // const credential = FacebookAuthProvider.credentialFromResult(user?.accessToken);
 
                 if (user) {
-                    console.log(user);
                     await handleSocialLogin(
                         user?.accessToken,
                         FACEBOOK_LOGIN_URL
@@ -120,7 +115,6 @@ export function AuthProvider({ children }) {
     };
 
     const logOut = () => {
-        console.log("logout");
         deleteCookie("userInfo");
         deleteCookie("accessToken");
         deleteCookie("selected_location");

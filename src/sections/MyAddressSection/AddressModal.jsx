@@ -40,7 +40,6 @@ const AddressModal = ({
             addressLine1: data.addressLine1 ? data.addressLine1 : null,
         });
 
-        // console.log("hello", data);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
@@ -70,7 +69,6 @@ const AddressModal = ({
         } else {
             // For update
             try {
-                console.log(values);
                 const res = await MakeApiCall({
                     apiUrl: MY_ADDRESS_URL,
                     method: "PATCH",
@@ -78,7 +76,6 @@ const AddressModal = ({
                     body: { ...values },
                     headers: { Authorization: token },
                 });
-                console.log(res);
 
                 handleDetailsModalOpen(null);
                 toast.success(res?.message);
@@ -132,8 +129,7 @@ const AddressModal = ({
                     >
                         <Input
                             className="py-3 rounded-sm border border-neutral-40 bg-neutral-10"
-                            placeholder="e.g. Home"
-                            // defaultValue={data ? data.name : ""}
+                            placeholder="My address"
                         />
                     </Form.Item>
 
@@ -158,8 +154,8 @@ const AddressModal = ({
                                 placeholder="Select Country"
                                 className="country-state-select  bg-neutral-10"
                                 style={{
-                                    backgroundColor: "#FAFBFB",
-                                    height: 48,
+                                    // backgroundColor: "#FAFBFB",
+                                    height: 52,
                                 }}
                                 options={countryData}
                                 onChange={handleCountryChange}
@@ -186,21 +182,9 @@ const AddressModal = ({
                                 },
                             ]}
                         >
-                            {/* <Select
-                                // defaultValue={data ? data.state : ""}
-                                placeholder="Select State/District"
-                                className="country-state-select   bg-neutral-10"
-                                style={{
-                                    backgroundColor: "#FAFBFB",
-                                    height: 48,
-                                }}
-                                options={selectedState}
-                                // onChange={handleStateChange}
-                                disabled={!selectedCountry}
-                            /> */}
                             <Input
                                 className="py-3 rounded-sm border border-neutral-40 bg-neutral-10"
-                                // defaultValue={data ? data.city : ""}
+                                placeholder="Enter state/district name"
                             />
                         </Form.Item>
 
@@ -225,7 +209,7 @@ const AddressModal = ({
                         >
                             <Input
                                 className="py-3 rounded-sm border border-neutral-40 bg-neutral-10"
-                                // defaultValue={data ? data.city : ""}
+                                placeholder="Enter city/area name"
                             />
                         </Form.Item>
 
@@ -251,7 +235,7 @@ const AddressModal = ({
                         >
                             <Input
                                 className="py-3 rounded-sm border border-neutral-40 bg-neutral-10"
-                                // defaultValue={data ? data.zip : ""}
+                                placeholder="Enter zip/postal code"
                             />
                         </Form.Item>
                     </div>
@@ -277,16 +261,11 @@ const AddressModal = ({
                     >
                         <TextArea
                             rows={4}
-                            placeholder="maxLength is 6"
+                            placeholder="Enter address..."
                             maxLength={1000}
                             showCount
-                            className="text-neutral-400 text-sm font-medium "
+                            className="text-neutral-500 text-sm font-medium "
                         />
-                        {/* <Input
-                            // defaultValue={data ? data.street : ""}
-                            className="py-3 rounded-sm border border-neutral-40 bg-neutral-10"
-                            placeholder="e.g. Road no., Building no., Floor no. etc"
-                        /> */}
                     </Form.Item>
                     <div className="pt-6">
                         <Buttons.PrimaryButton

@@ -16,7 +16,7 @@
 
 /* andt input */
 .ant-input {
-    color: #bdbdbd !important;
+    color: #7a8699 !important;
     font-size: 16px;
     font-family: var(--font-poppins);
     height: 52px;
@@ -25,26 +25,53 @@
 /* antd input outline */
 .ant-input-outlined,
 .ant-input-number-input {
-    border-color: #ebedf0;
+    /* border-color: #ebedf0; */
     /* padding: 13px 12px !important; */
     line-height: 24px;
     font-weight: 400;
     border-radius: 4px;
+    /* color: #7a8699 !important; */
+    font-size: 16px;
+    font-family: var(--font-poppins);
+}
+
+textarea.ant-input{
+    background-color: #FAFBFB !important;
+}
+
+textarea.ant-input:hover{
+    background-color: white !important
+}
+
+/* andt select item */
+.ant-select-selector{
+    background-color: #FAFBFB !important;
+}
+
+.ant-select-selector:hover {
+    border-color: #ebedf0 !important;
+    background-color: white !important
+}
+
+.ant-select-selection-item {
     color: #7a8699 !important;
     font-size: 16px;
     font-family: var(--font-poppins);
 }
 
-/* andt select item */
+.ant-select-item-option-content{
+    color: #0b2848 !important;
+    /* font-size: 16px; */
+    font-family: var(--font-poppins);
+}
 
-/* .ant-select-outlined:not(.ant-select-customize-input)
-    .ant-select-selector
-    .custom-select {
-    height: 52px;
-    border: none;
-    background-color: #f5f6f7;
-    border-radius: 2px;
-} */
+
+.ant-select-focused:where(.css-dev-only-do-not-override-usln0u).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector{
+    border-color: #ebedf0 !important;
+    outline: none !important;
+    box-shadow: none;
+}
+
 
 .ant-picker-outlined:hover {
     border-color: #0b2848;
@@ -105,25 +132,11 @@
 
 .ant-input-outlined:focus-within {
     border-color: #0b2848 !important;
+    box-shadow:none !important
 }
 
-.ant-select-outlined:not(.ant-select-disabled):not(
-        .ant-select-customize-input
-    ):not(.ant-pagination-size-changer):hover
-    .ant-select-selector {
-    border-color: #0b2848;
-}
 
-.ant-select-focused:where(
-        .css-dev-only-do-not-override-1uweeqc
-    ).ant-select-outlined:not(.ant-select-disabled):not(
-        .ant-select-customize-input
-    ):not(.ant-pagination-size-changer)
-    .ant-select-selector {
-    border-color: #0b2848;
-    box-shadow: none;
-    /* outline: 0; */
-}
+
 
 /* antd slider rail */
 .ant-slider-horizontal .ant-slider-rail {
@@ -182,6 +195,7 @@
 .ant-input-number-outlined:hover {
     border-color: #0b2848;
 }
+
 
 .ant-input-number-outlined:focus,
 .ant-input-number-outlined:focus-within {

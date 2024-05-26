@@ -3,7 +3,7 @@ import Layouts from "@/layouts";
 import ChangeEmailForm from "@/sections/ChangeEmail/ChangeEmailForm";
 import React, { Suspense } from "react";
 
-const ChangePhone = () => {
+const ChangeEmail = () => {
     return (
         <Suspense fallback={<Loader />}>
             <Layouts.Primary>
@@ -15,4 +15,4 @@ const ChangePhone = () => {
     );
 };
 
-export default ChangePhone;
+export default ChangeEmail;

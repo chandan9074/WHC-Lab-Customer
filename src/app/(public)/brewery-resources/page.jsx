@@ -9,7 +9,6 @@ async function BreweryResources() {
     const getResources = await ResourceService.getResources(
         "BREWIGN_RESOURCES"
     );
-    console.log({ getResources });
 
     return (
         <Layouts.Primary breadcrumb={false}>

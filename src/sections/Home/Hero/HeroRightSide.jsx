@@ -50,7 +50,6 @@ const HeroRightSide = () => {
         // Make sure to handle degrees to radians conversion if necessary
         // For example, THREE.MathUtils.degToRad(degrees)
         // Here, I'm just logging the new rotation assuming rotation is a prop of WhcHero
-        console.log(newRotation);
     };
 
     const handleMouseUp = () => {

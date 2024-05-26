@@ -19,7 +19,6 @@ const Primary = () => {
 
     const { isLogin } = useAuthContext();
     const { cartItem } = useCart();
-    console.log(cartItem?.length);
 
     useEffect(() => {
         if (open) {

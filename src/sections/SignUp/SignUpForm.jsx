@@ -71,7 +71,6 @@ const SignInForm = () => {
     );
 
     const onFinish = async (values) => {
-        console.log(values);
         try {
             setLoading(true);
             // Call the sign-in service

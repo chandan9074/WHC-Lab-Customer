@@ -36,32 +36,27 @@ const ProductRightView = ({
         checkProductInWishList,
     } = useWishlistContext();
     const pathname = usePathname();
-    console.log({ details: data });
-
-    console.log(data, "data log");
 
     useEffect(() => {
         if (hasCookie("selected_location")) {
             const locationId = JSON.parse(getCookie("selected_location"));
             if (locationId) {
-                console.log({ locationId, data });
                 const stock = data?.variants.find(
                     (item) => item.location._id === locationId
                 );
 
                 if (stock) {
                     setMaxLimit(stock?.quantity);
+                    setStatus(stock?.status);
                 }
             }
         }
     }, [data]);
 
-    console.log(data, "data");
 
     const handleLocation = async (locationId) => {
         setCookie("selected_location", JSON.stringify(locationId));
         if (locationId) {
-            console.log({ locationId, data });
             const stock = data?.variants.find(
                 (item) => item.location._id === locationId
             );
@@ -101,7 +96,6 @@ const ProductRightView = ({
     };
 
     const handleAddToCart = async () => {
-        console.log(data);
         if (data.inStock) {
             const locationId = JSON.parse(getCookie("selected_location"));
             const variant = data.variants.find(

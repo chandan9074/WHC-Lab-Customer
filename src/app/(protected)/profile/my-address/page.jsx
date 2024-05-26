@@ -20,9 +20,7 @@ async function getAddress(token) {
 
 const MyAddress = async () => {
     const token = getCookie("accessToken", { cookies });
-    // console.log(token);
     const addressData = await getAddress(token);
-    console.log("address-----------------__>", addressData.docs);
 
     return (
         <div className="flex justify-center items-center rounded-sm p-4 lg:py-12 lg:px-[58px]">

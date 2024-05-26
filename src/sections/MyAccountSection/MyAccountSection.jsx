@@ -193,13 +193,11 @@ const MyAccountSection = ({ data }) => {
     };
 
     const handleNavigate = (name) => {
-        console.log("name", name);
         if (name === "name") {
             setIsOpen(true);
         } else {
             router.push("/change-email");
         }
-        console.log(isOpen);
     };
 
     const handleOk = () => {
@@ -373,7 +371,6 @@ const NameCustomModal = ({ onSubmit, setUserInfo, setFormValue, data }) => {
             body: values,
             headers: { Authorization: token },
         });
-        console.log(response);
         const userInfo = response.user;
         setCookie("userInfo", `${JSON.stringify(userInfo)}`);
         setFormValue({
@@ -385,7 +382,6 @@ const NameCustomModal = ({ onSubmit, setUserInfo, setFormValue, data }) => {
         toast.success(response.message);
         onSubmit();
     };
-    console.log("asddasfsdfsdf-----------", data);
     return (
         <Form layout="vertical" onFinish={onFinish} initialValues={{ ...data }}>
             <Form.Item
