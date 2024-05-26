@@ -24,7 +24,7 @@ async function PlaceOrder() {
                         <h1 className="font-semibold text-[20px] text-neutral-700">
                             Checkout
                         </h1>
-                        <p className="text-[#5D6B82]">
+                        <p className="text-[#5D6B82] mt-2">
                             Please fill in the fields below and place order to
                             complete your purchase!
                         </p>
