@@ -22,7 +22,7 @@ const IconWithLabel = ({
             {...rest}
             className={`${className} group py-2 md:py-2.5 lg:py-3.5 px-4 md:px-5 lg:px-6 rounded-full ${bgColor} ${bgHoverColor} ${
                 border && border
-            } ${width} duration-200 flex items-center gap-2.5 justify-center`}
+            } ${width} duration-200 flex items-center gap-2.5 justify-center hover:border-none`}
         >
             {align === "left" && (
                 <Image

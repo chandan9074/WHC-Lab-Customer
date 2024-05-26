@@ -326,8 +326,7 @@ const RightSidecontent = ({ ratingsWithDivWidth, rating }) => {
                         Seller
                     </p>
 
-                    <Link
-                        href={SELLER_INFORMATION_PATH}
+                    <div
                         className="flex gap-x-3 cursor-pointer"
                     >
                         <Image
@@ -365,7 +364,7 @@ const RightSidecontent = ({ ratingsWithDivWidth, rating }) => {
                                 </p>
                             </div>
                         </div>
-                    </Link>
+                    </div>
                 </div>
             </div>
         </div>

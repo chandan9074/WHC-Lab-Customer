@@ -6,9 +6,10 @@ import Icons from "../../../../public/assets/Icons";
 import { useEffect, useState } from "react";
 import Buttons from "@/components/Buttons";
 import InfoPagesContainer from "@/components/common/InfoPagesContainer";
-import { whcFetch } from "@/services/BaseWHCHTTP";
 import { FAQ_URL } from "@/helpers/apiURLS";
 import { useRouter } from "next/navigation";
+import MakeApiCall from "@/services/MakeApiCall";
+import { toast } from "react-toastify";
 
 export default function FAQ() {
     const [collapse, setCollapse] = useState("01");
@@ -17,10 +18,15 @@ export default function FAQ() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await whcFetch({
-                endpoint: FAQ_URL,
-            });
-            setFaqs(response.body.docs);
+            try {
+                const response = await MakeApiCall({
+                    apiUrl: FAQ_URL,
+                });
+                setFaqs(response?.docs);
+            } catch (error) {
+                toast.error(error?.message)
+            }
+
         };
         fetchData();
     }, []);
@@ -40,11 +46,10 @@ export default function FAQ() {
                     {faqs.map((item, index) => (
                         <div
                             onClick={() => toggleCollapse(item._id)}
-                            className={` cursor-pointer flex justify-between gap-1 items-start p-4 md:p-8 border ${
-                                collapse === item._id
-                                    ? "border-brand-blue-500"
-                                    : "border-stroke-new "
-                            } rounded-2xl`}
+                            className={` cursor-pointer flex justify-between gap-1 items-start p-4 md:p-8 border ${collapse === item._id
+                                ? "border-brand-blue-500"
+                                : "border-stroke-new "
+                                } rounded-2xl`}
                             key={index}
                         >
                             <div className="flex flex-col gap-4">
@@ -52,11 +57,10 @@ export default function FAQ() {
                                     {item.question}
                                 </p>
                                 <p
-                                    className={`text-[#474D66] font-normal text-xs md:text-base animate-fadeIn ${
-                                        collapse === item._id
-                                            ? "block"
-                                            : "hidden"
-                                    }`}
+                                    className={`text-[#474D66] font-normal text-xs md:text-base animate-fadeIn ${collapse === item._id
+                                        ? "block"
+                                        : "hidden"
+                                        }`}
                                 >
                                     {item.answer}
                                 </p>
@@ -67,11 +71,10 @@ export default function FAQ() {
                                 alt="search"
                                 width={1000}
                                 height={1000}
-                                className={`w-[30px] h-[30px] cursor-pointer transform transition-transform duration-300 ${
-                                    collapse === item._id
-                                        ? "-rotate-90"
-                                        : "rotate-90"
-                                }`}
+                                className={`w-[30px] h-[30px] cursor-pointer transform transition-transform duration-300 ${collapse === item._id
+                                    ? "-rotate-90"
+                                    : "rotate-90"
+                                    }`}
                             />
                         </div>
                     ))}
