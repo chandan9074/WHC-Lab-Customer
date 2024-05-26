@@ -18,6 +18,7 @@ import Summary from "../Profile/Orders/OrderSummary/Summary";
 import MakeApiCall from "@/services/MakeApiCall";
 import { ORDERS_URL } from "@/helpers/apiURLS";
 import { useUserContext } from "@/contexts/UserContext";
+import { useCart } from "@/contexts/CartContext";
 const GuestAddressForm = dynamic(() => import("./GuestAddressForm"), {
     ssr: false,
 });
@@ -25,6 +26,7 @@ const GuestAddressForm = dynamic(() => import("./GuestAddressForm"), {
 const { Text, Title } = Typography;
 
 function PlaceOrderContainer({ addressData }) {
+    const { getUpdateCartList } = useCart();
     const [loading, setLoading] = useState(false);
     const [shippingMethod, setShippingMethod] = useState("standard");
     const [paymentMethod, setPaymentMethod] = useState("payNow");
@@ -99,6 +101,7 @@ function PlaceOrderContainer({ addressData }) {
             });
 
             if (response.status === 200) {
+                getUpdateCartList(token);
                 toast.success(response?.message);
                 const paymentLink = response?.doc.link;
 
