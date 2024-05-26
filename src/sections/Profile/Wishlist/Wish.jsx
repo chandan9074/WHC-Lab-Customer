@@ -16,24 +16,29 @@ const { Text } = Typography;
 const Wish = ({ wishData, handleDelete }) => {
     const { getUpdateCartList, createCartItem } = useCart();
     const token = getCookie("accessToken");
-    const currency = getCookie('selected_currency')
+    const currency = getCookie("selected_currency");
 
     const handleAddCartItem = async () => {
         if (wishData?.stockId) {
             try {
-                const res = await createCartItem(wishData?._id, 1, wishData?.stockId, currency, token);
+                const res = await createCartItem(
+                    wishData?._id,
+                    1,
+                    wishData?.stockId,
+                    currency,
+                    token
+                );
                 if (res?.status === 200) {
                     toast.success(res?.message);
                     handleDelete(wishData?._id);
                     getUpdateCartList();
                 }
             } catch (error) {
-                toast.error(error?.message)
+                toast.error(error?.message);
             }
         } else {
-            toast.warning('This product is currently out of stock.')
+            toast.warning("This product is currently out of stock.");
         }
-
     };
 
     return (
@@ -47,9 +52,7 @@ const Wish = ({ wishData, handleDelete }) => {
                     className="rounded-sm w-[80px] h-[80px]"
                 />
                 <div className="flex flex-col">
-                    <Link
-                        href={`/store/product-details/${wishData?._id}`}
-                    >
+                    <Link href={`/store/product-details/${wishData?._id}`}>
                         <Text className="w-32  md:w-32 lg:w-full text-base text-neutral-700">
                             {wishData?.productName}
                         </Text>
@@ -58,17 +61,22 @@ const Wish = ({ wishData, handleDelete }) => {
                     <Text className="text-neutral-300 font-medium text-base">
                         {formatPrice(
                             {
-                                "dollarPrice": wishData?.dollarPrice,
-                                "euroPrice": wishData?.euroPrice,
-                                "poundPrice": wishData?.poundPrice,
+                                dollarPrice: wishData?.dollarPrice,
+                                euroPrice: wishData?.euroPrice,
+                                poundPrice: wishData?.poundPrice,
                             },
-                            currency)}
+                            currency
+                        )}
                     </Text>
                     <Text
                         // type="success"
-                        className={`font-semibold ${wishData?.inStock ? 'text-green-500' : 'text-error-50'}`}
+                        className={`font-semibold ${
+                            wishData?.inStock
+                                ? "text-green-500"
+                                : "text-error-50"
+                        }`}
                     >
-                        {wishData?.inStock ? 'In stock' : 'Out of stock'}
+                        {wishData?.inStock ? "In stock" : "Out of stock"}
                     </Text>
                 </div>
             </div>
@@ -77,7 +85,7 @@ const Wish = ({ wishData, handleDelete }) => {
                     size="small"
                     type="text"
                     className="px-2 py-4 flex items-center justify-center rounded-full"
-                    onClick={() => handleDelete(wishData?._id)}
+                    onClick={() => handleDelete(wishData?.productId)}
                 >
                     <Image
                         alt="trash"
@@ -95,7 +103,9 @@ const Wish = ({ wishData, handleDelete }) => {
                 >
                     <Image
                         alt="add"
-                        src={wishData?.inStock ? Icons.plus : Icons.disabled_plus}
+                        src={
+                            wishData?.inStock ? Icons.plus : Icons.disabled_plus
+                        }
                         width={18}
                         height={18}
                     />
