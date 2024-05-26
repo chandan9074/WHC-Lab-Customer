@@ -47,6 +47,7 @@ const ProductRightView = ({
 
                 if (stock) {
                     setMaxLimit(stock?.quantity);
+                    setStatus(stock?.status);
                 }
             }
         }
