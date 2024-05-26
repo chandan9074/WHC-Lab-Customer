@@ -15,6 +15,8 @@ export function UserProvider({ children }) {
     const [userProfileInfo, setUserProfileInfo] = useState(null);
     const [productList, setProductList] = useState([]);
     const [selectedTab, setSelectedTab] = useState(null);
+    const [productLoading, setProductLoading] = useState(false);
+
 
     useEffect(() => {
         if (hasCookie("userInfo")) {
@@ -32,6 +34,7 @@ export function UserProvider({ children }) {
     }, []);
 
     const handleLocation = async (locationId) => {
+        setProductLoading(true);
         const category = selectedTab.name;
         const response = await ProductService.getProducts({
             locationId,
@@ -40,6 +43,7 @@ export function UserProvider({ children }) {
         // console.log(response, "reposnse----");
         console.log({ response });
         setProductList(response?.docs);
+        setProductLoading(false)
     };
 
     // Get Locations
@@ -76,7 +80,9 @@ export function UserProvider({ children }) {
         productList,
         setSelectedTab,
         selectedTab,
-        handleLocation
+        handleLocation,
+        productLoading,
+        setProductLoading
     };
     return (
         <userContext.Provider value={values}>{children}</userContext.Provider>

@@ -7,6 +7,7 @@ import CountrySelectionModal from "./CountrySelectionModal";
 import ProductService from "@/services/productsService";
 import { getCookie } from "cookies-next";
 import { useUserContext } from "@/contexts/UserContext";
+import { StoreSkeleton } from "@/components/common/StoreSkeleton";
 
 const StoreContainer = ({ productData, categoryData, initialCategory }) => {
     const {
@@ -15,6 +16,8 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
         selectedTab,
         setSelectedTab,
         handleLocation,
+        productLoading,
+        setProductLoading,
     } = useUserContext();
     // const [selectedTab, setSelectedTab] = useState(
     //     initialCategory
@@ -27,6 +30,8 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
             : categoryData[0]
     );
     setProductList(productData || []);
+
+    const [tagsLoading, setTagsLoading] = useState(false);
     // const [productList, setProductList] = useState(productData || []);
     const [searchQuery, setSearchQuery] = useState({
         yeastType: "",
@@ -51,13 +56,14 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
     const handleTabButtonClick = async (data) => {
         const _selectedLocation = getCookie("selected_location");
         const locationId = _selectedLocation && JSON.parse(_selectedLocation);
-
+        // setTagsLoading(true);
         const response = await ProductService.getProducts({
             locationId,
             category: data.name,
         });
         // console.log(response, "reposnse----");
-        console.log({ response });
+        // setTagsLoading(false);
+        // console.log({ response });
         setProductList(response?.docs);
     };
 
@@ -71,23 +77,25 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
 
     return (
         <div className="container mx-auto space-y-[14.5px] px-4 md:px-0 pb-0 md:pb-20">
-            <StoreTabButtonsSection
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-                categoryData={categoryData}
-                handleTabButtonClick={handleTabButtonClick}
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-            />
+            <>
+                <StoreTabButtonsSection
+                    selectedTab={selectedTab}
+                    setSelectedTab={setSelectedTab}
+                    categoryData={categoryData}
+                    handleTabButtonClick={handleTabButtonClick}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                />
 
-            <ProductListContainer
-                selectedTab={selectedTab}
-                productData={productList}
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-            />
+                <ProductListContainer
+                    selectedTab={selectedTab}
+                    productData={productList}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                />
 
-            <CountrySelectionModal handleLocation={handleLocation} />
+                <CountrySelectionModal handleLocation={handleLocation} />
+            </>
         </div>
     );
 };
