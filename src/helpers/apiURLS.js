@@ -67,6 +67,8 @@ export const RESEND_OTP = `${BASEURL}/users/resend-otp`;
 // distributors
 
 export const DISTRIBUTORS_URL = `${BASEURL}/distributors`;
+export const DISTINCT_COUNTRY_URL = `${BASEURL}/distributors/distinct-country`;
+export const DISTINCT_CATEGORY_URL = `${BASEURL}/distributors/distinct-category`;
 
 // category
 export const CATEGORY_URL = `${BASEURL}/categories`;

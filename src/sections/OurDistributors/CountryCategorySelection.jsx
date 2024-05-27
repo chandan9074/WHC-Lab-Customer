@@ -3,15 +3,31 @@ import { Select } from "antd";
 import React from "react";
 import Icons from "../../../public/assets/Icons";
 import Image from "next/image";
+import MakeApiCall from "@/services/MakeApiCall";
+import DistributorsService from "@/services/DistributorsService";
 
-const CountryCategorySelection = ({ data }) => {
-    const handleChange = (value) => {
-        console.log(`selected ${value}`);
-    };
+const CountryCategorySelection = ({
+    // data,
+    distinctCountry,
+    distinctCategory,
+    searchQuery,
+    setSearchQuery,
+}) => {
+    // const handleChange = async (value) => {
+    //     console.log(`selected ${value}`);
+    //     try {
+    //         const response = await DistributorsService.getDistinctCategory();
+    //     } catch (error) {}
+    // };
 
-    const options = data.map((doc) => ({
-        value: doc.name,
-        label: doc.name,
+    const countries = distinctCountry.map((doc) => ({
+        value: doc,
+        label: doc,
+    }));
+
+    const categories = distinctCategory.map((doc) => ({
+        value: doc,
+        label: doc,
     }));
 
     return (
@@ -26,18 +42,13 @@ const CountryCategorySelection = ({ data }) => {
                         alt="caretDown"
                     />
                 }
-                defaultValue="Select Category"
-                onChange={handleChange}
-                options={[
-                    {
-                        value: "commercial",
-                        label: "Commercial",
-                    },
-                    {
-                        value: "homebrewing",
-                        label: "Homebrewing",
-                    },
-                ]}
+                // defaultValue="Select Category"
+                // defaultValue={searchQuery.category}
+                placeholder="Select Category"
+                onChange={(value) =>
+                    setSearchQuery({ ...searchQuery, category: value })
+                }
+                options={categories}
             />
 
             <Select
@@ -50,9 +61,11 @@ const CountryCategorySelection = ({ data }) => {
                         alt="caretDown"
                     />
                 }
-                defaultValue="Select Country"
-                onChange={handleChange}
-                options={options}
+                placeholder="Select Country"
+                onChange={(value) =>
+                    setSearchQuery({ ...searchQuery, country: value })
+                }
+                options={countries}
             />
         </div>
     );
