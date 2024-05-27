@@ -110,6 +110,9 @@ const NextBreadcrumb = () => {
                     //     height: 50,
                     //     borderRadius: "20px",
                     // }}
+                    style={{
+                        width: "300px",
+                    }}
                     className="h-10"
                     onChange={handleChange}
                     options={locations?.map((location, index) => ({
