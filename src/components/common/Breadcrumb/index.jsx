@@ -70,7 +70,7 @@ const NextBreadcrumb = () => {
     // };
 
     return (
-        <ul className="w-full flex justify-between items-center container mx-auto">
+        <ul className="w-full justify-between items-center container mx-auto hidden md:flex">
             <div className="flex breadcrumb  py-6 font-poppins px-6 sm:px-0">
                 <li>
                     <Link href="/" className="text-sm font-normal capitalize">

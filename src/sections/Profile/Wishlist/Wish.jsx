@@ -18,26 +18,61 @@ const Wish = ({ wishData, handleDelete }) => {
     const token = getCookie("accessToken");
     const currency = getCookie("selected_currency");
 
-    const handleAddCartItem = async () => {
-        if (wishData?.stockId) {
+    // const handleAddCartItem = async () => {
+    //     if (wishData?.stockId) {
+    //         try {
+    //             const res = await createCartItem(
+    //                 wishData?._id,
+    //                 1,
+    //                 wishData?.stockId,
+    //                 currency,
+    //                 token
+    //             );
+    //             if (res?.status === 200) {
+    //                 toast.success(res?.message);
+    //                 handleDelete(wishData?._id);
+    //                 getUpdateCartList();
+    //             }
+    //         } catch (error) {
+    //             toast.error(error?.message);
+    //         }
+    //     } else {
+    //         toast.warning("This product is currently out of stock.");
+    //     }
+    // };
+
+    const handleAddToCart = async () => {
+        console.log(wishData);
+        if (wishData.inStock) {
+            const locationId = JSON.parse(getCookie("selected_location"));
+            const variant = wishData.variants.find(
+                (item) => item.location._id === locationId
+            );
+            const stockId = variant.stockId;
+            const sku = variant.sku;
+
             try {
                 const res = await createCartItem(
                     wishData?._id,
-                    1,
-                    wishData?.stockId,
-                    currency,
+                    quantity,
+                    stockId,
+                    sku,
+                    variant.location.currency,
                     token
                 );
+                setLoading(true);
                 if (res?.status === 200) {
                     toast.success(res?.message);
-                    handleDelete(wishData?._id);
-                    getUpdateCartList();
+                    getUpdateCartList(token);
+                    setOpenSuccessionModal(true);
                 }
-            } catch (error) {
-                toast.error(error?.message);
+            } catch (e) {
+                toast.error(e?.message);
+            } finally {
+                setLoading(false);
             }
         } else {
-            toast.warning("This product is currently out of stock.");
+            toast.error("This product is out of stock");
         }
     };
 
@@ -99,7 +134,7 @@ const Wish = ({ wishData, handleDelete }) => {
                     size="small"
                     type="text"
                     // disabled={!wishData.inStock}
-                    onClick={handleAddCartItem}
+                    onClick={handleAddToCart}
                 >
                     <Image
                         alt="add"
