@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 
 const Price = ({ setSearchQuery, searchQuery }) => {
     // const [inputValue, setInputValue] = useState([0, 20]);
-    const [maxValue, setMaxValue] = useState(0);
     const [minValue, setMinValue] = useState(0);
+    const [maxValue, setMaxValue] = useState(999999);
 
     const { currency } = useUserContext();
 
@@ -30,19 +30,19 @@ const Price = ({ setSearchQuery, searchQuery }) => {
 
     const handleInputFieldChange = (e, type) => {
         if (type === "min") {
-            setMinValue(e.target.value);
-            setSearchQuery((prev) => ({ ...prev, minPrice: e.target.value }));
+            setMinValue(e);
+            setSearchQuery((prev) => ({ ...prev, minPrice: e }));
         } else {
-            setMaxValue(e.target.value);
-            setSearchQuery((prev) => ({ ...prev, maxPrice: e.target.value }));
+            setMaxValue(e);
+            setSearchQuery((prev) => ({ ...prev, maxPrice: e }));
         }
     };
 
     const handlePressEnter = (e, type) => {
         if (type === "min") {
-            setSearchQuery((prev) => ({ ...prev, minPrice: e.target.value }));
+            setSearchQuery((prev) => ({ ...prev, minPrice: e }));
         } else {
-            setSearchQuery((prev) => ({ ...prev, maxPrice: e.target.value }));
+            setSearchQuery((prev) => ({ ...prev, maxPrice: e }));
         }
     };
 
@@ -69,6 +69,7 @@ const Price = ({ setSearchQuery, searchQuery }) => {
                     className="h-10"
                     controls={false}
                     value={minValue}
+                    type="number"
                     onChange={(e) => handleInputFieldChange(e, "min")}
                     onPressEnter={(e) => handlePressEnter(e, "min")}
                     prefix={
@@ -82,6 +83,7 @@ const Price = ({ setSearchQuery, searchQuery }) => {
                     className="h-10"
                     controls={false}
                     value={maxValue}
+                    type="number"
                     onChange={(e) => handleInputFieldChange(e, "max")}
                     onPressEnter={(e) => handlePressEnter(e, "max")}
                     prefix={

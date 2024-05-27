@@ -2,13 +2,15 @@ import Orders from "@/sections/Profile/Orders";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
 import { ORDERS_URL } from "@/helpers/apiURLS";
+import MakeApiCall from "@/services/MakeApiCall";
 
 
 async function getOderHistoryData(token) {
-    const res = await fetch(ORDERS_URL, {
+    const res = await MakeApiCall({
+        apiUrl: ORDERS_URL,
         headers: { Authorization: token },
     });
-    return res.json();
+    return res;
 }
 
 const ActiveOrders = async () => {

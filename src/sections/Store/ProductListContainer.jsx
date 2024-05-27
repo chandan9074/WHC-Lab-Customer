@@ -84,6 +84,7 @@ const ProductListContainer = ({
 
     return (
         <div className="flex gap-x-6">
+            <Spin spinning={isLoading} fullscreen />
             <div className="hidden md:block">
                 <Filter.Primary
                     data={data}

@@ -2,13 +2,15 @@ import MyAccountSection from "@/sections/MyAccountSection/MyAccountSection";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
 import { MY_ACCOUNT_URL } from "@/helpers/apiURLS";
+import MakeApiCall from "@/services/MakeApiCall";
 
 async function getData(token) {
-    const res = await fetch(MY_ACCOUNT_URL, {
+    const res = await MakeApiCall({
+        apiUrl: MY_ACCOUNT_URL,
         headers: { Authorization: token },
     });
+    return res;
 
-    return res.json();
 }
 
 const MyAccount = async () => {
