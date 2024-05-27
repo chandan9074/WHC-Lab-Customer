@@ -28,7 +28,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
     // console.log("tags---------------------", flocculationTags);
 
     const items = [
-        {
+        yeastTypeTags.length > 0 && {
             key: "1",
             label: "Yeast Type",
             component: (
@@ -40,7 +40,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
                 />
             ),
         },
-        {
+        beerStyleTags.length > 0 && {
             key: "2",
             label: "Beer Style",
             component: (
@@ -56,7 +56,7 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
                 // />
             ),
         },
-        {
+        flocculationTags.length > 0 && {
             key: "3",
             label: "Flocculation",
             component: (
