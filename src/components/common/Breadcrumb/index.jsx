@@ -15,6 +15,7 @@ import { setCookie } from "cookies-next";
 const NextBreadcrumb = () => {
     const [distributorsData, setDistributorsData] = useState([]);
     const paths = usePathname();
+    console.log(paths);
     const pathNames = paths.split("/").filter((path) => path);
     // const hasStoreInPath = pathNames.includes("store");
 
@@ -101,34 +102,36 @@ const NextBreadcrumb = () => {
                     </li>
                 ))}
             </div>
-            <Select
-                placeholder="Please select your country"
-                // style={{
-                //     backgroundColor: "#FAFBFB",
-                //     height: 50,
-                //     borderRadius: "20px",
-                // }}
-                className="h-10"
-                onChange={handleChange}
-                options={locations?.map((location, index) => ({
-                    ...location,
-                    label: (
-                        <div className="flex justify-start items-center align-middle text-[#354764] gap-4">
-                            {location.flag && (
-                                <Image
-                                    width={1000}
-                                    height={1000}
-                                    alt="product-image"
-                                    src={`${GET_IMAGE_RENDER}?key=${location.flag}`}
-                                    className="w-[30px] h-[20px]"
-                                />
-                            )}
+            {paths === "/store" && (
+                <Select
+                    placeholder="Please select your country"
+                    // style={{
+                    //     backgroundColor: "#FAFBFB",
+                    //     height: 50,
+                    //     borderRadius: "20px",
+                    // }}
+                    className="h-10"
+                    onChange={handleChange}
+                    options={locations?.map((location, index) => ({
+                        ...location,
+                        label: (
+                            <div className="flex justify-start items-center align-middle text-[#354764] gap-4">
+                                {location.flag && (
+                                    <Image
+                                        width={1000}
+                                        height={1000}
+                                        alt="product-image"
+                                        src={`${GET_IMAGE_RENDER}?key=${location.flag}`}
+                                        className="w-[30px] h-[20px]"
+                                    />
+                                )}
 
-                            {location.label}
-                        </div>
-                    ),
-                }))}
-            />
+                                {location.label}
+                            </div>
+                        ),
+                    }))}
+                />
+            )}
         </ul>
     );
 };
