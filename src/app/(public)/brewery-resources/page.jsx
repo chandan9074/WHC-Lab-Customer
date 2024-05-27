@@ -50,7 +50,7 @@ async function BreweryResources() {
                     </div>
                 </div>
             </InfoPagesContainer>
-        </Layouts.Secondary>
+        </Layouts.Primary>
     );
 }
 

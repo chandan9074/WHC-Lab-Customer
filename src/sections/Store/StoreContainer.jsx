@@ -10,29 +10,29 @@ import { useUserContext } from "@/contexts/UserContext";
 import { StoreSkeleton } from "@/components/common/StoreSkeleton";
 
 const StoreContainer = ({ productData, categoryData, initialCategory }) => {
-    const {
-        productList,
-        setProductList,
-        selectedTab,
-        setSelectedTab,
-        handleLocation,
-        productLoading,
-        setProductLoading,
-    } = useUserContext();
-    // const [selectedTab, setSelectedTab] = useState(
-    //     initialCategory
-    //         ? categoryData.find((item) => item.name === initialCategory)
-    //         : categoryData[0]
-    // );
-    setSelectedTab(
+    // const {
+    //     productList,
+    //     setProductList,
+    //     selectedTab,
+    //     setSelectedTab,
+    //     handleLocation,
+    //     productLoading,
+    //     setProductLoading,
+    // } = useUserContext();
+    const [selectedTab, setSelectedTab] = useState(
         initialCategory
             ? categoryData.find((item) => item.name === initialCategory)
             : categoryData[0]
     );
-    setProductList(productData || []);
+    // setSelectedTab(
+    //     initialCategory
+    //         ? categoryData.find((item) => item.name === initialCategory)
+    //         : categoryData[0]
+    // );
+    // setProductList(productData || []);
 
-    const [tagsLoading, setTagsLoading] = useState(false);
-    // const [productList, setProductList] = useState(productData || []);
+    // const [tagsLoading, setTagsLoading] = useState(false);
+    const [productList, setProductList] = useState(productData || []);
     const [searchQuery, setSearchQuery] = useState({
         yeastType: "",
         beerStyle: "",
@@ -42,16 +42,16 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
         category: "",
     });
 
-    // const handleLocation = async (locationId) => {
-    //     const category = selectedTab.name;
-    //     const response = await ProductService.getProducts({
-    //         locationId,
-    //         category,
-    //     });
-    //     // console.log(response, "reposnse----");
-    //     console.log({ response });
-    //     setProductList(response?.docs);
-    // };
+    const handleLocation = async (locationId) => {
+        const category = selectedTab.name;
+        const response = await ProductService.getProducts({
+            locationId,
+            category,
+        });
+        // console.log(response, "reposnse----");
+        console.log({ response });
+        setProductList(response?.docs);
+    };
 
     const handleTabButtonClick = async (data) => {
         const _selectedLocation = getCookie("selected_location");
