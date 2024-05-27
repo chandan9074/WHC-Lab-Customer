@@ -27,11 +27,14 @@ async function Store(params) {
         getCategories,
     ]);
 
+    // const [categoryData] = await Promise.all([getCategories]);
+
     return (
         <Suspense fallback={null}>
             <Layouts.Primary>
                 <StoreContainer
-                    productData={productData?.docs}
+                    // productData={productData?.docs}
+                    productData={[]}
                     categoryData={categoryData?.docs}
                     initialCategory={params.searchParams.category}
                 />

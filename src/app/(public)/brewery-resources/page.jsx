@@ -7,7 +7,7 @@ import ResourceService from "@/services/ResourcesService";
 
 async function BreweryResources() {
     const getResources = await ResourceService.getResources(
-        "BREWIGN_RESOURCES"
+        "BREWING_RESOURCES"
     );
 
     return (

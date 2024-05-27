@@ -4,7 +4,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import ProductDisplay from "./ProductDisplay";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ProductService from "@/services/productsService";
-import { getCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
+import { Spin } from "antd";
 
 const ProductListContainer = ({
     data,
@@ -26,23 +27,25 @@ const ProductListContainer = ({
     }, [searchParams, productData]);
 
     const handleSearchProduct = useCallback(async () => {
-        setIsLoading(true);
-        const paramData = {};
-        searchParams.forEach((value, key) => {
-            setSearchQuery((prev) => ({ ...prev, [key]: value }));
-            paramData[key] = value;
-        });
+        if (hasCookie("selected_location")) {
+            setIsLoading(true);
+            const paramData = {};
+            searchParams.forEach((value, key) => {
+                setSearchQuery((prev) => ({ ...prev, [key]: value }));
+                paramData[key] = value;
+            });
 
-        const locationId = getCookie("selected_location");
-        const _selectedLocation = locationId && JSON.parse(locationId);
+            const locationId = getCookie("selected_location");
+            const _selectedLocation = locationId && JSON.parse(locationId);
 
-        const response = await ProductService.getProducts({
-            ...paramData,
-            // category: selectedTab.name,
-            locationId: _selectedLocation,
-        });
-        setProductList(response?.docs);
-        setIsLoading(false);
+            const response = await ProductService.getProducts({
+                ...paramData,
+                // category: selectedTab.name,
+                locationId: _selectedLocation,
+            });
+            setProductList(response?.docs);
+            setIsLoading(false);
+        }
     }, [searchParams]);
 
     const handleProductLoading = useCallback(() => {
@@ -69,18 +72,11 @@ const ProductListContainer = ({
         const updatedPath = queryString
             ? `${pathname}?${queryString}`
             : pathname;
-
-        if (!firstRender) {
-            router.push(updatedPath, { scroll: false });
-        }
-    }, [
-        handleProductLoading,
-        searchQuery,
-        firstRender,
-        searchParams,
-        pathname,
-        router,
-    ]);
+        setIsLoading(false);
+        // if (!firstRender) {
+        router.push(updatedPath, { scroll: false });
+        // }
+    }, [handleProductLoading, searchQuery, searchParams, pathname, router]);
 
     useEffect(() => {
         handleUpdateSearchQuery();
