@@ -40,7 +40,7 @@ const ProductDetailsSection = ({ data }) => {
                 />
             </div>
 
-            <div className="flex w-full border-b border-neutral-40">
+            <div className="flex w-full border-b border-neutral-40 gap-4 sm:gap-0 sm:min-w-64 md:w-full overflow-x-auto">
                 {[
                     "Product Description",
                     "Technical Specification",
@@ -50,7 +50,7 @@ const ProductDetailsSection = ({ data }) => {
                     <button
                         key={index}
                         onClick={() => setSelectedTab(index)}
-                        className={`w-[180px] h-10 flex justify-center items-center  font-medium border-b-[3px] duration-300 ${
+                        className={`w-[180px] h-10 flex justify-center items-center gap-2 font-medium border-b-[3px] duration-300 whitespace-nowrap ${
                             selectedTab === index
                                 ? "border-brand-blue-500 font-semibold text-brand-blue-500"
                                 : "text-neutral-200 border-transparent"
