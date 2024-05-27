@@ -1,11 +1,31 @@
 "use client";
 import React, { useState } from "react";
 import ReviewsAndRatings from "./ReviewsAndRatings";
-import { allRatingReviewers } from "@/libs/reviewData";
-// import DOMPurify from "dompurify";
+import TehcnicalSpac from "./TehcnicalSpac";
+import Documentation from "./Documentation";
 
 const ProductDetailsSection = ({ data }) => {
     const [selectedTab, setSelectedTab] = useState(0);
+
+    const RenderComponent = () => {
+        switch (selectedTab) {
+            case 0:
+                return <ProductDetails data={data} />;
+            case 1:
+                return <TehcnicalSpac data={data} />;
+            case 2:
+                return <Documentation data={data} />;
+            case 3:
+                return (
+                    <ReviewsAndRatings
+                        data={data?.review?.list || []}
+                        rating={data?.review?.summary}
+                    />
+                );
+            default:
+                return <div>No Component Found</div>;
+        }
+    };
 
     return (
         <div className="flex flex-col w-full">
@@ -21,7 +41,12 @@ const ProductDetailsSection = ({ data }) => {
             </div>
 
             <div className="flex w-full border-b border-neutral-40">
-                {["Product details", "Reviews & ratings"].map((item, index) => (
+                {[
+                    "Product Description",
+                    "Technical Specification",
+                    "Documentation",
+                    "Reviews & ratings",
+                ].map((item, index) => (
                     <button
                         key={index}
                         onClick={() => setSelectedTab(index)}
@@ -37,14 +62,15 @@ const ProductDetailsSection = ({ data }) => {
             </div>
 
             <div className="w-full animate-fadeIn pt-6">
-                {selectedTab === 0 ? (
+                {/* {selectedTab === 0 ? (
                     <ProductDetails />
                 ) : (
                     <ReviewsAndRatings
                         data={data?.review?.list || []}
                         rating={data?.review?.summary}
                     />
-                )}
+                )} */}
+                {RenderComponent()}
             </div>
         </div>
     );
@@ -52,54 +78,19 @@ const ProductDetailsSection = ({ data }) => {
 
 export default ProductDetailsSection;
 
-const ProductDetails = () => {
-    const details = [
-        "Abstract print",
-        "Floral print",
-        "Rounded neckline",
-        "Long puff sleeves",
-        "Ruched front",
-        "Tiered hem",
-        "Midi length",
-        "Button and tie-back fastening",
-        "Lightweight woven fabric",
-        "Fit-and-flare design",
-        "Model is 5'8/173cm and wears UK 10/EU 38/US 6",
-    ];
-
-    const guides = ["100% viscose", "Machine washable"];
-
+const ProductDetails = ({ data }) => {
     return (
         <>
-            <div className="px-12 pt-6 flex flex-col gap-y-3">
+            <div className="pt-5 flex flex-col gap-y-3">
                 <h3 className="text-neutral-700 text-sm font-medium">
                     Details
                 </h3>
-                <div className="space-y-2">
-                    {details.map((item, index) => (
-                        <li
-                            key={index}
-                            className="text-neutral-600 text-sm font-medium"
-                        >
-                            {item}
-                        </li>
-                    ))}
-                </div>
-            </div>
-
-            <div className="px-12 pt-6 flex flex-col gap-y-3">
-                <h3 className="text-neutral-700 text-sm font-medium">
-                    Care guide
-                </h3>
-                <div className="space-y-2">
-                    {guides.map((item, index) => (
-                        <li
-                            key={index}
-                            className="text-neutral-600 text-sm font-medium"
-                        >
-                            {item}
-                        </li>
-                    ))}
+                <div>
+                    <p
+                        dangerouslySetInnerHTML={{
+                            __html: data?.description,
+                        }}
+                    />
                 </div>
             </div>
         </>

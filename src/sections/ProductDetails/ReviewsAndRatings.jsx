@@ -102,7 +102,7 @@ const LeftSideContent = ({ ratings, data }) => {
                                 onClick={() => handleSelection(item.rating)}
                                 className={`w-[46px] md:w-[49px] h-[28px] md:h-[30px] flex justify-center items-center py-1.5 px-3 rounded-sm ${
                                     selectedRating === item.rating
-                                        ? "border-[1.5px] border-black-1000 font-bold text-neutral-700"
+                                        ? "border-[1.5px] border-black font-bold text-neutral-700 rounded-sm"
                                         : "border-[1.5px] border-neutral-30 font-medium text-neutral-300"
                                 }`}
                             >
