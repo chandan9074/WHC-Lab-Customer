@@ -36,8 +36,8 @@ async function Store(params) {
         <Suspense fallback={null}>
             <Layouts.Primary>
                 <StoreContainer
-                    // productData={productData?.docs}
-                    productData={[]}
+                    productData={productData?.docs}
+                    // productData={[]}
                     categoryData={categoryData?.docs}
                     initialCategory={params.searchParams.category}
                 />
