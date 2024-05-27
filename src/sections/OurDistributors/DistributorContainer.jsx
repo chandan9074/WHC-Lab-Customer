@@ -21,7 +21,7 @@ const DistributorContainer = ({
         category: "",
     });
 
-    console.log(searchParams);
+    // console.log(searchParams);
 
     useEffect(() => {
         searchParams.forEach((value, key) => {
@@ -30,7 +30,7 @@ const DistributorContainer = ({
     }, []);
 
     const handleUpdateSearchQuery = () => {
-        console.log("clidck");
+        // console.log("clidck");
         const params = new URLSearchParams(searchParams);
         Object.keys(searchQuery).forEach((key) => {
             if (searchQuery[key]) {
