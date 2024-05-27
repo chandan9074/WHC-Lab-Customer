@@ -36,7 +36,7 @@ export default function FAQ() {
         setCollapse((prevState) => (prevState === itemId ? null : itemId));
 
     return (
-        <Layouts.Secondary breadcrumb={false}>
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage
                 pageHeading="FAQ"
                 backgroundImage={"/assets/Images/page_header_bg.png"}
@@ -94,6 +94,6 @@ export default function FAQ() {
                     </div>
                 </div>
             </InfoPagesContainer>
-        </Layouts.Secondary>
+        </Layouts.Primary>
     );
 }

@@ -11,7 +11,7 @@ async function LabAnalysisResources() {
     );
 
     return (
-        <Layouts.Secondary breadcrumb={false}>
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="Lab Analysis Resources" />
             <InfoPagesContainer>
                 <div className="flex flex-col gap-6">

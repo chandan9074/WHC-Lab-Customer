@@ -25,7 +25,7 @@ export default async function Home() {
     const [testimonialsData,mainCategoriesData,featuredProducts,newProducts] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts,getNewProducts]);
 
     return (
-        <Layouts.Primary>
+        <Layouts.Primary breadcrumb={false}>
             <HeroContainer />
             <ProductContainer featuredProducts={featuredProducts.docs}/>
             <MainCategoriesContainer mainCategoriesData={mainCategoriesData.docs}/>

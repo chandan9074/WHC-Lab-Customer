@@ -68,7 +68,7 @@ const CartList = ({
                     })}
                     <div className="self-end">
                         <Link href={PRODUCTS_PATH}>
-                            <Buttons.PrimaryButton
+                            <Buttons.OutlinedButton
                                 className={
                                     "md:py-3 py-3 md:px-9 px-6 rounded-full text-black border-[1.5px] border-black  md:text-base text-sm font-semibold"
                                 }

@@ -1,7 +1,6 @@
 import InfoPagesContainer from "@/components/common/InfoPagesContainer";
 import PageHeaderWithNameAndBgImage from "@/components/common/PageHeaderWithNameAndBgImage";
 import Layouts from "@/layouts";
-import React from "react";
 import AuthorInfo from "@/sections/Blog/AuthorInfo";
 import SocialMediaShare from "@/sections/Blog/SocialMediaShare";
 import PreviousNextNavigator from "@/sections/Blog/Navigator/PreviousNextNavigator";
@@ -11,7 +10,6 @@ import TagLists from "@/sections/Blog/TagLists";
 import CommentList from "@/sections/Blog/Comment/CommentList";
 import CommentForm from "@/sections/Blog/Comment/CommentForm";
 import Text from "@/components/Text";
-import { blogsData } from "../page";
 import BlogContainer from "@/sections/Blog/BlogContainer";
 import BlogService from "@/services/BlogService";
 // import { useRouter } from "next/router";
@@ -40,7 +38,7 @@ async function BlogDetails({ params }) {
     // console.log({ singleBlogData });
 
     return (
-        <Layouts.Secondary breadcrumb={false}>
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading={singleBlogData?.title} />
             <InfoPagesContainer>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-12">
@@ -73,7 +71,7 @@ async function BlogDetails({ params }) {
                         <div className="h-[1px] bg-stroke-new w-full"></div>
 
                         {/* comment section */}
-                        <CommentList comment={singleBlogData?.comment} />
+                        <CommentList comments={singleBlogData?.comment} />
                         <CommentForm blogId={singleBlogData?._id} />
                     </div>
 
@@ -92,7 +90,7 @@ async function BlogDetails({ params }) {
                     <BlogContainer blogsData={blogsData.docs.slice(0, 3)} />
                 </div>
             </InfoPagesContainer>
-        </Layouts.Secondary>
+        </Layouts.Primary>
     );
 }
 

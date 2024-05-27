@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { currencyData } from "@/libs/common";
+import ProductService from "@/services/productsService";
 
 const userContext = createContext();
 
@@ -12,6 +13,10 @@ export function UserProvider({ children }) {
     const [userInfo, setUserInfo] = useState(null);
     const [currency, setCurrency] = useState(null);
     const [userProfileInfo, setUserProfileInfo] = useState(null);
+    const [productList, setProductList] = useState([]);
+    const [selectedTab, setSelectedTab] = useState(null);
+    const [productLoading, setProductLoading] = useState(false);
+
 
     useEffect(() => {
         if (hasCookie("userInfo")) {
@@ -27,6 +32,19 @@ export function UserProvider({ children }) {
             setCurrency(getCurrencyKey);
         }
     }, []);
+
+    const handleLocation = async (locationId) => {
+        setProductLoading(true);
+        const category = selectedTab.name;
+        const response = await ProductService.getProducts({
+            locationId,
+            category,
+        });
+        // console.log(response, "reposnse----");
+        console.log({ response });
+        setProductList(response?.docs);
+        setProductLoading(false)
+    };
 
     // Get Locations
     const getLocation = async () => {
@@ -58,6 +76,13 @@ export function UserProvider({ children }) {
         currency,
         userProfileInfo,
         setUserProfileInfo,
+        setProductList,
+        productList,
+        setSelectedTab,
+        selectedTab,
+        handleLocation,
+        productLoading,
+        setProductLoading
     };
     return (
         <userContext.Provider value={values}>{children}</userContext.Provider>

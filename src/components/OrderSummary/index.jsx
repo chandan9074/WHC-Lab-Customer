@@ -3,7 +3,7 @@ import { getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Summary from "./Summary";
-import { Typography, Input } from "antd";
+import { Typography, Input, Spin } from "antd";
 import Buttons from "../Buttons";
 
 const { Text } = Typography;
@@ -17,16 +17,19 @@ function OrderSummary({
 }) {
     // const [guestLoginFormModal, setGuestLoginFormModal] = useState(false);
     const [couponCode, setCouponCode] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const { discountAmount, shippingCharge } = cartSummary;
     const router = useRouter();
 
     const checkIfLoggedIn = () => {
         if (orderItem.length > 0) {
+            setIsLoading(true);
             // const accessToken = getCookie("accessToken");
             // localStorage.setItem("orderDate", JSON.stringify(orderItem));
             setCookie("orderData", JSON.stringify(orderItem));
             setCookie("calculatedOrderData", JSON.stringify(summaryCalculate));
 
+            setIsLoading(false);
             router.push("place-order/?userType=login");
             // if (accessToken) {
             // } else {
@@ -49,6 +52,7 @@ function OrderSummary({
         <div
             className={`bg-neutral-10 pb-9 px-4 flex flex-col gap-4 border border-neutral-30 rounded-lg ${className}`}
         >
+            <Spin spinning={isLoading} fullscreen />
             <h5 className="text-center text-base font-semibold leading-6 text-brand-blue-800 px-4 pt-4">
                 ORDER SUMMERY
             </h5>

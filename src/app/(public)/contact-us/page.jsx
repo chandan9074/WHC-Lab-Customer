@@ -36,8 +36,7 @@ function Contact() {
     };
 
     return (
-        <Layouts.Secondary breadcrumb={false}>
-            <Spin spinning={loading} fullscreen />
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="Contact Us" />
             <InfoPagesContainer>
                 <div className="flex flex-col gap-12 md:flex-row">
@@ -168,7 +167,7 @@ function Contact() {
                     </div>
                 </div>
             </InfoPagesContainer>
-        </Layouts.Secondary>
+        </Layouts.Primary>
     );
 }
 
