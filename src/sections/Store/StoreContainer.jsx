@@ -40,6 +40,7 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
         maxPrice: 0,
         minPrice: 0,
         category: "",
+        sortBy: "",
     });
 
     const handleLocation = async (locationId) => {
@@ -57,14 +58,14 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
         const _selectedLocation = getCookie("selected_location");
         const locationId = _selectedLocation && JSON.parse(_selectedLocation);
         // setTagsLoading(true);
-        const response = await ProductService.getProducts({
-            locationId,
-            category: data.name,
-        });
+        // const response = await ProductService.getProducts({
+        //     locationId,
+        //     category: data.name,
+        // });
         // console.log(response, "reposnse----");
         // setTagsLoading(false);
         // console.log({ response });
-        setProductList(response?.docs);
+        // setProductList(response?.docs);
     };
 
     // useEffect(() => {

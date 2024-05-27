@@ -7,7 +7,12 @@ import React, { useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import Filter from "@/components/Filter";
 
-const ProductHeader = ({ selectedTab, dataLength }) => {
+const ProductHeader = ({
+    selectedTab,
+    dataLength,
+    setSearchQuery,
+    searchQuery,
+}) => {
     const [open, setOpen] = useState(false);
 
     const showDrawer = () => {
@@ -57,7 +62,8 @@ const ProductHeader = ({ selectedTab, dataLength }) => {
                         Sort by :
                     </p>
                     <Select
-                        defaultValue="newest"
+                        // defaultValue="newest"
+                        placeholder="Select"
                         suffixIcon={
                             <Image
                                 src={Icons.caretDown}
@@ -67,7 +73,13 @@ const ProductHeader = ({ selectedTab, dataLength }) => {
                                 className="w-4 h-4"
                             />
                         }
-                        style={{ width: 92 }}
+                        style={{ width: 110 }}
+                        onChange={(value) =>
+                            setSearchQuery({
+                                ...searchQuery,
+                                sortBy: value,
+                            })
+                        }
                         variant={false}
                         className="text-sm md:text-base text-brand-blue-500"
                         options={[

@@ -7,7 +7,14 @@ import ProductHeader from "./ProductHeader";
 // import { productsData } from "@/libs/productData";
 import { useWishlistContext } from "@/contexts/WishlistContext";
 
-const ProductDisplay = ({ data, filterData, selectedTab, productData }) => {
+const ProductDisplay = ({
+    data,
+    filterData,
+    selectedTab,
+    productData,
+    setSearchQuery,
+    searchQuery,
+}) => {
     const { wishlistItems } = useWishlistContext();
 
     return (
@@ -15,6 +22,8 @@ const ProductDisplay = ({ data, filterData, selectedTab, productData }) => {
             <ProductHeader
                 selectedTab={selectedTab}
                 dataLength={data?.length}
+                setSearchQuery={setSearchQuery}
+                searchQuery={searchQuery}
             />
             {data?.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-6 mt-6">
