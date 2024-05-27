@@ -11,7 +11,7 @@ async function DistilledResources() {
     );
 
     return (
-        <Layouts.Secondary breadcrumb={false}>
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="DISTILLING RESOURCES" />
             <InfoPagesContainer>
                 <div className="flex flex-col gap-6">

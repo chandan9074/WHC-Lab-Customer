@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import ProductService from "@/services/productsService";
 import dynamic from "next/dynamic";
 import { getCookie } from "cookies-next";
+import { StoreSkeleton } from "@/components/common/StoreSkeleton";
 
 const StoreContainer = dynamic(
     () => import("@/sections/Store/StoreContainer"),
@@ -12,6 +13,8 @@ const StoreContainer = dynamic(
 );
 
 async function Store(params) {
+    // const [isLoading, setIsLoading] = useState(false);
+
     const _selectedLocation = getCookie("selected_location");
     const locationId = _selectedLocation && JSON.parse(_selectedLocation);
     const getProducts = ProductService.getProducts({
@@ -27,11 +30,14 @@ async function Store(params) {
         getCategories,
     ]);
 
+    // const [categoryData] = await Promise.all([getCategories]);
+
     return (
         <Suspense fallback={null}>
             <Layouts.Primary>
                 <StoreContainer
-                    productData={productData?.docs}
+                    // productData={productData?.docs}
+                    productData={[]}
                     categoryData={categoryData?.docs}
                     initialCategory={params.searchParams.category}
                 />

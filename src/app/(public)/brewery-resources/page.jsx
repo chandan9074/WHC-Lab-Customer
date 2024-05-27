@@ -7,11 +7,11 @@ import ResourceService from "@/services/ResourcesService";
 
 async function BreweryResources() {
     const getResources = await ResourceService.getResources(
-        "BREWIGN_RESOURCES"
+        "BREWING_RESOURCES"
     );
 
     return (
-        <Layouts.Secondary breadcrumb={false}>
+        <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="BREWING RESOURCES" />
             <InfoPagesContainer>
                 <div className="flex flex-col gap-6">
