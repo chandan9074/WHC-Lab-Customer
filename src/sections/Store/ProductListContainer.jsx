@@ -98,6 +98,8 @@ const ProductListContainer = ({
             <ProductDisplay
                 selectedTab={selectedTab}
                 data={productList}
+                setSearchQuery={setSearchQuery}
+                searchQuery={searchQuery}
                 productData={productData}
             />
         </div>

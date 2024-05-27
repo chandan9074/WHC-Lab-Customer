@@ -40,6 +40,7 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
         maxPrice: 0,
         minPrice: 0,
         category: "",
+        sortBy: "",
     });
 
     const handleLocation = async (locationId) => {
