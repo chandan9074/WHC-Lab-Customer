@@ -5,27 +5,15 @@ import { MethodsStructure } from "../MethodsStructure";
 async function getProducts(query) {
     const url = query
         ? `${GET_PRODUCTS}?${new URLSearchParams({
-              ...query,
-          })}`
+            ...query,
+        })}`
         : `${GET_PRODUCTS}`;
 
-    const res = await fetch(url, {
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-
-    return res.json();
+    const res = await MakeApiCall({ apiUrl: url, method: "GET" });
+    return res;
 }
 
 async function getCategories() {
-    // const res = await fetch(url, {
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    // });
-
-    // return res.json();
     const res = await MakeApiCall({ apiUrl: CATEGORY_URL, method: "GET" });
     return res;
 }

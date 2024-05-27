@@ -38,10 +38,10 @@ const ChangeEmailVarification = () => {
         }
     };
 
-    const handleResendCode =()=>{
-        console.log('userDetails',userDetails);
-        console.log('resend code');
-    }
+    const handleResendCode = () => {
+        console.log("userDetails", userDetails);
+        console.log("resend code");
+    };
 
     return (
         <Suspense fallback={<Loader />}>
@@ -53,6 +53,7 @@ const ChangeEmailVarification = () => {
                         verifyShortForm="asdasdasavc@gamil.com"
                         handleUpdate={handleUpdate}
                         handleResendCode={handleResendCode}
+                        verificationType={"change_email"}
                     />
                 </section>
             </Layouts.Primary>

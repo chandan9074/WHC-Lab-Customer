@@ -1,7 +1,3 @@
-import React from "react";
-import Icons from "../../../../public/assets/Icons";
-import Image from "next/image";
-import Images from "../../../../public/assets/Images";
 import CategoryCard from "./CategoryCard";
 import SectionHeader from "@/components/common/SectionHeader";
 

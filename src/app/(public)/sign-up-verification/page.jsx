@@ -34,26 +34,29 @@ const SignUpVerification = () => {
                 apiUrl: VERIFY_OTP,
                 method: "POST",
                 body: body,
-                headers: { Authorization: token },
+                // headers: { Authorization: token },
             });
             toast.success(response?.message);
-            setCookie("userInfo", JSON.stringify(userDetails));
-            setCookie("accessToken", token);
-            setIsLogin(true);
-            setUserInfo(userDetails);
-            deleteCookie("temp_userInfo");
-            deleteCookie("temp_accessToken");
-            router.push("/");
+            if (token) {
+                setCookie("userInfo", JSON.stringify(userDetails));
+                setCookie("accessToken", token);
+                setIsLogin(true);
+                setUserInfo(userDetails);
+                deleteCookie("temp_userInfo");
+                deleteCookie("temp_accessToken");
+                router.push("/");
+            } else {
+                router.push("/log-in");
+            }
         } catch (error) {
             toast.error(error.message);
         }
     };
 
-    const handleResendCode =()=>{
-        console.log('userDetails',userDetails);
-        console.log('resend code');
-    }
-
+    // const handleResendCode = () => {
+    //     console.log("userDetails", userDetails);
+    //     console.log("resend code");
+    // };
 
     return (
         <Suspense fallback={<Loader />}>
@@ -64,7 +67,8 @@ const SignUpVerification = () => {
                             title="sign up"
                             verifyShortForm={userDetails?.primaryEmail}
                             handleUpdate={handleSubmit}
-                            handleResendCode={handleResendCode}
+                            verificationType={"change_email"}
+                            // handleResendCode={handleResendCode}
                         />
                     )}
                 </section>

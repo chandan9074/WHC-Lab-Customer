@@ -1,7 +1,5 @@
 "use client";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import Images from "../../../../public/assets/Images";
+import { useEffect, useState } from "react";
 import SectionHeader from "@/components/common/SectionHeader";
 import Buttons from "@/components/Buttons";
 import NavHeader from "./NavHeader";

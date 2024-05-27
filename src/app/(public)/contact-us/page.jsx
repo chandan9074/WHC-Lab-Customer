@@ -3,14 +3,38 @@ import InfoPagesContainer from "@/components/common/InfoPagesContainer";
 import PageHeaderWithNameAndBgImage from "@/components/common/PageHeaderWithNameAndBgImage";
 import Layouts from "@/layouts";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Icons from "../../../../public/assets/Icons";
-import { Form, Input } from "antd";
+import { Form, Input, Spin } from "antd";
 import LabelText from "@/components/common/LabelText";
 import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Buttons from "@/components/Buttons";
+import UserService from "@/services/UserService/UserService";
+import { toast } from "react-toastify";
 
 function Contact() {
+    const [loading, setLoding] = useState(false);
+    const [form] = Form.useForm();
+
+    const onFinish = async (values) => {
+        setLoding(true);
+        values.phone = values.prefix + values.phone;
+        delete values.prefix;
+
+        try {
+            const res = await UserService.makeAContact(values);
+
+            if (res?.status === 200) {
+                toast.success(res?.message);
+                form.resetFields();
+            }
+        } catch (e) {
+            toast.error(e?.message);
+        } finally {
+            setLoding(false);
+        }
+    };
+
     return (
         <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="Contact Us" />
@@ -26,10 +50,11 @@ function Contact() {
                             </p>
                         </div>
                         <Form
-                            onFinish={(values) => console.log(values)}
+                            onFinish={onFinish}
                             layout="vertical"
                             className="flex flex-col gap-6 md:gap-9"
                             initialValues={{ prefix: "+1" }}
+                            form={form}
                         >
                             <div className="flex flex-col gap-6">
                                 <Form.Item
@@ -43,7 +68,7 @@ function Contact() {
                                     ]}
                                     className="mb-0"
                                 >
-                                    <Input />
+                                    <Input placeholder="Enter your name" />
                                 </Form.Item>
                                 <div className="flex flex-col gap-6 md:flex-row md:items-center">
                                     <div className="w-full md:w-1/2">
@@ -64,7 +89,7 @@ function Contact() {
                                             ]}
                                             className="mb-0 w-full"
                                         >
-                                            <Input />
+                                            <Input placeholder="Enter your email" />
                                         </Form.Item>
                                     </div>
                                     <div className="w-full md:w-1/2">
@@ -118,7 +143,7 @@ function Contact() {
                             Let’s Connect
                         </h3>
                         <div className="flex flex-col gap-4">
-                            {Array(8)
+                            {Array(5)
                                 .fill()
                                 .map((_, index) => (
                                     <div
@@ -142,7 +167,7 @@ function Contact() {
                     </div>
                 </div>
             </InfoPagesContainer>
-        </Layouts.Secondary>
+        </Layouts.Primary>
     );
 }
 

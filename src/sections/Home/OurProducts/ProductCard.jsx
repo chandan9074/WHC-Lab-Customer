@@ -4,6 +4,7 @@ import Images from "../../../../public/assets/Images";
 import Buttons from "@/components/Buttons";
 import Icons from "../../../../public/assets/Icons";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
+import Link from "next/link";
 
 const ProductCard = ({ index, data }) => {
     return (
@@ -32,14 +33,20 @@ const ProductCard = ({ index, data }) => {
                     {data.name}
                 </p>
                 <div className="mt-6 flex justify-end">
-                    <Buttons.IconWithLabel
-                        label="View Details"
-                        icon={Icons.arrow_up_right_white}
-                        bgColor="bg-transparent"
-                        textColor="text-white"
-                        border="border border-white"
-                        width="w-auto"
-                    />
+                    <Link
+                        href={`/store/product-details/${data?._id}`}
+                    >
+                        <Buttons.IconWithLabel
+                            label="View Details"
+                            icon={Icons.arrow_up_right_white}
+                            bgColor="bg-transparent"
+                            textColor="text-white"
+                            border="border border-white"
+                            width="w-auto"
+
+                        />
+                    </Link>
+
                 </div>
             </div>
         </div>

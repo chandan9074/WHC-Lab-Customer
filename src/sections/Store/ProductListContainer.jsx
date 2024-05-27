@@ -5,6 +5,7 @@ import ProductDisplay from "./ProductDisplay";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ProductService from "@/services/productsService";
 import { getCookie } from "cookies-next";
+import { Spin } from "antd";
 
 const ProductListContainer = ({
     data,
@@ -88,6 +89,7 @@ const ProductListContainer = ({
 
     return (
         <div className="flex gap-x-6">
+            <Spin spinning={isLoading} fullscreen />
             <div className="hidden md:block">
                 <Filter.Primary
                     data={data}

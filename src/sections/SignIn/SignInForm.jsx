@@ -7,7 +7,7 @@ import { FORGOT_PASSWORD_PATH, SIGN_UP_PATH } from "@/helpers/slug";
 import LabelText from "@/components/common/LabelText";
 import Images from "../../../public/assets/Images";
 import { LoadingOutlined } from "@ant-design/icons";
-import { SIGN_IN_URL } from "@/helpers/apiURLS";
+import { RESEND_OTP, SIGN_IN_URL } from "@/helpers/apiURLS";
 import { toast } from "react-toastify";
 import { useAuthContext } from "@/contexts/AuthContext";
 import MakeApiCall from "@/services/MakeApiCall";
@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
 import Icons from "../../../public/assets/Icons";
 import { useSearchParams } from "next/navigation";
-import { getCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 
 const SignInForm = () => {
     const { handlePageTransition } = useAuthContext();
@@ -96,8 +96,32 @@ const SignInForm = () => {
                 }
             }
         } catch (error) {
-            // console.log("error", error.message);
+            console.log("error", error);
             toast.error(error?.message);
+            if (error.message === "Please verify your email address first.") {
+                try {
+                    const response = await MakeApiCall({
+                        apiUrl: RESEND_OTP,
+                        method: "POST",
+                        body: {
+                            primaryEmail: values.email,
+                        },
+                    });
+                    if (response.status === 200) {
+                        toast.success(response.message);
+                        const temp_userInfo = {
+                            primaryEmail: values.email,
+                        };
+                        setCookie(
+                            "temp_userInfo",
+                            JSON.stringify(temp_userInfo)
+                        );
+                        router.push("/sign-up-verification");
+                    }
+                } catch (error) {
+                    toast.error(error?.message);
+                }
+            }
         } finally {
             setIsLoading(false);
         }

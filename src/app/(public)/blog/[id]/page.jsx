@@ -20,7 +20,6 @@ async function BlogDetails({ params }) {
     const singleBlogData = blogsData?.docs?.find(
         (blog) => blog?._id === params?.id
     );
-    // console.log("single------------------", singleBlogData);
 
     const currentIndex = blogsData.docs.findIndex(
         (blog) => blog._id === singleBlogData?._id

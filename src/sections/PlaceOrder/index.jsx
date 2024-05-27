@@ -92,6 +92,8 @@ function PlaceOrderContainer({ addressData }) {
     // };
 
     const handlePlaceOrder = async (body) => {
+        setLoading(true);
+
         try {
             const response = await MakeApiCall({
                 apiUrl: ORDERS_URL,
@@ -99,12 +101,10 @@ function PlaceOrderContainer({ addressData }) {
                 headers: { authorization: token },
                 body: body,
             });
-
             if (response.status === 200) {
                 getUpdateCartList(token);
                 toast.success(response?.message);
                 const paymentLink = response?.doc.link;
-
                 if (paymentLink) {
                     window.location.href = paymentLink;
                 } else if (body.paymentMethod === "creditBalance") {
@@ -113,6 +113,8 @@ function PlaceOrderContainer({ addressData }) {
             }
         } catch (error) {
             toast.error(error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -153,7 +155,7 @@ function PlaceOrderContainer({ addressData }) {
         setExpiredDate(date);
     };
 
-    const inputStyle = `active:text-black  focus:border-magenta-500 hover:#505f79`;
+    const inputStyle = `text-black`;
 
     return (
         <div>
@@ -290,12 +292,13 @@ function PlaceOrderContainer({ addressData }) {
                             maxLength={300}
                             rows={5}
                             // minRows={5}
-                            // style={{
-                            //     resize: "none",
-                            //     borderRadius: "2px",
-                            //     backgroundColor: "#FAFBFB",
-                            // }}
-                            // className={`${inputStyle}`}
+                            style={{
+                                resize: "none",
+                                borderRadius: "4px",
+                                color: "#000",
+                                // backgroundColor: "#FAFBFB",
+                            }}
+                            className={`${inputStyle} `}
                         />
                     </Form.Item>
 

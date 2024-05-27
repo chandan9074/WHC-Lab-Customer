@@ -1,29 +1,49 @@
 // PaymentMethodSelection.jsx
 import React, { useEffect, useState } from "react";
-import { Radio, Typography } from "antd";
+import { Radio, Spin, Typography } from "antd";
 import { handleInactiveFontColor } from "./ShippingMethod";
 import { getCookie, setCookie } from "cookies-next";
-import MakeApiCall from "@/services/MakeApiCall";
-import { APPLY_FOR_CREDIT_BALANCE } from "@/helpers/apiURLS";
+// import MakeApiCall from "@/services/MakeApiCall";
+// import { APPLY_FOR_CREDIT_BALANCE } from "@/helpers/apiURLS";
 import { toast } from "react-toastify";
+import CreditService from "@/services/CreditBalanceService";
+import UserService from "@/services/UserService/UserService";
+import { useUserContext } from "@/contexts/UserContext";
+import { currencyData } from "@/libs/common";
 
 const { Title } = Typography;
 
 const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
     const [userInfo, setUserInfo] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const { currency } = useUserContext();
+    const _currency = getCookie("selected_currency");
+
+    // get user profile to get credit balance info.
+    const getUserProfile = async () => {
+        setLoading(true);
+        try {
+            const res = await UserService.fetchUserInfo(token);
+
+            if (res?.status === 200) {
+                setUserInfo(res?.user);
+            }
+        } catch (e) {
+            toast.error(e?.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const _userInfo = JSON.parse(getCookie("userInfo"));
-        setUserInfo(_userInfo);
+        getUserProfile();
+        // const _userInfo = JSON.parse(getCookie("userInfo"));
+        // setUserInfo(_userInfo);
     }, []);
 
     const handleApplyForCredit = async () => {
         try {
-            const response = await MakeApiCall({
-                apiUrl: APPLY_FOR_CREDIT_BALANCE,
-                method: "POST",
-                headers: { authorization: token },
-            });
+            const response = await CreditService.applyForCredit(token);
 
             if (response.status === 200) {
                 toast.success(response.message);
@@ -39,6 +59,7 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
 
     return (
         <div className="border border-stroke-new rounded-lg">
+            <Spin spinning={loading} fullscreen />
             <div className="bg-[#EBEDF0] p-4 rounded-t-lg">
                 <Title
                     level={4}
@@ -113,14 +134,22 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
                                         userInfo?.creditBalanceLimit ? (
                                             <div className="flex gap-x-6">
                                                 <p className="text-brand-blue-500 text-sm leading-[18.23px]">
-                                                    Credit Limit: €
-                                                    {userInfo?.creditBalance}
-                                                </p>
-                                                <p className="text-brand-blue-500 text-sm leading-[18.23px]">
-                                                    Credit Balance: €
+                                                    Credit Limit:
+                                                    {
+                                                        currencyData[_currency]
+                                                            ?.icon
+                                                    }
                                                     {
                                                         userInfo?.creditBalanceLimit
                                                     }
+                                                </p>
+                                                <p className="text-brand-blue-500 text-sm leading-[18.23px]">
+                                                    Credit Balance:
+                                                    {
+                                                        currencyData[_currency]
+                                                            ?.icon
+                                                    }
+                                                    {userInfo?.creditBalance}
                                                 </p>
                                             </div>
                                         ) : userInfo?.appliedForCreditBalance ? (

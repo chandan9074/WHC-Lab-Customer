@@ -52,3 +52,49 @@ export const isImageInvalid = async (file) => {
 
     return false;
 };
+
+
+// export const formatPrice = (price, currency) => {
+//     let currencySymbol = '';
+//     switch (currency) {
+//       case 'USD':
+//         currencySymbol = '$';
+//         break;
+//       case 'EUR':
+//         currencySymbol = '€';
+//         break;
+//       case 'GBP':
+//         currencySymbol = '£';
+//         break;
+//       default:
+//         currencySymbol = '';
+//     }
+//     return `${currencySymbol} ${price}`;
+//   };
+
+  export function formatPrice(prices, currency) {
+    switch (currency) {
+        case 'USD':
+            return `$ ${prices.dollarPrice || '--'}`;
+        case 'EUR':
+            return `€ ${prices.euroPrice || '--'}`;
+        case 'GBP':
+            return `£ ${prices.poundPrice || '--'}`;
+        default:
+            return `$ ${prices.dollarPrice || '--'}`;
+    }
+}
+
+
+export function checkStock(product, locationId) { 
+    const variant = product.variants.find(variant => variant.location._id === locationId);
+
+    if (!variant) {
+        return false;
+    }
+
+    if (variant.status !== 'active' || variant.quantity <= 0) {
+        return false;
+    }
+    return true;
+}

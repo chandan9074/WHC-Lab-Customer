@@ -3,10 +3,11 @@ import Buttons from "@/components/Buttons";
 import { Spin, Table } from "antd";
 import { Suspense, useEffect, useState } from "react";
 import CreditService from "@/services/CreditBalanceService";
-import { getCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import Loader from "@/components/common/Loader";
 import { useUserContext } from "@/contexts/UserContext";
+import UserService from "@/services/UserService/UserService";
 
 const CreditBalance = () => {
     const [creditBalance, setCreditBalance] = useState([]);
@@ -15,10 +16,10 @@ const CreditBalance = () => {
     const [search, setSearch] = useState(null);
     const [loading, setLoading] = useState(false);
     const token = getCookie("accessToken");
-    const _userInfo = getCookie("userInfo");
-    const userInfo = _userInfo && JSON.parse(_userInfo);
+    // const _userInfo = getCookie("userInfo");
+    // const userInfo = _userInfo && JSON.parse(_userInfo);
     const { currency } = useUserContext();
-
+    const [userInfo, setUserInfo] = useState(null);
 
     // Function to format the date
     const formatDate = (dateString) => {
@@ -27,10 +28,28 @@ const CreditBalance = () => {
         return new Intl.DateTimeFormat("en-US", options).format(date);
     };
 
+    const handleGetUserProfile = async () => {
+        setLoading(true);
+        try {
+            const res = await UserService.fetchUserInfo(token);
+
+            if (res?.status === 200) {
+                setUserInfo(res?.user);
+                setCookie("userInfo", JSON.stringify(res?.user));
+            }
+        } catch (e) {
+            console.log(e);
+            console.log(e?.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const handleGetCreditBalance = async () => {
         try {
             setLoading(true);
             const res = await CreditService.getCredits(page, search, token);
+
             if (res?.status === 200) {
                 const updatedDocs = res.docs.map((doc, index) => ({
                     ...doc,
@@ -63,9 +82,28 @@ const CreditBalance = () => {
                 } else {
                     toast.error("Payment link not found.");
                 }
+                handleGetUserProfile();
+                handleGetCreditBalance();
             }
         } catch (e) {
             console.log(e);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleApplyCreditBalance = async () => {
+        try {
+            setLoading(true);
+            const res = await CreditService.applyForCreditBalance(token);
+
+            if (res?.status === 200) {
+                toast.success(res?.message);
+                handleGetUserProfile();
+            }
+        } catch (e) {
+            console.log(e, "message..");
+            toast.error(e?.message);
         } finally {
             setLoading(false);
         }
@@ -138,12 +176,18 @@ const CreditBalance = () => {
             render: (_, record) => {
                 return (
                     <>
-                        <button
-                            onClick={() => handlePay(record?.orderNumber)}
-                            className="py-2 px-4 bg-brand-blue-500 text-white rounded-md font-medium text-center text-sm"
-                        >
-                            Pay now
-                        </button>
+                        {record?.status === "paid" ? (
+                            <h4 className="font-semibold text-md text-green-600">
+                                Paid
+                            </h4>
+                        ) : (
+                            <button
+                                onClick={() => handlePay(record?.orderNumber)}
+                                className="py-2 px-4 bg-brand-blue-500 text-white rounded-md font-medium text-center text-sm"
+                            >
+                                Pay now
+                            </button>
+                        )}
                     </>
                 );
             },
@@ -153,6 +197,10 @@ const CreditBalance = () => {
     useEffect(() => {
         handleGetCreditBalance();
     }, [page, search]);
+
+    useEffect(() => {
+        handleGetUserProfile();
+    }, []);
 
     const handleStatusChange = (value) => {
         console.log(`selected ${value}`);
@@ -197,7 +245,7 @@ const CreditBalance = () => {
                             </p>
                         </div>
                     </div>
-                    {userInfo?.appliedForCreditBalance ? (
+                    {/* {userInfo?.appliedForCreditBalance ? (
                         <div className=" text-brand-blue-800 px-8 py-4 rounded-md border">
                             <h3>Applied</h3>
                         </div>
@@ -205,6 +253,20 @@ const CreditBalance = () => {
                         <Buttons.PrimaryButton
                             label={"Apply for Credit"}
                             className="h-12 whitespace-nowrap"
+                            onClick={handleApplyCreditBalance}
+                        />
+                    )} */}
+                    {userInfo?.appliedForCreditBalance ? (
+                        userInfo?.creditBalance > 0 ? null : (
+                            <div className="text-brand-blue-800 px-8 py-4 rounded-md border">
+                                <h3>Applied</h3>
+                            </div>
+                        )
+                    ) : (
+                        <Buttons.PrimaryButton
+                            label="Apply for Credit"
+                            className="h-12 whitespace-nowrap"
+                            onClick={handleApplyCreditBalance}
                         />
                     )}
                 </div>

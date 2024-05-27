@@ -62,6 +62,7 @@ export const TAGS_URL = `${BASEURL}/tags`;
 
 // verify otp
 export const VERIFY_OTP = `${BASEURL}/users/verify-otp`;
+export const RESEND_OTP = `${BASEURL}/users/resend-otp`;
 
 // distributors
 
@@ -87,3 +88,5 @@ export const COMMENTS = `${BASEURL}/comments`;
 export const APPLY_FOR_CREDIT_BALANCE = `${BASEURL}/users/apply-for-credit`;
 // Review url
 export const REVIEW_URL = `${BASEURL}/reviews`;
+// Contact url
+export const CONTACTS = `${BASEURL}/contacts`;

@@ -6,7 +6,9 @@ import { useRouter } from "next/navigation";
 import Images from "../../../public/assets/Images";
 import TimerDisplay from "./TimerDisplay";
 import { setCookie } from "cookies-next";
-
+import MakeApiCall from "@/services/MakeApiCall";
+import { RESEND_OTP } from "@/helpers/apiURLS";
+import { toast } from "react-toastify";
 
 const VerificationForm = ({
     title,
@@ -14,19 +16,38 @@ const VerificationForm = ({
     verifyShortForm,
     loading,
     verifying,
-    handleResendCode,
+    verificationType,
+    // handleResendCode,
 }) => {
-    const router = useRouter()
+    const router = useRouter();
     const timer = 150;
     const [verificationCode, setVerificationCode] = useState("");
     const [hiddenMail, setHiddenMail] = useState("");
     const [timeRemaining, setTimeRemaining] = useState(timer);
 
-    const resetTimer = useCallback(() => {
+    const resetTimer = () => {
         setCookie("timeRemaining", timer);
         setTimeRemaining(timer);
-        handleResendCode && handleResendCode()
-    }, [setTimeRemaining]);
+        handleResendCode();
+    };
+
+    const handleResendCode = async () => {
+        try {
+            const response = await MakeApiCall({
+                apiUrl: RESEND_OTP,
+                method: "POST",
+                body: {
+                    primaryEmail: verifyShortForm,
+                    action: verificationType,
+                },
+            });
+            if (response.status === 200) {
+                toast.success(response.message);
+            }
+        } catch (error) {
+            toast.error(error?.message);
+        }
+    };
 
     function hideEmail(email) {
         // Split the email address into local part and domain part
@@ -96,7 +117,11 @@ const VerificationForm = ({
                             <button
                                 disabled={timeRemaining > 0}
                                 onClick={resetTimer}
-                                className={`${timeRemaining > 0 ? 'text-neutral-300':'text-neutral-700'}  text-sm font-semibold cursor-pointer`}
+                                className={`${
+                                    timeRemaining > 0
+                                        ? "text-neutral-300"
+                                        : "text-neutral-700"
+                                }  text-sm font-semibold cursor-pointer`}
                             >
                                 Re-send Code
                             </button>
@@ -115,7 +140,10 @@ const VerificationForm = ({
                         />
 
                         <div className="w-full flex justify-between items-center">
-                            <p className="text-neutral-700 text-sm font-bold leading-[18.23px] cursor-pointer" onClick={() => router.back()} >
+                            <p
+                                className="text-neutral-700 text-sm font-bold leading-[18.23px] cursor-pointer"
+                                onClick={() => router.back()}
+                            >
                                 Change {title}
                             </p>
                             <TimerDisplay
@@ -131,19 +159,20 @@ const VerificationForm = ({
                             verificationCode.length < 6
                                 ? true
                                 : verifying
-                                    ? true
-                                    : false
+                                ? true
+                                : false
                         }
-                        className={`w-full flex justify-center items-center text-white h-[52px]  ${verificationCode.length < 6
+                        className={`w-full flex justify-center items-center text-white h-[52px]  ${
+                            verificationCode.length < 6
                                 ? "bg-neutral-50"
                                 : "bg-brand-blue-500"
-                            } rounded-full text-base font-semibold duration-300`}
+                        } rounded-full text-base font-semibold duration-300`}
                     >
                         {loading
                             ? "Please wait verifying..."
                             : verifying
-                                ? "Redirecting..."
-                                : `Verify ${title}`}
+                            ? "Redirecting..."
+                            : `Verify ${title}`}
                     </button>
                 </div>
             </div>
