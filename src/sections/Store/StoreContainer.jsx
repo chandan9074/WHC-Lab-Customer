@@ -8,6 +8,7 @@ import ProductService from "@/services/productsService";
 import { getCookie } from "cookies-next";
 import { useUserContext } from "@/contexts/UserContext";
 import { StoreSkeleton } from "@/components/common/StoreSkeleton";
+import { Spin } from "antd";
 
 const StoreContainer = ({ productData, categoryData, initialCategory }) => {
     // const {
@@ -24,6 +25,7 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
             ? categoryData.find((item) => item.name === initialCategory)
             : categoryData[0]
     );
+    const [loading, setLoading] = useState(false);
     // setSelectedTab(
     //     initialCategory
     //         ? categoryData.find((item) => item.name === initialCategory)
@@ -33,6 +35,7 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
 
     // const [tagsLoading, setTagsLoading] = useState(false);
     const [productList, setProductList] = useState(productData || []);
+    const { navLocation, setNavLocationValue } = useUserContext();
     const [searchQuery, setSearchQuery] = useState({
         yeastType: "",
         beerStyle: "",
@@ -45,18 +48,20 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
 
     const handleLocation = async (locationId) => {
         const category = selectedTab.name;
+        setNavLocationValue(locationId);
+        setLoading(true);
         const response = await ProductService.getProducts({
             locationId,
             category,
         });
         // console.log(response, "reposnse----");
         console.log({ response });
+        setLoading(false);
         setProductList(response?.docs);
     };
 
-    const handleTabButtonClick = async (data) => {
+    const handleTabButtonClick = async () => {
         const _selectedLocation = getCookie("selected_location");
-        const locationId = _selectedLocation && JSON.parse(_selectedLocation);
         // setTagsLoading(true);
         // const response = await ProductService.getProducts({
         //     locationId,
@@ -68,6 +73,13 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
         // setProductList(response?.docs);
     };
 
+    useEffect(() => {
+        if (navLocation) {
+            console.log(navLocation);
+            handleLocation(navLocation);
+        }
+    }, [navLocation]);
+
     // useEffect(() => {
     //     const locationId = getCookie("selected_location");
     //     const _selectedLocation = locationId && JSON.parse(locationId);
@@ -78,6 +90,7 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
 
     return (
         <div className="container mx-auto space-y-[14.5px] px-4 md:px-0 pb-0 md:pb-20">
+            <Spin fullscreen spinning={loading} />
             <>
                 <StoreTabButtonsSection
                     selectedTab={selectedTab}
