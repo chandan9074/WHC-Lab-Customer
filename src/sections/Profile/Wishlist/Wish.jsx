@@ -10,66 +10,48 @@ import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { formatPrice } from "@/utils";
+import { useWishlistContext } from "@/contexts/WishlistContext";
 
 const { Text } = Typography;
 
 const Wish = ({ wishData, handleDelete }) => {
+    console.log(wishData);
+    const { getProductWishlist } = useWishlistContext();
+
     const { getUpdateCartList, createCartItem } = useCart();
     const token = getCookie("accessToken");
+    const quantity = 1;
+    // console.log({ token });
     const currency = getCookie("selected_currency");
 
-    // const handleAddCartItem = async () => {
-    //     if (wishData?.stockId) {
-    //         try {
-    //             const res = await createCartItem(
-    //                 wishData?._id,
-    //                 1,
-    //                 wishData?.stockId,
-    //                 currency,
-    //                 token
-    //             );
-    //             if (res?.status === 200) {
-    //                 toast.success(res?.message);
-    //                 handleDelete(wishData?._id);
-    //                 getUpdateCartList();
-    //             }
-    //         } catch (error) {
-    //             toast.error(error?.message);
-    //         }
-    //     } else {
-    //         toast.warning("This product is currently out of stock.");
-    //     }
-    // };
-
     const handleAddToCart = async () => {
-        console.log(wishData);
         if (wishData.inStock) {
-            const locationId = JSON.parse(getCookie("selected_location"));
-            const variant = wishData.variants.find(
-                (item) => item.location._id === locationId
-            );
-            const stockId = variant.stockId;
-            const sku = variant.sku;
+            // const locationId = JSON.parse(getCookie("selected_location"));
+            // const variant = wishData.variants.find(
+            //     (item) => item.location._id === locationId
+            // );
+            const stockId = wishData.stockId;
+            const sku = wishData.sku;
+            const productId = wishData.productId;
 
             try {
                 const res = await createCartItem(
-                    wishData?._id,
+                    productId,
                     quantity,
                     stockId,
                     sku,
-                    variant.location.currency,
+                    currency,
                     token
                 );
-                setLoading(true);
+                // setLoading(true);
                 if (res?.status === 200) {
                     toast.success(res?.message);
                     getUpdateCartList(token);
-                    setOpenSuccessionModal(true);
+                    getProductWishlist();
+                    // setOpenSuccessionModal(true);
                 }
             } catch (e) {
                 toast.error(e?.message);
-            } finally {
-                setLoading(false);
             }
         } else {
             toast.error("This product is out of stock");
