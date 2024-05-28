@@ -46,6 +46,7 @@ function OrderSummary({
 
     const handleAddCouponCode = () => {
         calculateOrder(couponCode);
+        setCouponCode("");
     };
 
     return (
@@ -81,9 +82,10 @@ function OrderSummary({
                     <Buttons.PrimaryButton
                         onClick={handleAddCouponCode}
                         label={"Apply"}
-                        className={
-                            "bg-magenta-600 rounded-full text-white md:text-base text-sm font-semibold"
-                        }
+                        disabled={couponCode === "" ? true : false}
+                        className={`bg-magenta-600 ${
+                            couponCode === "" ? "cursor-not-allowed" : ""
+                        } rounded-full text-white md:text-base text-sm font-semibold`}
                         width="w-[100px]"
                     />
                 </div>
