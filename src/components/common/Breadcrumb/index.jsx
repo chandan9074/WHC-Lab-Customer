@@ -18,24 +18,22 @@ const NextBreadcrumb = () => {
     console.log(paths);
     const pathNames = paths.split("/").filter((path) => path);
     // const hasStoreInPath = pathNames.includes("store");
-
-    // const [selectLocation, setSelectLocation] = useState();
-    const { locations, currency, setCurrency, handleLocation } =
+    const { setNavLocation, setNavLocationValue, navLocationValue } =
         useUserContext();
+    // const [selectLocation, setSelectLocation] = useState();
+    const { locations, setCurrency } = useUserContext();
     // const selected_locations = hasCookie("selected_location");
     // const [selected, setSelected] = useState(true);
 
     const handleChange = (value) => {
-        // console.log(value, locations);
-        // setSelectLocation(value);
-        // const locationObj = locations.find((item) => item._id === value);
-        // console.log(locationObj, "lcoation");
+        console.log("click");
         const locationObj = locations.find((item) => item.value === value);
         setCookie("selected_location", JSON.stringify(value));
         setCookie("selected_currency", locationObj.currency);
         const getCurrencyKey = currencyData[locationObj.currency];
         setCurrency(getCurrencyKey);
-        handleLocation(value);
+        setNavLocationValue(value);
+        setNavLocation(value);
     };
 
     // To Uppercase the Breadcrumb item
@@ -110,8 +108,12 @@ const NextBreadcrumb = () => {
                     //     height: 50,
                     //     borderRadius: "20px",
                     // }}
+                    style={{
+                        width: "300px",
+                    }}
+                    value={navLocationValue}
                     className="h-10"
-                    onChange={handleChange}
+                    onChange={(value) => handleChange(value)}
                     options={locations?.map((location, index) => ({
                         ...location,
                         label: (

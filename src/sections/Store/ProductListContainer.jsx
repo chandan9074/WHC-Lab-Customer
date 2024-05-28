@@ -23,7 +23,7 @@ const ProductListContainer = ({
     const router = useRouter();
 
     useEffect(() => {
-        setProductList(searchParams.toString() ? [] : productData);
+        setProductList(productData);
     }, [searchParams, productData]);
 
     const handleSearchProduct = useCallback(async () => {

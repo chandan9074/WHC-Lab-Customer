@@ -16,20 +16,25 @@ export function UserProvider({ children }) {
     const [productList, setProductList] = useState([]);
     const [selectedTab, setSelectedTab] = useState(null);
     const [productLoading, setProductLoading] = useState(false);
-
+    const [navLocation, setNavLocation] = useState(null);
+    const [navLocationValue, setNavLocationValue] = useState(null);
 
     useEffect(() => {
         if (hasCookie("userInfo")) {
             setUserInfo(JSON.parse(getCookie("userInfo")));
         }
-        if(hasCookie("selected_currency")){
-            const currencyValue = getCookie("selected_currency")
+        if (hasCookie("selected_currency")) {
+            const currencyValue = getCookie("selected_currency");
             const getCurrencyKey = currencyData[currencyValue];
             setCurrency(getCurrencyKey);
-        }else{
-            setCookie("selected_currency","GBP")
+        } else {
+            setCookie("selected_currency", "GBP");
             const getCurrencyKey = currencyData["GBP"];
             setCurrency(getCurrencyKey);
+        }
+        if (hasCookie("selected_location")) {
+            const location = JSON.parse(getCookie("selected_location"));
+            setNavLocationValue(location);
         }
     }, []);
 
@@ -43,7 +48,7 @@ export function UserProvider({ children }) {
         // console.log(response, "reposnse----");
         console.log({ response });
         setProductList(response?.docs);
-        setProductLoading(false)
+        setProductLoading(false);
     };
 
     // Get Locations
@@ -82,7 +87,11 @@ export function UserProvider({ children }) {
         selectedTab,
         handleLocation,
         productLoading,
-        setProductLoading
+        setProductLoading,
+        setNavLocation,
+        navLocation,
+        setNavLocationValue,
+        navLocationValue,
     };
     return (
         <userContext.Provider value={values}>{children}</userContext.Provider>
