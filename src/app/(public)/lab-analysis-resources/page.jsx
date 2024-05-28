@@ -50,7 +50,7 @@ async function LabAnalysisResources() {
                     </div>
                 </div>
             </InfoPagesContainer>
-        </Layouts.Secondary>
+        </Layouts.Primary>
     );
 }
 
