@@ -23,7 +23,7 @@ const ProductView = ({ data }) => {
                 <ProductLeftView data={data} />
             </div>
 
-            <div className="hidden lg:block col-span-1">
+            <div className="hidden lg:flex col-span-1 lg:justify-end">
                 <ProductRightView data={data} />
             </div>
 

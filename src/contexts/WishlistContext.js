@@ -32,11 +32,11 @@ export function WishlistProvider({ children }) {
         }
     }, [token]);
 
-    const createProductWishlist = async (productId, stockId, currency) => {
+    const createProductWishlist = async (productId, stockId, sku, currency) => {
         try {
             const res = await MakeApiCall({
                 apiUrl: WISHLISTS_URL,
-                body: { productId, stockId, currency },
+                body: { productId, stockId, sku, currency },
                 ...MethodsStructure.postMethod({ Authorization: `${token}` }),
             });
             if (res.status === 200) {

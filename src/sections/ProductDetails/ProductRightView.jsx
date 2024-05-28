@@ -40,6 +40,8 @@ const ProductRightView = ({
     const pathname = usePathname();
     const [stockStatus, setStockStatus] = useState(null);
 
+    const token = getCookie("accessToken");
+
     useEffect(() => {
         if (hasCookie("selected_location")) {
             const locationId = JSON.parse(getCookie("selected_location"));
@@ -72,17 +74,27 @@ const ProductRightView = ({
         }
     };
 
-    const token = getCookie("accessToken");
-
     const handlewishlistClick = async () => {
         if (checkProductInWishList(data._id)) {
             //delete
             await deleteWishlist(data._id);
             await getProductWishlist(); // Call getWishlist after delete
         } else {
+            const locationId = JSON.parse(getCookie("selected_location"));
+
+            const variant = data.variants.find(
+                (item) => item.location._id === locationId
+            );
+
             //create
-            const stockId = data?.variants[0]?.stockId;
-            await createProductWishlist(data._id, stockId);
+            const stockId = variant.stockId;
+            const sku = variant.sku;
+            await createProductWishlist(
+                data._id,
+                stockId,
+                sku,
+                variant.location.currency
+            );
             await getProductWishlist(); // Call getWishlist after create
         }
     };
@@ -106,11 +118,14 @@ const ProductRightView = ({
                 (item) => item.location._id === locationId
             );
             const stockId = variant.stockId;
+            const sku = variant.sku;
+
             try {
                 const res = await createCartItem(
                     data?._id,
                     quantity,
                     stockId,
+                    sku,
                     variant.location.currency,
                     token
                 );

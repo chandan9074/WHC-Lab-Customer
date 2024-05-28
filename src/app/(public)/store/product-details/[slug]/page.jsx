@@ -1,6 +1,7 @@
 import Layouts from "@/layouts";
 import ProductView from "@/sections/ProductDetails/ProductView";
 import ProductService from "@/services/productsService";
+import { getCookie } from "cookies-next";
 import dynamic from "next/dynamic";
 
 const ProductDetailsSection = dynamic(
@@ -21,7 +22,11 @@ const Page = async ({ params }) => {
     // const token = getCookie("accessToken", { cookies });
 
     const getSingleProduct = ProductService.getProducts({ id: params.slug });
-    const getProducts = ProductService.getProducts();
+    const _selectedLocation = getCookie("selected_location");
+    const locationId = _selectedLocation && JSON.parse(_selectedLocation);
+    const getProducts = ProductService.getProducts({
+        locationId: locationId || "",
+    });
     // const getWishlist = await WishlistServices.getWishlist(token);
     const [singleProductData, productData] = await Promise.all([
         getSingleProduct,

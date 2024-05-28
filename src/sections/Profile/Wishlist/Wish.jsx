@@ -10,34 +10,51 @@ import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { formatPrice } from "@/utils";
+import { useWishlistContext } from "@/contexts/WishlistContext";
 
 const { Text } = Typography;
 
 const Wish = ({ wishData, handleDelete }) => {
+    console.log(wishData);
+    const { getProductWishlist } = useWishlistContext();
+
     const { getUpdateCartList, createCartItem } = useCart();
     const token = getCookie("accessToken");
+    const quantity = 1;
+    // console.log({ token });
     const currency = getCookie("selected_currency");
 
-    const handleAddCartItem = async () => {
-        if (wishData?.stockId) {
+    const handleAddToCart = async () => {
+        if (wishData.inStock) {
+            // const locationId = JSON.parse(getCookie("selected_location"));
+            // const variant = wishData.variants.find(
+            //     (item) => item.location._id === locationId
+            // );
+            const stockId = wishData.stockId;
+            const sku = wishData.sku;
+            const productId = wishData.productId;
+
             try {
                 const res = await createCartItem(
-                    wishData?._id,
-                    1,
-                    wishData?.stockId,
+                    productId,
+                    quantity,
+                    stockId,
+                    sku,
                     currency,
                     token
                 );
+                // setLoading(true);
                 if (res?.status === 200) {
                     toast.success(res?.message);
-                    handleDelete(wishData?._id);
-                    getUpdateCartList();
+                    getUpdateCartList(token);
+                    getProductWishlist();
+                    // setOpenSuccessionModal(true);
                 }
-            } catch (error) {
-                toast.error(error?.message);
+            } catch (e) {
+                toast.error(e?.message);
             }
         } else {
-            toast.warning("This product is currently out of stock.");
+            toast.error("This product is out of stock");
         }
     };
 
@@ -99,7 +116,7 @@ const Wish = ({ wishData, handleDelete }) => {
                     size="small"
                     type="text"
                     // disabled={!wishData.inStock}
-                    onClick={handleAddCartItem}
+                    onClick={handleAddToCart}
                 >
                     <Image
                         alt="add"

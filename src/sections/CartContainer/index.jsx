@@ -9,6 +9,7 @@ import { PRODUCTS_PATH } from "@/helpers/slug";
 import OrderSummary from "@/components/OrderSummary";
 import io from "socket.io-client";
 import { WHC_LAB_SOCKET_CONNECTION } from "@/utils/constant";
+import { toast } from "react-toastify";
 
 const { Text, Title } = Typography;
 
@@ -32,7 +33,12 @@ function CartContainer() {
 
         // Listen for response from the server
         socket.on("order:calculated", (data) => {
-            setSummaryCalculate(data);
+            console.log({ data });
+            if (data.error && ids.length > 0) {
+                toast.error(data.error);
+            } else {
+                setSummaryCalculate(data);
+            }
         });
 
         return () => {

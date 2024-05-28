@@ -8,6 +8,10 @@ import Icons from "../../../public/assets/Icons";
 import Image from "next/image";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import AddToCartSuccession from "./AddToCartSuccession";
+import { getCookie } from "cookies-next";
+import { useWishlistContext } from "@/contexts/WishlistContext";
+import { toast } from "react-toastify";
+import { useCart } from "@/contexts/CartContext";
 
 const ProductViewMobile = ({ data }) => {
     const carouselRef = useRef();
@@ -22,13 +26,17 @@ const ProductViewMobile = ({ data }) => {
     const [quantity, setQuantity] = useState(1);
     const [maxLimit, setMaxLimit] = useState(0);
     const [loading, setLoading] = useState(false);
-    // const { getUpdateCartList, createCartItem } = useCart();
+    const { getUpdateCartList, createCartItem } = useCart();
     const router = useRouter();
 
-    // const token = getCookie("accessToken");
+    const token = getCookie("accessToken");
 
-    // const { createProductWishlist, deleteWishlist } =
-    //     useContext(wishlistContext);
+    const {
+        checkProductInWishList,
+        createProductWishlist,
+        deleteWishlist,
+        getProductWishlist,
+    } = useWishlistContext();
 
     // const getWishlist = useCallback(async () => {
     //     const wishlists = await WishlistServices.getWishlist(token);
@@ -50,17 +58,30 @@ const ProductViewMobile = ({ data }) => {
         });
     };
 
-    // const handlewishlistClick = async () => {
-    //     if (wishlistIds?.includes(data._id)) {
-    //         //delete
-    //         await deleteWishlist(data._id);
-    //         await getWishlist(); // Call getWishlist after delete
-    //     } else {
-    //         //create
-    //         await createProductWishlist(data._id);
-    //         await getWishlist(); // Call getWishlist after create
-    //     }
-    // };
+    const handlewishlistClick = async () => {
+        if (checkProductInWishList(data._id)) {
+            //delete
+            await deleteWishlist(data._id);
+            await getProductWishlist(); // Call getWishlist after delete
+        } else {
+            const locationId = JSON.parse(getCookie("selected_location"));
+
+            const variant = data.variants.find(
+                (item) => item.location._id === locationId
+            );
+
+            //create
+            const stockId = variant.stockId;
+            const sku = variant.sku;
+            await createProductWishlist(
+                data._id,
+                stockId,
+                sku,
+                variant.location.currency
+            );
+            await getProductWishlist(); // Call getWishlist after create
+        }
+    };
 
     const handleCurrentCount = (val) => {
         setQuantity(val);
@@ -98,22 +119,40 @@ const ProductViewMobile = ({ data }) => {
         setMaxLimit(item?.quantity);
     };
 
-    // const handleAddToCart = async () => {
-    //     setLoading(true);
-    //     try {
-    //         const res = await createCartItem(data?._id, quantity, token);
+    const handleAddToCart = async () => {
+        if (data.inStock) {
+            const locationId = JSON.parse(getCookie("selected_location"));
+            const variant = data.variants.find(
+                (item) => item.location._id === locationId
+            );
+            console.log({ data });
+            const stockId = variant.stockId;
+            const sku = variant.sku;
 
-    //         if (res?.status === 200) {
-    //             toast.success(res?.body?.message);
-    //             getUpdateCartList(token);
-    //             setOpenSuccessionModal(true);
-    //         }
-    //     } catch (e) {
-    //         toast.error(e?.error?.message);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+            try {
+                const res = await createCartItem(
+                    data?._id,
+                    quantity,
+                    stockId,
+                    sku,
+                    variant.location.currency,
+                    token
+                );
+                setLoading(true);
+                if (res?.status === 200) {
+                    toast.success(res?.message);
+                    getUpdateCartList(token);
+                    setOpenSuccessionModal(true);
+                }
+            } catch (e) {
+                toast.error(e?.message);
+            } finally {
+                setLoading(false);
+            }
+        } else {
+            toast.error("This product is out of stock");
+        }
+    };
 
     return (
         <div className="w-full py-4">
@@ -164,7 +203,7 @@ const ProductViewMobile = ({ data }) => {
                                 Icons.wishlistIcon
                             }
                             className="w-6 h-6"
-                            // onClick={handlewishlistClick}
+                            onClick={handlewishlistClick}
                         />
                         {/* )} */}
 
@@ -293,11 +332,11 @@ const ProductViewMobile = ({ data }) => {
                                     : data.price * quantity
                             }`}
                             className="w-full h-[52px] bg-magenta-600 text-white font-semibold rounded-full"
-                            // onClick={() => {
-                            //     token
-                            //         ? handleAddToCart()
-                            //         : router.push("/sign-in");
-                            // }}
+                            onClick={() => {
+                                token
+                                    ? handleAddToCart()
+                                    : router.push("/sign-in");
+                            }}
                         />
 
                         {openSuccessionModal && (

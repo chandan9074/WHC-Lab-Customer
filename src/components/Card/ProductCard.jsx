@@ -48,6 +48,8 @@ const ProductCard = ({ data, wishListIds }) => {
         );
 
         const stockId = variant.stockId;
+        const sku = variant.sku;
+
         setLoading(true);
         checkProductInWishList(data._id)
             ? //delete
@@ -56,6 +58,7 @@ const ProductCard = ({ data, wishListIds }) => {
               await createProductWishlist(
                   data._id,
                   stockId,
+                  sku,
                   variant.location.currency
               );
         setLoading(false);

@@ -51,7 +51,7 @@ const ProductLeftView = ({ forModal = false, data }) => {
                 className={`flex ${
                     forModal
                         ? "w-[460px] flex-col-reverse gap-y-4"
-                        : "flex-row pr-6 gap-x-6"
+                        : "flex-row gap-x-6"
                 }`}
             >
                 <div
@@ -95,7 +95,9 @@ const ProductLeftView = ({ forModal = false, data }) => {
                 </div>
                 <div
                     className={`${
-                        forModal ? "w-[460px]" : "w-[360px] xl:w-[512px]"
+                        forModal
+                            ? "w-[460px]"
+                            : "w-[360px] md:w-[280px] md:h-[300px] lg:w-[380px] lg:h-[400px] xl:w-[512px] xl:h-[513px] 2xl:w-[700px] 2xl:h-[710px]"
                     } relative`}
                 >
                     <Carousel
@@ -108,7 +110,9 @@ const ProductLeftView = ({ forModal = false, data }) => {
                                 <div
                                     key={index}
                                     className={`flex justify-center items-center border border-[#EBEDF0] rounded-lg overflow-hidden ${
-                                        forModal ? "w-[460px] h-[708px]" : ""
+                                        forModal
+                                            ? "w-[460px] h-[708px] lg:w-[512px] lg:h-[513px]"
+                                            : "w-[360px] md:w-[280px] md:h-[300px] lg:w-[380px] lg:h-[400px] xl:w-[512px] xl:h-[513px] 2xl:w-[700px] 2xl:h-[710px]"
                                     }`}
                                 >
                                     <Image
@@ -118,8 +122,8 @@ const ProductLeftView = ({ forModal = false, data }) => {
                                         height={1000}
                                         className={`${
                                             forModal
-                                                ? "w-[460px] h-[708px]"
-                                                : ""
+                                                ? "w-[460px] h-[708px] lg:w-[512px] lg:h-[513px]"
+                                                : "w-[360px] md:w-[280px] md:h-[300px] lg:w-[380px] lg:h-[400px] xl:w-[512px] xl:h-[513px] 2xl:w-[700px] 2xl:h-[710px]"
                                         } w-full  rounded-sm`}
                                     />
                                 </div>
