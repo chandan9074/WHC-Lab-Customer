@@ -24,9 +24,8 @@ export default function FAQ() {
                 });
                 setFaqs(response?.docs);
             } catch (error) {
-                toast.error(error?.message)
+                toast.error(error?.message);
             }
-
         };
         fetchData();
     }, []);
@@ -46,10 +45,11 @@ export default function FAQ() {
                     {faqs.map((item, index) => (
                         <div
                             onClick={() => toggleCollapse(item._id)}
-                            className={` cursor-pointer flex justify-between gap-1 items-start p-4 md:p-8 border ${collapse === item._id
-                                ? "border-brand-blue-500"
-                                : "border-stroke-new "
-                                } rounded-2xl`}
+                            className={` cursor-pointer flex justify-between gap-1 items-start p-4 md:p-8 border ${
+                                collapse === item._id
+                                    ? "border-brand-blue-500"
+                                    : "border-stroke-new "
+                            } rounded-2xl`}
                             key={index}
                         >
                             <div className="flex flex-col gap-4">
@@ -57,10 +57,11 @@ export default function FAQ() {
                                     {item.question}
                                 </p>
                                 <p
-                                    className={`text-[#474D66] font-normal text-xs md:text-base animate-fadeIn ${collapse === item._id
-                                        ? "block"
-                                        : "hidden"
-                                        }`}
+                                    className={`text-[#474D66] font-normal text-xs md:text-base animate-fadeIn ${
+                                        collapse === item._id
+                                            ? "block"
+                                            : "hidden"
+                                    }`}
                                 >
                                     {item.answer}
                                 </p>
@@ -71,15 +72,16 @@ export default function FAQ() {
                                 alt="search"
                                 width={1000}
                                 height={1000}
-                                className={`w-[30px] h-[30px] cursor-pointer transform transition-transform duration-300 ${collapse === item._id
-                                    ? "-rotate-90"
-                                    : "rotate-90"
-                                    }`}
+                                className={`w-[30px] h-[30px] cursor-pointer transform transition-transform duration-300 ${
+                                    collapse === item._id
+                                        ? "-rotate-90"
+                                        : "rotate-90"
+                                }`}
                             />
                         </div>
                     ))}
 
-                    <div
+                    {/* <div
                         className={`flex flex-col md:flex-row justify-between gap-5 md:gap-10 items-center p-8 border transform transition-colors duration-300 border-stroke-new rounded-2xl`}
                     >
                         <p className="font-semibold text-sm md:text-lg text-brand-blue-500 font-montserrat">
@@ -91,7 +93,7 @@ export default function FAQ() {
                             className="whitespace-nowrap px-14"
                             onClick={() => router.push("/contact-us")}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </InfoPagesContainer>
         </Layouts.Primary>
