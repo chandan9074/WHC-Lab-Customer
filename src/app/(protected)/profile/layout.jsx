@@ -59,7 +59,7 @@ export default async function ProfileLayout({
                             // }
                         />
                     </div>
-                    <div className="flex-1 bg-white rounded-2xl border-[1.5px] border-[#EBEDF0] mb-6 md:mb-[120px]">
+                    <div className="flex-1 bg-neutral-30 bg-opacity-15 rounded-2xl border-[1.5px] border-[#EBEDF0] mb-6 md:mb-[120px]">
                         {children}
                     </div>
                 </section>

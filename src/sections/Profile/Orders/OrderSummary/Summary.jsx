@@ -3,6 +3,7 @@ import { Flex, Typography } from "antd";
 import { useUserContext } from "@/contexts/UserContext";
 // import { useCart } from "@/contexts/CartContext";
 import { currencyData } from "@/libs/common";
+import { usePathname, useRouter } from "next/navigation";
 
 const { Text } = Typography;
 
@@ -17,8 +18,16 @@ const Summary = ({
     orderCurrency,
 }) => {
     const { currency } = useUserContext();
+    const currentPath = usePathname();
+    console.log("currentPath", currentPath.includes("orders-history"));
     return (
-        <div className="border p-4  rounded-lg">
+        <div
+            className={`${
+                currentPath.includes("orders-history")
+                    ? "bg-white"
+                    : "bg-transparent"
+            } border p-4 rounded-lg`}
+        >
             {showTotalItemCount && (
                 <div className="border-b-2 pb-2 border-dashed mb-4">
                     <Container

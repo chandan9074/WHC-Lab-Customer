@@ -15,7 +15,7 @@ const OrderItem = ({
     const createdAtDate = new Date(createdAt);
 
     return (
-        <div className="flex flex-row justify-between py-6 px-8 bg-neutral-10 border border-neutral-30 rounded-[8px]  duration-500 cursor-pointer">
+        <div className="flex flex-row justify-between py-6 px-8 bg-white border border-neutral-30 rounded-[8px]  duration-500 cursor-pointer">
             <div className="flex flex-col gap-2">
                 <div className="flex flex-row items-center gap-2">
                     <Image alt="calender" src={Icons.calendar} width={18} />

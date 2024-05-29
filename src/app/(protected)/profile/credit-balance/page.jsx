@@ -223,7 +223,7 @@ const CreditBalance = () => {
         <Suspense fallback={<Loader />}>
             <div className="p-4 md:p-8 flex flex-col gap-y-5 md:gap-y-6">
                 <Spin spinning={loading} fullscreen />
-                <div className="p-0 px-4 py-6 md:p-8 flex flex-col md:flex-row gap-y-6 md:justify-between md:items-center">
+                <div className="bg-white rounded-[4px] border border-stroke-new p-0 px-4 py-6 md:p-8 flex flex-col md:flex-row gap-y-6 md:justify-between md:items-center">
                     <div className="px-4 py-6 flex justify-between md:gap-x-12">
                         <div className="space-y-1">
                             <p className="text-brand-blue-800 text-sm leading-[21px]">
@@ -271,13 +271,13 @@ const CreditBalance = () => {
                     )}
                 </div>
 
-                <div className="p-8 border border-[#EBEDF0] rounded-[4px] space-y-6">
+                <div className="bg-white p-8 border border-[#EBEDF0] rounded-[4px] space-y-6">
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                         <div className="flex flex-col lg:flex-row gap-6">
                             <div>
                                 <input
                                     placeholder="input order number"
-                                    className="border py-[7px] px-2"
+                                    className="border py-[7px] px-2 rounded-s-md"
                                     value={inputSearch}
                                     onChange={(e) => handleChange(e)}
                                 />

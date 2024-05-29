@@ -143,10 +143,11 @@ const MyAddressSection = ({ data }) => {
                     {addressList?.map((address, index) => (
                         <div
                             key={address._id}
-                            className={`${value === address._id
-                                    ? "border-magenta-600  bg-white"
+                            className={`${
+                                value === address._id
+                                    ? "border-brand-blue-500 bg-transparent"
                                     : "border-transparent bg-neutral-10"
-                                } border flex justify-between items-start lg:items-center px-4 py-4 lg:px-6 lg:py-5 rounded-sm`}
+                            } border flex justify-between items-start lg:items-center px-4 py-4 lg:px-6 lg:py-5 rounded-lg`}
                         >
                             <div className="flex flex-1 items-start">
                                 <Radio
@@ -158,10 +159,11 @@ const MyAddressSection = ({ data }) => {
                                     <div className="space-y-2">
                                         <div className="flex gap-x-2 items-center">
                                             <h2
-                                                className={`font-semibold ${value === address._id
+                                                className={`font-semibold ${
+                                                    value === address._id
                                                         ? "text-brand-blue-500"
                                                         : "text-neutral-700"
-                                                    }`}
+                                                }`}
                                             >
                                                 {address.name}
                                             </h2>
@@ -219,8 +221,11 @@ const MyAddressSection = ({ data }) => {
                                     height="h-6"
                                     type="button"
                                     onClick={() => {
-                                        address.isDefault ? toast.warning(`Default address cannot be deleted. Change the default first. ${address.isDefault}`) : setOpenDeleteModal(address._id);;
-
+                                        address.isDefault
+                                            ? toast.warning(
+                                                  `Default address cannot be deleted. Change the default first. ${address.isDefault}`
+                                              )
+                                            : setOpenDeleteModal(address._id);
                                     }}
                                 />
                             </div>
@@ -333,7 +338,7 @@ export const ThreeDotsMenu = ({
             />
             <div
                 className="absolute z-20 top-10 -left-36 w-48 bg-white animate-fadeIn py-4 px-5 shadow-md rounded-sm"
-            // onClick={handleDetailsModalOpen}
+                // onClick={handleDetailsModalOpen}
             >
                 {/* <Buttons.IconWithLabel
                     alt="edit-icon"

@@ -59,7 +59,7 @@ const ShippingMethod = ({ shippingMethod, onChange }) => {
                                     )}
                                     `}
                                 >
-                                    {currency.icon} 6.99
+                                    {currency?.icon} 6.99
                                 </h2>
                             </div>
                         </Radio>
@@ -95,7 +95,7 @@ const ShippingMethod = ({ shippingMethod, onChange }) => {
                                         "express"
                                     )}`}
                                 >
-                                    {currency.icon} 12.99
+                                    {currency?.icon} 12.99
                                 </h2>
                             </div>
                         </Radio>

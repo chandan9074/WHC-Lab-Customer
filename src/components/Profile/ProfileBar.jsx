@@ -220,7 +220,11 @@ const ProfileBar = ({ width, data }) => {
     ];
 
     return (
-        <div className={`bg-white rounded-sm ${width || "w-full"}`}>
+        <div
+            className={`bg-neutral-30 bg-opacity-15 rounded-sm ${
+                width || "w-full"
+            }`}
+        >
             <div
                 className={`${
                     width ? width : "w-[300px]"

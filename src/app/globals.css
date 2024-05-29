@@ -324,6 +324,10 @@ textarea.ant-input:hover {
     position: relative;
 }
 
+.ant-table-thead .ant-table-cell {
+    background-color: white !important;
+  }
+
 /* .ant-radio-wrapper .ant-radio {
     position: absolute;
     top: 4px !important;
