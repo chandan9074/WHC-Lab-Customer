@@ -17,6 +17,7 @@ const AddressModal = ({
     onOk,
     onCancel,
     modalInnerTitle,
+    setAddressList,
     buttonTitle,
     handleDetailsModalOpen,
     getUserAddress,
@@ -42,6 +43,17 @@ const AddressModal = ({
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
+
+    const handleGetUserAddress = async () => {
+        try {
+            const response = await UserService.getUserAddress(token);
+            if (response?.status === 200) {
+                setAddressList(response.docs);
+            }
+        } catch (error) {
+            toast.error(error?.message);
+        }
+    };
 
     const onFinish = async (values) => {
         if (Object.keys(data).length === 0) {
@@ -86,6 +98,7 @@ const AddressModal = ({
                 toast.error(error.message);
             }
         }
+        handleGetUserAddress();
     };
 
     const handleCountryChange = (value) => {

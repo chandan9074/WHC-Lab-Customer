@@ -109,7 +109,7 @@ const NextBreadcrumb = () => {
                     //     borderRadius: "20px",
                     // }}
                     style={{
-                        width: "300px",
+                        width: "350px",
                     }}
                     value={navLocationValue}
                     className="h-10"

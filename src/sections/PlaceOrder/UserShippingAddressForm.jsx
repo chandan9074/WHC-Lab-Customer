@@ -161,6 +161,7 @@ const UserShippingAddressForm = ({ data, setAddress }) => {
                     </> */}
                     Addresses not added yet!
                     <Buttons.PrimaryButton
+                        type="button"
                         label={"Add New Address"}
                         onClick={handleAddressPageNavigation}
                         className={
@@ -191,6 +192,7 @@ const UserShippingAddressForm = ({ data, setAddress }) => {
                         modalInnerTitle={"Create new address"}
                         buttonTitle={"Create"}
                         countryList={locations}
+                        setAddressList={setAddressList}
                         // handleDetailsModalOpen={handleDetailsModalOpen}
                         // getUserAddress={getUserData}
                     />

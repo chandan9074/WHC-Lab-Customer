@@ -36,7 +36,7 @@ const TrackOrderedItem = ({ data, leaveItemReview }) => {
     };
 
     return (
-        <div className="border border-neutral-30 border-opacity-[12%] px-5 py-5 rounded-lg w-full ">
+        <div className="bg-white border border-neutral-30 px-6 py-12 rounded-lg w-full ">
             {/* Collapse */}
             <div className=" flex justify-between items-center">
                 <div>

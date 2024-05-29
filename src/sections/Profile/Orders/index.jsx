@@ -15,7 +15,7 @@ const Orders = ({ activeOrderList, orderHistoryList }) => {
         // setCurrent(e.key);
     };
     return (
-        <div className="bg-white">
+        <div className="">
             {/* Tab component */}
             <div className="flex-row w-full flex">
                 {tab.map((ele, index) => (

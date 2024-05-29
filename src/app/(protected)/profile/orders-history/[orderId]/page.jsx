@@ -121,9 +121,7 @@ const OrderDetails = ({ params: { orderId } }) => {
 
             <CustomModal
                 title={
-                    <h4 className="w-full flex justify-center">
-                        Items Review asdf
-                    </h4>
+                    <h4 className="w-full flex justify-center">Items Review</h4>
                 }
                 open={isReview}
                 onCancel={() => setIsReview(false)}
