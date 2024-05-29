@@ -9,11 +9,11 @@ const OrderSummaryWithDetails = ({ orderSummary }) => {
         <div className="border p-4 rounded-lg">
             <div className="flex items-center justify-between border-b pb-2 mb-4">
                 <Text className="font-bold text-neutral-700">
-                    Total items ({orderSummary.length} items)
+                    Total items ({orderSummary?.length} items)
                 </Text>
                 <Text className="font-bold text-neutral-700">
                     ${" "}
-                    {orderSummary.reduce(
+                    {orderSummary?.reduce(
                         (acc, pro) => acc + pro.price * pro.quantity,
                         0
                     )}
