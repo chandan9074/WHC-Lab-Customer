@@ -37,11 +37,11 @@ const Primary = () => {
                 <div className="container mx-auto px-6 sm:px-3  flex items-center justify-between">
                     <Link href={"/"}>
                         <Image
-                            src={Images.logo}
+                            src={Images.WHC_logo}
                             alt="Logo"
                             width={1000}
                             height={1000}
-                            className="lg:w-[98px] sm:w-[80px] w-[73px] lg:h-8 sm:h-7 h-6"
+                            className="sm:w-[120px] w-[100px] "
                         />
                     </Link>
                     <div className="flex items-center gap-6">

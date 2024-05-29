@@ -30,7 +30,7 @@ export default async function ProfileLayout({
         <Suspense fallback={<Loader />}>
             <Layouts.Primary>
                 <div
-                    className={`gap- container mx-auto px-3 sm:px-0 py-6 border-b`}
+                    className={`gap- container mx-auto px-6 sm:px-0 py-6 border-b`}
                 >
                     <TitleBar profileData={profileData} />
                 </div>
