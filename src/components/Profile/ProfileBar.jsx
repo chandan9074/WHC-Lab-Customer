@@ -221,14 +221,14 @@ const ProfileBar = ({ width, data }) => {
 
     return (
         <div
-            className={`bg-neutral-30 bg-opacity-15 rounded-sm ${
+            className={`bg-neutral-30 border-[1.5px] border-stroke-new pb-4 bg-opacity-15 rounded-2xl ${
                 width || "w-full"
             }`}
         >
             <div
                 className={`${
                     width ? width : "w-[300px]"
-                } px-6 py-12 rounded-2xl border-[1.5px] border-[#EBEDF0]  hidden lg:block`}
+                } px-6 py-12 rounded-2xl   hidden lg:block`}
             >
                 {/* Profile Details */}
                 {isLoading ? (
