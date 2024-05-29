@@ -19,17 +19,32 @@ function CartContainer() {
     const [orderItem, setOrderItem] = useState([]);
     const [summaryCalculate, setSummaryCalculate] = useState();
     const socket = io(WHC_LAB_SOCKET_CONNECTION);
+    const [orderCoupon, setOrderCoupon] = useState("");
 
     const calculateOrder = (couponCode) => {
         const ids = orderItem.map((item) => item._id);
-
-        socket.emit(
-            "order:calculate",
-            JSON.stringify({
+        let data = {};
+        console.log({ couponCode });
+        if (ids.length === 0) {
+            setOrderCoupon("");
+            data = {
+                cartId: ids,
+            };
+        } else if (couponCode === "") {
+            data = {
+                cartId: ids,
+            };
+        } else {
+            data = {
                 cartId: ids,
                 couponCode,
-            })
-        );
+            };
+        }
+        // data = {
+        //     cartId: ids,
+        //     couponCode,
+        // };
+        socket.emit("order:calculate", JSON.stringify(data));
 
         // Listen for response from the server
         socket.on("order:calculated", (data) => {
@@ -101,7 +116,7 @@ function CartContainer() {
     };
 
     useEffect(() => {
-        calculateOrder();
+        calculateOrder(orderCoupon);
         // console.log(summaryCalculate);
     }, [orderItem]);
 
@@ -168,6 +183,7 @@ function CartContainer() {
                                     }`}
                                     summaryCalculate={summaryCalculate}
                                     calculateOrder={calculateOrder}
+                                    setOrderCoupon={setOrderCoupon}
                                 />
                                 <Spin
                                     className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"

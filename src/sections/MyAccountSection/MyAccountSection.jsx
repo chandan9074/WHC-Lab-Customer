@@ -19,7 +19,7 @@ import UserService from "@/services/UserService/UserService";
 
 const MyAccountSection = ({ data }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const { setUserInfo } = useUserContext();
+    const { setUserInfo, setUserProfileInfo } = useUserContext();
     const [image, setImage] = useState(
         data?.profilePicture
             ? `${GET_IMAGE_RENDER}?key=${data?.profilePicture}`
@@ -37,7 +37,6 @@ const MyAccountSection = ({ data }) => {
         primaryEmail: data?.primaryEmail,
         primaryPhone: data?.primaryPhone,
     });
-    const { setUserProfileInfo } = useUserContext();
 
     const [fields, setFields] = useState([
         {
@@ -354,6 +353,7 @@ const MyAccountSection = ({ data }) => {
                     onSubmit={handleOk}
                     setUserInfo={setUserInfo}
                     setFormValue={setFormValue}
+                    setUserProfileInfo={setUserProfileInfo}
                 />
             </Modal>
         </div>
@@ -362,7 +362,13 @@ const MyAccountSection = ({ data }) => {
 
 export default MyAccountSection;
 
-const NameCustomModal = ({ onSubmit, setUserInfo, setFormValue, data }) => {
+const NameCustomModal = ({
+    onSubmit,
+    setUserInfo,
+    setUserProfileInfo,
+    setFormValue,
+    data,
+}) => {
     const onFinish = async (values) => {
         const token = getCookie("accessToken");
         const response = await MakeApiCall({
@@ -379,6 +385,7 @@ const NameCustomModal = ({ onSubmit, setUserInfo, setFormValue, data }) => {
             primaryPhone: userInfo?.primaryPhone,
         });
         setUserInfo(response.user);
+        setUserProfileInfo(response.user);
         toast.success(response.message);
         onSubmit();
     };

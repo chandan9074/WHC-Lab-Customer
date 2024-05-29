@@ -15,6 +15,7 @@ import profile_avatar from "./profile_avatar.svg";
 import noImageFound from "./noImageFound.svg"
 import something_went_wrong from "./something_went_wrong.svg";
 import page_not_found from "./page-not-found.svg";
+import WHC_logo from "./whc-lab-logo.gif";
 
 const Images = {
     logo,
@@ -35,6 +36,7 @@ const Images = {
     noImageFound,
     something_went_wrong,
     page_not_found,
+    WHC_logo
 };
 
 export default Images;

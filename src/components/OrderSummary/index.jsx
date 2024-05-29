@@ -14,6 +14,7 @@ function OrderSummary({
     className,
     summaryCalculate,
     calculateOrder,
+    setOrderCoupon,
 }) {
     // const [guestLoginFormModal, setGuestLoginFormModal] = useState(false);
     const [couponCode, setCouponCode] = useState("");
@@ -46,6 +47,7 @@ function OrderSummary({
 
     const handleAddCouponCode = () => {
         calculateOrder(couponCode);
+        setOrderCoupon(couponCode);
         setCouponCode("");
     };
 
@@ -62,7 +64,8 @@ function OrderSummary({
                 subTotal={summaryCalculate?.subtotal || 0}
                 totalItems={summaryCalculate?.lineItems?.length || 0}
                 shippingCharge={shippingCharge}
-                discount={discountAmount}
+                couponCode={summaryCalculate?.couponCode}
+                discount={summaryCalculate?.couponAmount}
                 tax={summaryCalculate?.vatAmount || 0}
                 showTotalItemCount={true}
             />

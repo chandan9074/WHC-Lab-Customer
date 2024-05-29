@@ -9,6 +9,7 @@ function Summary({
     subTotal,
     tax,
     shippingCharge,
+    couponCode,
     discount,
     total,
     showTotalItemCount,
@@ -50,13 +51,17 @@ function Summary({
             value={shippingCharge ? shippingCharge : 0}
             contentStyle="text-neutral-300"
             valueStyle="text-neutral-300"
-        />
-        <Container
-            content={"Discount"}
-            value={discount ? `${discount}` : 0}
-            contentStyle="text-neutral-300"
-            valueStyle="text-error-500"
         /> */}
+                {couponCode && (
+                    <Container
+                        content={"Discount"}
+                        value={discount ? `${discount}` : 0}
+                        contentStyle="text-neutral-300"
+                        couponCode={couponCode}
+                        currency={currency}
+                        valueStyle="text-error-500"
+                    />
+                )}
                 <Container
                     content={"Total"}
                     value={total}
@@ -76,12 +81,15 @@ const Container = ({
     content,
     value,
     currency,
+    couponCode,
     contentStyle,
     valueStyle,
     containerStyle,
 }) => (
     <Flex horizontal="true" justify="space-between" className={containerStyle}>
-        <Text className={contentStyle}>{content}</Text>
+        <Text className={contentStyle}>
+            {couponCode ? `${content} (${couponCode})` : content}
+        </Text>
         <Text className={valueStyle}>{`${content === "Discount" ? "- " : ""}${
             content.includes("Total Items") ? "" : `${currency.icon}`
         }${value}`}</Text>
