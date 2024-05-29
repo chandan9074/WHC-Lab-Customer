@@ -105,6 +105,7 @@ const SignInForm = () => {
                         method: "POST",
                         body: {
                             primaryEmail: values.email,
+                            action: "change_email",
                         },
                     });
                     if (response.status === 200) {
