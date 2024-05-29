@@ -29,6 +29,7 @@ const Page = async ({ params }) => {
         // getWishlist,
     ]);
 
+    console.log({ singleProductData });
     // const wishListIds = wishlistData?.body?.docs.map(
     //     (wishes) => wishes.productId
     // );

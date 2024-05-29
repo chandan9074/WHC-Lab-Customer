@@ -44,7 +44,11 @@ const ProductRightView = ({
         if (hasCookie("selected_location")) {
             const locationId = JSON.parse(getCookie("selected_location"));
             const stockStatusData = checkStock(data, locationId);
-            setStockStatus(stockStatusData);
+            if (data.inStock) {
+                setStockStatus(stockStatusData);
+            } else {
+                setStockStatus(data.inStock);
+            }
             if (locationId) {
                 const stock = data?.variants.find(
                     (item) => item.location._id === locationId
@@ -100,7 +104,8 @@ const ProductRightView = ({
     };
 
     const handleAddToCart = async () => {
-        if (data.inStock) {
+        console.log(data.inStock, data._id, "instock");
+        if (stockStatus) {
             const locationId = JSON.parse(getCookie("selected_location"));
             const variant = data.variants.find(
                 (item) => item.location._id === locationId
