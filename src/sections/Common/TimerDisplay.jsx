@@ -3,7 +3,9 @@ import { getCookie, setCookie, deleteCookie } from "cookies-next";
 
 const TimerDisplay = ({ timeRemaining, setTimeRemaining }) => {
     const memoizedSetCookie = useCallback((name, value) => {
-        setCookie(name, value);
+        setCookie(name, value, {
+            maxAge: 60 * 60 * 12,
+        });
     }, []);
 
     const memoizedDeleteCookie = useCallback((name) => {

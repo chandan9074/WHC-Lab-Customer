@@ -27,8 +27,12 @@ function OrderSummary({
             setIsLoading(true);
             // const accessToken = getCookie("accessToken");
             // localStorage.setItem("orderDate", JSON.stringify(orderItem));
-            setCookie("orderData", JSON.stringify(orderItem));
-            setCookie("calculatedOrderData", JSON.stringify(summaryCalculate));
+            setCookie("orderData", JSON.stringify(orderItem), {
+                maxAge: 60 * 60 * 12,
+            });
+            setCookie("calculatedOrderData", JSON.stringify(summaryCalculate), {
+                maxAge: 60 * 60 * 12,
+            });
 
             setIsLoading(false);
             router.push("place-order/?userType=login");

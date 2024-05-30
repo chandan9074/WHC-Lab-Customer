@@ -18,7 +18,9 @@ const ChangePassword = ({ title, description }) => {
 
     const onFinish = async (values) => {
         setLoading(true);
-        setCookie("temp_email", `${values.email}`);
+        setCookie("temp_email", `${values.email}`,{
+            maxAge: 60 * 60 * 12,
+        });
         const token = getCookie("accessToken");
 
         try {

@@ -35,7 +35,9 @@ const CreditBalance = () => {
 
             if (res?.status === 200) {
                 setUserInfo(res?.user);
-                setCookie("userInfo", JSON.stringify(res?.user));
+                setCookie("userInfo", JSON.stringify(res?.user), {
+                    maxAge: 60 * 60 * 12,
+                });
             }
         } catch (e) {
             console.log(e);

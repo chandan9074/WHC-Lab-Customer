@@ -34,7 +34,9 @@ const OrderSummary = ({ cartSummary, orderItem, className }) => {
         if (orderItem.length > 0) {
             const accessToken = getCookie("accessToken");
             // localStorage.setItem("orderDate", JSON.stringify(orderItem));
-            setCookie("orderData", JSON.stringify(orderItem));
+            setCookie("orderData", JSON.stringify(orderItem), {
+                maxAge: 60 * 60 * 12,
+            });
 
             if (accessToken) {
                 router.push("place-order/?userType=login");

@@ -19,6 +19,8 @@ export const GET_USER_PROFILE = `${BASEURL}/profile`;
 
 export const PROFILE_URL = `${BASEURL}/users/profile`;
 
+export const COMPANY_VAT_CODE_URL = `${BASEURL}/companies/vat`;
+
 export const GET_USER_ADDRESS = `${BASEURL}/addresses`;
 
 export const CHANGE_PASSWORD = `${BASEURL}/users/change-password`;

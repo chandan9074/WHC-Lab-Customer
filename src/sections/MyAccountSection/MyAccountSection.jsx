@@ -36,7 +36,9 @@ const MyAccountSection = ({ data }) => {
         companyName: data?.companyName,
         primaryEmail: data?.primaryEmail,
         primaryPhone: data?.primaryPhone,
+        companyVatCode: data?.companyVatCode,
     });
+    const [openVatCodeModal, setOpenVatCodeModal] = useState(false);
 
     const [fields, setFields] = useState([
         {
@@ -194,6 +196,8 @@ const MyAccountSection = ({ data }) => {
     const handleNavigate = (name) => {
         if (name === "name") {
             setIsOpen(true);
+        } else if (name === "companyVatCode") {
+            setOpenVatCodeModal(true);
         } else {
             router.push("/change-email");
         }
@@ -201,13 +205,18 @@ const MyAccountSection = ({ data }) => {
 
     const handleOk = () => {
         setIsOpen(false);
+        setOpenVatCodeModal(false);
     };
+
     const handleCancel = () => {
         setIsOpen(false);
+        setOpenVatCodeModal(false);
     };
 
     useEffect(() => {
-        setCookie("userInfo", `${JSON.stringify(data)}`);
+        setCookie("userInfo", `${JSON.stringify(data)}`, {
+            maxAge: 60 * 60 * 12,
+        });
     }, [data]);
 
     return (
@@ -309,6 +318,16 @@ const MyAccountSection = ({ data }) => {
                     // isEdit={isEdit}
                     setIsEdit={setIsEdit}
                 />
+                <EditableInput
+                    label={"Company Vat Code"}
+                    formValue={formValue}
+                    setFormValue={setFormValue}
+                    name={"companyVatCode"}
+                    forwardedRef={editFieldRef}
+                    // isEdit={isEdit}
+                    setIsEdit={setIsEdit}
+                    handleNavigate={handleNavigate}
+                />
                 {/* <Form.Item className="pt-4"> */}
                 {/* </Form.Item> */}
             </Form>
@@ -356,6 +375,27 @@ const MyAccountSection = ({ data }) => {
                     setUserProfileInfo={setUserProfileInfo}
                 />
             </Modal>
+            <Modal
+                className="sm:w-[408px]"
+                title={
+                    <p className="w-full flex justify-center text-neutral-700 border-b border-[#8790AB14] border-opacity-[8%] pb-5">
+                        Update Company Vat Code
+                    </p>
+                }
+                footer={false}
+                centered
+                open={openVatCodeModal}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                <VatCodeCustomModal
+                    data={data}
+                    onSubmit={handleOk}
+                    setUserInfo={setUserInfo}
+                    setFormValue={setFormValue}
+                    setUserProfileInfo={setUserProfileInfo}
+                />
+            </Modal>
         </div>
     );
 };
@@ -378,7 +418,9 @@ const NameCustomModal = ({
             headers: { Authorization: token },
         });
         const userInfo = response.user;
-        setCookie("userInfo", `${JSON.stringify(userInfo)}`);
+        setCookie("userInfo", `${JSON.stringify(userInfo)}`, {
+            maxAge: 60 * 60 * 12,
+        });
         setFormValue({
             name: userInfo?.firstName + " " + userInfo?.lastName,
             primaryEmail: userInfo?.primaryEmail,
@@ -435,6 +477,79 @@ const NameCustomModal = ({
             </Form.Item>
             <Buttons.PrimaryButton
                 label="Change name"
+                className="w-full flex justify-center items-center bg-magenta-600 h-12 text-white font-semibold"
+                // onClick={onOk}
+            />
+        </Form>
+    );
+};
+
+const VatCodeCustomModal = ({
+    onSubmit,
+    setUserInfo,
+    setUserProfileInfo,
+    setFormValue,
+    data,
+}) => {
+    const onFinish = async (values) => {
+        const token = getCookie("accessToken");
+        // vat code update
+
+        console.log({ values });
+        try {
+            const res = await UserService.updateCompanyVatCode(
+                { id: data?.companyId, vatCode: values.vatCode },
+                token
+            );
+
+            console.log({ res });
+            toast.success(res?.message);
+
+            // get user profile and set response in the state
+            const response = await UserService.fetchUserInfo(token);
+            const userInfo = response.user;
+            setFormValue({
+                name: userInfo?.firstName + " " + userInfo?.lastName,
+                primaryEmail: userInfo?.primaryEmail,
+                primaryPhone: userInfo?.primaryPhone,
+                companyVatCode: userInfo?.companyVatCode,
+            });
+
+            setUserInfo(response.user);
+            setUserProfileInfo(response.user);
+            toast.success(response.message);
+            onSubmit();
+        } catch (error) {
+            toast.error(error?.message);
+            console.log(error);
+        }
+    };
+    return (
+        <Form layout="vertical" onFinish={onFinish} initialValues={{ ...data }}>
+            <Form.Item
+                className="col-span-1"
+                label={
+                    <h3 className="text-neutral-300 text-sm font-medium">
+                        Vat Code
+                    </h3>
+                }
+                name="vatCode"
+                rules={[
+                    {
+                        required: true,
+                        message: "Vat Code is required!",
+                    },
+                ]}
+            >
+                <Input
+                    className="py-3 rounded-sm border border-neutral-40 bg-neutral-10"
+                    // defaultValue={data ? data.city : ""}
+                    placeholder="Vat Code"
+                />
+            </Form.Item>
+
+            <Buttons.PrimaryButton
+                label="Change Vat Code"
                 className="w-full flex justify-center items-center bg-magenta-600 h-12 text-white font-semibold"
                 // onClick={onOk}
             />

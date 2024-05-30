@@ -16,7 +16,7 @@ function CountrySelectionModal({ handleLocation }) {
     const [selected, setSelected] = useState(true);
 
     const handleChange = (value) => {
-        console.log(value, locations);
+        // console.log(value, locations);
         setSelectLocation(value);
         // const locationObj = locations.find((item) => item._id === value);
         // console.log(locationObj, "lcoation");
@@ -27,7 +27,9 @@ function CountrySelectionModal({ handleLocation }) {
             const locationObj = locations.find(
                 (item) => item.value === selectLocation
             );
-            setCookie("selected_location", JSON.stringify(selectLocation));
+            setCookie("selected_location", JSON.stringify(selectLocation), {
+                maxAge: 60 * 60 * 12,
+            });
             setCookie("selected_currency", locationObj.currency);
             const getCurrencyKey = currencyData[locationObj.currency];
             setCurrency(getCurrencyKey);
