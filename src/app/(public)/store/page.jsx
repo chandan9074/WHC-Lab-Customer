@@ -4,6 +4,7 @@ import ProductService from "@/services/productsService";
 import dynamic from "next/dynamic";
 import { getCookie } from "cookies-next";
 import { StoreSkeleton } from "@/components/common/StoreSkeleton";
+import Loader from "@/components/common/Loader";
 
 const StoreContainer = dynamic(
     () => import("@/sections/Store/StoreContainer"),
@@ -33,7 +34,7 @@ async function Store(params) {
     // const [categoryData] = await Promise.all([getCategories]);
 
     return (
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
             <Layouts.Primary>
                 <StoreContainer
                     productData={productData?.docs}
