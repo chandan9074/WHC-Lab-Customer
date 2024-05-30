@@ -19,7 +19,7 @@ const Summary = ({
 }) => {
     const { currency } = useUserContext();
     const currentPath = usePathname();
-    console.log("currentPath", currentPath.includes("orders-history"));
+    // console.log("currentPath", currentPath.includes("orders-history"));
     return (
         <div
             className={`${

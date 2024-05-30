@@ -3,7 +3,8 @@ import React, { useCallback, useEffect } from "react";
 import { Typography } from "antd";
 import Image from "next/image";
 import Icons from "../../../public/assets/Icons";
-import Summary from "../Profile/Orders/OrderSummary/Summary";
+// import Summary from "../Profile/Orders/OrderSummary/Summary";
+import Summary from "@/components/OrderSummary/Summary";
 import Link from "next/link";
 import { PRODUCTS_PATH } from "@/helpers/slug";
 import OrderSummaryWithDetails from "./OrderSummaryWithDetails";
@@ -66,7 +67,8 @@ const OrderConfirmation = ({ orderSummary }) => {
                             subTotal={orderSummary?.subtotal}
                             totalItems={orderSummary?.lineItems.length}
                             // shippingCharge={shippingCharge}
-                            // discount={discountAmount}
+                            discount={orderSummary?.couponAmount}
+                            couponCode={orderSummary?.couponCode}
                             tax={orderSummary?.vat}
                             showTotalItemCount={orderSummary?.lineItems.length}
                         />

@@ -164,6 +164,59 @@ const toPascalCase = (str) =>
 const NextBreadcrumb = () => {
     const pathname = usePathname();
     const breadcrumbPaths = generateBreadcrumbPaths(pathname);
+    // const [distributorsData, setDistributorsData] = useState([]);
+    const paths = usePathname();
+    // console.log(paths);
+    // const pathNames = paths.split("/").filter((path) => path);
+    // const hasStoreInPath = pathNames.includes("store");
+    // const { setNavLocation, setNavLocationValue, navLocationValue } =
+    //     useUserContext();
+    // const [selectLocation, setSelectLocation] = useState();
+    // const { locations, setCurrency } = useUserContext();
+    // const selected_locations = hasCookie("selected_location");
+    // const [selected, setSelected] = useState(true);
+
+    // const handleChange = (value) => {
+    //     // console.log("click");
+    //     const locationObj = locations.find((item) => item.value === value);
+    //     setCookie("selected_location", JSON.stringify(value));
+    //     setCookie("selected_currency", locationObj.currency);
+    //     const getCurrencyKey = currencyData[locationObj.currency];
+    //     setCurrency(getCurrencyKey);
+    //     setNavLocationValue(value);
+    //     setNavLocation(value);
+    // };
+
+    // To Uppercase the Breadcrumb item
+    // const toPascalCase = (string) => (string ? string : "");
+
+    // Breadcrumb item array
+    // const breadcrumbPath = () => {
+    //     const removeQuestionMark = paths.replace(/\?/g, "/");
+    //     const removeEquals = removeQuestionMark.replace(/\=/g, "/");
+    //     const pathToPascalCase = toPascalCase(removeEquals);
+
+    //     return pathToPascalCase.split("/").slice(1);
+    // };
+
+    // const getDistributors = async () => {
+    //     const response = await DistributorsService.getDistributors();
+    //     console.log(response, "---------------map");
+    //     setDistributorsData(response.docs);
+    // };
+
+    // useEffect(() => {
+    //     getDistributors();
+    // }, []);
+
+    // const options = distributorsData.map((doc) => ({
+    //     value: doc.name,
+    //     label: doc.name,
+    // }));
+
+    // const handleChange = (value) => {
+    //     console.log(`selected ${value}`);
+    // };
 
     return (
         <div className="container mx-auto py-6">

@@ -125,7 +125,7 @@ const ProductViewMobile = ({ data }) => {
             const variant = data.variants.find(
                 (item) => item.location._id === locationId
             );
-            console.log({ data });
+            // console.log({ data });
             const stockId = variant.stockId;
             const sku = variant.sku;
 

@@ -118,7 +118,7 @@ const ProductRightView = ({
     };
 
     const handleAddToCart = async () => {
-        console.log(data.inStock, data._id, "instock");
+        // console.log(data.inStock, data._id, "instock");
         if (stockStatus) {
             const locationId = JSON.parse(getCookie("selected_location"));
             const variant = data.variants.find(
