@@ -48,7 +48,7 @@ const AddressModal = ({
         try {
             const response = await UserService.getUserAddress(token);
             if (response?.status === 200) {
-                setAddressList(response.docs);
+                setAddressList && setAddressList(response.docs);
             }
         } catch (error) {
             toast.error(error?.message);
