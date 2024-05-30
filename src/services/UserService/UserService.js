@@ -9,7 +9,7 @@ import {
     IMAGE_UPLOAD,
     PROFILE_URL,
     CONTACTS,
-
+    COMPANY_VAT_CODE_URL,
 } from "@/helpers/apiURLS";
 
 export default class UserService {
@@ -158,5 +158,15 @@ export default class UserService {
             body: { ...data },
             ...MethodsStructure.postMethod(),
         });
+    }
+
+    static async updateCompanyVatCode(data, token) {
+        const res = await MakeApiCall({
+            apiUrl: COMPANY_VAT_CODE_URL,
+            query: { ...data },
+            ...MethodsStructure.patchMethod({ Authorization: `${token}` }),
+        });
+
+        return res;
     }
 }
