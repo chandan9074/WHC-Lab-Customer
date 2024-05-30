@@ -21,47 +21,78 @@ function CartContainer() {
     const socket = io(WHC_LAB_SOCKET_CONNECTION);
     const [orderCoupon, setOrderCoupon] = useState("");
 
+    // const calculateOrder = (couponCode) => {
+    //     const ids = orderItem.map((item) => item._id);
+    //     let data = {};
+    //     // console.log({ couponCode });
+    //     if (ids.length === 0) {
+    //         setOrderCoupon("");
+    //         data = {
+    //             cartId: ids,
+    //         };
+    //     } else if (couponCode === "") {
+    //         data = {
+    //             cartId: ids,
+    //         };
+    //     } else {
+    //         data = {
+    //             cartId: ids,
+    //             couponCode,
+    //         };
+    //     }
+    //     // data = {
+    //     //     cartId: ids,
+    //     //     couponCode,
+    //     // };
+    //     socket.emit("order:calculate", JSON.stringify(data));
+
+    //     // Listen for response from the server
+    //     socket.on("order:calculated", (data) => {
+    //         // console.log({ data });
+    //         if (data.error && ids.length > 0) {
+    //             toast.error(data.error);
+    //         } else {
+    //             setSummaryCalculate(data);
+    //             console.log({ data });
+    //         }
+    //     });
+
+    //     return () => {
+    //         socket.disconnect();
+    //     };
+    // };
+
     const calculateOrder = (couponCode) => {
         const ids = orderItem.map((item) => item._id);
-        let data = {};
-        // console.log({ couponCode });
-        if (ids.length === 0) {
-            setOrderCoupon("");
-            data = {
-                cartId: ids,
-            };
-        } else if (couponCode === "") {
-            data = {
-                cartId: ids,
-            };
-        } else {
-            data = {
-                cartId: ids,
-                couponCode,
-            };
+        const data = { cartId: ids };
+
+        if (couponCode) {
+            data.couponCode = couponCode;
         }
-        // data = {
-        //     cartId: ids,
-        //     couponCode,
-        // };
+
         socket.emit("order:calculate", JSON.stringify(data));
 
-        // Listen for response from the server
-        socket.on("order:calculated", (data) => {
-            // console.log({ data });
-            if (data.error && ids.length > 0) {
-                toast.error(data.error);
+        // Define the listener function outside to avoid re-definition
+        const handleCalculation = (response) => {
+            if (response.error && ids.length > 0) {
+                toast.error(response.error);
             } else {
-                setSummaryCalculate(data);
+                setSummaryCalculate(response);
+                console.log({ response });
             }
-        });
+        };
 
+        // Set up the socket listener
+        socket.on("order:calculated", handleCalculation);
+
+        // Clean up the socket listener on unmount
         return () => {
-            socket.disconnect();
+            socket.off("order:calculated", handleCalculation);
         };
     };
 
     const addOrderItem = (newCartItem, checked, quantity) => {
+        console.log("asdf");
         if (checked) {
             setOrderItem((prevItems) => {
                 const isCartExist = prevItems?.some(

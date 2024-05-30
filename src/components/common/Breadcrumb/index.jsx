@@ -146,7 +146,13 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Select } from "antd";
+import { useState } from "react";
+import { useUserContext } from "@/contexts/UserContext";
+import { hasCookie, setCookie } from "cookies-next";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
+import Image from "next/image";
+import { currencyData } from "@/libs/common";
 
 // Utility function to generate breadcrumb paths
 const generateBreadcrumbPaths = (pathname) => {
@@ -164,28 +170,28 @@ const toPascalCase = (str) =>
 const NextBreadcrumb = () => {
     const pathname = usePathname();
     const breadcrumbPaths = generateBreadcrumbPaths(pathname);
-    // const [distributorsData, setDistributorsData] = useState([]);
+    const [distributorsData, setDistributorsData] = useState([]);
     const paths = usePathname();
     // console.log(paths);
-    // const pathNames = paths.split("/").filter((path) => path);
-    // const hasStoreInPath = pathNames.includes("store");
-    // const { setNavLocation, setNavLocationValue, navLocationValue } =
-    //     useUserContext();
-    // const [selectLocation, setSelectLocation] = useState();
-    // const { locations, setCurrency } = useUserContext();
-    // const selected_locations = hasCookie("selected_location");
-    // const [selected, setSelected] = useState(true);
+    const pathNames = paths.split("/").filter((path) => path);
+    const hasStoreInPath = pathNames.includes("store");
+    const { setNavLocation, setNavLocationValue, navLocationValue } =
+        useUserContext();
+    const [selectLocation, setSelectLocation] = useState();
+    const { locations, setCurrency } = useUserContext();
+    const selected_locations = hasCookie("selected_location");
+    const [selected, setSelected] = useState(true);
 
-    // const handleChange = (value) => {
-    //     // console.log("click");
-    //     const locationObj = locations.find((item) => item.value === value);
-    //     setCookie("selected_location", JSON.stringify(value));
-    //     setCookie("selected_currency", locationObj.currency);
-    //     const getCurrencyKey = currencyData[locationObj.currency];
-    //     setCurrency(getCurrencyKey);
-    //     setNavLocationValue(value);
-    //     setNavLocation(value);
-    // };
+    const handleChange = (value) => {
+        // console.log("click");
+        const locationObj = locations.find((item) => item.value === value);
+        setCookie("selected_location", JSON.stringify(value));
+        setCookie("selected_currency", locationObj.currency);
+        const getCurrencyKey = currencyData[locationObj.currency];
+        setCurrency(getCurrencyKey);
+        setNavLocationValue(value);
+        setNavLocation(value);
+    };
 
     // To Uppercase the Breadcrumb item
     // const toPascalCase = (string) => (string ? string : "");
@@ -219,7 +225,7 @@ const NextBreadcrumb = () => {
     // };
 
     return (
-        <div className="container mx-auto py-6">
+        <div className="container mx-auto py-6 flex justify-between items-center">
             <Breadcrumb>
                 <Breadcrumb.Item>
                     <Link
@@ -250,6 +256,40 @@ const NextBreadcrumb = () => {
                     );
                 })}
             </Breadcrumb>
+            {paths === "/store" && (
+                <Select
+                    placeholder="Please select your country"
+                    // style={{
+                    //     backgroundColor: "#FAFBFB",
+                    //     height: 50,
+                    //     borderRadius: "20px",
+                    // }}
+                    style={{
+                        width: "350px",
+                    }}
+                    value={navLocationValue}
+                    className="h-10"
+                    onChange={(value) => handleChange(value)}
+                    options={locations?.map((location, index) => ({
+                        ...location,
+                        label: (
+                            <div className="flex justify-start items-center align-middle text-[#354764] gap-4">
+                                {location.flag && (
+                                    <Image
+                                        width={1000}
+                                        height={1000}
+                                        alt="product-image"
+                                        src={`${GET_IMAGE_RENDER}?key=${location.flag}`}
+                                        className="w-[30px] h-[20px]"
+                                    />
+                                )}
+
+                                {location.label}
+                            </div>
+                        ),
+                    }))}
+                />
+            )}
         </div>
     );
 };
