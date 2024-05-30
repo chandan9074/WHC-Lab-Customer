@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import OrderInfo from "../OrderInfo";
 import ItemReview from "../ItemReview";
 import ItemReviewForm from "../ItemReviewForm";
-import Summary from "@/sections/Profile/Orders/OrderSummary/Summary";
+// import Summary from "@/sections/Profile/Orders/OrderSummary/Summary";
+import Summary from "@/components/OrderSummary/Summary";
 import CustomModal from "@/components/common/CustomModal";
 import OrderService from "@/services/OrderService";
 import { getCookie } from "cookies-next";
@@ -67,7 +68,6 @@ const OrderDetails = ({ params: { orderId } }) => {
             setIsWriteReview(false);
         }
     };
-
     return (
         <div className="py-6 md:py-12 sm:px-[0px] md:px-[10px] lg:px-[58px]">
             <div className="flex justify-center mb-10">
@@ -103,7 +103,8 @@ const OrderDetails = ({ params: { orderId } }) => {
                             subTotal={data?.subtotal}
                             totalItems={data?.lineItems?.length}
                             // shippingCharge={shippingCharge}
-                            // discount={discountAmount}
+                            discount={data?.couponAmount}
+                            couponCode={data?.couponCode}
                             // tax={tax}
                             showTotalItemCount={true}
                             orderCurrency={data?.currency}

@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Icons from "../../../public/assets/Icons";
 
 const RecentlyViewedSlideShowSection = ({ data, wishListIds }) => {
-    console.log(wishListIds);
+    // console.log(wishListIds);
     const [selectedTab, setSelectedTab] = useState("YOU MAY ALSO LIKE");
     const [slidesPerRow, setSlidesPerRow] = useState(4);
 

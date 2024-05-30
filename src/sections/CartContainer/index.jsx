@@ -24,7 +24,7 @@ function CartContainer() {
     const calculateOrder = (couponCode) => {
         const ids = orderItem.map((item) => item._id);
         let data = {};
-        console.log({ couponCode });
+        // console.log({ couponCode });
         if (ids.length === 0) {
             setOrderCoupon("");
             data = {
@@ -48,7 +48,7 @@ function CartContainer() {
 
         // Listen for response from the server
         socket.on("order:calculated", (data) => {
-            console.log({ data });
+            // console.log({ data });
             if (data.error && ids.length > 0) {
                 toast.error(data.error);
             } else {

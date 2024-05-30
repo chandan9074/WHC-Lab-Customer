@@ -1,5 +1,6 @@
 import { useUserContext } from "@/contexts/UserContext";
 import { Flex, Typography } from "antd";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const { Text } = Typography;
@@ -15,8 +16,15 @@ function Summary({
     showTotalItemCount,
 }) {
     const { currency } = useUserContext();
+    const currentPath = usePathname();
     return (
-        <div className="border p-4 bg-neutral-10 rounded-lg">
+        <div
+            className={`${
+                currentPath.includes("orders-history")
+                    ? "bg-white"
+                    : "bg-transparent"
+            } border p-4 bg-neutral-10 rounded-lg`}
+        >
             {showTotalItemCount && (
                 <div className="border-b-2 pb-2 border-dashed mb-4">
                     <Container
@@ -91,7 +99,7 @@ const Container = ({
             {couponCode ? `${content} (${couponCode})` : content}
         </Text>
         <Text className={valueStyle}>{`${content === "Discount" ? "- " : ""}${
-            content.includes("Total Items") ? "" : `${currency.icon}`
+            content.includes("Total Items") ? "" : `${currency?.icon}`
         }${value}`}</Text>
     </Flex>
 );

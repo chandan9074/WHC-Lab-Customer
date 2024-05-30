@@ -14,7 +14,8 @@ import UserShippingAddressForm from "./UserShippingAddressForm";
 import ShippingMethod from "./ShippingMethod";
 import PaymentMethodSelection from "./PaymentMethod";
 import OrderSummaryWithProduct from "../Profile/Orders/OrderSummary/OrderSummaryWithProduct";
-import Summary from "../Profile/Orders/OrderSummary/Summary";
+// import Summary from "../Profile/Orders/OrderSummary/Summary";
+import Summary from "@/components/OrderSummary/Summary";
 import MakeApiCall from "@/services/MakeApiCall";
 import { ORDERS_URL } from "@/helpers/apiURLS";
 import { useUserContext } from "@/contexts/UserContext";
@@ -42,7 +43,7 @@ function PlaceOrderContainer({ addressData }) {
     const _calculateOrderData = getCookie("calculatedOrderData");
     const calculatedOrderData =
         _calculateOrderData && JSON.parse(_calculateOrderData);
-
+    console.log({ calculatedOrderData });
     const searchParams = useSearchParams();
     const userType = `${searchParams}`.split("=")[1];
 
@@ -58,6 +59,8 @@ function PlaceOrderContainer({ addressData }) {
             const body = {
                 paymentMethod: paymentMethod,
                 cartId: orderIds,
+                couponCode: calculatedOrderData?.couponCode,
+                couponAmount: calculatedOrderData?.couponAmount,
             };
             handlePlaceOrder(body);
         } else {
@@ -246,7 +249,7 @@ function PlaceOrderContainer({ addressData }) {
                 </div>
                 {/* Order review section */}
                 <div
-                    className="bg-white p-4 flex flex-col gap-4"
+                    className="bg-neutral-10 border border-stroke-new rounded-lg p-4 flex flex-col gap-4"
                     style={{ height: "fit-content" }}
                 >
                     <Text className="font w-full flex justify-center text-base font-medium text-neutral-700">
@@ -259,20 +262,13 @@ function PlaceOrderContainer({ addressData }) {
                     />
 
                     <Summary
-                        total={calculatedOrderData?.total}
-                        subTotal={calculatedOrderData?.subtotal}
-                        totalItems={calculatedOrderData?.lineItems?.length}
+                        total={calculatedOrderData?.total || 0}
+                        subTotal={calculatedOrderData?.subtotal || 0}
+                        totalItems={calculatedOrderData?.lineItems?.length || 0}
                         // shippingCharge={shippingCharge}
-                        // discount={discountAmount}
-                        // tax={
-                        //     orderItem?.length !== 0
-                        //         ? calculateOrderItemsTotalPrice(
-                        //               orderItem,
-                        //               0.05,
-                        //               true
-                        //           )
-                        //         : 0
-                        // }
+                        couponCode={calculatedOrderData?.couponCode}
+                        discount={calculatedOrderData?.couponAmount}
+                        tax={calculatedOrderData?.vatAmount || 0}
                         showTotalItemCount={true}
                     />
 

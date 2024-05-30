@@ -15,7 +15,7 @@ import { setCookie } from "cookies-next";
 const NextBreadcrumb = () => {
     const [distributorsData, setDistributorsData] = useState([]);
     const paths = usePathname();
-    console.log(paths);
+    // console.log(paths);
     const pathNames = paths.split("/").filter((path) => path);
     // const hasStoreInPath = pathNames.includes("store");
     const { setNavLocation, setNavLocationValue, navLocationValue } =
@@ -26,7 +26,7 @@ const NextBreadcrumb = () => {
     // const [selected, setSelected] = useState(true);
 
     const handleChange = (value) => {
-        console.log("click");
+        // console.log("click");
         const locationObj = locations.find((item) => item.value === value);
         setCookie("selected_location", JSON.stringify(value));
         setCookie("selected_currency", locationObj.currency);

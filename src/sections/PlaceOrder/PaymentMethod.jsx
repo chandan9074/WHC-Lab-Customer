@@ -158,6 +158,7 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
                                             </p>
                                         ) : (
                                             <button
+                                                type="button"
                                                 onClick={handleApplyForCredit}
                                                 className="text-brand-blue-500 text-sm font-semibold leading-[18.23px]"
                                             >
