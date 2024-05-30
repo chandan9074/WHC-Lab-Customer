@@ -16,6 +16,7 @@ export default async function OrderConfirmationPage({ params }) {
         orderNumber,
         token
     );
+    // console.log({ orderData });
 
     return (
         <Suspense fallback={<Loader />}>

@@ -15,7 +15,7 @@ import { useWishlistContext } from "@/contexts/WishlistContext";
 const { Text } = Typography;
 
 const Wish = ({ wishData, handleDelete }) => {
-    console.log(wishData);
+    // console.log(wishData);
     const { getProductWishlist } = useWishlistContext();
 
     const { getUpdateCartList, createCartItem } = useCart();

@@ -8,7 +8,7 @@ const { Text } = Typography;
 const OrderSummaryWithProduct = ({ orderItem, total }) => {
     const { currency } = useUserContext();
     return (
-        <div className="border p-4 bg-white rounded-sm">
+        <div className="border p-4 bg-neutral-10 rounded-[4px]">
             <div className="flex items-center justify-between border-b pb-2 mb-2">
                 <Text className="font-bold text-neutral-700">
                     Total items ({orderItem?.length} items){" "}

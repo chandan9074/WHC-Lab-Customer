@@ -23,7 +23,7 @@ const OurDistributors = async (params) => {
             getDistinctCategory,
         ]);
 
-    console.log("distributorsData-----", distributorsData);
+    // console.log("distributorsData-----", distributorsData);
     // console.log("ctgry-----", distinctCategory);
 
     return (
