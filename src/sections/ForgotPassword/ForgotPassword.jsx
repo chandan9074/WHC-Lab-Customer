@@ -18,7 +18,9 @@ const ForgotPassword = ({ title, description }) => {
 
     const onFinish = async (values) => {
         setLoading(true);
-        setCookie("temp_email", `${values.email}`);
+        setCookie("temp_email", `${values.email}`, {
+            maxAge: 60 * 60 * 12,
+        });
 
         try {
             const res = await MakeApiCall({
@@ -27,11 +29,12 @@ const ForgotPassword = ({ title, description }) => {
                 ...MethodsStructure.patchMethod(),
             });
 
-
             // setCookie();
 
             if (res?.status === 200) {
-                setCookie("temp_whc_forget_pass_info", JSON.stringify(values));
+                setCookie("temp_whc_forget_pass_info", JSON.stringify(values), {
+                    maxAge: 60 * 60 * 12,
+                });
                 toast.success(res.message);
                 router.push(CHANGE_PASSWORD_VERIFICATION_PATH);
             }

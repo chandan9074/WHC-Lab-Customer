@@ -65,7 +65,9 @@ const ProductRightView = ({
     }, [data]);
 
     const handleLocation = async (locationId) => {
-        setCookie("selected_location", JSON.stringify(locationId));
+        setCookie("selected_location", JSON.stringify(locationId), {
+            maxAge: 60 * 60 * 12,
+        });
         if (locationId) {
             const stock = data?.variants.find(
                 (item) => item.location._id === locationId

@@ -115,7 +115,10 @@ const SignInForm = () => {
                         };
                         setCookie(
                             "temp_userInfo",
-                            JSON.stringify(temp_userInfo)
+                            JSON.stringify(temp_userInfo),
+                            {
+                                maxAge: 60 * 60 * 12,
+                            }
                         );
                         router.push("/sign-up-verification");
                     }

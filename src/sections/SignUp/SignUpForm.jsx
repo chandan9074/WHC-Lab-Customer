@@ -5,8 +5,9 @@ import {
     Form,
     Input,
     Typography,
-    Divider, Spin,
-    Select
+    Divider,
+    Spin,
+    Select,
 } from "antd";
 import Image from "next/image";
 import Link from "next/link";
@@ -90,9 +91,13 @@ const SignInForm = () => {
                 method: "POST",
                 body: body,
             });
-            console.log(response, "sign  up response");
-            setCookie("temp_userInfo", JSON.stringify(response.user));
-            setCookie("temp_accessToken", response.user.token);
+            // console.log(response, "sign  up response");
+            setCookie("temp_userInfo", JSON.stringify(response.user), {
+                maxAge: 60 * 60 * 12,
+            });
+            setCookie("temp_accessToken", response.user.token, {
+                maxAge: 60 * 60 * 12,
+            });
             toast.success(response.message);
             setLoading(false);
 

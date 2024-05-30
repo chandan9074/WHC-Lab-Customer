@@ -28,7 +28,9 @@ const NextBreadcrumb = () => {
     const handleChange = (value) => {
         console.log("click");
         const locationObj = locations.find((item) => item.value === value);
-        setCookie("selected_location", JSON.stringify(value));
+        setCookie("selected_location", JSON.stringify(value), {
+            maxAge: 60 * 60 * 12,
+        });
         setCookie("selected_currency", locationObj.currency);
         const getCurrencyKey = currencyData[locationObj.currency];
         setCurrency(getCurrencyKey);

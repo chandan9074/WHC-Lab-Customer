@@ -207,7 +207,9 @@ const MyAccountSection = ({ data }) => {
     };
 
     useEffect(() => {
-        setCookie("userInfo", `${JSON.stringify(data)}`);
+        setCookie("userInfo", `${JSON.stringify(data)}`, {
+            maxAge: 60 * 60 * 12,
+        });
     }, [data]);
 
     return (
@@ -378,7 +380,9 @@ const NameCustomModal = ({
             headers: { Authorization: token },
         });
         const userInfo = response.user;
-        setCookie("userInfo", `${JSON.stringify(userInfo)}`);
+        setCookie("userInfo", `${JSON.stringify(userInfo)}`, {
+            maxAge: 60 * 60 * 12,
+        });
         setFormValue({
             name: userInfo?.firstName + " " + userInfo?.lastName,
             primaryEmail: userInfo?.primaryEmail,

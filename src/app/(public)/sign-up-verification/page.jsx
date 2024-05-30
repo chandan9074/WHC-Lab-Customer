@@ -38,8 +38,12 @@ const SignUpVerification = () => {
             });
             toast.success(response?.message);
             if (token) {
-                setCookie("userInfo", JSON.stringify(userDetails));
-                setCookie("accessToken", token);
+                setCookie("userInfo", JSON.stringify(userDetails), {
+                    maxAge: 60 * 60 * 12,
+                });
+                setCookie("accessToken", token, {
+                    maxAge: 60 * 60 * 12,
+                });
                 setIsLogin(true);
                 setUserInfo(userDetails);
                 deleteCookie("temp_userInfo");

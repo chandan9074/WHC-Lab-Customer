@@ -39,9 +39,12 @@ export function AuthProvider({ children }) {
         setIsLogin(true);
 
         // Set the token and userInfo set inside cookie
-        setCookie("accessToken", token);
-        setCookie("userInfo", JSON.stringify(userInfo));
-
+        setCookie("accessToken", token, {
+            maxAge: 60 * 60 * 12,
+        });
+        setCookie("userInfo", JSON.stringify(userInfo), {
+            maxAge: 60 * 60 * 12,
+        });
 
         // You can use the router to navigate to home page
         router.push("/");
@@ -72,13 +75,12 @@ export function AuthProvider({ children }) {
                         GOOGLE_LOGIN_URL
                     );
 
-        toast.success("Successfully logged in!")
+                    toast.success("Successfully logged in!");
 
                     // if(res.status === 200){
                     //     toast.success(res.message)
                     // }
                 }
-
             }
         } catch (error) {
             throw new Error(error.message || "Something went wrong");
@@ -122,7 +124,7 @@ export function AuthProvider({ children }) {
         setUserInfo(null);
         setIsLogin(false);
         signOut(socialAuth);
-        toast.success("Successfully logged out!")
+        toast.success("Successfully logged out!");
         router.push("/");
     };
 

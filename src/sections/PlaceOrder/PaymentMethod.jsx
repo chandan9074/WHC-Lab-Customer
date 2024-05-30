@@ -50,7 +50,9 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
                 let tempUser = userInfo;
                 tempUser.appliedForCreditBalance = true;
                 setUserInfo(tempUser);
-                setCookie("userInfo", JSON.stringify(tempUser));
+                setCookie("userInfo", JSON.stringify(tempUser), {
+                    maxAge: 60 * 60 * 12,
+                });
             }
         } catch (error) {
             toast.error(error.message);
