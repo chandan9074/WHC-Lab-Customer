@@ -355,7 +355,7 @@ const SignInForm = () => {
                                     {
                                         required: true,
                                         message:
-                                            "Please input your confirm password!",
+                                            "Please confirm your password!",
                                     },
                                     {
                                         min: 8,
@@ -373,7 +373,7 @@ const SignInForm = () => {
                                             }
                                             return Promise.reject(
                                                 new Error(
-                                                    "The new password that you entered do not match!"
+                                                    "The new password that you entered does not match!"
                                                 )
                                             );
                                         },

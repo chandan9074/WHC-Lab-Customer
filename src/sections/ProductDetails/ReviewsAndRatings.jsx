@@ -125,7 +125,7 @@ const LeftSideContent = ({ ratings, data }) => {
                     {<Comments data={filteredData} />}
                 </div>
 
-                <div className="flex lg:hidden flex-col gap-y-3 pt-12">
+                {/* <div className="flex lg:hidden flex-col gap-y-3 pt-12">
                     <p className="text-neutral-300 text-sm font-medium">
                         Seller
                     </p>
@@ -170,7 +170,7 @@ const LeftSideContent = ({ ratings, data }) => {
                             </div>
                         </div>
                     </Link>
-                </div>
+                </div> */}
             </div>
         </>
     );
@@ -182,6 +182,8 @@ const Comments = ({ data }) => {
         const options = { year: "numeric", month: "long", day: "numeric" };
         return date.toLocaleDateString("en-US", options);
     };
+
+    console.log(data);
 
     return (
         <div className="animate-fadeIn w-full space-y-[33px]">
@@ -196,8 +198,8 @@ const Comments = ({ data }) => {
                             width={1000}
                             height={1000}
                             src={
-                                item?.user?.image
-                                    ? item?.user?.image
+                                item?.user?.profilePicture
+                                    ? `${GET_IMAGE_RENDER}?key=${item?.user?.profilePicture}`
                                     : Images.profile_avatar
                             }
                             className="w-10 h-10 md:w-10 md:h-10 rounded-full"
@@ -321,14 +323,12 @@ const RightSidecontent = ({ ratingsWithDivWidth, rating }) => {
 
                 <div className="w-full h-[1px] bg-[#8790AB] bg-opacity-[12%]" />
 
-                <div className="hidden lg:flex flex-col gap-y-3">
+                {/* <div className="hidden lg:flex flex-col gap-y-3">
                     <p className="text-neutral-300 text-sm font-medium">
                         Seller
                     </p>
 
-                    <div
-                        className="flex gap-x-3 cursor-pointer"
-                    >
+                    <div className="flex gap-x-3 cursor-pointer">
                         <Image
                             alt="seller-avatar"
                             src={Images.profile_avatar}
@@ -365,7 +365,7 @@ const RightSidecontent = ({ ratingsWithDivWidth, rating }) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

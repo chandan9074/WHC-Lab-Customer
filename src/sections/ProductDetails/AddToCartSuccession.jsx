@@ -16,6 +16,7 @@ const AddToCartSuccession = ({
 }) => {
     const router = useRouter();
     const { currency } = useUserContext();
+    console.log(data, "data prdo");
     return (
         <div className="p-3">
             <div className="flex items-center gap-x-2">
@@ -56,7 +57,7 @@ const AddToCartSuccession = ({
 
                         <h3 className="text-neutral-700 font-normal text-sm">
                             <span className="font-medium text-base">SKU:</span>{" "}
-                            {data?.sku}
+                            {data?.variants[0]?.sku}
                         </h3>
 
                         <h3 className="text-neutral-700 font-normal text-sm">
