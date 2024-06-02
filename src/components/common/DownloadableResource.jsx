@@ -6,7 +6,7 @@ import ResourceService from "@/services/ResourcesService";
 
 function DownloadableResource({ text = "Downloadable Resources", link }) {
     const handleDownload = () => {
-        ResourceService.downloadResource(link);
+        ResourceService.downloadResource(link, text);
     };
 
     return (

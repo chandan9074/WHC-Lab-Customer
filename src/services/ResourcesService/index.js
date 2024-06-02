@@ -12,16 +12,14 @@ async function getResources(slug) {
     return res;
 }
 
-function downloadResource(link) {
-    const _link = document.createElement("a");
-    _link.href = `${DOWNLOAD_RESOURCE}${link}`;
-    _link.setAttribute("download", `${DOWNLOAD_RESOURCE}${link}`);
-
-    window.document.body.appendChild(_link);
-    _link.click();
-
-    // Clean up and remove the link
-    _link.parentNode.removeChild(_link);
+function downloadResource(links,text) {
+    const url = links;
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = text;  // Specify the filename here
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 const ResourceService = {
