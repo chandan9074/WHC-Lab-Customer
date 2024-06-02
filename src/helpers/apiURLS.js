@@ -94,3 +94,5 @@ export const APPLY_FOR_CREDIT_BALANCE = `${BASEURL}/users/apply-for-credit`;
 export const REVIEW_URL = `${BASEURL}/reviews`;
 // Contact url
 export const CONTACTS = `${BASEURL}/contacts`;
+// Newsletter
+export const NEWS_LETTER = `${BASEURL}/newsletter-subscribers/subscribe`;

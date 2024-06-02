@@ -10,6 +10,7 @@ import {
     PROFILE_URL,
     CONTACTS,
     COMPANY_VAT_CODE_URL,
+    NEWS_LETTER,
 } from "@/helpers/apiURLS";
 
 export default class UserService {
@@ -168,5 +169,13 @@ export default class UserService {
         });
 
         return res;
+    }
+
+    static async subscribeNewsletter(data) {
+        return await MakeApiCall({
+            apiUrl: NEWS_LETTER,
+            body: { ...data },
+            ...MethodsStructure.postMethod(),
+        });
     }
 }
