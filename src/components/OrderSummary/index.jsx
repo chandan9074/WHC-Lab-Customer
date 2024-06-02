@@ -50,9 +50,13 @@ function OrderSummary({
     };
 
     const handleAddCouponCode = () => {
-        calculateOrder(couponCode);
-        setOrderCoupon(couponCode);
-        setCouponCode("");
+        if (orderItem.length > 0) {
+            calculateOrder(couponCode);
+            setOrderCoupon(couponCode);
+            setCouponCode("");
+        } else {
+            toast.error("Please check items you want to checkout with!");
+        }
     };
 
     return (

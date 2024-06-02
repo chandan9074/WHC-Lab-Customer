@@ -11,12 +11,13 @@ import Buttons from "@/components/Buttons";
 import AddressModal from "../MyAddressSection/AddressModal";
 import { useUserContext } from "@/contexts/UserContext";
 
-const UserShippingAddressForm = ({ data, setAddress }) => {
+const UserShippingAddressForm = ({ data, setAddress, setBillingAddress }) => {
     // const [isModalOpen, setIsModalOpen] = useState(false);
     // const [isDetailsOpen, setIsDetailsOpen] = useState(null);
     // const [isNewAddress, setIsNewAddress] = useState(false);
     const [value, setValue] = useState();
     const [createNewAddressModal, setCreateNewAddressModal] = useState(false);
+    const [loading, setLoading] = useState(true);
     const { locations } = useUserContext();
     // const [isUpdateData, setIsUpdateData] = useState(null);
     // const [openDeleteModal, setOpenDeleteModal] = useState(null);
@@ -28,6 +29,7 @@ const UserShippingAddressForm = ({ data, setAddress }) => {
         // console.log(data);
         setAddressList(data);
         handleActiveAddress(data);
+        setLoading(false);
     }, [data]);
 
     const handleActiveAddress = (data) => {
@@ -44,7 +46,8 @@ const UserShippingAddressForm = ({ data, setAddress }) => {
         try {
             // console.log(e.target.value);
             setValue(e.target.value);
-            setAddress(e.target.value);
+            setAddress && setAddress(e.target.value);
+            setBillingAddress && setBillingAddress(e.target.value);
         } catch (error) {
             console.error("Error updating default address:", error);
             toast.error("Failed to update default address");
@@ -149,26 +152,28 @@ const UserShippingAddressForm = ({ data, setAddress }) => {
                     </Radio.Group>
                 </>
             ) : (
-                <div className="w-full py-12 bg-[#EFF9F9] text-green-600 text-lg font-medium flex justify-center flex-col items-center gap-2">
-                    {/* <>
-                        {"Addresses not added yet! "}
-                        <Link
-                            href={"/profile/my-address"}
-                            className="font-bold hover:text-current"
-                        >
-                            Add New Address
-                        </Link>
-                    </> */}
-                    Addresses not added yet!
-                    <Buttons.PrimaryButton
-                        type="button"
-                        label={"Add New Address"}
-                        onClick={handleAddressPageNavigation}
-                        className={
-                            "md:py-3 py-2 md:px-9 px-6 bg-magenta-600 rounded-full text-white md:text-base text-sm font-semibold"
-                        }
-                    />
-                </div>
+                !loading && (
+                    <div className="w-full py-12 bg-[#EFF9F9] text-green-600 text-lg font-medium flex justify-center flex-col items-center gap-2">
+                        {/* <>
+                    {"Addresses not added yet! "}
+                    <Link
+                        href={"/profile/my-address"}
+                        className="font-bold hover:text-current"
+                    >
+                        Add New Address
+                    </Link>
+                </> */}
+                        Addresses not added yet!
+                        <Buttons.PrimaryButton
+                            type="button"
+                            label={"Add New Address"}
+                            onClick={handleAddressPageNavigation}
+                            className={
+                                "md:py-3 py-2 md:px-9 px-6 bg-magenta-600 rounded-full text-white md:text-base text-sm font-semibold"
+                            }
+                        />
+                    </div>
+                )
             )}
             {createNewAddressModal && (
                 <Modal

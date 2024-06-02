@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 import { ORDER_CONFIRM_PATH } from "@/helpers/slug";
 import "./PlaceOrder.css";
-import UserShippingAddressForm from "./UserShippingAddressForm";
+// import UserShippingAddressForm from "./UserShippingAddressForm";
 import ShippingMethod from "./ShippingMethod";
 import PaymentMethodSelection from "./PaymentMethod";
 import OrderSummaryWithProduct from "../Profile/Orders/OrderSummary/OrderSummaryWithProduct";
@@ -20,9 +20,17 @@ import MakeApiCall from "@/services/MakeApiCall";
 import { ORDERS_URL } from "@/helpers/apiURLS";
 import { useUserContext } from "@/contexts/UserContext";
 import { useCart } from "@/contexts/CartContext";
+import BillingAddressToggleButton from "./BillingAddressToggleButton";
 const GuestAddressForm = dynamic(() => import("./GuestAddressForm"), {
     ssr: false,
 });
+
+const UserShippingAddressForm = dynamic(
+    () => import("./UserShippingAddressForm"),
+    {
+        ssr: false,
+    }
+);
 
 const { Text, Title } = Typography;
 
@@ -32,9 +40,13 @@ function PlaceOrderContainer({ addressData }) {
     const [shippingMethod, setShippingMethod] = useState("standard");
     const [paymentMethod, setPaymentMethod] = useState("payNow");
     const [expiredDate, setExpiredDate] = useState("");
-    const [address, setAddress] = useState(addressData[0]?._id);
+    const [address, setAddress] = useState(
+        addressData.find((item) => item.isDefault)._id
+    );
     const [sameAddress, setSameAddress] = useState(true);
-    const [billingAddress, setBillingAddress] = useState(addressData[0]?._id);
+    const [billingAddress, setBillingAddress] = useState(
+        addressData.find((item) => item.isDefault)._id
+    );
     const [form] = Form.useForm();
     const [orderItem, setOrderItem] = useState([]);
     const router = useRouter();
@@ -47,13 +59,21 @@ function PlaceOrderContainer({ addressData }) {
     const searchParams = useSearchParams();
     const userType = `${searchParams}`.split("=")[1];
 
+    const userInfo = getCookie("userInfo");
+    const user = JSON.parse(userInfo);
+
     const onFinish = (values) => {
-        // console.log("values", values);
+        let addressObject = {};
+        let billingAddressObject = {};
+
+        addressObject = addressData.find((item) => item._id === address);
+        billingAddressObject = addressData.find(
+            (item) => item._id === billingAddress
+        );
 
         const stockOutProduct = orderItem.filter(
             (item) => orderItem.inStock === false
         );
-
         if (orderItem.length > 0 && stockOutProduct.length === 0) {
             const orderIds = orderItem.map((item) => item._id);
             const body = {
@@ -61,14 +81,20 @@ function PlaceOrderContainer({ addressData }) {
                 cartId: orderIds,
                 couponCode: calculatedOrderData?.couponCode,
                 couponAmount: calculatedOrderData?.couponAmount,
+                shippingAddress: addressObject,
+                billingAddress: sameAddress
+                    ? addressObject
+                    : billingAddressObject,
+                shippingMethod: shippingMethod,
             };
+            if (values.instructions) {
+                body.instructions = values.instructions;
+            }
             handlePlaceOrder(body);
         } else {
             toast.error("Some products are stock out. Please remove those!!");
         }
-
         deleteCookie("calculatedOrderData");
-
         // console.log(orderIds, "order item");
     };
 
@@ -204,11 +230,13 @@ function PlaceOrderContainer({ addressData }) {
                                     data={addressData}
                                     setAddress={setAddress}
                                 />
-
+                                <BillingAddressToggleButton
+                                    onToggleChange={onToggleChange}
+                                />
                                 {!sameAddress && (
                                     <UserShippingAddressForm
                                         data={addressData}
-                                        setAddress={setBillingAddress}
+                                        setBillingAddress={setBillingAddress}
                                     />
                                 )}
                             </div>
