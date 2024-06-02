@@ -5,7 +5,7 @@ import Layouts from "@/layouts";
 import Image from "next/image";
 import React, { useState } from "react";
 import Icons from "../../../../public/assets/Icons";
-import { Form, Input, Spin } from "antd";
+import { Button, Form, Input, Spin } from "antd";
 import LabelText from "@/components/common/LabelText";
 import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Buttons from "@/components/Buttons";
@@ -131,10 +131,19 @@ function Contact() {
                             </div>
 
                             <div className="w-full">
-                                <Buttons.PrimaryButton
-                                    label={"Submit"}
-                                    width={"md:w-1/3 w-full"}
-                                />
+                                {!loading ? (
+                                    <Buttons.PrimaryButton
+                                        label={"Submit"}
+                                        width={"md:w-1/3 w-full"}
+                                    />
+                                ) : (
+                                    <Button
+                                        className="h-[52px] py-3 sm:py-3.5 px-6 font-montserrat rounded-full  flex items-center gap-2.5 md:w-1/3 w-full justify-center bg-brand-blue-800 text-white font-bold"
+                                        loading={loading}
+                                    >
+                                        Submit
+                                    </Button>
+                                )}
                             </div>
                         </Form>
                     </div>
