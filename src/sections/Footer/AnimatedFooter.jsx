@@ -193,7 +193,10 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                     © 2024 WHC Lab. All rights reserved.{" "}
                 </p>
                 <p className="text-[#9194A6] font-normal text-xs leading-4">
-                    Developed by ZAAG Systems Ltd.
+                    Developed by{" "}
+                    <a href="https://zaagsys.com/" target="_blank">
+                        ZAAG Systems Ltd.
+                    </a>
                 </p>
             </motion.div>
         </>

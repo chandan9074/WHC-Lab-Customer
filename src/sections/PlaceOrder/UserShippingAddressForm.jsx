@@ -75,9 +75,9 @@ const UserShippingAddressForm = ({ data, setAddress, setBillingAddress }) => {
                     >
                         {addressList?.map((address, index) => (
                             <div
-                                key={address._id}
+                                key={address?._id}
                                 className={`${
-                                    value === address._id
+                                    value === address?._id
                                         ? "border-[#0b2848] bg-white"
                                         : "border-transparent bg-neutral-10"
                                 } border flex justify-between px-4 py-4 lg:px-6 lg:py-5 rounded-sm`}
@@ -85,7 +85,7 @@ const UserShippingAddressForm = ({ data, setAddress, setBillingAddress }) => {
                                 <div className="flex">
                                     <Radio
                                         // style={radioStyle}
-                                        value={address._id}
+                                        value={address?._id}
                                         className="custom-radio"
                                         checked={false}
                                     >
@@ -93,7 +93,7 @@ const UserShippingAddressForm = ({ data, setAddress, setBillingAddress }) => {
                                             <div className="flex gap-x-2 items-center">
                                                 <h2
                                                     className={`font-semibold ${
-                                                        value === address._id
+                                                        value === address?._id
                                                             ? "text-magenta-600"
                                                             : "text-neutral-700"
                                                     }`}

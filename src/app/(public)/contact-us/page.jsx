@@ -3,7 +3,7 @@ import InfoPagesContainer from "@/components/common/InfoPagesContainer";
 import PageHeaderWithNameAndBgImage from "@/components/common/PageHeaderWithNameAndBgImage";
 import Layouts from "@/layouts";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Icons from "../../../../public/assets/Icons";
 import { Button, Form, Input, Spin } from "antd";
 import LabelText from "@/components/common/LabelText";
@@ -12,13 +12,32 @@ import Buttons from "@/components/Buttons";
 import UserService from "@/services/UserService/UserService";
 import { toast } from "react-toastify";
 import { LoadingOutlined } from "@ant-design/icons";
+import MakeApiCall from "@/services/MakeApiCall";
+import { CONTACT_INFO_URL } from "@/helpers/apiURLS";
 
 function Contact() {
-    const [loading, setLoding] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [contactInfo, setContactInfo] = useState(false);
     const [form] = Form.useForm();
 
+    const getContactInfo = async () => {
+        try {
+            const response = await MakeApiCall({
+                apiUrl: CONTACT_INFO_URL,
+            });
+            console.log(response);
+            setContactInfo(response.doc);
+        } catch (error) {
+            toast.error(error?.message);
+        }
+    };
+
+    useEffect(() => {
+        getContactInfo();
+    }, []);
+
     const onFinish = async (values) => {
-        setLoding(true);
+        setLoading(true);
         values.phone = values.prefix + values.phone;
         delete values.prefix;
 
@@ -32,7 +51,7 @@ function Contact() {
         } catch (e) {
             toast.error(e?.message);
         } finally {
-            setLoding(false);
+            setLoading(false);
         }
     };
 
@@ -159,27 +178,52 @@ function Contact() {
                         <h3 className="text-2xl md:text-4xl font-semibold text-brand-blue-500 font-montserrat">
                             Let’s Connect
                         </h3>
-                        <div className="flex flex-col gap-4">
-                            {Array(5)
-                                .fill()
-                                .map((_, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex items-center gap-3"
-                                    >
-                                        <Image
-                                            src={Icons.phone}
-                                            width={1000}
-                                            height={1000}
-                                            alt="arrow-button"
-                                            className="w-5 h-5 md:w-6 md:h-6"
-                                        />
-                                        <p className="text-brand-blue-500 text-sm md:text-lg font-light">
-                                            EU Sales & Technical: +353 894 068
-                                            622
-                                        </p>
-                                    </div>
-                                ))}
+                        <div className="flex flex-col gap-4 lg:gap-9">
+                            <div className="flex flex-col gap-4">
+                                {contactInfo?.contactInfo?.emails.map(
+                                    (email, index) => (
+                                        <div
+                                            key={index}
+                                            className="flex items-center gap-3"
+                                        >
+                                            <Image
+                                                src={Icons.email}
+                                                width={1000}
+                                                height={1000}
+                                                alt="arrow-button"
+                                                className="w-5 h-5 md:w-6 md:h-6"
+                                            />
+                                            <p className="text-brand-blue-500 text-sm md:text-lg font-light">
+                                                {email}
+                                            </p>
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col gap-4 lg:gap-9">
+                            <div className="flex flex-col gap-4">
+                                {contactInfo?.contactInfo?.phoneNumbers.map(
+                                    (phone, index) => (
+                                        <div
+                                            key={index}
+                                            className="flex items-center gap-3"
+                                        >
+                                            <Image
+                                                src={Icons.phone}
+                                                width={1000}
+                                                height={1000}
+                                                alt="arrow-button"
+                                                className="w-5 h-5 md:w-6 md:h-6"
+                                            />
+                                            <p className="text-brand-blue-500 text-sm md:text-lg font-light">
+                                                {phone}
+                                            </p>
+                                        </div>
+                                    )
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
