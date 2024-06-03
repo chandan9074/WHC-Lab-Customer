@@ -12,20 +12,15 @@ const ActiveOrders = ({ activeOrderList }) => {
                     const createdAtDate = new Date(ele?.createdAt); // Convert createdAt to Date object if not already
 
                     return (
-                        <Link
-                            href={`${ORDERS_HISTORY_PATH}/${ele._id}`}
-                            key={index}
-                        >
-                            <OrderItem
-                                key={index}
-                                createdAt={createdAtDate}
-                                orderId={ele?.number}
-                                state={ele.state}
-                                lineItemCount={ele.lineItems.length}
-                                total={ele.total}
-                                currency={ele?.currency}
-                            />
-                        </Link>
+                                <OrderItem
+                                    key={index}
+                                    createdAt={createdAtDate}
+                                    orderId={ele?.number}
+                                    state={ele.state}
+                                    lineItemCount={ele.lineItems.length}
+                                    total={ele.total}
+                                    currency={ele?.currency}
+                                />
                     );
                 })
             ) : (
