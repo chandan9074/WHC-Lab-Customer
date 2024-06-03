@@ -3,10 +3,38 @@ import Link from "next/link";
 import Image from "next/image";
 import Icons from "../../../public/assets/Icons";
 import { PRIVACY_AND_POLICY, TERMS_AND_CONDITIONS } from "@/helpers/slug";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { Spin } from "antd";
+import UserService from "@/services/UserService/UserService";
 
 const AnimatedFooter = ({ navLinks, socialLinks }) => {
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleAddNewsletter = async () => {
+        if (!email) {
+            toast.error("Email is required");
+            return;
+        }
+
+        try {
+            setLoading(true);
+
+            const res = await UserService.subscribeNewsletter({ email });
+            if (res?.status === 200) {
+                toast.success(res?.message);
+            }
+        } catch (e) {
+            toast.error(e?.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <>
+            <Spin spinning={loading} fullscreen />
             <div className="pt-20 flex flex-col lg:flex-row gap-y-9 justify-between text-white">
                 <motion.div
                     initial={{ x: -100, opacity: 0 }}
@@ -54,7 +82,7 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                     className="md:w-[500px]"
                 >
                     <div className="space-y-9">
-                        {/* <div className="flex flex-col gap-y-2 md:gap-y-0">
+                        <div className="flex flex-col gap-y-2 md:gap-y-0">
                             <p className="text-[#9194A6] text-[13.5px] font-medium leading-5">
                                 Subscribe to our newsletter{" "}
                             </p>
@@ -62,8 +90,15 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                                 <input
                                     type="text"
                                     className="bg-transparent border-b-[1.5px] border-[#2B2E3A] h-12 outline-none"
+                                    onChange={(e) => {
+                                        e.preventDefault();
+                                        setEmail(e.target.value);
+                                    }}
                                 />
-                                <button className="w-[42px] h-[42px] flex justify-center items-center rounded-full bg-[#1B1B1B]">
+                                <button
+                                    className="w-[42px] h-[42px] flex justify-center items-center rounded-full bg-[#1B1B1B]"
+                                    onClick={handleAddNewsletter}
+                                >
                                     <Image
                                         src={Icons.arrow_up_right_gray}
                                         width={1000}
@@ -73,7 +108,7 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                                     />
                                 </button>
                             </div>
-                        </div> */}
+                        </div>
                         {/* <div className="space-y-[15px]">
                             <p className="text-[#9194A6] text-[13.5px] font-medium leading-5">
                                 Drop us a line

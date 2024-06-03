@@ -12,6 +12,7 @@ import OrderService from "@/services/OrderService";
 import { getCookie } from "cookies-next";
 import ProductService from "@/services/productsService";
 import { toast } from "react-toastify";
+import { generateInvoice } from "@/services/common";
 
 const OrderDetails = ({ params: { orderId } }) => {
     const [data, setData] = useState({});
@@ -70,13 +71,14 @@ const OrderDetails = ({ params: { orderId } }) => {
     };
     return (
         <div className="py-6 md:py-12 sm:px-[0px] md:px-[10px] lg:px-[58px]">
-            <div className="flex justify-center mb-10">
-                <span className="text-neutral-300 text-base font-medium">
+            <div className="flex justify-between items-center mb-14">
+                <p className="text-neutral-300 text-base font-medium">
                     Order id{" "}
                     <span className="text-neutral-700 font-bold">
-                        #{data?.number}
+                        #{data?.number} 
                     </span>
-                </span>
+                </p>
+                <a className="text-blue-500 font-medium underline p-0 m-0 cursor-pointer" onClick={() => generateInvoice(data?.number)}>Download Invoice</a>
             </div>
 
             <div className="lg:flex justify-center lg:gap-x-[60px]">

@@ -9,6 +9,7 @@ import { generateInvoice } from "@/services/common";
 
 
 const OrderItem = ({
+    id,
     createdAt,
     orderId,
     state,
@@ -21,7 +22,7 @@ const OrderItem = ({
     return (
         <div className=" py-6 px-8 bg-white border border-neutral-30 rounded-[8px]  duration-500">
             <Link
-                href={`${ORDERS_HISTORY_PATH}/${orderId}`}
+                href={`${ORDERS_HISTORY_PATH}/${id}`}
             >
                 <div className="flex flex-row justify-between">
                     <div className="flex flex-col gap-2">
@@ -57,8 +58,7 @@ const OrderItem = ({
                     </div>
                 </div>
             </Link>
-            <button className="text-blue-500 font-medium underline" onClick={() => generateInvoice(orderId)}>Download Invoice</button>
-        
+            <a className="text-blue-500 font-medium underline p-0 m-0 cursor-pointer" onClick={() => generateInvoice(data?.number)}>Download Invoice</a>
         </div>
     );
 };

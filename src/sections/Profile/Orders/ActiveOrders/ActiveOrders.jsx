@@ -40,6 +40,7 @@ const ActiveOrders = ({ activeOrderList, data }) => {
                             >
                                 <OrderItem
                                     key={index}
+                                    id={ele?._id}
                                     createdAt={createdAtDate}
                                     orderId={ele?.number}
                                     state={ele.state}
