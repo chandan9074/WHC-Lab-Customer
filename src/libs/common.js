@@ -75,6 +75,11 @@ export const chooseUsData = [
         description:
             "We use the highest quality control standards with our yeast production. We utilize both next generation gentic/QPCR and plating methods to test the various batches for any spoiler organisms. Nothing is shipped without meeting the highest QC Standards.",
     },
+    {
+        _id: "06",
+        name: "Speedy Shipping",
+        description:"We use the highest quality control standards with our yeast production. We utilize both next generation gentic/QPCR and plating methods to test the various batches for any spoiler organisms. Nothing is shipped without meeting the highest QC Standards.",
+    },
 ];
 
 export const orderStatusColor = [
