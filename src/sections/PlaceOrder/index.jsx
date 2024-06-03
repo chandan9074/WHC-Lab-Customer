@@ -41,11 +41,15 @@ function PlaceOrderContainer({ addressData }) {
     const [paymentMethod, setPaymentMethod] = useState("payNow");
     const [expiredDate, setExpiredDate] = useState("");
     const [address, setAddress] = useState(
-        addressData.find((item) => item.isDefault)._id
+        addressData.length > 0
+            ? addressData.find((item) => item.isDefault)?._id
+            : {}
     );
     const [sameAddress, setSameAddress] = useState(true);
     const [billingAddress, setBillingAddress] = useState(
-        addressData.find((item) => item.isDefault)._id
+        addressData.length > 0
+            ? addressData.find((item) => item.isDefault)?._id
+            : {}
     );
     const [form] = Form.useForm();
     const [orderItem, setOrderItem] = useState([]);
@@ -66,16 +70,16 @@ function PlaceOrderContainer({ addressData }) {
         let addressObject = {};
         let billingAddressObject = {};
 
-        addressObject = addressData.find((item) => item._id === address);
-        billingAddressObject = addressData.find(
-            (item) => item._id === billingAddress
+        addressObject = addressData?.find((item) => item?._id === address);
+        billingAddressObject = addressData?.find(
+            (item) => item?._id === billingAddress
         );
 
         const stockOutProduct = orderItem.filter(
-            (item) => orderItem.inStock === false
+            (item) => orderItem?.inStock === false
         );
         if (orderItem.length > 0 && stockOutProduct.length === 0) {
-            const orderIds = orderItem.map((item) => item._id);
+            const orderIds = orderItem.map((item) => item?._id);
             const body = {
                 paymentMethod: paymentMethod,
                 cartId: orderIds,
