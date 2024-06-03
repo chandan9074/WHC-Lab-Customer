@@ -63,8 +63,8 @@ function PlaceOrderContainer({ addressData }) {
     const searchParams = useSearchParams();
     const userType = `${searchParams}`.split("=")[1];
 
-    const userInfo = getCookie("userInfo");
-    const user = JSON.parse(userInfo);
+    // const userInfo = getCookie("userInfo");
+    // const user = userInfo && JSON.parse(userInfo);
 
     const onFinish = (values) => {
         let addressObject = {};
