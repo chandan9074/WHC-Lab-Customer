@@ -11,6 +11,7 @@ import OrderSummaryWithDetails from "./OrderSummaryWithDetails";
 import { getCookie, hasCookie, deleteCookie } from "cookies-next";
 import { usePathname, useRouter } from "next/navigation";
 import Buttons from "@/components/Buttons";
+import { generateInvoice } from "@/services/common";
 
 const { Text } = Typography;
 
@@ -46,11 +47,14 @@ const OrderConfirmation = ({ orderSummary }) => {
                         <Text className="text-neutral-300">
                             Please be patient while we confirm your order.
                         </Text>
+                        <Text className="text-neutral-300 font-semibold">
+                            Download Invoice! Please <span className="text-blue-500 underline cursor-pointer" onClick={() => generateInvoice(orderSummary?.number)} >Click Here</span>.
+                        </Text>
                     </div>
                 </div>
             </div>
             <div className="flex flex-col gap-4 bg-neutral-10 rounded-lg border border-stroke-new">
-                <div className="hidden md:block border-b p-6 mb-4">
+                <div className="hidden border-b p-6 mb-4 md:flex md:justify-between md:items-center">
                     <Text className="font-bold text-2xl text-neutral-700">
                         Order Summary
                     </Text>
