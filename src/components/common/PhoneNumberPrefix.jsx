@@ -9,7 +9,7 @@ function PhoneNumberPrefix() {
                 defaultValue={"+880"}
                 className="flex items-center w-20 focus:border-none"
                 style={{
-                    height: "52px",
+                    height: "50px",
                     width: "90px",
                 }}
             >
