@@ -11,6 +11,7 @@ import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Buttons from "@/components/Buttons";
 import UserService from "@/services/UserService/UserService";
 import { toast } from "react-toastify";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function Contact() {
     const [loading, setLoding] = useState(false);
@@ -131,19 +132,26 @@ function Contact() {
                             </div>
 
                             <div className="w-full">
-                                {!loading ? (
-                                    <Buttons.PrimaryButton
-                                        label={"Submit"}
-                                        width={"md:w-1/3 w-full"}
-                                    />
-                                ) : (
-                                    <Button
-                                        className="h-[52px] py-3 sm:py-3.5 px-6 font-montserrat rounded-full  flex items-center gap-2.5 md:w-1/3 w-full justify-center bg-brand-blue-800 text-white font-bold"
-                                        loading={loading}
-                                    >
-                                        Submit
-                                    </Button>
-                                )}
+                                <Button
+                                    type="primary"
+                                    htmlType="submit"
+                                    className="md:w-1/3 w-full duration-200 bg-brand-blue-500 text-base font-semibold leading-6 rounded-full p-2 h-[52px] flex items-center justify-center gap-3"
+                                >
+                                    {loading && (
+                                        <Spin
+                                            indicator={
+                                                <LoadingOutlined
+                                                    style={{
+                                                        fontSize: 24,
+                                                        color: "white",
+                                                    }}
+                                                    spin
+                                                />
+                                            }
+                                        />
+                                    )}
+                                    Submit
+                                </Button>
                             </div>
                         </Form>
                     </div>
