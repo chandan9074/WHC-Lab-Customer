@@ -7,10 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 export const metadata = {
     title: "WHC-Lab",
     description: "WELCOME TO THE WHC LAB",
+    icons: { icon: "icon.svg" },
 };
 
 export default function RootLayout({ children }) {
-    
     return (
         <html lang="en">
             <body
