@@ -8,6 +8,7 @@ async function getOderHistoryData(token) {
     const res = await MakeApiCall({
         apiUrl: ORDERS_URL,
         headers: { Authorization: token },
+        query: { page: 1, limit: 6 },
     });
     return res;
 }
@@ -15,13 +16,14 @@ async function getOderHistoryData(token) {
 const ActiveOrders = async () => {
     const token = getCookie("accessToken", { cookies });
     const orderData = await getOderHistoryData(token);
-    // console.log("orderData---------", orderData);
+    console.log("orderData---------", orderData);
 
     return (
         <div className="py-6 md:py-12 sm:px-[0px] md:px-[10px] lg:px-[58px]">
             <Orders
                 activeOrderList={orderData?.error ? [] : orderData?.docs}
                 orderHistoryList={orderData?.error ? [] : orderData?.docs}
+                data={orderData}
             />
         </div>
     );
