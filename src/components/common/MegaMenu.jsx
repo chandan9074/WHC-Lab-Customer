@@ -181,7 +181,10 @@ const MegaMenu = ({ setOpen, open }) => {
 
                             <LinkHeader title={"Our Products"} />
                             <div className="mt-4 space-y-2 mb-9 flex flex-col">
-                                <NavLink title={"BUY ONLINE"} path="/store" />
+                                <NavLink
+                                    title={"BUY ONLINE"}
+                                    path="/store?category=Brewing+Yeast"
+                                />
                                 <NavLink
                                     title={"OUR DISTRIBUTORS"}
                                     path="/our-distributors"

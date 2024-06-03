@@ -6,7 +6,7 @@ import OrderHistory from "./OrderHistory/OrderHistory";
 
 const { Text } = Typography;
 
-const Orders = ({ activeOrderList, orderHistoryList }) => {
+const Orders = ({ activeOrderList, orderHistoryList, data }) => {
     const [activeTab, setActiveTab] = useState(true);
     const [current, setCurrent] = useState("mail");
 
@@ -42,9 +42,9 @@ const Orders = ({ activeOrderList, orderHistoryList }) => {
             </div>
 
             {activeTab ? (
-                <ActiveOrders activeOrderList={activeOrderList} />
+                <ActiveOrders activeOrderList={activeOrderList} data={data} />
             ) : (
-                <OrderHistory orderHistoryList={orderHistoryList} />
+                <OrderHistory orderHistoryList={orderHistoryList} data={data} />
             )}
         </div>
     );

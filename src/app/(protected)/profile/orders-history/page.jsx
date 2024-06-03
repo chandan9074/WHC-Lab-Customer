@@ -8,6 +8,7 @@ async function getOderHistoryData(token) {
     const res = await MakeApiCall({
         apiUrl: ORDERS_URL,
         headers: { Authorization: token },
+        query: { page: 1, limit: 6 },
     });
     return res;
 }
@@ -22,6 +23,7 @@ const ActiveOrders = async () => {
             <Orders
                 activeOrderList={orderData?.error ? [] : orderData?.docs}
                 orderHistoryList={orderData?.error ? [] : orderData?.docs}
+                data={orderData}
             />
         </div>
     );

@@ -1,21 +1,31 @@
 import InfoPagesContainer from "@/components/common/InfoPagesContainer";
 import PageHeaderWithNameAndBgImage from "@/components/common/PageHeaderWithNameAndBgImage";
+import { BLOG_URL } from "@/helpers/apiURLS";
 import Layouts from "@/layouts";
 import BlogContainer from "@/sections/Blog/BlogContainer";
 import BlogService from "@/services/BlogService";
+import MakeApiCall from "@/services/MakeApiCall";
+import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
+
+async function getBlogsData(token) {
+    const res = await MakeApiCall({
+        apiUrl: BLOG_URL,
+        headers: { Authorization: token },
+        query: { page: 1, limit: 9 },
+    });
+    return res;
+}
 
 async function page() {
-    const blogsData = await BlogService.getBlogs();
+    const token = getCookie("accessToken", { cookies });
+    const blogsData = await getBlogsData(token);
 
     return (
         <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="Blog" />
             <InfoPagesContainer>
-                <BlogContainer
-                    blogsData={blogsData.docs}
-                    blogDataTotalPage={blogsData.totalPages}
-                    blogDataLimit={blogsData.limit}
-                />
+                <BlogContainer blogsData={blogsData} />
             </InfoPagesContainer>
         </Layouts.Primary>
     );

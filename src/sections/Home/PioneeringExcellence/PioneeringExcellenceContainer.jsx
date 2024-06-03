@@ -104,16 +104,16 @@ const pioneeringData = [
     {
         _id: 2,
         comment:
-            "WHC Lab is a Biotechnology business focused on the brewing/distilling industry, established in 2017. The laboratory boasts best in class laboratory equipment, experts in the brewing and distilling industry and uses next-generation methods to grow brewing/distilling yeast and bacteria.",
+            " We provide an selection of analysis services, available for all customers trying to maintain a high quality and consistent final product. Our R&D lab is home to industry-leading equipment including our Anton Paar Alcolyzer and density meter as well as QPCR for genetic analysis. Our services offer a large selection of tests including microanalysis PH, IBU, ABV, Congeners, calories, final gravity, colour (EBC) and water/gluten testing.",
     },
     {
         _id: 3,
         comment:
-            "WHC Lab is a Biotechnology business focused on the brewing/distilling industry, established in 2017. The laboratory boasts best in class laboratory equipment, experts in the brewing and distilling industry and uses next-generation methods to grow brewing/distilling yeast and bacteria.",
+            "WHC Lab is proud to propagate fresh, high cell count and quality yeasts. We do so by propagating fresh for orders and integrating stringent quality control throughout our production process. Every pitch of yeast is genetically tested on our QPCR system to ensure that our pitches are free from any contaminating microorganisms and are highly viable and metabolically active.",
     },
     {
         _id: 4,
         comment:
-            "WHC Lab is a Biotechnology business focused on the brewing/distilling industry, established in 2017. The laboratory boasts best in class laboratory equipment, experts in the brewing and distilling industry and uses next-generation methods to grow brewing/distilling yeast and bacteria.",
+            "At WHC Lab, we redefine excellence in the biotech realm, seamlessly blending cutting-edge technology, expert craftsmanship, and innovative methods to revolutionize the brewing and distilling industry. Unleash the power of unparalleled quality and precision with WHC Lab – your trusted partner in brewing and distilling excellence.",
     },
 ];

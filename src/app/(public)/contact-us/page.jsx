@@ -5,12 +5,13 @@ import Layouts from "@/layouts";
 import Image from "next/image";
 import React, { useState } from "react";
 import Icons from "../../../../public/assets/Icons";
-import { Form, Input, Spin } from "antd";
+import { Button, Form, Input, Spin } from "antd";
 import LabelText from "@/components/common/LabelText";
 import PhoneNumberInputField from "@/components/common/PhoneNumberInputField";
 import Buttons from "@/components/Buttons";
 import UserService from "@/services/UserService/UserService";
 import { toast } from "react-toastify";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function Contact() {
     const [loading, setLoding] = useState(false);
@@ -131,10 +132,26 @@ function Contact() {
                             </div>
 
                             <div className="w-full">
-                                <Buttons.PrimaryButton
-                                    label={"Submit"}
-                                    width={"md:w-1/3 w-full"}
-                                />
+                                <Button
+                                    type="primary"
+                                    htmlType="submit"
+                                    className="md:w-1/3 w-full duration-200 bg-brand-blue-500 text-base font-semibold leading-6 rounded-full p-2 h-[52px] flex items-center justify-center gap-3"
+                                >
+                                    {loading && (
+                                        <Spin
+                                            indicator={
+                                                <LoadingOutlined
+                                                    style={{
+                                                        fontSize: 24,
+                                                        color: "white",
+                                                    }}
+                                                    spin
+                                                />
+                                            }
+                                        />
+                                    )}
+                                    Submit
+                                </Button>
                             </div>
                         </Form>
                     </div>
