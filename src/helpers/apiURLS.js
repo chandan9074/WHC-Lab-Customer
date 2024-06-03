@@ -94,3 +94,6 @@ export const APPLY_FOR_CREDIT_BALANCE = `${BASEURL}/users/apply-for-credit`;
 export const REVIEW_URL = `${BASEURL}/reviews`;
 // Contact url
 export const CONTACTS = `${BASEURL}/contacts`;
+
+// generate-invoice
+export const GENERATE_INVOICE_API_URL = `${BASEURL}/orders/generate-invoice`;
