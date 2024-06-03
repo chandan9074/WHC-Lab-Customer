@@ -69,8 +69,10 @@ import grey_bg_profile_avatar from "./grey_bg_profile_avatar.svg";
 import mapMarker from "./map.svg";
 import check_circle from "./CheckCircle.svg"
 import order_confirm from "./order_confirm.svg"
+import email from "./email.svg"
 
 const Icons = {
+    email,
     order_confirm,
     check_circle,
     mapMarker,
