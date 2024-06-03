@@ -16,7 +16,7 @@ async function getOderHistoryData(token) {
 const ActiveOrders = async () => {
     const token = getCookie("accessToken", { cookies });
     const orderData = await getOderHistoryData(token);
-    console.log("orderData---------", orderData);
+    // console.log("orderData---------", orderData);
 
     return (
         <div className="py-6 md:py-12 sm:px-[0px] md:px-[10px] lg:px-[58px]">
