@@ -72,6 +72,7 @@ const AddressModal = ({
                     headers: { Authorization: token },
                 });
 
+                router.refresh();
                 toast.success(res?.message);
                 getUserAddress && getUserAddress();
                 onOk();

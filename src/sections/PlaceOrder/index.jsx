@@ -7,24 +7,38 @@ import { deleteCookie, getCookie, hasCookie } from "cookies-next";
 import Buttons from "@/components/Buttons";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-
-import { ORDER_CONFIRM_PATH } from "@/helpers/slug";
-import "./PlaceOrder.css";
-// import UserShippingAddressForm from "./UserShippingAddressForm";
-import ShippingMethod from "./ShippingMethod";
-import PaymentMethodSelection from "./PaymentMethod";
-import OrderSummaryWithProduct from "../Profile/Orders/OrderSummary/OrderSummaryWithProduct";
-// import Summary from "../Profile/Orders/OrderSummary/Summary";
-import Summary from "@/components/OrderSummary/Summary";
 import MakeApiCall from "@/services/MakeApiCall";
 import { ORDERS_URL } from "@/helpers/apiURLS";
 import { useUserContext } from "@/contexts/UserContext";
 import { useCart } from "@/contexts/CartContext";
-import BillingAddressToggleButton from "./BillingAddressToggleButton";
+import { ORDER_CONFIRM_PATH } from "@/helpers/slug";
+
+import "./PlaceOrder.css";
+
+const ShippingMethod = dynamic(() => import("./ShippingMethod"), {
+    ssr: false,
+});
+const PaymentMethodSelection = dynamic(() => import("./PaymentMethod"), {
+    ssr: false,
+});
+const OrderSummaryWithProduct = dynamic(
+    () => import("../Profile/Orders/OrderSummary/OrderSummaryWithProduct"),
+    {
+        ssr: false,
+    }
+);
+const Summary = dynamic(() => import("@/components/OrderSummary/Summary"), {
+    ssr: false,
+});
+const BillingAddressToggleButton = dynamic(
+    () => import("./BillingAddressToggleButton"),
+    {
+        ssr: false,
+    }
+);
 const GuestAddressForm = dynamic(() => import("./GuestAddressForm"), {
     ssr: false,
 });
-
 const UserShippingAddressForm = dynamic(
     () => import("./UserShippingAddressForm"),
     {
@@ -241,6 +255,7 @@ function PlaceOrderContainer({ addressData }) {
                                     <UserShippingAddressForm
                                         data={addressData}
                                         setBillingAddress={setBillingAddress}
+                                        setAddress={setAddress}
                                     />
                                 )}
                             </div>
