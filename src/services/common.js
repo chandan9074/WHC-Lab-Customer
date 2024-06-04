@@ -1,8 +1,9 @@
 import { GENERATE_INVOICE_API_URL } from "@/helpers/apiURLS";
 import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
+import CreditService from "./CreditBalanceService";
 
-export const generateInvoice = async (orderId) => {
+export const generateInvoice = async (orderNumber) => {
     try {
         
         const token = getCookie("accessToken");
@@ -13,7 +14,7 @@ export const generateInvoice = async (orderId) => {
                 'Content-Type': 'application/json',
                 'Authorization': token
             },
-            body: JSON.stringify({ number: orderId })
+            body: JSON.stringify({ number: orderNumber })
         });
 
         if (!response.ok) {
@@ -29,7 +30,7 @@ export const generateInvoice = async (orderId) => {
         // Create a link element
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'Invoice.webp'); // Specify the WebP image name
+        link.setAttribute('download', `${orderNumber}.webp`); // Specify the WebP image name
 
         // Append the link to the document body and click it
         document.body.appendChild(link);
@@ -39,5 +40,28 @@ export const generateInvoice = async (orderId) => {
         document.body.removeChild(link);
     } catch (error) {
         toast.error("Failed to download the invoice. Please try again later!");
+    }
+};
+
+
+
+export const handlePay = async (number) => {
+    const token = getCookie("accessToken");
+    try {
+        const res = await CreditService.makePayment(number, token);
+
+        if (res?.status === 200) {
+            toast.success(res?.message);
+            const paymentLink = res?.link;
+
+            if (paymentLink) {
+                // window.open(paymentLink, "_blank");
+                window.location.href = paymentLink;
+            } else {
+                toast.error("Payment link not found.");
+            }
+        }
+    } catch (e) {
+        console.log(e);
     }
 };

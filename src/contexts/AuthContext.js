@@ -112,6 +112,7 @@ export function AuthProvider({ children }) {
             }
         } catch (error) {
             console.error("Error in facebookSignIn:", error);
+            toast.error(error?.message)
             throw error;
         }
     };

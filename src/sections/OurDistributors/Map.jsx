@@ -324,7 +324,9 @@ function Map({ data }) {
                                     />
                                 </button> */}
                             </div>
-                            <p className="text-base italic">{marker.address}</p>
+                            <p className="text-base italic px-6 text-center">
+                                {marker.address}
+                            </p>
                             <div className="flex gap-x-2 pb-[14.4px]">
                                 <button className="px-[21px] py-[4.5px] bg-[#0E2F55] text-white text-base">
                                     Directions
