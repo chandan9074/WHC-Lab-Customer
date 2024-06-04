@@ -23,7 +23,7 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
     const [selectedTab, setSelectedTab] = useState(
         initialCategory
             ? categoryData.find((item) => item.name === initialCategory)
-            : categoryData[0]
+            : {}
     );
     const [loading, setLoading] = useState(false);
     // setSelectedTab(
@@ -103,7 +103,9 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
 
                 <ProductListContainer
                     selectedTab={selectedTab}
+                    setSelectedTab={setSelectedTab}
                     productData={productList}
+                    categoryData={categoryData}
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
                 />

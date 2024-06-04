@@ -11,6 +11,8 @@ const ProductListContainer = ({
     data,
     productData,
     selectedTab,
+    setSelectedTab,
+    categoryData,
     searchQuery,
     setSearchQuery,
 }) => {
@@ -28,11 +30,20 @@ const ProductListContainer = ({
 
     const handleSearchProduct = useCallback(async () => {
         if (hasCookie("selected_location")) {
+            console.log("called");
             setIsLoading(true);
             const paramData = {};
             searchParams.forEach((value, key) => {
                 setSearchQuery((prev) => ({ ...prev, [key]: value }));
                 paramData[key] = value;
+                console.log(paramData.category, "caetogyr dodata");
+                if (selectedTab) {
+                    setSelectedTab(
+                        categoryData.find(
+                            (item) => item.name === paramData.category
+                        )
+                    );
+                }
             });
 
             const locationId = getCookie("selected_location");
@@ -69,9 +80,10 @@ const ProductListContainer = ({
             }
         });
         const queryString = params.toString();
+        console.log({ queryString });
         const updatedPath = queryString
             ? `${pathname}?${queryString}`
-            : pathname;
+            : `${pathname}?category=Brewing Yeast`;
         setIsLoading(false);
         // if (!firstRender) {
         router.push(updatedPath, { scroll: false });

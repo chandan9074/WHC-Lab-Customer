@@ -1,7 +1,11 @@
 import MakeApiCall from "../MakeApiCall";
 import { MethodsStructure } from "../MethodsStructure";
 
-const { RESOURCES, DOWNLOAD_RESOURCE } = require("@/helpers/apiURLS");
+const {
+    RESOURCES,
+    DOWNLOAD_RESOURCE,
+    GET_IMAGE_RENDER,
+} = require("@/helpers/apiURLS");
 
 async function getResources(slug) {
     const res = await MakeApiCall({
@@ -12,14 +16,30 @@ async function getResources(slug) {
     return res;
 }
 
-function downloadResource(links,text) {
-    const url = links;
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = text;  // Specify the filename here
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+function downloadResource(links, text) {
+    console.log(links, text);
+    const url = `${GET_IMAGE_RENDER}?key=${links}`;
+    // console.log({ url });
+    // const link = document.createElement("a");
+    // link.href = url;
+    // link.download = text; // Specify the filename here
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
+
+    fetch(url)
+        .then((response) => response.blob())
+        .then((blob) => {
+            const link = document.createElement("a");
+            const objectURL = URL.createObjectURL(blob);
+            link.href = objectURL;
+            link.download = text; // Specify the filename here
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(objectURL); // Clean up the object URL after the download
+        })
+        .catch((error) => console.error("Error downloading the file:", error));
 }
 
 const ResourceService = {

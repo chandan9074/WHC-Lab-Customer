@@ -20,7 +20,7 @@ async function Store(params) {
     const locationId = _selectedLocation && JSON.parse(_selectedLocation);
     const getProducts = ProductService.getProducts({
         locationId: locationId || "",
-        category: params.searchParams.category || "Brewing Yeast",
+        category: "Brewing Yeast",
     });
     const getCategories = ProductService.getCategories();
 
