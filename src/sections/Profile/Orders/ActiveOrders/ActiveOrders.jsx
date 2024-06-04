@@ -34,21 +34,7 @@ const ActiveOrders = ({ activeOrderList, data }) => {
 
                     return (
                         <>
-                            <Link
-                                href={`${ORDERS_HISTORY_PATH}/${ele._id}`}
-                                key={index}
-                            >
-                                <OrderItem
-                                    key={index}
-                                    id={ele?._id}
-                                    createdAt={createdAtDate}
-                                    orderId={ele?.number}
-                                    state={ele.state}
-                                    lineItemCount={ele.lineItems.length}
-                                    total={ele.total}
-                                    currency={ele?.currency}
-                                />
-                            </Link>
+                            <OrderItem key={index} data={ele} />
                         </>
                     );
                 })

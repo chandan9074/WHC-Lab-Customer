@@ -43,11 +43,13 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
 
     const handleApplyForCredit = async () => {
         try {
-            const response = await CreditService.applyForCredit(token);
+            // const response = await CreditService.applyForCredit(token);
+            const response = await CreditService.applyForCreditBalance(token);
 
             if (response.status === 200) {
                 toast.success(response.message);
                 let tempUser = userInfo;
+                getUserProfile(); // saw a bug that status was not changing after api call
                 tempUser.appliedForCreditBalance = true;
                 setUserInfo(tempUser);
                 setCookie("userInfo", JSON.stringify(tempUser), {

@@ -30,17 +30,7 @@ const OrderHistory = ({ orderHistoryList, data }) => {
                 list.map((ele, index) => {
                     const createdAtDate = new Date(ele?.createdAt); // Convert createdAt to Date object if not already
 
-                    return (
-                        <OrderItem
-                            key={index}
-                            createdAt={createdAtDate}
-                            orderId={ele?.number}
-                            state={ele.state}
-                            lineItemCount={ele.lineItems.length}
-                            total={ele.total}
-                            currency={ele?.currency}
-                        />
-                    );
+                    return <OrderItem key={index} data={ele} />;
                 })
             ) : (
                 <NoDataFound message="No Oder History Found" />
