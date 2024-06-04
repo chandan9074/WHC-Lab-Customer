@@ -67,9 +67,11 @@ import googleLogo from "./googleLogo.svg";
 import facebookLogo from "./facebookLogo.svg";
 import grey_bg_profile_avatar from "./grey_bg_profile_avatar.svg";
 import mapMarker from "./map.svg";
-import check_circle from "./CheckCircle.svg"
-import order_confirm from "./order_confirm.svg"
-import email from "./email.svg"
+import check_circle from "./CheckCircle.svg";
+import order_confirm from "./order_confirm.svg";
+import email from "./email.svg";
+import instagram from "./InstagramLogo.svg";
+import xLogo from "./XLogo.svg";
 
 const Icons = {
     email,
@@ -144,6 +146,8 @@ const Icons = {
     appleLogo,
     googleLogo,
     facebookLogo,
+    instagram,
+    xLogo,
 };
 
 export default Icons;

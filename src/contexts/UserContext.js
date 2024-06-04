@@ -4,6 +4,8 @@ import { getCookie, hasCookie, setCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { currencyData } from "@/libs/common";
 import ProductService from "@/services/productsService";
+import HomeService from "@/services/HomeService";
+import Icons from "../../public/assets/Icons";
 
 const userContext = createContext();
 
@@ -18,6 +20,7 @@ export function UserProvider({ children }) {
     const [productLoading, setProductLoading] = useState(false);
     const [navLocation, setNavLocation] = useState(null);
     const [navLocationValue, setNavLocationValue] = useState(null);
+    const [socialList, setSocialList] = useState(null);
 
     useEffect(() => {
         if (hasCookie("userInfo")) {
@@ -68,7 +71,44 @@ export function UserProvider({ children }) {
         }
     };
 
+    // getSocial list
+    const getSocialMediaLinks = async () => {
+        try {
+            const res = await HomeService.getSocialLink();
+
+            if (res?.status === 200) {
+                const socialMediaLink = [
+                    {
+                        name: "facebook",
+                        icon: Icons.facebook,
+                        link: res?.doc?.socialLink?.facebookLink,
+                    },
+                    {
+                        name: "instagram",
+                        icon: Icons.instagram,
+                        link: res?.doc?.socialLink?.instagramLink,
+                    },
+                    {
+                        name: "linkedin",
+                        icon: Icons.linkedin,
+                        link: res?.doc?.socialLink?.linkedInLink,
+                    },
+                    {
+                        name: "twitter",
+                        icon: Icons.xLogo,
+                        link: res?.doc?.socialLink?.twitterLink,
+                    },
+                ];
+
+                setSocialList(socialMediaLink);
+            }
+        } catch (e) {
+            toast.error(e?.message);
+        }
+    };
+
     useEffect(() => {
+        getSocialMediaLinks();
         getLocation();
     }, []);
 
@@ -92,6 +132,7 @@ export function UserProvider({ children }) {
         navLocation,
         setNavLocationValue,
         navLocationValue,
+        socialList,
     };
     return (
         <userContext.Provider value={values}>{children}</userContext.Provider>

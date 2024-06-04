@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,10 +8,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { Spin } from "antd";
 import UserService from "@/services/UserService/UserService";
+import { useUserContext } from "@/contexts/UserContext";
 
 const AnimatedFooter = ({ navLinks, socialLinks }) => {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const { socialList } = useUserContext();
 
     const handleAddNewsletter = async () => {
         if (!email) {
@@ -31,6 +35,10 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
             setLoading(false);
         }
     };
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     return (
         <>
@@ -145,13 +153,15 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                                 Stay up-to date
                             </p>
                             <div className="flex gap-3 flex-wrap">
-                                {socialLinks.map((item) => (
-                                    <button
-                                        key={item._id}
+                                {socialList?.map((item) => (
+                                    <Link
+                                        key={item.name}
                                         className="group flex items-center gap-x-1.5 px-[18px] py-[10.5px] border-[1.5px] border-[#2B2E3A] hover:bg-[#1B1B1B] hover:border-[#1B1B1B] rounded-[37.5px]  duration-300 relative"
+                                        href={item.link}
+                                        target="_blank"
                                     >
                                         <p className="text-xs font-bold text-[#D9D9D9] group-hover:text-white leading-4 mr-0 group-hover:mr-3 duration-300">
-                                            {item.label}
+                                            {capitalizeFirstLetter(item.name)}
                                         </p>
 
                                         <Image
@@ -161,7 +171,7 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                                             alt="arrow-up-right"
                                             className="w-[15px] h-[15px] hidden group-hover:block animate-fadeIn"
                                         />
-                                    </button>
+                                    </Link>
                                 ))}
                             </div>
                         </div>

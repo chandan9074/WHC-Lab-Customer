@@ -100,4 +100,6 @@ export const NEWS_LETTER = `${BASEURL}/newsletter-subscribers/subscribe`;
 export const GENERATE_INVOICE_API_URL = `${BASEURL}/orders/generate-invoice`;
 
 //Contact Info
-export const CONTACT_INFO_URL = `${BASEURL}/system-configs/contact-info`
+export const CONTACT_INFO_URL = `${BASEURL}/system-configs/contact-info`;
+// Social link Info
+export const SOCIAL_MEDIA_LINK_URL = `${BASEURL}/system-configs/social-link`;

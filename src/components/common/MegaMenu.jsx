@@ -10,10 +10,12 @@ import { motion } from "framer-motion";
 import Buttons from "../Buttons";
 import { LOGIN_PATH, SIGN_UP_PATH } from "@/helpers/slug";
 import { useAuthContext } from "@/contexts/AuthContext";
+import { useUserContext } from "@/contexts/UserContext";
 
 const MegaMenu = ({ setOpen, open }) => {
     const [showResourcesButtons, setShowResourcesButtons] = useState(false);
     const { isLogin, logOut } = useAuthContext();
+    const { socialList } = useUserContext();
 
     return (
         <div className="">
@@ -204,8 +206,12 @@ const MegaMenu = ({ setOpen, open }) => {
                                 Personalized Medicine and Advanced Science.
                             </p>
                             <div className="flex items-center gap-4 mt-4">
-                                {socialLinks.map((item) => (
-                                    <Link key={item._id} href={"/"}>
+                                {socialList?.map((item) => (
+                                    <Link
+                                        key={item.name}
+                                        href={item.link}
+                                        target="_blank"
+                                    >
                                         <Image
                                             src={item.icon}
                                             alt="Logo"
