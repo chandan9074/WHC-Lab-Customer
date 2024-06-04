@@ -140,7 +140,7 @@ const MegaMenu = ({ setOpen, open }) => {
                                                     }}
                                                     className="mt-2"
                                                 >
-                                                    <Link href="lab-analysis-resources">
+                                                    <Link href="/lab-analysis-resources">
                                                         <Buttons.OutlinedButton
                                                             label="Lab Analysis"
                                                             borderColor="border-white hover:border-transparent"
