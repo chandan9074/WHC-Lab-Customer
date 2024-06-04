@@ -50,7 +50,7 @@ const RecentlyViewedSlideShowSection = ({ data, wishListIds }) => {
     return (
         <div className="space-y-9 pb-[120px]">
             <div className="w-full flex justify-center gap-x-10">
-                {["YOU MAY ALSO LIKE", "RECENTLY VIEWED"].map((item, index) => (
+                {["RECENTLY VIEWED"].map((item, index) => (
                     <div
                         key={index}
                         className="flex flex-col items-center gap-y-2"

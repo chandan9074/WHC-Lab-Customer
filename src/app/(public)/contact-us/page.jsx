@@ -38,8 +38,8 @@ function Contact() {
 
     const onFinish = async (values) => {
         setLoading(true);
-        values.phone = values.prefix + values.phone;
-        delete values.prefix;
+        values.phone = values.phone;
+        // delete values.prefix;
 
         try {
             const res = await UserService.makeAContact(values);

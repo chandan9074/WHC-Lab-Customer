@@ -23,7 +23,10 @@ function Documentation({ data }) {
                         <h1
                             className="font-medium"
                             onClick={() =>
-                                ResourceService.downloadResource(item?.key)
+                                ResourceService.downloadResource(
+                                    item?.key,
+                                    item?.originalFilename
+                                )
                             }
                         >
                             {item.originalFilename}
