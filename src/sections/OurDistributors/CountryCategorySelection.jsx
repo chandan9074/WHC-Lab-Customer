@@ -33,6 +33,7 @@ const CountryCategorySelection = ({
     return (
         <div className="space-y-4 md:space-y-9 flex flex-col">
             <Select
+                allowClear
                 className="h-[52px]"
                 suffixIcon={
                     <Image
@@ -46,7 +47,10 @@ const CountryCategorySelection = ({
                 // defaultValue={searchQuery.category}
                 placeholder="Select Category"
                 onChange={(value) =>
-                    setSearchQuery({ ...searchQuery, category: value })
+                    setSearchQuery({
+                        ...searchQuery,
+                        category: value ? value : "",
+                    })
                 }
                 options={categories}
             />

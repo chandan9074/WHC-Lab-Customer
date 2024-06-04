@@ -93,14 +93,7 @@ const TrackOrder = ({ trackOrderList }) => {
                             //     // onClick={() => handleOrderItemClick(ele.id)}
                             //     href={`${TRACK_ORDER_PATH}/${ele._id}`}
                             // >
-                            <OrderItem
-                                key={index}
-                                createdAt={createdAtDate}
-                                orderId={ele?.number}
-                                state={ele.state}
-                                lineItemCount={ele.lineItems.length}
-                                total={ele.total}
-                            />
+                            <OrderItem key={index} data={ele} />
                             // </Link>
                         );
                     })

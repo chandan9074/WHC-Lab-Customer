@@ -13,9 +13,18 @@ const MainCategoriesContainer = ({ mainCategoriesData }) => {
             <div className="flex flex-col container mx-auto px-6 sm:px-3 xl:py-[120px] lg:py-20 md:py-14 sm:py-10 py-6 gap-6 md:gap-12">
                 <SectionHeader title={"Main Categories"} />
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
-                    {mainCategoriesData.slice(0, 3).map((item) => (
+                    {/* {mainCategoriesData.slice(0, 3).map((item) => (
                         <CategoryCard key={item._id} data={item} />
-                    ))}
+                    ))} */}
+                    {mainCategoriesData
+                        .filter(
+                            (item) =>
+                                item.name.toLowerCase() !== "uncategorized"
+                        )
+                        .slice(0, 3)
+                        .map((item) => (
+                            <CategoryCard key={item._id} data={item} />
+                        ))}
                 </div>
             </div>
         </div>

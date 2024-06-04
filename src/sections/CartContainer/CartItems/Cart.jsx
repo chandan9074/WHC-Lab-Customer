@@ -105,7 +105,6 @@ function Cart({
         setQuantity(cart?.quantity);
     }, [cart]);
 
-
     return (
         <div className="border-b">
             <Spin spinning={loading} fullscreen />
@@ -206,7 +205,7 @@ function Cart({
                         <Text className="whitespace-nowrap col-span-2">
                             {currency.icon}
                             {product[currency.field] &&
-                                product[currency.field] * quantity}
+                                (product[currency.field] * quantity).toFixed(2)}
                         </Text>
                     </div>
 
