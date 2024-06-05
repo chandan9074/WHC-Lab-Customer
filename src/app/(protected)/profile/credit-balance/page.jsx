@@ -227,25 +227,31 @@ const CreditBalance = () => {
                 <Spin spinning={loading} fullscreen />
                 <div className="bg-white rounded-[4px] border border-stroke-new p-0 px-4 py-6 md:p-8 flex flex-col md:flex-row gap-y-6 md:justify-between md:items-center">
                     <div className="px-4 py-6 flex justify-between md:gap-x-12">
-                        <div className="space-y-1">
-                            <p className="text-brand-blue-800 text-sm leading-[21px]">
-                                Credit Limit
-                            </p>
-                            <p className="text-brand-blue-500 text-xl md:text-2xl font-medium leading-[30px] md:leading-9">
-                                {currency?.icon}
-                                {userInfo?.creditBalanceLimit}
-                            </p>
-                        </div>
-
-                        <div className="space-y-1">
-                            <p className="text-brand-blue-800 text-sm leading-[21px]">
-                                Credit Balance
-                            </p>
-                            <p className="text-brand-blue-500 text-xl md:text-2xl font-medium leading-[30px] md:leading-9">
-                                {currency?.icon}
-                                {userInfo?.creditBalance}
-                            </p>
-                        </div>
+                        {/* {JSON.stringify(userInfo)} */}
+                        {userInfo?.appliedForCreditBalance ? (
+                            <>
+                                <div className="space-y-1">
+                                    <p className="text-brand-blue-800 text-sm leading-[21px]">
+                                        Credit Limit
+                                    </p>
+                                    <p className="text-brand-blue-500 text-xl md:text-2xl font-medium leading-[30px] md:leading-9">
+                                        {currency?.icon}
+                                        {userInfo?.creditBalanceLimit}
+                                    </p>
+                                </div>
+                                <div className="space-y-1">
+                                    <p className="text-brand-blue-800 text-sm leading-[21px]">
+                                        Credit Balance
+                                    </p>
+                                    <p className="text-brand-blue-500 text-xl md:text-2xl font-medium leading-[30px] md:leading-9">
+                                        {currency?.icon}
+                                        {userInfo?.creditBalance}
+                                    </p>
+                                </div>
+                            </>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     {/* {userInfo?.appliedForCreditBalance ? (
                         <div className=" text-brand-blue-800 px-8 py-4 rounded-md border">
