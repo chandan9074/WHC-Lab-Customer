@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { FACEBOOK_LOGIN_URL, GOOGLE_LOGIN_URL } from "@/helpers/apiURLS";
 import MakeApiCall from "@/services/MakeApiCall";
 import { toast } from "react-toastify";
+import { useSearchParams } from "next/navigation";
 
 const AuthContext = createContext();
 
@@ -18,6 +19,8 @@ export function AuthProvider({ children }) {
     const [userInfo, setUserInfo] = useState(null);
     const [isLogin, setIsLogin] = useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirect = searchParams.get("redirect");
 
     // if user already
     useEffect(() => {
@@ -47,7 +50,12 @@ export function AuthProvider({ children }) {
         });
 
         // You can use the router to navigate to home page
-        router.push("/");
+        // You can use the router to navigate to another page
+        if (redirect) {
+            router.push(redirect);
+        } else {
+            router.push("/");
+        }
     };
 
     const handleSocialLogin = async (firebaseToken, apiEndPoint) => {
@@ -112,7 +120,7 @@ export function AuthProvider({ children }) {
             }
         } catch (error) {
             console.error("Error in facebookSignIn:", error);
-            toast.error(error?.message)
+            toast.error(error?.message);
             throw error;
         }
     };
