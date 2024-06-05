@@ -11,7 +11,7 @@ import UserService from "@/services/UserService/UserService";
 
 const CreditBalance = () => {
     const [creditBalance, setCreditBalance] = useState([]);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const [inputSearch, setInputSearch] = useState("");
     const [search, setSearch] = useState(null);
     const [loading, setLoading] = useState(false);
