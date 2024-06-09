@@ -53,6 +53,8 @@ export const MY_ADDRESS_URL = `${BASEURL}/addresses`;
 export const MY_CART_URL = `${BASEURL}/carts`;
 // Location
 export const GET_LOCATIONS = `${BASEURL}/locations`;
+//Why Choose Us
+export const WHY_US = `${BASEURL}/why-us`;
 //Testimonials
 export const GET_TESTIMONIALS = `${BASEURL}/testimonials`;
 //Main Categories
