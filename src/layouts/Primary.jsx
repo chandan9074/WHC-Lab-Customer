@@ -23,7 +23,7 @@ const Primary = ({ children, breadcrumb = true }) => {
                     src={Icons.whatsappFloatingIcon}
                     width={1000} // Adjust size as needed
                     height={1000} // Adjust size as needed
-                    className="md:w-14 md:h-14 w-10 h-10"
+                    className="md:w-12 md:h-12 w-10 h-10"
                 />
             </a>
             <Footer.Primary />
