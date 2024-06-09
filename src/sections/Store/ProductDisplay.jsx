@@ -1,8 +1,7 @@
 "use client";
 // import { getCookie } from "cookies-next";
 import ProductCard from "@/components/Card/ProductCard";
-import { Select } from "antd";
-import React from "react";
+import { useEffect } from "react";
 import ProductHeader from "./ProductHeader";
 // import { productsData } from "@/libs/productData";
 import { useWishlistContext } from "@/contexts/WishlistContext";
@@ -15,7 +14,15 @@ const ProductDisplay = ({
     setSearchQuery,
     searchQuery,
 }) => {
-    const { wishlistItems } = useWishlistContext();
+    const { wishlistItems, getProductWishlist } = useWishlistContext();
+
+    const handleWishlists = async () => {
+        const res = await getProductWishlist();
+    };
+
+    useEffect(() => {
+        handleWishlists();
+    }, []);
 
     return (
         <div className="w-full">
