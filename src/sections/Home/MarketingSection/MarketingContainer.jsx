@@ -1,14 +1,14 @@
 import React from "react";
 import SingleMarketingSection from "./SingleMarketingSection";
 
-const MarketingContainer = () => {
+const MarketingContainer = ({ strainsData }) => {
     return (
         <div className="bg-[#F5F5F5]">
             <div className="container mx-auto px-6 sm:px-3 xl:py-[120px] lg:py-20 md:py-14 sm:py-10 py-6 pb-10 flex flex-col gap-[54px] sm:gap-10 md:gap-16 xl:gap-[120px] ">
-                {marketingSectionData.map((data, index) => {
+                {strainsData?.map((data, index) => {
                     return (
                         <SingleMarketingSection
-                            key={index}
+                            key={data?._id}
                             data={data}
                             index={index}
                         />

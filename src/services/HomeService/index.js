@@ -5,6 +5,7 @@ const {
     GET_MAIN_CATEGORIES,
     SOCIAL_MEDIA_LINK_URL,
     WHY_US,
+    STRAINS,
 } = require("@/helpers/apiURLS");
 
 async function getTestimonials() {
@@ -32,7 +33,12 @@ async function getWhyUsContents(query) {
     return res;
 }
 
+async function getStrains() {
+    return await MakeApiCall({ apiUrl: STRAINS });
+}
+
 const HomeService = {
+    getStrains,
     getWhyUsContents,
     getTestimonials,
     getMainCategories,

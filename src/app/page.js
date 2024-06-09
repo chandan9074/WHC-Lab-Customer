@@ -26,7 +26,9 @@ export default async function Home() {
 
     const getWhyUsRightContents = HomeService.getWhyUsContents({sectionType:"rightSection"})
 
-    const [testimonialsData,mainCategoriesData,featuredProducts,newProducts,whyUsLeftContents,whyUsRightContents] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts,getNewProducts,getWhyUsLeftContents,getWhyUsRightContents]);
+    const getStrains = HomeService.getStrains();
+
+    const [testimonialsData,mainCategoriesData,featuredProducts,newProducts,whyUsLeftContents,whyUsRightContents,strainsData] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts,getNewProducts,getWhyUsLeftContents,getWhyUsRightContents,getStrains]);
 
 
     return (
@@ -35,7 +37,7 @@ export default async function Home() {
             <ProductContainer featuredProducts={featuredProducts.docs}/>
             <MainCategoriesContainer mainCategoriesData={mainCategoriesData.docs}/>
             <OfferContainer />
-            <MarketingContainer />
+            <MarketingContainer strainsData={strainsData.docs}/>
             <OurProductsContainer data={newProducts.docs}/>
             <ChooseUsContainer whyUsLeftContents={whyUsLeftContents.docs} whyUsRightContents={whyUsRightContents.docs}/>
             <PioneeringExcellenceContainer />

@@ -55,6 +55,8 @@ export const MY_CART_URL = `${BASEURL}/carts`;
 export const GET_LOCATIONS = `${BASEURL}/locations`;
 //Why Choose Us
 export const WHY_US = `${BASEURL}/why-us`;
+//Strains
+export const STRAINS = `${BASEURL}/strains`;
 //Testimonials
 export const GET_TESTIMONIALS = `${BASEURL}/testimonials`;
 //Main Categories
