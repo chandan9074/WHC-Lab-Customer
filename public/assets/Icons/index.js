@@ -72,8 +72,10 @@ import order_confirm from "./order_confirm.svg";
 import email from "./email.svg";
 import instagram from "./InstagramLogo.svg";
 import xLogo from "./XLogo.svg";
+import whatsappFloatingIcon from "./WhatsappFloatingButton.svg"
 
 const Icons = {
+    whatsappFloatingIcon,
     email,
     order_confirm,
     check_circle,

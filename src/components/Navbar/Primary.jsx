@@ -16,9 +16,23 @@ import { useCart } from "@/contexts/CartContext";
 
 const Primary = () => {
     const [open, setOpen] = useState(false);
+    const [isSticky, setIsSticky] = useState(false);
 
     const { isLogin } = useAuthContext();
     const { cartItem } = useCart();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setIsSticky(true);
+            } else {
+                setIsSticky(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     useEffect(() => {
         if (open) {
@@ -33,7 +47,11 @@ const Primary = () => {
 
     return (
         <>
-            <div className="relative  lg:py-6 sm:py-5 py-4  bg-white flex flex-col gap-4">
+            <div
+                className={`relative lg:py-6 sm:py-5 py-4 bg-white flex flex-col gap-4 duration-300 animate-fadeIn ${
+                    isSticky ? "md:sticky top-0 z-50 shadow-lg" : ""
+                }`}
+            >
                 <div className="container mx-auto px-6 sm:px-3  flex items-center justify-between">
                     <Link href={"/"}>
                         <Image

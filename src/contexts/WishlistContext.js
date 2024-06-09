@@ -75,6 +75,7 @@ export function WishlistProvider({ children }) {
 
     const values = {
         wishlistItems,
+        setWishlistItems,
         createProductWishlist,
         deleteWishlist,
         getProductWishlist,
