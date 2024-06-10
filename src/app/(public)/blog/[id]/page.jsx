@@ -53,6 +53,7 @@ async function BlogDetails({ params }) {
 
                             {/* social media share */}
                             <SocialMediaShare
+                                title="Share this blog"
                                 quote={singleBlogData?.title}
                                 hashtag={singleBlogData?.tags}
                             />
