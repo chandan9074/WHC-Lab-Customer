@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 import { FACEBOOK_LOGIN_URL, GOOGLE_LOGIN_URL } from "@/helpers/apiURLS";
 import MakeApiCall from "@/services/MakeApiCall";
 import { toast } from "react-toastify";
-import { useSearchParams } from "next/navigation";
 
 const AuthContext = createContext();
 
@@ -19,8 +18,6 @@ export function AuthProvider({ children }) {
     const [userInfo, setUserInfo] = useState(null);
     const [isLogin, setIsLogin] = useState(false);
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const redirect = searchParams.get("redirect");
 
     // if user already
     useEffect(() => {
@@ -48,14 +45,6 @@ export function AuthProvider({ children }) {
         setCookie("userInfo", JSON.stringify(userInfo), {
             maxAge: 60 * 60 * 12,
         });
-
-        // You can use the router to navigate to home page
-        // You can use the router to navigate to another page
-        if (redirect) {
-            router.push(redirect);
-        } else {
-            router.push("/");
-        }
     };
 
     const handleSocialLogin = async (firebaseToken, apiEndPoint) => {
@@ -63,6 +52,7 @@ export function AuthProvider({ children }) {
             let url = `${apiEndPoint}?firebaseToken=${firebaseToken}`;
             const res = await MakeApiCall({ apiUrl: url, method: "POST" });
             handlePageTransition(res);
+            return res;
         } catch (error) {
             // console.error("Error in makeFacebookLogin:", error.message);
             throw new Error(error.message || "Something went wrong");
@@ -84,6 +74,7 @@ export function AuthProvider({ children }) {
                     );
 
                     toast.success("Successfully logged in!");
+                    return res;
 
                     // if(res.status === 200){
                     //     toast.success(res.message)
