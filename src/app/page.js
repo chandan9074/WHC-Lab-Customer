@@ -22,7 +22,14 @@ export default async function Home() {
 
     const getFeaturedProducts = ProductService.getProducts({isFeatured:true});
 
-    const [testimonialsData,mainCategoriesData,featuredProducts,newProducts] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts,getNewProducts]);
+    const getWhyUsLeftContents = HomeService.getWhyUsContents({sectionType:"leftSection"})
+
+    const getWhyUsRightContents = HomeService.getWhyUsContents({sectionType:"rightSection"})
+
+    const getStrains = HomeService.getStrains();
+
+    const [testimonialsData,mainCategoriesData,featuredProducts,newProducts,whyUsLeftContents,whyUsRightContents,strainsData] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts,getNewProducts,getWhyUsLeftContents,getWhyUsRightContents,getStrains]);
+
 
     return (
         <Layouts.Primary breadcrumb={false}>
@@ -30,9 +37,9 @@ export default async function Home() {
             <ProductContainer featuredProducts={featuredProducts.docs}/>
             <MainCategoriesContainer mainCategoriesData={mainCategoriesData.docs}/>
             <OfferContainer />
-            <MarketingContainer />
+            <MarketingContainer strainsData={strainsData.docs}/>
             <OurProductsContainer data={newProducts.docs}/>
-            <ChooseUsContainer />
+            <ChooseUsContainer whyUsLeftContents={whyUsLeftContents.docs} whyUsRightContents={whyUsRightContents.docs}/>
             <PioneeringExcellenceContainer />
             <TestimonialSection testimonialsData={testimonialsData.docs}/>
             <ContactUsSection />

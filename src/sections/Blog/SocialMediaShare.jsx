@@ -12,13 +12,13 @@ import {
     Xs,
 } from "next-share";
 
-function SocialMediaShare({ quote, hashtag }) {
+function SocialMediaShare({ title, quote, hashtag }) {
     const shareUrl = typeof window !== "undefined" ? window.location.href : "";
     const formattedHashtags = hashtag.map((tag) => `#${tag}`).join("");
     return (
         <div className="flex flex-col gap-4 w-full md:w-1/3">
             <p className="text-sm md:text-base font-medium text-neutral-400">
-                Share this post
+                {title}
             </p>
             <div className="flex items-center gap-4">
                 {/* <Image
