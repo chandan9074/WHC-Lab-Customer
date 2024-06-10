@@ -50,7 +50,7 @@ export default async function Home() {
             <PioneeringExcellenceContainer />
             <TestimonialSection testimonialsData={testimonialsData.docs} />
             <ContactUsSection />
-            <PopupModalComponent />
+            <PopupModalComponent pageLocation="homepage" />
         </Layouts.Primary>
     );
 }

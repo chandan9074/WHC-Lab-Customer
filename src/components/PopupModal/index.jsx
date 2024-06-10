@@ -2,9 +2,15 @@ import React from "react";
 import { useModal } from "@/contexts/PopupModalContext";
 import { Button, Modal } from "antd";
 
-const PopupModal = () => {
-    const { handleCloseModal, handlePermanentlyCloseModal, showModal } =
-        useModal();
+const PopupModal = ({ pageLocation }) => {
+    const {
+        handleCloseModal,
+        handlePermanentlyCloseModal,
+        showModal,
+        popupInfo,
+    } = useModal();
+
+    console.log({ popupInfo });
 
     return (
         <Modal
@@ -24,10 +30,13 @@ const PopupModal = () => {
                     </div>
                 </div>
             )}
+            className=""
         >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <div className="bg-gray-500">
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </div>
         </Modal>
     );
 };

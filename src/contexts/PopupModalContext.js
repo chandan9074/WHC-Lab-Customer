@@ -1,11 +1,14 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getCookie, setCookie } from "cookies-next";
+import MakeApiCall from "@/services/MakeApiCall";
+import { POPUP_INFORMATION } from "@/helpers/apiURLS";
 
 const ModalContext = createContext();
 
 export const ModalProvider = ({ children }) => {
     const [showModal, setShowModal] = useState(false);
+    const [popupInfo, setPopupInfo] = useState([]);
     const modalStateKey = "hideModalPermanently";
     const router = useRouter();
     const hideModalPermanently = getCookie(modalStateKey);
@@ -32,12 +35,35 @@ export const ModalProvider = ({ children }) => {
         router.refresh();
     };
 
+    // get Popup information from API endpoint
+    const getPopupInformation = async () => {
+        try {
+            const res = await MakeApiCall({
+                apiUrl: POPUP_INFORMATION,
+                method: "GET",
+            });
+            console.log({ res });
+            if (res?.status === 200) {
+                setPopupInfo(res?.docs);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    useEffect(() => {
+        getPopupInformation();
+    }, []);
+
+    const values = {
+        showModal,
+        popupInfo,
+        handleCloseModal,
+        handlePermanentlyCloseModal,
+    };
+
     return (
-        <ModalContext.Provider
-            value={{ showModal, handleCloseModal, handlePermanentlyCloseModal }}
-        >
-            {children}
-        </ModalContext.Provider>
+        <ModalContext.Provider value={values}>{children}</ModalContext.Provider>
     );
 };
 
