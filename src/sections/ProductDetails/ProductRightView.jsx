@@ -11,7 +11,7 @@ import { getCookie, hasCookie, setCookie } from "cookies-next";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "react-toastify";
 import { useWishlistContext } from "@/contexts/WishlistContext";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useUserContext } from "@/contexts/UserContext";
 import CountrySelectionModal from "../Store/CountrySelectionModal";
 import { checkStock } from "@/utils";
@@ -29,6 +29,7 @@ const ProductRightView = ({
     const [openSuccessionModal, setOpenSuccessionModal] = useState(false);
     const [status, setStatus] = useState(null);
     const { currency } = useUserContext();
+    const [stockStatus, setStockStatus] = useState(null);
 
     const router = useRouter();
     const {
@@ -38,7 +39,8 @@ const ProductRightView = ({
         checkProductInWishList,
     } = useWishlistContext();
     const pathname = usePathname();
-    const [stockStatus, setStockStatus] = useState(null);
+    const searchParams = useSearchParams();
+    const params = new URLSearchParams(searchParams);
 
     const token = getCookie("accessToken");
 
@@ -347,7 +349,7 @@ const ProductRightView = ({
                                 token
                                     ? handleAddToCart()
                                     : router.push(
-                                          `/log-in?redirect=${pathname}`
+                                          `/log-in?redirect=${pathname}?${params.toString()}`
                                       );
                             }}
                         />
