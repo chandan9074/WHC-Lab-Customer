@@ -19,7 +19,10 @@ const TestimonialCarouselMobile = ({ data }) => {
         <div className="block md:hidden">
             <Carousel ref={slider1} afterChange={onChange} dots={false}>
                 {data.map((item, index) => (
-                    <div key={index} className="pt-6 flex flex-col gap-y-4">
+                    <div
+                        key={index}
+                        className="pt-6 flex flex-col gap-y-4 pb-9"
+                    >
                         <Rate
                             disabled
                             defaultValue={item.rating}
@@ -32,9 +35,9 @@ const TestimonialCarouselMobile = ({ data }) => {
                 ))}
             </Carousel>
 
-            <div className="relative flex justify-end items-center pt-9 h-40 overflow-hidden">
+            <div className="relative flex justify-end items-center h-40 overflow-hidden">
                 <div
-                    className="absolute w-full duration-500 z-10"
+                    className="absolute w-full duration-300 z-10"
                     style={{
                         top: `-${sectionHeight * (currentSlide - 1)}px`,
                     }}
