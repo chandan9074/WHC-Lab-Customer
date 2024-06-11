@@ -103,10 +103,13 @@ textarea.ant-input:hover {
     box-shadow: none !important;
     outline: none !important;
 }
-:where(.css-dev-only-do-not-override-usln0u).ant-pagination .ant-pagination-item-active:hover {
+:where(.css-dev-only-do-not-override-usln0u).ant-pagination
+    .ant-pagination-item-active:hover {
     border-color: #0b2848;
 }
-:where(.css-dev-only-do-not-override-usln0u).ant-pagination .ant-pagination-item-active:hover a {
+:where(.css-dev-only-do-not-override-usln0u).ant-pagination
+    .ant-pagination-item-active:hover
+    a {
     color: white;
 }
 
@@ -326,7 +329,7 @@ textarea.ant-input:hover {
 
 .ant-table-thead .ant-table-cell {
     background-color: white !important;
-  }
+}
 
 /* .ant-radio-wrapper .ant-radio {
     position: absolute;
@@ -391,4 +394,13 @@ textarea.ant-input:hover {
 .ant-input-outlined:hover {
     outline: none !important;
     border-color: #ebedf0 !important;
+}
+
+:where(.css-dev-only-do-not-override-usln0u).ant-modal .ant-modal-content {
+    padding: 0px;
+    margin: 0px;
+}
+
+.ant-modal .ant-modal-header {
+    margin: 0px;
 }

@@ -1,4 +1,5 @@
 import Layouts from "@/layouts";
+import PopupModalComponent from "@/sections/Home/PopupModalSection";
 import ProductView from "@/sections/ProductDetails/ProductView";
 import ProductService from "@/services/productsService";
 import { getCookie } from "cookies-next";
@@ -49,6 +50,8 @@ const Page = async ({ params }) => {
                     data={productData?.docs}
                     // wishListIds={wishListIds}
                 />
+
+                <PopupModalComponent pageLocation="product-details-page" />
             </section>
         </Layouts.Primary>
         // </Suspense>
