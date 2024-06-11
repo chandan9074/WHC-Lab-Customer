@@ -2,18 +2,21 @@
 
 import Buttons from "@/components/Buttons";
 import { Carousel, Modal, Rate } from "antd";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import Image from "next/image";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import AddToCartSuccession from "./AddToCartSuccession";
-import { getCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 import { useWishlistContext } from "@/contexts/WishlistContext";
 import { toast } from "react-toastify";
 import { useCart } from "@/contexts/CartContext";
+import { useUserContext } from "@/contexts/UserContext";
+import { checkStock } from "@/utils";
 
 const ProductViewMobile = ({ data }) => {
+    console.log("tanjil khawa----------", data);
     const carouselRef = useRef();
     const [selectedColor, setSelectedColor] = useState(
         Object.keys(data.variants)[0]
@@ -26,8 +29,12 @@ const ProductViewMobile = ({ data }) => {
     const [quantity, setQuantity] = useState(1);
     const [maxLimit, setMaxLimit] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [stockStatus, setStockStatus] = useState(null);
+    const [status, setStatus] = useState(null);
+
     const { getUpdateCartList, createCartItem } = useCart();
     const router = useRouter();
+    const pathname = usePathname();
 
     const token = getCookie("accessToken");
 
@@ -37,6 +44,8 @@ const ProductViewMobile = ({ data }) => {
         deleteWishlist,
         getProductWishlist,
     } = useWishlistContext();
+
+    const { currency } = useUserContext();
 
     // const getWishlist = useCallback(async () => {
     //     const wishlists = await WishlistServices.getWishlist(token);
@@ -154,6 +163,28 @@ const ProductViewMobile = ({ data }) => {
         }
     };
 
+    useEffect(() => {
+        if (hasCookie("selected_location")) {
+            const locationId = JSON.parse(getCookie("selected_location"));
+            const stockStatusData = checkStock(data, locationId);
+            if (data.inStock) {
+                setStockStatus(stockStatusData);
+            } else {
+                setStockStatus(data.inStock);
+            }
+            if (locationId) {
+                const stock = data?.variants.find(
+                    (item) => item.location._id === locationId
+                );
+
+                if (stock) {
+                    setMaxLimit(stock?.quantity);
+                    setStatus(stock?.status);
+                }
+            }
+        }
+    }, [data]);
+
     return (
         <div className="w-full py-4">
             {/* {loading && <Spin spinning={loading} fullscreen />} */}
@@ -170,22 +201,24 @@ const ProductViewMobile = ({ data }) => {
                     <div className="flex gap-x-2.5 items-center">
                         <Rate
                             disabled
-                            defaultValue={4}
-                            style={{ color: "#F08200", fontSize: "12px" }}
+                            defaultValue={data?.review?.summary?.average}
+                            style={{ color: "#F08200", fontSize: 12 }}
                         />
 
                         <p className="text-neutral-700 text-sm font-medium">
-                            4.0
+                            {data?.review?.summary?.average
+                                ? data?.review?.summary?.average
+                                : "0"}
                         </p>
 
-                        <p className="text-neutral-300 text-sm font-medium">
-                            .
-                        </p>
+                        <p className="text-[#8790AB] text-sm font-medium">.</p>
 
                         <p className="text-neutral-700 text-sm font-medium">
-                            12.345{" "}
-                            <span className="text-neutral-300 text-sm font-medium">
-                                reviews
+                            {data?.review?.summary?.total
+                                ? data?.review?.summary?.total
+                                : "0"}
+                            <span className="text-neutral-200 text-sm font-medium">
+                                &nbsp; reviews
                             </span>
                         </p>
                     </div>
@@ -218,15 +251,22 @@ const ProductViewMobile = ({ data }) => {
                 </div>
 
                 <div className="flex items-center text-center gap-x-2 pb-6">
-                    {data?.offerPrice && (
-                        <p className="text-neutral-300 line-through font-medium mt-1">
-                            $ {data?.price}
+                    {data[currency.field] && (
+                        <p className="text-brand-blue-500 font-semibold mt-1">
+                            {currency.icon}
+                            {data[currency.field]}
                         </p>
                     )}
 
-                    <p className="text-neutral-700 font-semibold text-xl">
-                        $ {data?.offerPrice ? data?.offerPrice : data?.price}
-                    </p>
+                    {!stockStatus && (
+                        <p className="py-1 px-2 bg-red-400 mt-2 text-white font-semibold rounded">
+                            Out of Stock
+                        </p>
+                    )}
+
+                    {/* <p className="text-neutral-700 font-semibold text-xl">
+                        {data?.offerPrice ? data?.offerPrice : data?.price}
+                    </p> */}
                 </div>
             </div>
 
@@ -320,22 +360,31 @@ const ProductViewMobile = ({ data }) => {
                         <Buttons.CounterBtn
                             maxLimit={maxLimit}
                             handleCurrentCount={handleCurrentCount}
+                            disabled={!stockStatus}
                             current={quantity}
                         />
                     </div>
 
                     <div className="pb-6">
                         <Buttons.PrimaryButton
-                            label={`ADD TO CART - $ ${
-                                data.offerPrice
-                                    ? data.offerPrice * quantity
-                                    : data.price * quantity
+                            label={`ADD TO CART - ${
+                                stockStatus
+                                    ? `${currency.icon} ${
+                                          data[currency.field] &&
+                                          data[currency.field] * quantity
+                                      }`
+                                    : ""
                             }`}
-                            className="w-full h-[52px] bg-magenta-600 text-white font-semibold rounded-full"
+                            className={`w-full h-[52px] bg-magenta-600 text-white font-semibold rounded-full ${
+                                !stockStatus &&
+                                "bg-brand-blue-300 hover:bg-brand-blue-300"
+                            }`}
                             onClick={() => {
                                 token
                                     ? handleAddToCart()
-                                    : router.push("/sign-in");
+                                    : router.push(
+                                          `/log-in?redirect=${pathname}?${params.toString()}`
+                                      );
                             }}
                         />
 
@@ -371,7 +420,7 @@ const ProductViewMobile = ({ data }) => {
                 </div>
             </div>
 
-            <div className="space-y-4">
+            {/* <div className="space-y-4">
                 <h3 className="text-neutral-700 font-medium">
                     About the product
                 </h3>
@@ -381,7 +430,7 @@ const ProductViewMobile = ({ data }) => {
                     option, dress down with chunky trainers or up with strappy
                     sandals.
                 </p>
-            </div>
+            </div> */}
         </div>
     );
 };
