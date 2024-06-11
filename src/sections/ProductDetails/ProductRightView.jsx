@@ -11,10 +11,12 @@ import { getCookie, hasCookie, setCookie } from "cookies-next";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "react-toastify";
 import { useWishlistContext } from "@/contexts/WishlistContext";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useUserContext } from "@/contexts/UserContext";
 import CountrySelectionModal from "../Store/CountrySelectionModal";
 import { checkStock } from "@/utils";
+import SocialMediaShare from "../Blog/SocialMediaShare";
+import Image from "next/image";
 
 const ProductRightView = ({
     forModal = false,
@@ -28,17 +30,24 @@ const ProductRightView = ({
     const { getUpdateCartList, createCartItem } = useCart();
     const [openSuccessionModal, setOpenSuccessionModal] = useState(false);
     const [status, setStatus] = useState(null);
+    const [shareModalVisible, setShareModalVisible] = useState(false);
+    const [isCopied, setIsCopied] = useState(false);
+
     const { currency } = useUserContext();
+    const [stockStatus, setStockStatus] = useState(null);
 
     const router = useRouter();
+
+    const pathname = usePathname();
+
     const {
         createProductWishlist,
         deleteWishlist,
         getProductWishlist,
         checkProductInWishList,
     } = useWishlistContext();
-    const pathname = usePathname();
-    const [stockStatus, setStockStatus] = useState(null);
+    const searchParams = useSearchParams();
+    const params = new URLSearchParams(searchParams);
 
     const token = getCookie("accessToken");
 
@@ -179,6 +188,30 @@ const ProductRightView = ({
         return Number(value.toFixed(2));
     }
 
+    const handleShareIconClick = () => {
+        setShareModalVisible(true);
+    };
+
+    const handleShareModalCancel = () => {
+        setShareModalVisible(false);
+    };
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(
+                window.location.origin + pathname
+            );
+            // console.log(
+            //     "Copied to clipboard:",
+            //     window.location.origin + pathname
+            // );
+            setIsCopied(true);
+            toast.success("Copied to clipboard!");
+        } catch (error) {
+            toast.error(error?.message);
+        }
+    };
+
     return (
         <div className={`${forModal ? "" : "w-[486px]"} px-6`}>
             {loading && <Spin spinning={loading} fullscreen />}
@@ -236,6 +269,7 @@ const ProductRightView = ({
                             width={1000}
                             icon={Icons.share}
                             className="w-6 h-6"
+                            onClick={handleShareIconClick}
                         />
                     )}
                 </div>
@@ -347,7 +381,7 @@ const ProductRightView = ({
                                 token
                                     ? handleAddToCart()
                                     : router.push(
-                                          `/log-in?redirect=${pathname}`
+                                          `/log-in?redirect=${pathname}?${params.toString()}`
                                       );
                             }}
                         />
@@ -387,6 +421,39 @@ const ProductRightView = ({
             </div>
 
             <CountrySelectionModal handleLocation={handleLocation} />
+
+            <Modal
+                footer={false}
+                centered
+                open={shareModalVisible}
+                onCancel={handleShareModalCancel}
+            >
+                <h3 className="text-xl font-semibold mb-4">
+                    Share this product
+                </h3>
+                <div className="mt-4 flex gap-3">
+                    <input
+                        type="text"
+                        value={window.location.origin + pathname}
+                        readOnly
+                        className="w-full px-3 py-2 border rounded"
+                    />
+                    <button className="border p-2 rounded" onClick={handleCopy}>
+                        <Image
+                            alt="copy"
+                            src={isCopied ? Icons.active : Icons.copyBlue}
+                            width={1000}
+                            height={1000}
+                            className="w-6 h-6"
+                        />
+                    </button>
+                </div>
+                <SocialMediaShare
+                    title=""
+                    hashtag={[data?.mainCategory?.name]}
+                    quote={data?.mainCategory?.name}
+                />
+            </Modal>
         </div>
     );
 };

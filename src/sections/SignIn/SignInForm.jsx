@@ -44,34 +44,81 @@ const SignInForm = () => {
         },
     ];
 
-    const handleGoogleSignIn = async () => {
+    // const handleGoogleSignIn = async () => {
+    //     try {
+    //         setIsSocialLoading({ ...isSocialLoading, google: true });
+    //         const res = await googleSingIn();
+
+    //         const token = getCookie("accessToken");
+    //         getUpdateCartList(token);
+    //         setIsSocialLoading({ ...isSocialLoading, google: false });
+    //         if (res?.status === 200) {
+    //             if (redirect) {
+    //                 router.push(redirect);
+    //             } else {
+    //                 router.push("/");
+    //             }
+    //         }
+    //     } catch (e) {
+    //         setIsSocialLoading({ ...isSocialLoading, google: false });
+    //         console.log(e);
+    //         if (e.message !== "Firebase: Error (auth/popup-closed-by-user).") {
+    //             toast.error(e.message);
+    //         }
+    //     }
+    // };
+
+    // const handleFaceBookSignIn = async () => {
+    //     try {
+    //         setIsSocialLoading({ ...isSocialLoading, facebook: true });
+    //         const res = await facebookSignIn();
+    //         const token = getCookie("accessToken");
+    //         getUpdateCartList(token);
+    //         setIsSocialLoading({ ...isSocialLoading, facebook: false });
+    //         if (res?.status === 200) {
+    //             if (redirect) {
+    //                 router.push(redirect);
+    //             } else {
+    //                 router.push("/");
+    //             }
+    //         }
+    //     } catch (e) {
+    //         setIsSocialLoading({ ...isSocialLoading, facebook: false });
+    //         console.log(e);
+    //     }
+    // };
+
+    const handleSocialSignIn = async (signInFunction, platform) => {
         try {
-            setIsSocialLoading({ ...isSocialLoading, google: true });
-            await googleSingIn();
+            setIsSocialLoading({ ...isSocialLoading, [platform]: true });
+            const res = await signInFunction();
             const token = getCookie("accessToken");
             getUpdateCartList(token);
-            setIsSocialLoading({ ...isSocialLoading, google: false });
+            setIsSocialLoading({ ...isSocialLoading, [platform]: false });
+
+            if (res?.status === 200) {
+                if (redirect) {
+                    router.push(redirect);
+                } else {
+                    router.push("/");
+                }
+            }
         } catch (e) {
-            setIsSocialLoading({ ...isSocialLoading, google: false });
+            setIsSocialLoading({ ...isSocialLoading, [platform]: false });
             console.log(e);
-            if (e.message !== "Firebase: Error (auth/popup-closed-by-user).") {
+
+            if (
+                platform === "google" &&
+                e.message !== "Firebase: Error (auth/popup-closed-by-user)."
+            ) {
                 toast.error(e.message);
             }
         }
     };
 
-    const handleFaceBookSignIn = async () => {
-        try {
-            setIsSocialLoading({ ...isSocialLoading, facebook: true });
-            await facebookSignIn();
-            const token = getCookie("accessToken");
-            getUpdateCartList(token);
-            setIsSocialLoading({ ...isSocialLoading, facebook: false });
-        } catch (e) {
-            setIsSocialLoading({ ...isSocialLoading, facebook: false });
-            console.log(e);
-        }
-    };
+    const handleGoogleSignIn = () => handleSocialSignIn(googleSingIn, "google");
+    const handleFaceBookSignIn = () =>
+        handleSocialSignIn(facebookSignIn, "facebook");
 
     const onFinish = async (values) => {
         delete values.remember;
@@ -131,7 +178,7 @@ const SignInForm = () => {
         }
     };
     const onFinishFailed = (errorInfo) => {
-        console.log("Failed:", errorInfo);
+        // console.log("Failed:", errorInfo);
         setIsLoading(false);
     };
 

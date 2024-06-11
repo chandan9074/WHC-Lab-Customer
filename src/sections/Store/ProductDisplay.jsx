@@ -1,10 +1,11 @@
 "use client";
 // import { getCookie } from "cookies-next";
 import ProductCard from "@/components/Card/ProductCard";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import ProductHeader from "./ProductHeader";
 // import { productsData } from "@/libs/productData";
 import { useWishlistContext } from "@/contexts/WishlistContext";
+import { getCookie } from "cookies-next";
 
 const ProductDisplay = ({
     data,
@@ -14,15 +15,19 @@ const ProductDisplay = ({
     setSearchQuery,
     searchQuery,
 }) => {
+    const token = getCookie("accessToken");
+
     const { wishlistItems, getProductWishlist } = useWishlistContext();
 
-    const handleWishlists = async () => {
+    const handleWishlists = useCallback(async () => {
         const res = await getProductWishlist();
-    };
+        // Do something with the response
+        console.log(res);
+    }, [getProductWishlist]);
 
     useEffect(() => {
-        handleWishlists();
-    }, []);
+        token && handleWishlists();
+    }, [handleWishlists, token]);
 
     return (
         <div className="w-full">

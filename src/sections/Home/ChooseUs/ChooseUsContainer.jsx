@@ -1,16 +1,15 @@
 "use client";
 import SectionHeader from "@/components/common/SectionHeader";
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Images from "../../../../public/assets/Images";
 import ChooseUsLeftSide from "./ChooseUsLeftSide";
 import ChooseUsRightSide from "./ChooseUsRightSide";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ChooseUsCard from "./ChooseUsCard";
-import { chooseUsData } from "@/libs/common";
 
-const ChooseUsContainer = () => {
+const ChooseUsContainer = ({ whyUsLeftContents, whyUsRightContents }) => {
     const sectionOneRef = useRef(null);
     const textOneRef = useRef(null);
 
@@ -50,11 +49,7 @@ const ChooseUsContainer = () => {
                     <div className="h-[700px] overflow-hidden grid grid-cols-12 mt-12">
                         <div className="col-span-5">
                             <p className="md:text-base text-sm font-light w-full sm:w-[486px] text-[#061628] text-opacity-80 md:mb-9 mb-7">
-                                WHC Lab sets the standard in yeast production,
-                                employing advanced genetic/QPCR and plating
-                                methods. Each batch undergoes meticulous
-                                testing, ensuring nothing leaves our facility
-                                without meeting the highest QC standards.
+                                {whyUsLeftContents[0]?.leftSection}
                             </p>
                             <Image
                                 src={Images.offer_image}
@@ -84,8 +79,9 @@ const ChooseUsContainer = () => {
                                     ref={textOneRef}
                                     className="flex flex-col gap-6"
                                 >
-                                    {chooseUsData.map((item) => (
+                                    {whyUsRightContents?.map((item, index) => (
                                         <ChooseUsCard
+                                            index={index}
                                             key={item._id}
                                             data={item}
                                         />
