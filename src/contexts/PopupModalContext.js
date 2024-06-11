@@ -19,7 +19,7 @@ export const ModalProvider = ({ children }) => {
         if (!hideModalPermanently) {
             const interval = setInterval(() => {
                 setShowModal(true);
-            }, 10000); // 60000 ms = 1 minute
+            }, 30000); // 60000 ms = 1 minute
 
             return () => clearInterval(interval);
         }
@@ -42,7 +42,7 @@ export const ModalProvider = ({ children }) => {
                 apiUrl: POPUP_INFORMATION,
                 method: "GET",
             });
-            console.log({ res });
+
             if (res?.status === 200) {
                 setPopupInfo(res?.docs);
             }
