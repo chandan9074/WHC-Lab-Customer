@@ -20,16 +20,18 @@ const MegaMenu = ({ setOpen, open }) => {
     return (
         <div className="">
             <video
+                playsInline
                 src={megamenuVideo}
                 autoPlay
                 muted
                 loop
+                controls={false}
                 className="fixed top-0 left-0 w-full h-screen object-cover"
             />
             <div className="bg-black bg-opacity-25 fixed w-full h-full" />
             <div className="w-full flex justify-center h-full absolute top-0">
-                <div className="container mx-auto py-9">
-                    <div className="flex justify-end">
+                <div className="container mx-auto py-4 lg:py-9">
+                    <div className="fixed right-6">
                         <button
                             onClick={() => {
                                 setOpen(!open);
@@ -45,7 +47,7 @@ const MegaMenu = ({ setOpen, open }) => {
                             />
                         </button>
                     </div>
-                    <div className="grid grid-cols-12 lg:mt-12 md:mt-8 sm:mt-6 mt-4 mx-4 gap-6">
+                    <div className="grid grid-cols-12 lg:mt-12 md:mt-8 sm:mt-6 mt-4 mx-4 gap-6 pb-40 md:pb-10">
                         <div className="col-span-12 lg:col-span-8 flex flex-col gap-[13px]">
                             {megaMenuMainLinks.map((item) => (
                                 <div
