@@ -57,6 +57,7 @@ function SingleMarketingSection({ data, index }) {
                 <div className="bg-[#C1AE91] opacity-75 xl:h-[650px] lg:h-[550px] md:h-[470px] sm:h-[400px] h-[350px] 2xl:w-[650px] lg:w-auto md:w-[550px] sm:w-[500px] w-[312px] md:rounded-[25px] rounded-[13px] shadow-lg">
                     <video
                         src={`${GET_IMAGE_RENDER}?key=${data?.image}`}
+                        playsInline
                         autoPlay
                         muted
                         loop
