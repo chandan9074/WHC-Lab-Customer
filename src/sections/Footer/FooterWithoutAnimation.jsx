@@ -7,10 +7,13 @@ import { useState } from "react";
 import UserService from "@/services/UserService/UserService";
 import { toast } from "react-toastify";
 import { Spin } from "antd";
+import { useUserContext } from "@/contexts/UserContext";
 
 const FooterWithoutAnimation = ({ navLinks, socialLinks }) => {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const { socialList } = useUserContext();
 
     const handleAddNewsletter = async () => {
         if (!email) {
@@ -118,28 +121,31 @@ const FooterWithoutAnimation = ({ navLinks, socialLinks }) => {
                                 />
                             </button>
                         </div> */}
-                        <div className="space-y-[15px]">
+                        <div className="space-y-[15px] pb-[30px] md:pb-0">
                             <p className="text-[#9194A6] text-[13.5px] font-medium leading-5">
                                 Stay up-to date
                             </p>
                             <div className="flex gap-3 flex-wrap">
-                                {socialLinks.map((item) => (
-                                    <button
+                                {socialList?.map((item) => (
+                                    <a
+                                        href={item?.link}
+                                        target="_blank"
                                         key={item._id}
-                                        className="group flex items-center gap-x-1.5 px-[18px] py-[10.5px] border-[1.5px] border-[#2B2E3A] hover:bg-[#1B1B1B] hover:border-[#1B1B1B] rounded-[37.5px]  duration-300 relative"
                                     >
-                                        <p className="text-xs font-bold text-[#D9D9D9] group-hover:text-white leading-4 mr-0 group-hover:mr-3 duration-300">
-                                            {item.label}
-                                        </p>
+                                        <button className="group flex items-center gap-x-1.5 px-[18px] py-[10.5px] border-[1.5px] border-[#2B2E3A] hover:bg-[#1B1B1B] hover:border-[#1B1B1B] rounded-[37.5px]  duration-300 relative">
+                                            <p className="text-xs font-bold text-[#D9D9D9] md:group-hover:text-white leading-4 mr-0 md:group-hover:mr-3 duration-300">
+                                                {item.name}
+                                            </p>
 
-                                        <Image
-                                            src={Icons.arrow_up_right_white}
-                                            width={1000}
-                                            height={1000}
-                                            alt="arrow-up-right"
-                                            className="w-[15px] h-[15px] hidden group-hover:block animate-fadeIn"
-                                        />
-                                    </button>
+                                            <Image
+                                                src={Icons.arrow_up_right_white}
+                                                width={1000}
+                                                height={1000}
+                                                alt="arrow-up-right"
+                                                className="w-[15px] h-[15px] hidden md:group-hover:block animate-fadeIn"
+                                            />
+                                        </button>
+                                    </a>
                                 ))}
                             </div>
                         </div>
