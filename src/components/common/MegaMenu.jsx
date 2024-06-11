@@ -11,11 +11,17 @@ import Buttons from "../Buttons";
 import { LOGIN_PATH, SIGN_UP_PATH } from "@/helpers/slug";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useUserContext } from "@/contexts/UserContext";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const MegaMenu = ({ setOpen, open }) => {
     const [showResourcesButtons, setShowResourcesButtons] = useState(false);
     const { isLogin, logOut } = useAuthContext();
     const { socialList } = useUserContext();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const params = new URLSearchParams(searchParams);
+    // console.log(params.toString());
+    // console.log({ pathname });
 
     return (
         <div className="">
@@ -163,7 +169,11 @@ const MegaMenu = ({ setOpen, open }) => {
                                     <>
                                         <NavLink
                                             title={"LOG IN"}
-                                            path={LOGIN_PATH}
+                                            path={
+                                                pathname === "/"
+                                                    ? `${LOGIN_PATH}`
+                                                    : `${LOGIN_PATH}?redirect=${pathname}?${params.toString()}`
+                                            }
                                         />
                                         <NavLink
                                             title={"REGISTER NEW ACCOUNT"}
