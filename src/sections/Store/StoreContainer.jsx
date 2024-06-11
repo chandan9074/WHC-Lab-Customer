@@ -89,7 +89,7 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
     // }, [selectedTab]);
 
     return (
-        <div className="container mx-auto space-y-[14.5px] px-4 md:px-0 pb-0 md:pb-20">
+        <div className="container mx-auto space-y-[14.5px] px-4 md:px-0 pb-10 md:pb-20">
             <Spin fullscreen spinning={loading} />
             <>
                 <StoreTabButtonsSection
