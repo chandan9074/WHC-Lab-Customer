@@ -394,9 +394,9 @@ const ProductViewMobile = ({ data }) => {
 
                     <div className="pb-6">
                         <Buttons.PrimaryButton
-                            label={`ADD TO CART - ${
-                                !stockStatus
-                                    ? `${currency.icon} ${
+                            label={`ADD TO CART ${
+                                stockStatus
+                                    ? `- ${currency.icon} ${
                                           data[currency.field] &&
                                           data[currency.field] * quantity
                                       }`

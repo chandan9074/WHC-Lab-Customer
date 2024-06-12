@@ -122,7 +122,7 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
                             onChange={() => onChange("creditBalance")}
                             checked={paymentMethod === "creditBalance"}
                         >
-                            <div className="text-wrap bg-white flex justify-between items-center">
+                            <div className="w-full text-wrap bg-white flex justify-between items-center">
                                 <div className="w-full flex justify-between items-center gap-3">
                                     <h2
                                         className={`font-semibold ${handleInactiveFontColor(
@@ -136,8 +136,8 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
                                     <div className="animate-fadeIn">
                                         {userInfo?.creditBalance &&
                                         userInfo?.creditBalanceLimit ? (
-                                            <div className="flex gap-x-6">
-                                                <p className="text-brand-blue-500 text-sm leading-[18.23px]">
+                                            <div className="flex gap-x-2 sm:gap-x-6">
+                                                <p className="text-nowrap text-brand-blue-500 text-xs sm:text-sm leading-[18.23px]">
                                                     Credit Limit:
                                                     {
                                                         currencyData[_currency]
@@ -147,7 +147,7 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
                                                         userInfo?.creditBalanceLimit
                                                     }
                                                 </p>
-                                                <p className="text-brand-blue-500 text-sm leading-[18.23px]">
+                                                <p className="text-nowrap text-brand-blue-500 text-xs sm:text-sm leading-[18.23px]">
                                                     Credit Balance:
                                                     {
                                                         currencyData[_currency]
