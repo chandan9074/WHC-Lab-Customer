@@ -14,6 +14,8 @@ import { toast } from "react-toastify";
 import { useCart } from "@/contexts/CartContext";
 import { useUserContext } from "@/contexts/UserContext";
 import { checkStock } from "@/utils";
+import SocialMediaShare from "../Blog/SocialMediaShare";
+import copy from "copy-to-clipboard";
 
 const ProductViewMobile = ({ data }) => {
     console.log("tanjil khawa----------", data);
@@ -31,6 +33,8 @@ const ProductViewMobile = ({ data }) => {
     const [loading, setLoading] = useState(false);
     const [stockStatus, setStockStatus] = useState(null);
     const [status, setStatus] = useState(null);
+    const [shareModalVisible, setShareModalVisible] = useState(false);
+    const [isCopied, setIsCopied] = useState(false);
 
     const { getUpdateCartList, createCartItem } = useCart();
     const router = useRouter();
@@ -167,6 +171,25 @@ const ProductViewMobile = ({ data }) => {
         }
     };
 
+    const handleShareIconClick = () => {
+        setShareModalVisible(true);
+    };
+
+    const handleShareModalCancel = () => {
+        setShareModalVisible(false);
+    };
+
+    const handleCopy = () => {
+        try {
+            const textToCopy = window.location.origin + pathname;
+            copy(textToCopy); // Using the copy-to-clipboard package
+            setIsCopied(true);
+            toast.success("Copied to clipboard!");
+        } catch (error) {
+            toast.error(error?.message || "Failed to copy");
+        }
+    };
+
     useEffect(() => {
         if (hasCookie("selected_location")) {
             const locationId = JSON.parse(getCookie("selected_location"));
@@ -249,6 +272,7 @@ const ProductViewMobile = ({ data }) => {
                             width={32}
                             icon={Icons.share}
                             className="w-6 h-6"
+                            onClick={handleShareIconClick}
                         />
                     </div>
                 </div>
@@ -422,6 +446,39 @@ const ProductViewMobile = ({ data }) => {
                     </div>
                 </div>
             </div>
+
+            <Modal
+                footer={false}
+                centered
+                open={shareModalVisible}
+                onCancel={handleShareModalCancel}
+            >
+                <h3 className="text-xl font-semibold mb-4">
+                    Share this product
+                </h3>
+                <div className="mt-4 flex gap-3">
+                    <input
+                        type="text"
+                        value={window.location.origin + pathname}
+                        readOnly
+                        className="w-full px-3 py-2 border rounded"
+                    />
+                    <button className="border p-2 rounded" onClick={handleCopy}>
+                        <Image
+                            alt="copy"
+                            src={isCopied ? Icons.active : Icons.copyBlue}
+                            width={1000}
+                            height={1000}
+                            className="w-6 h-6"
+                        />
+                    </button>
+                </div>
+                <SocialMediaShare
+                    title=""
+                    hashtag={[data?.mainCategory?.name]}
+                    quote={data?.mainCategory?.name}
+                />
+            </Modal>
 
             {/* <div className="space-y-4">
                 <h3 className="text-neutral-700 font-medium">
