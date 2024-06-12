@@ -45,6 +45,11 @@ function Cart({
                 newQuantity = prevQuantity - 1;
             } else {
                 // If operation is decrement but quantity is already 1, do nothing
+                if (operation === "increment") {
+                    toast.error("Stock limit exceeded!");
+                } else if (operation === "decrement") {
+                    toast.error("Quantity can not be less than 1!");
+                }
                 return prevQuantity;
             }
 
@@ -165,7 +170,7 @@ function Cart({
                                         handleQuantityChange("decrement");
                                         // handleUpdateCartItem();
                                     }}
-                                    disabled={quantity <= 1}
+                                    // disabled={quantity <= 1}
                                 >
                                     <Image
                                         src={Icons.minus}
@@ -254,7 +259,7 @@ function Cart({
                                     <span className="text-neutral-700">
                                         Product code:
                                     </span>{" "}
-                                    {product?.productCode}
+                                    {product?.variants[0].sku}
                                 </Text>
                             </div>
                             <div className="flex flex-row justify-between items-center border-[1px] border-black-500 p-2 rounded-full w-[7.5rem]">
@@ -293,10 +298,10 @@ function Cart({
                     {/* price , delete button */}
                     <div className="flex flex-col justify-between items-center">
                         <Text className="whitespace-nowrap">
-                            $&nbsp;
-                            {product?.offerPrice
-                                ? product?.offerPrice * quantity
-                                : product?.price * quantity}
+                            &nbsp;
+                            {currency.icon}
+                            {product[currency.field] &&
+                                (product[currency.field] * quantity).toFixed(2)}
                         </Text>
                         <Button
                             icon={
