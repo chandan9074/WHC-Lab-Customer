@@ -92,7 +92,7 @@ const UserShippingAddressForm = ({ data, setAddress, setBillingAddress }) => {
                                         <div className="space-y-2">
                                             <div className="flex gap-x-2 items-center">
                                                 <h2
-                                                    className={`font-semibold ${
+                                                    className={`text-wrap font-semibold ${
                                                         value === address?._id
                                                             ? "text-magenta-600"
                                                             : "text-neutral-700"
@@ -111,7 +111,7 @@ const UserShippingAddressForm = ({ data, setAddress, setBillingAddress }) => {
                                                 )}
                                             </div>
 
-                                            <p className="text-neutral-300 text-sm font-medium flex flex-wrap w-[200px] sm:w-full">
+                                            <p className="text-wrap text-neutral-300 text-sm font-medium flex flex-wrap w-[200px] sm:w-full">
                                                 {address.addressLine1 && (
                                                     <span>
                                                         {address.addressLine1},
