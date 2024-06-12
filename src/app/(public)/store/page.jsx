@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { getCookie } from "cookies-next";
 import { StoreSkeleton } from "@/components/common/StoreSkeleton";
 import Loader from "@/components/common/Loader";
+import PopupModalComponent from "@/sections/Home/PopupModalSection";
 
 const StoreContainer = dynamic(
     () => import("@/sections/Store/StoreContainer"),
@@ -42,6 +43,7 @@ async function Store(params) {
                     categoryData={categoryData?.docs}
                     initialCategory={params.searchParams.category}
                 />
+                <PopupModalComponent pageLocation="store-page" />
             </Layouts.Primary>
         </Suspense>
     );

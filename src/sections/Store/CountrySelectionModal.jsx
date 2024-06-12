@@ -42,7 +42,7 @@ function CountrySelectionModal({ handleLocation }) {
 
     return (
         <CustomModal
-            title="Select Your Country. "
+            title={<div className="p-5">Select Your Country.</div>}
             open={!selected_locations && selected}
             footer={null}
             wrapClassName="custom-modal"
@@ -53,7 +53,12 @@ function CountrySelectionModal({ handleLocation }) {
                     : toast.info("Please select your country first.")
             }
         >
-            <Flex vertical={"column"} align="end" gap={20} className="mt-10">
+            <Flex
+                vertical={"column"}
+                align="end"
+                gap={20}
+                className="my-5 px-5"
+            >
                 <Select
                     placeholder="Please select your country"
                     style={{
@@ -84,7 +89,7 @@ function CountrySelectionModal({ handleLocation }) {
                 />
                 <Buttons.PrimaryButton
                     label={"Continue"}
-                    className="h-12 whitespace-nowrap"
+                    className="h-12 whitespace-nowrap mb-5"
                     onClick={handleSelectLocation}
                 ></Buttons.PrimaryButton>
             </Flex>
