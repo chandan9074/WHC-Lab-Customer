@@ -41,12 +41,13 @@ const CartList = ({
                     </div>
                 </div>
 
+                {/* For mobile version. */}
                 <div className="flex flex-row md:hidden items-center justify-between py-3 border-b">
                     <Title level={5} className="m-0 pl-8">
                         Product
                     </Title>
                     <Title level={5} className="m-0">
-                        Price
+                        Total Price
                     </Title>
                 </div>
 
