@@ -22,7 +22,8 @@ const PopupModal = ({ pageLocation }) => {
     if (!filteredData.length) return null;
 
     // want to display the first matching item
-    const { title, content, image, buttonName, buttonLink } = filteredData[0];
+    const { _id, title, content, image, buttonName, buttonLink } =
+        filteredData[0];
 
     const handleOk = () => {
         window.open(buttonLink);
@@ -41,7 +42,11 @@ const PopupModal = ({ pageLocation }) => {
             }}
             footer={(_, { OkBtn, CancelBtn }) => (
                 <div className="flex flex-row justify-between p-5 relative z-30">
-                    <Button onClick={handlePermanentlyCloseModal}>
+                    <Button
+                        onClick={() =>
+                            handlePermanentlyCloseModal(pageLocation, _id)
+                        }
+                    >
                         Don't show again
                     </Button>
                     <div>

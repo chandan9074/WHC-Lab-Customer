@@ -11,27 +11,32 @@ export const ModalProvider = ({ children }) => {
     const [popupInfo, setPopupInfo] = useState([]);
     const modalStateKey = "hideModalPermanently";
     const router = useRouter();
-    const hideModalPermanently = getCookie(modalStateKey);
 
     useEffect(() => {
-        console.log({ hideModalPermanently });
+        const interval = setInterval(() => {
+            setShowModal(true);
+        }, 10 * 1000); // 60000 ms = 1 minute
 
-        if (!hideModalPermanently) {
-            const interval = setInterval(() => {
-                setShowModal(true);
-            }, 30000); // 60000 ms = 1 minute
-
-            return () => clearInterval(interval);
-        }
-    }, [hideModalPermanently]);
+        return () => clearInterval(interval);
+    }, []);
 
     const handleCloseModal = () => {
         setShowModal(false);
     };
 
-    const handlePermanentlyCloseModal = () => {
-        setCookie(modalStateKey, "true");
-        setShowModal(false);
+    const handlePermanentlyCloseModal = (pageLocation, id) => {
+        const _modalState = getCookie(modalStateKey);
+        const modalState = (_modalState && JSON.parse(_modalState)) || [];
+        const obj = { pageLocation, id };
+
+        // Check if the id already exists in the modalState array
+        const alreadyExists = modalState.some((modal) => modal.id === id);
+
+        if (!alreadyExists) {
+            setCookie(modalStateKey, JSON.stringify([...modalState, obj]));
+            setShowModal(false);
+        }
+
         router.refresh();
     };
 
