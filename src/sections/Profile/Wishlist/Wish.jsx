@@ -64,13 +64,13 @@ const Wish = ({ wishData, handleDelete }) => {
                 <Image
                     alt={wishData?.productName}
                     src={`${GET_IMAGE_RENDER}?key=${wishData?.productFeaturedImage}`}
-                    width={80}
-                    height={80}
-                    className="rounded-sm w-[80px] h-[80px]"
+                    width={1000}
+                    height={1000}
+                    className="rounded-sm w-[60px] h-[60px] sm:w-[80px] sm:h-[80px]"
                 />
                 <div className="flex flex-col">
                     <Link href={`/store/product-details/${wishData?._id}`}>
-                        <Text className="w-32  md:w-32 lg:w-full text-base text-neutral-700">
+                        <Text className="w-32  md:w-32 lg:w-full text-xs lg:text-base text-neutral-700">
                             {wishData?.productName}
                         </Text>
                     </Link>
@@ -101,18 +101,18 @@ const Wish = ({ wishData, handleDelete }) => {
                 <Button
                     size="small"
                     type="text"
-                    className="px-2 py-4 flex items-center justify-center rounded-full"
+                    className=" flex items-center justify-center rounded-full w-[40px] h-[40px]"
                     onClick={() => handleDelete(wishData?.productId)}
                 >
                     <Image
                         alt="trash"
                         src={Icons.trash}
-                        width={22}
-                        height={22}
+                        width={1000}
+                        height={1000}
                     />
                 </Button>
                 <Button
-                    className="px-2 py-4 flex items-center justify-center rounded-full w-full"
+                    className=" flex items-center justify-center rounded-full w-[40px] h-[40px]"
                     size="small"
                     type="text"
                     // disabled={!wishData.inStock}
@@ -123,8 +123,8 @@ const Wish = ({ wishData, handleDelete }) => {
                         src={
                             wishData?.inStock ? Icons.plus : Icons.disabled_plus
                         }
-                        width={18}
-                        height={18}
+                        width={1000}
+                        height={1000}
                     />
                 </Button>
             </div>

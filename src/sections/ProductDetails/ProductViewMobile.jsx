@@ -2,7 +2,7 @@
 
 import Buttons from "@/components/Buttons";
 import { Carousel, Modal, Rate } from "antd";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import Image from "next/image";
@@ -45,7 +45,11 @@ const ProductViewMobile = ({ data }) => {
         getProductWishlist,
     } = useWishlistContext();
 
+    const searchParams = useSearchParams();
+
     const { currency } = useUserContext();
+
+    const params = new URLSearchParams(searchParams);
 
     // const getWishlist = useCallback(async () => {
     //     const wishlists = await WishlistServices.getWishlist(token);
@@ -129,12 +133,12 @@ const ProductViewMobile = ({ data }) => {
     };
 
     const handleAddToCart = async () => {
-        if (data.inStock) {
+        // console.log(data.inStock, data._id, "instock");
+        if (stockStatus) {
             const locationId = JSON.parse(getCookie("selected_location"));
             const variant = data.variants.find(
                 (item) => item.location._id === locationId
             );
-            // console.log({ data });
             const stockId = variant.stockId;
             const sku = variant.sku;
 
@@ -230,10 +234,9 @@ const ProductViewMobile = ({ data }) => {
                             height={32}
                             width={32}
                             icon={
-                                // wishlistIds?.includes(data._id)
-                                //     ? Icons.wishlist_filled
-                                // :
-                                Icons.wishlistIcon
+                                checkProductInWishList(data._id)
+                                    ? Icons.wishlist_active
+                                    : Icons.wishlist_inactive
                             }
                             className="w-6 h-6"
                             onClick={handlewishlistClick}
@@ -259,7 +262,7 @@ const ProductViewMobile = ({ data }) => {
                     )}
 
                     {!stockStatus && (
-                        <p className="py-1 px-2 bg-red-400 mt-2 text-white font-semibold rounded">
+                        <p className="py-1 px-2 bg-red-400  text-white font-semibold rounded">
                             Out of Stock
                         </p>
                     )}
@@ -368,7 +371,7 @@ const ProductViewMobile = ({ data }) => {
                     <div className="pb-6">
                         <Buttons.PrimaryButton
                             label={`ADD TO CART - ${
-                                stockStatus
+                                !stockStatus
                                     ? `${currency.icon} ${
                                           data[currency.field] &&
                                           data[currency.field] * quantity
