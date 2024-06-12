@@ -14,10 +14,12 @@ import { WISHLISTS_URL } from "@/helpers/apiURLS";
 const wishlistContext = createContext();
 
 export function WishlistProvider({ children }) {
-    const token = getCookie("accessToken");
+    const accessToken = getCookie("accessToken");
+    
     const [wishlistItems, setWishlistItems] = useState([]);
 
     const getProductWishlist = useCallback(async () => {
+        const token = getCookie("accessToken");
         try {
             const res = await MakeApiCall({
                 apiUrl: WISHLISTS_URL,
@@ -30,9 +32,10 @@ export function WishlistProvider({ children }) {
         } catch (e) {
             toast.error(e?.message);
         }
-    }, [token]);
+    }, []);
 
     const createProductWishlist = async (productId, stockId, sku, currency) => {
+        const token = getCookie("accessToken");
         try {
             const res = await MakeApiCall({
                 apiUrl: WISHLISTS_URL,
@@ -48,6 +51,7 @@ export function WishlistProvider({ children }) {
     };
 
     const deleteWishlist = async (id) => {
+        const token = getCookie("accessToken");
         try {
             const res = await MakeApiCall({
                 apiUrl: WISHLISTS_URL,
@@ -70,8 +74,8 @@ export function WishlistProvider({ children }) {
     }
 
     useEffect(() => {
-        token && getProductWishlist();
-    }, [getProductWishlist, token]);
+        accessToken && getProductWishlist();
+    }, [getProductWishlist,accessToken]);
 
     const values = {
         wishlistItems,

@@ -33,7 +33,14 @@ const CountryCategorySelection = ({
     return (
         <div className="space-y-4 md:space-y-9 flex flex-col">
             <Select
-                allowClear
+                allowClear={
+                    <Image
+                        src={Icons.cross_blue}
+                        width={40}
+                        height={40}
+                        alt="caretDown"
+                    />
+                }
                 className="h-[52px]"
                 suffixIcon={
                     <Image
@@ -56,6 +63,14 @@ const CountryCategorySelection = ({
             />
 
             <Select
+                allowClear={
+                    <Image
+                        src={Icons.cross_blue}
+                        width={40}
+                        height={40}
+                        alt="caretDown"
+                    />
+                }
                 className="h-[52px]"
                 suffixIcon={
                     <Image

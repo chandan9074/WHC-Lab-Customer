@@ -78,6 +78,7 @@ const HeroRightSide = () => {
         // </div>
         <div className="flex justify-center items-center h-full">
             <video
+                playsInline
                 src={petriDishVideo}
                 autoPlay
                 muted

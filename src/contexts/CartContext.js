@@ -60,7 +60,7 @@ export function CartProvider({ children }) {
     // };
 
     useEffect(() => {
-        getUpdateCartList(token);
+        if(token){getUpdateCartList(token)};
     }, [getUpdateCartList, token]);
 
     const values = {

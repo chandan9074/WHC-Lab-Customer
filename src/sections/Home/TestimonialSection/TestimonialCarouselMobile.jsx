@@ -7,6 +7,7 @@ import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 const TestimonialCarouselMobile = ({ data }) => {
     const [currentSlide, setCurrentSlide] = useState(1);
+    const [sectionHeight, setSectionHeight] = useState(160);
 
     const slider1 = useRef(null);
     const slider2 = useRef(null);
@@ -18,7 +19,10 @@ const TestimonialCarouselMobile = ({ data }) => {
         <div className="block md:hidden">
             <Carousel ref={slider1} afterChange={onChange} dots={false}>
                 {data.map((item, index) => (
-                    <div key={index} className="pt-6 flex flex-col gap-y-4">
+                    <div
+                        key={index}
+                        className="pt-6 flex flex-col gap-y-4 pb-9"
+                    >
                         <Rate
                             disabled
                             defaultValue={item.rating}
@@ -31,11 +35,43 @@ const TestimonialCarouselMobile = ({ data }) => {
                 ))}
             </Carousel>
 
-            <div className="flex justify-between items-center pt-9">
-                <Carousel
+            <div className="relative flex justify-end items-center h-40 overflow-hidden">
+                <div
+                    className="absolute w-full duration-300 z-10"
+                    style={{
+                        top: `-${sectionHeight * (currentSlide - 1)}px`,
+                    }}
+                >
+                    {data.map((item, index) => (
+                        <div
+                            key={index}
+                            className="flex items-start w-[170px] h-40"
+                        >
+                            <div className="flex gap-x-5">
+                                <Image
+                                    alt="avatar"
+                                    width={1000}
+                                    height={1000}
+                                    src={`${GET_IMAGE_RENDER}?key=${item.client.image}`}
+                                    className="w-12 h-12 rounded-full"
+                                />
+                                <div className="space-y-1.5">
+                                    <h5 className="text-brand-blue-800 text-base font-medium leading-5">
+                                        {item.client.name}
+                                    </h5>
+                                    <p className="text-[#151924] text-opacity-30 text-sm leading-[17px]">
+                                        {item.client.designation}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                {/* <Carousel
                     ref={slider2}
                     afterChange={onChange}
                     dots={false}
+                    slidesPerRow={1}
                     vertical
                     // effect="fade"
                 >
@@ -63,13 +99,13 @@ const TestimonialCarouselMobile = ({ data }) => {
                             </div>
                         </div>
                     ))}
-                </Carousel>
+                </Carousel> */}
 
-                <div className="flex gap-x-5">
+                <div className="flex gap-x-5 z-50">
                     <button
                         onClick={() => {
                             slider1.current.prev();
-                            slider2.current.prev();
+                            // slider2.current.prev();
                         }}
                         className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
                             currentSlide === 1 ? "opacity-20" : ""
@@ -87,7 +123,7 @@ const TestimonialCarouselMobile = ({ data }) => {
                     <button
                         onClick={() => {
                             slider1.current.next();
-                            slider2.current.next();
+                            // slider2.current.next();
                         }}
                         disabled={currentSlide > data.length - 1}
                         className={`w-14 h-14 rounded-full border border-brand-green-500 flex justify-center items-center ${
@@ -129,7 +165,7 @@ const TestimonialCarouselMobile = ({ data }) => {
                     <div
                         className={`h-1.5 bg-black absolute top-0 left-0 z-10  rounded-full duration-300`}
                         style={{
-                            width: `${(80 / data.length) * currentSlide}px`,
+                            width: `${(132 / data.length) * currentSlide}px`,
                         }}
                     />
                 </div>

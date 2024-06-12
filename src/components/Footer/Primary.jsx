@@ -36,22 +36,22 @@ const Primary = () => {
         {
             _id: 1,
             label: "Facebook",
-            path: "/",
+            path: "https://www.facebook.com/WHCLab/",
         },
         {
             _id: 2,
             label: "Instagram",
-            path: "/",
+            path: "https://www.instagram.com/whc_lab/",
         },
         {
             _id: 3,
             label: "LinkedIn",
-            path: "/",
+            path: "https://www.linkedin.com/company/the-wicklow-hops-company/?originalSubdomain=ie",
         },
         {
             _id: 4,
             label: "Twitter",
-            path: "/",
+            path: "https://x.com/whclab?s=21",
         },
     ];
 

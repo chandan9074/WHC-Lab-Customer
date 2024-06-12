@@ -225,7 +225,7 @@ const NextBreadcrumb = () => {
     // };
 
     return (
-        <div className="container mx-auto py-6 flex justify-between items-center">
+        <div className="container mx-auto py-6 px-4 md:px-0 flex flex-col md:flex-row justify-between item-start md:items-center gap-y-4 md:gap-y-0">
             <Breadcrumb>
                 <Breadcrumb.Item>
                     <Link

@@ -113,6 +113,8 @@ const ProductListContainer = ({
                 setSearchQuery={setSearchQuery}
                 searchQuery={searchQuery}
                 productData={productData}
+                filterData={data}
+                handleProductLoading={handleProductLoading}
             />
         </div>
     );

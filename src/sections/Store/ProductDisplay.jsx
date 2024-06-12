@@ -14,6 +14,7 @@ const ProductDisplay = ({
     productData,
     setSearchQuery,
     searchQuery,
+    handleProductLoading,
 }) => {
     const token = getCookie("accessToken");
 
@@ -32,10 +33,12 @@ const ProductDisplay = ({
     return (
         <div className="w-full">
             <ProductHeader
+                filterData={filterData}
                 selectedTab={selectedTab}
                 dataLength={data?.length}
                 setSearchQuery={setSearchQuery}
                 searchQuery={searchQuery}
+                handleProductLoading={handleProductLoading}
             />
             {data?.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-6 mt-6">

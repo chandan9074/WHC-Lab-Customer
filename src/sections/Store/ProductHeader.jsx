@@ -8,10 +8,12 @@ import Icons from "../../../public/assets/Icons";
 import Filter from "@/components/Filter";
 
 const ProductHeader = ({
+    filterData,
     selectedTab,
     dataLength,
     setSearchQuery,
     searchQuery,
+    handleProductLoading,
 }) => {
     const [open, setOpen] = useState(false);
 
@@ -115,7 +117,13 @@ const ProductHeader = ({
                 open={open}
                 width={340}
             >
-                <Filter.Primary />
+                <Filter.Primary
+                    data={filterData}
+                    selectedTab={selectedTab}
+                    setSearchQuery={setSearchQuery}
+                    searchQuery={searchQuery}
+                    handleProductLoading={handleProductLoading}
+                />
             </Drawer>
         </div>
     );

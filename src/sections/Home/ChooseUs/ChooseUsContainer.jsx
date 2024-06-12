@@ -97,8 +97,11 @@ const ChooseUsContainer = ({ whyUsLeftContents, whyUsRightContents }) => {
                     Why Choose Us
                 </h1>
                 <div className="lg:mt-10 md:mt-9 sm:mt-7 mt-6">
-                    <ChooseUsLeftSide />
-                    <ChooseUsRightSide />
+                    <ChooseUsLeftSide whyUsLeftContents={whyUsLeftContents} />
+                    <ChooseUsRightSide
+                        // refId={textOneRef}
+                        whyUsRightContents={whyUsRightContents}
+                    />
                 </div>
             </div>
         </>

@@ -5,7 +5,7 @@ import ChooseUsCard from "./ChooseUsCard";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const ChooseUsRightSide = ({ refId }) => {
+const ChooseUsRightSide = ({ refId, whyUsRightContents }) => {
     // const [scrollEnabled, setScrollEnabled] = useState(true);
     // const scrollableRef = useRef(null);
     // const [activeScroll, setActiveScroll] = useState(false);
@@ -120,8 +120,8 @@ const ChooseUsRightSide = ({ refId }) => {
                 className="space-y-12"
                 // onScroll={handleInnerScroll}
             >
-                {chooseUsData.map((item) => (
-                    <ChooseUsCard key={item._id} data={item} />
+                {whyUsRightContents.map((item, index) => (
+                    <ChooseUsCard index={index} key={item._id} data={item} />
                 ))}
             </div>
         </div>

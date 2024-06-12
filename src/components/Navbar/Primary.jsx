@@ -139,7 +139,7 @@ function MobileMenuItem({ isLogin, cartItem }) {
                             alt="search"
                             width={1000}
                             height={1000}
-                            className="w-5 sm:w-[30px] h-5 sm:h-[30px] cursor-pointer"
+                            className="w-7 sm:w-[30px] h-7 sm:h-[30px] cursor-pointer"
                         />
                     </Link>
                     <Link href={MY_ACCOUNT_PATH}>
@@ -148,7 +148,7 @@ function MobileMenuItem({ isLogin, cartItem }) {
                             alt="search"
                             width={1000}
                             height={1000}
-                            className="w-5 sm:w-[40px] h-5 sm:h-[40px] cursor-pointer"
+                            className="w-7 sm:w-[40px] h-7 sm:h-[40px] cursor-pointer"
                         />
                     </Link>
                     <Link href={MY_CART_PATH}>

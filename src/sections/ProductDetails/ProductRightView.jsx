@@ -233,13 +233,17 @@ const ProductRightView = ({
                     />
 
                     <p className="text-neutral-700 text-sm font-medium">
-                        {data?.review?.summary?.average}
+                        {data?.review?.summary?.average
+                            ? data?.review?.summary?.average
+                            : "0"}
                     </p>
 
                     <p className="text-[#8790AB] text-sm font-medium">.</p>
 
                     <p className="text-neutral-700 text-sm font-medium">
-                        {data?.review?.summary?.total}
+                        {data?.review?.summary?.total
+                            ? data?.review?.summary?.total
+                            : "0"}
                         <span className="text-neutral-200 text-sm font-medium">
                             &nbsp; reviews
                         </span>
