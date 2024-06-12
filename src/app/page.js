@@ -7,42 +7,69 @@ import MarketingContainer from "@/sections/Home/MarketingSection/MarketingContai
 import OfferContainer from "@/sections/Home/Offer/OfferContainer";
 import OurProductsContainer from "@/sections/Home/OurProducts/OurProductsContainer";
 import PioneeringExcellenceContainer from "@/sections/Home/PioneeringExcellence/PioneeringExcellenceContainer";
+import PopupModalComponent from "@/sections/Home/PopupModalSection";
 import ProductContainer from "@/sections/Home/Product/ProductContainer";
 import TestimonialSection from "@/sections/Home/TestimonialSection/TestimonialSection";
 import HomeService from "@/services/HomeService";
 import ProductService from "@/services/productsService";
 
 export default async function Home() {
-
     const getTestimonials = HomeService.getTestimonials();
 
     const getMainCategories = HomeService.getMainCategories();
 
     const getNewProducts = ProductService.getProducts();
 
-    const getFeaturedProducts = ProductService.getProducts({isFeatured:true});
+    const getFeaturedProducts = ProductService.getProducts({
+        isFeatured: true,
+    });
 
-    const getWhyUsLeftContents = HomeService.getWhyUsContents({sectionType:"leftSection"})
+    const getWhyUsLeftContents = HomeService.getWhyUsContents({
+        sectionType: "leftSection",
+    });
 
-    const getWhyUsRightContents = HomeService.getWhyUsContents({sectionType:"rightSection"})
+    const getWhyUsRightContents = HomeService.getWhyUsContents({
+        sectionType: "rightSection",
+    });
 
     const getStrains = HomeService.getStrains();
 
-    const [testimonialsData,mainCategoriesData,featuredProducts,newProducts,whyUsLeftContents,whyUsRightContents,strainsData] = await Promise.all([getTestimonials,getMainCategories,getFeaturedProducts,getNewProducts,getWhyUsLeftContents,getWhyUsRightContents,getStrains]);
-
+    const [
+        testimonialsData,
+        mainCategoriesData,
+        featuredProducts,
+        newProducts,
+        whyUsLeftContents,
+        whyUsRightContents,
+        strainsData,
+    ] = await Promise.all([
+        getTestimonials,
+        getMainCategories,
+        getFeaturedProducts,
+        getNewProducts,
+        getWhyUsLeftContents,
+        getWhyUsRightContents,
+        getStrains,
+    ]);
 
     return (
         <Layouts.Primary breadcrumb={false}>
             <HeroContainer />
-            <ProductContainer featuredProducts={featuredProducts.docs}/>
-            <MainCategoriesContainer mainCategoriesData={mainCategoriesData.docs}/>
+            <ProductContainer featuredProducts={featuredProducts.docs} />
+            <MainCategoriesContainer
+                mainCategoriesData={mainCategoriesData.docs}
+            />
             <OfferContainer />
-            <MarketingContainer strainsData={strainsData.docs}/>
-            <OurProductsContainer data={newProducts.docs}/>
-            <ChooseUsContainer whyUsLeftContents={whyUsLeftContents.docs} whyUsRightContents={whyUsRightContents.docs}/>
+            <MarketingContainer strainsData={strainsData.docs} />
+            <OurProductsContainer data={newProducts.docs} />
+            <ChooseUsContainer
+                whyUsLeftContents={whyUsLeftContents.docs}
+                whyUsRightContents={whyUsRightContents.docs}
+            />
             <PioneeringExcellenceContainer />
-            <TestimonialSection testimonialsData={testimonialsData.docs}/>
+            <TestimonialSection testimonialsData={testimonialsData.docs} />
             <ContactUsSection />
+            <PopupModalComponent pageLocation="homepage" />
         </Layouts.Primary>
     );
 }
