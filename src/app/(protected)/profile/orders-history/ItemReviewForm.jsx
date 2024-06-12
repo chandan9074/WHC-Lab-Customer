@@ -90,7 +90,8 @@ const ItemReviewForm = ({ submit, productName, category, image, data }) => {
                                 name="comment"
                                 rules={[
                                     {
-                                        required: false,
+                                        required: true,
+                                        message: "Comment is required!",
                                     },
                                 ]}
                             >

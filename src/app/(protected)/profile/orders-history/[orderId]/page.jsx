@@ -71,7 +71,7 @@ const OrderDetails = ({ params: { orderId } }) => {
     };
 
     return (
-        <div className="py-6 md:py-12 sm:px-[0px] md:px-[10px] lg:px-[58px]">
+        <div className="py-6 md:py-12 px-4 sm:px-[0px] md:px-[10px] lg:px-[58px]">
             <div className="flex justify-between items-center mb-14">
                 <p className="text-neutral-300 text-base font-medium">
                     Order id{" "}
@@ -139,7 +139,9 @@ const OrderDetails = ({ params: { orderId } }) => {
 
             <CustomModal
                 title={
-                    <h4 className="w-full flex justify-center">Items Review</h4>
+                    <h4 className="w-full flex justify-center pt-4">
+                        Items Review
+                    </h4>
                 }
                 open={isReview}
                 onCancel={() => setIsReview(false)}
@@ -154,7 +156,7 @@ const OrderDetails = ({ params: { orderId } }) => {
             {isWriteReview && (
                 <CustomModal
                     title={
-                        <h4 className="w-full flex justify-center">
+                        <h4 className="w-full flex justify-center pt-4">
                             Write Review
                         </h4>
                     }

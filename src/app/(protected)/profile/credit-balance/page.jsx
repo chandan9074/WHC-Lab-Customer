@@ -225,10 +225,10 @@ const CreditBalance = () => {
 
     return (
         <Suspense fallback={<Loader />}>
-            <div className="p-4 md:p-8 flex flex-col gap-y-5 md:gap-y-6">
+            <div className="p-2 lg:p-4 flex flex-col gap-y-5 md:gap-y-6">
                 <Spin spinning={loading} fullscreen />
                 <div className="bg-white rounded-[4px] border border-stroke-new p-0 px-4 py-6 md:p-8 flex flex-col md:flex-row gap-y-6 md:justify-between md:items-center">
-                    <div className="px-4 py-6 flex justify-between md:gap-x-12">
+                    <div className=" py-6 flex justify-between md:gap-x-12">
                         {/* {JSON.stringify(userInfo)} */}
                         {userInfo?.appliedForCreditBalance ? (
                             <>

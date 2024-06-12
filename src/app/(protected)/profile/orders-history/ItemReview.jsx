@@ -6,7 +6,7 @@ import Image from "next/image";
 const ItemReview = ({ data, handleWriteReview }) => {
     // console.log(data);
     return (
-        <div className="px-3 pb-10">
+        <div className="px-3 pb-10 pt-6">
             {data &&
                 data.map((item, i) => (
                     <div key={i}>
