@@ -110,3 +110,6 @@ export const SOCIAL_MEDIA_LINK_URL = `${BASEURL}/system-configs/social-link`;
 
 // GET POPUP information
 export const POPUP_INFORMATION = `${BASEURL}/popups/customer`;
+
+// collaboraion
+export const COLLABORATION_URL = `${BASEURL}/collaborations`;
