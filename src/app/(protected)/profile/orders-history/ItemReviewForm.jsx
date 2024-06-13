@@ -9,15 +9,17 @@ import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 const ItemReviewForm = ({ submit, productName, category, image, data }) => {
     const [form] = Form.useForm();
     const [selectedRating, setSelectedRating] = useState(null);
+    const [isRatingEmpty, setIsRatingEmpty] = useState(false);
 
     const handleRating = (value) => {
         setSelectedRating(value);
+        setIsRatingEmpty(false);
     };
 
     const onFinish = (values) => {
         const _data = {
             ...values,
-            rating: selectedRating || 1,
+            rating: selectedRating,
             productId: data?._id,
         };
         submit(_data);
@@ -25,6 +27,11 @@ const ItemReviewForm = ({ submit, productName, category, image, data }) => {
 
     const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo);
+        if (selectedRating === null) {
+            setIsRatingEmpty(true);
+        } else {
+            setIsRatingEmpty(false);
+        }
     };
 
     return (
@@ -80,6 +87,11 @@ const ItemReviewForm = ({ submit, productName, category, image, data }) => {
                                 />
                             ))}
                         </div>
+                        {isRatingEmpty && (
+                            <p className="text-error-500 pt-1 animate-fadeIn">
+                                Rating is required!
+                            </p>
+                        )}
 
                         <div className="space-y-3 mt-7">
                             <p className="text-neutral-400 text-xs font-medium leading-[15.62px] md:text-sm md:leading-[18.23px]">
