@@ -122,7 +122,7 @@ const CreditBalance = () => {
             ),
         },
         {
-            title: "Order Number",
+            title: <p className="whitespace-nowrap">Order Number</p>,
             dataIndex: "orderNumber",
             key: "orderId",
             width: 174.5,
@@ -136,7 +136,9 @@ const CreditBalance = () => {
             key: "date",
             width: 174.5,
             render: (text) => (
-                <a className="text-[#696F8C] text-sm font-medium">{text}</a>
+                <a className="whitespace-nowrap text-[#696F8C] text-sm font-medium">
+                    {text}
+                </a>
             ),
         },
         {
@@ -185,7 +187,7 @@ const CreditBalance = () => {
                         ) : (
                             <button
                                 onClick={() => handlePay(record?.orderNumber)}
-                                className="py-2 px-4 bg-brand-blue-500 text-white rounded-md font-medium text-center text-sm"
+                                className="whitespace-nowrap py-2 px-4 bg-brand-blue-500 text-white rounded-md font-medium text-center text-sm"
                             >
                                 Pay now
                             </button>
@@ -223,10 +225,10 @@ const CreditBalance = () => {
 
     return (
         <Suspense fallback={<Loader />}>
-            <div className="p-4 md:p-8 flex flex-col gap-y-5 md:gap-y-6">
+            <div className="p-2 lg:p-4 flex flex-col gap-y-5 md:gap-y-6">
                 <Spin spinning={loading} fullscreen />
                 <div className="bg-white rounded-[4px] border border-stroke-new p-0 px-4 py-6 md:p-8 flex flex-col md:flex-row gap-y-6 md:justify-between md:items-center">
-                    <div className="px-4 py-6 flex justify-between md:gap-x-12">
+                    <div className=" py-6 flex justify-between md:gap-x-12">
                         {/* {JSON.stringify(userInfo)} */}
                         {userInfo?.appliedForCreditBalance ? (
                             <>
@@ -293,21 +295,19 @@ const CreditBalance = () => {
 
                 <div className="bg-white p-8 border border-[#EBEDF0] rounded-[4px] space-y-6">
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                        <div className="flex flex-col lg:flex-row gap-6">
-                            <div>
-                                <input
-                                    placeholder="input order number"
-                                    className="border py-[7px] px-2 rounded-s-md"
-                                    value={inputSearch}
-                                    onChange={(e) => handleChange(e)}
-                                />
-                                <button
-                                    onClick={handleSearch}
-                                    className="py-2 px-4 bg-brand-blue-500 text-white rounded-e-md font-medium text-center text-sm"
-                                >
-                                    Search
-                                </button>
-                            </div>
+                        <div className="flex ">
+                            <input
+                                placeholder="input order number"
+                                className="border py-[7px] px-2 rounded-s-md min-w-20"
+                                value={inputSearch}
+                                onChange={(e) => handleChange(e)}
+                            />
+                            <button
+                                onClick={handleSearch}
+                                className="py-2 px-4 bg-brand-blue-500 text-white rounded-e-md font-medium text-center text-sm"
+                            >
+                                Search
+                            </button>
                         </div>
 
                         <h4 className="leading-6 text-neutral-500 whitespace-nowrap">
@@ -318,6 +318,7 @@ const CreditBalance = () => {
                         </h4>
                     </div>
                     <Table
+                        scroll={{ x: 540 }}
                         className="tab-scroll"
                         columns={columns}
                         dataSource={creditBalance?.docs}
