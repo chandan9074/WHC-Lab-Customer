@@ -41,13 +41,13 @@ const PopupModal = ({ pageLocation }) => {
                 style: { background: "#0b2848" },
             }}
             footer={(_, { OkBtn, CancelBtn }) => (
-                <div className="flex flex-row justify-between p-5 relative z-30">
+                <div className="flex flex-row justify-between px-8 py-6 relative z-30">
                     <Button
                         onClick={() =>
                             handlePermanentlyCloseModal(pageLocation, _id)
                         }
                     >
-                        Don't show again
+                        Don&apos;t show again
                     </Button>
                     <div>
                         <OkBtn className="hover:bg-[#0b2848] bg-[#0b2848]" />
@@ -63,7 +63,7 @@ const PopupModal = ({ pageLocation }) => {
             <Image
                 src={`${GET_IMAGE_RENDER}?key=${image}`}
                 alt={title}
-                className="w-full h-full object-cover absolute inset-0 z-0 transition-opacity opacity-0 duration-[2s]"
+                className="w-full h-full object-cover absolute inset-0 z-0 "
                 height={1000}
                 width={1000}
                 onLoadingComplete={(image) =>
@@ -72,7 +72,7 @@ const PopupModal = ({ pageLocation }) => {
             />
             <div className="absolute top-0 left-0 w-full h-full bg-black z-20 opacity-40" />
             <div className="relative top-[10%] left-[0%] text-white z-30">
-                <div className="flex flex-col gap-8 p-5">
+                <div className="flex flex-col gap-8 px-8 py-6">
                     <h1 className="text-2xl font-semibold align-top">
                         {title}
                     </h1>
