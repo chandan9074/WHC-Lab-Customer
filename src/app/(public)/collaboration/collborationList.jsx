@@ -36,7 +36,7 @@ function CollaborationList() {
 
     return (
         <div>
-            <Spin spinning={loading} fullscreen />
+            {/* <Spin spinning={loading} fullscreen /> */}
             <div className="flex flex-col items-center justify-center gap-7">
                 {collaborations?.map((item, index) => {
                     return (
@@ -50,7 +50,7 @@ function CollaborationList() {
                     disabled={page === totalPages}
                     className="border border-[#061628] p-4 rounded-full text-[16px] test-[#0B2848]"
                 >
-                    Show More
+                    {loading ? "Loading..." : "Show More"}
                 </button>
             </div>
         </div>
