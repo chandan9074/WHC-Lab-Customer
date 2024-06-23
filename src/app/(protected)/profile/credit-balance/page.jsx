@@ -230,7 +230,7 @@ const CreditBalance = () => {
                 <div className="bg-white rounded-[4px] border border-stroke-new p-0 px-4 py-6 md:p-8 flex flex-col md:flex-row gap-y-6 md:justify-between md:items-center">
                     <div className=" py-6 flex justify-between md:gap-x-12">
                         {/* {JSON.stringify(userInfo)} */}
-                        {userInfo?.appliedForCreditBalance ? (
+                        {userInfo?.creditBalanceLimit > 0 ? (
                             <>
                                 <div className="space-y-1">
                                     <p className="text-brand-blue-800 text-sm leading-[21px]">
