@@ -390,6 +390,7 @@ const MyAccountSection = ({ data }) => {
             >
                 <VatCodeCustomModal
                     data={data}
+                    formValue={formValue}
                     onSubmit={handleOk}
                     setUserInfo={setUserInfo}
                     setFormValue={setFormValue}
@@ -485,12 +486,14 @@ const NameCustomModal = ({
 };
 
 const VatCodeCustomModal = ({
+    formValue,
     onSubmit,
     setUserInfo,
     setUserProfileInfo,
     setFormValue,
     data,
 }) => {
+    console.log(formValue.companyVatCode);
     const onFinish = async (values) => {
         const token = getCookie("accessToken");
         // vat code update
@@ -517,7 +520,7 @@ const VatCodeCustomModal = ({
 
             setUserInfo(response.user);
             setUserProfileInfo(response.user);
-            toast.success(response.message);
+            // toast.success(response.message);
             onSubmit();
         } catch (error) {
             toast.error(error?.message);
@@ -525,7 +528,11 @@ const VatCodeCustomModal = ({
         }
     };
     return (
-        <Form layout="vertical" onFinish={onFinish} initialValues={{ ...data }}>
+        <Form
+            layout="vertical"
+            onFinish={onFinish}
+            initialValues={{ vatCode: formValue.companyVatCode }}
+        >
             <Form.Item
                 className="col-span-1"
                 label={
