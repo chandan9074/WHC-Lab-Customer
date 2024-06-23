@@ -26,7 +26,7 @@ async function CollaborationDetailsPage({ params }) {
                     <Image
                         key={index}
                         alt="collab-img"
-                        className="col-span-1 rounded-md"
+                        className="col-span-1 rounded-md h-[350px] sm:h-[400px] md:h-[500px] lg:h-[650px] w-full object-cover"
                         width={1000}
                         height={1000}
                         src={`${GET_IMAGE_RENDER}?key=${item}`}

@@ -50,7 +50,7 @@ function Card({ data }) {
                         <Image
                             key={index}
                             alt="collab-img"
-                            className="col-span-1 rounded-md"
+                            className="col-span-1 rounded-md w-full h-[456px] object-cover"
                             width={1000}
                             height={1000}
                             src={`${GET_IMAGE_RENDER}?key=${item}`}
