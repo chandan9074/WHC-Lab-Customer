@@ -1,29 +1,25 @@
-import Buttons from "@/components/Buttons";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Icons from "../../../../public/assets/Icons";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
-import Images from "../../../../public/assets/Images";
 
 function Card({ data }) {
     const { _id, title, description, images } = data;
 
-    console.log({ _id });
-    const processImages = (obj) => {
+    const processImages = (images) => {
         let pickedImages = [];
 
-        if (obj.images.length >= 2) {
-            pickedImages = obj.images.slice(0, 2); // Pick the first two images
-        } else if (obj.images.length === 1) {
-            pickedImages = obj.images.slice(0, 1); // Pick the only image
+        if (images.length >= 2) {
+            pickedImages = images.slice(0, 2); // Pick the first two images
+        } else if (images.length === 1) {
+            pickedImages = images.slice(0, 1); // Pick the only image
         }
 
         return pickedImages;
     };
 
-    const selectedImages = processImages(data);
-    console.log(selectedImages);
+    const selectedImages = processImages(images);
 
     return (
         <div className="bg-[#fff] w-full lg:py-6 lg:px-9 md:p-6 sm:p-5 p-4 border border-neutral-40 rounded-3xl ">

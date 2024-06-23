@@ -8,13 +8,16 @@ function CollaborationList() {
     const [collaborations, setCollaborations] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [totalPages, setTotalPages] = useState(0);
 
     const getCollaborations = async () => {
+        setLoading(true);
         try {
             const res = await CollaborationService.getCollaborations(page);
 
             if (res?.status === 200) {
-                setCollaborations(res);
+                setCollaborations((ps) => [...ps, ...res?.docs]);
+                setTotalPages(res?.totalPages);
             }
         } catch (e) {
             console.log(e);
@@ -27,18 +30,28 @@ function CollaborationList() {
         getCollaborations();
     }, [page]);
 
-    // const handlePageChange = () => {
-    //     setPage(2);
-    // };
+    const handlePageChange = () => {
+        setPage(2);
+    };
 
     return (
         <div>
             <Spin spinning={loading} fullscreen />
             <div className="flex flex-col items-center justify-center gap-7">
-                {collaborations?.docs?.map((collaboration, index) => {
-                    return <Card data={collaboration} key={index} />;
+                {collaborations?.map((item, index) => {
+                    return (
+                        <div key={index}>
+                            <Card data={item} />
+                        </div>
+                    );
                 })}
-                {/* <button onClick={handlePageChange}>asdfasdf</button> */}
+                <button
+                    onClick={handlePageChange}
+                    disabled={page === totalPages}
+                    className="border border-[#061628] p-4 rounded-full text-[16px] test-[#0B2848]"
+                >
+                    Show More
+                </button>
             </div>
         </div>
     );

@@ -8,7 +8,10 @@ async function getCollaborations(page = 1) {
 }
 
 async function getCollaboration(id) {
-    return await MakeApiCall({ apiUrl: `${COLLABORATION_URL}?id=${id}` });
+    return await MakeApiCall({
+        apiUrl: `${COLLABORATION_URL}?id=${id}`,
+        cache: "no-store",
+    });
 }
 
 const CollaborationService = {
