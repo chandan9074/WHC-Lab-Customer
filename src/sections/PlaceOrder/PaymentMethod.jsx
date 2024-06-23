@@ -44,6 +44,7 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
     const handleApplyForCredit = async () => {
         try {
             // const response = await CreditService.applyForCredit(token);
+            setLoading(true);
             const response = await CreditService.applyForCreditBalance(token);
 
             if (response.status === 200) {
@@ -55,6 +56,7 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
                 setCookie("userInfo", JSON.stringify(tempUser), {
                     maxAge: 60 * 60 * 12,
                 });
+                setLoading(false);
             }
         } catch (error) {
             toast.error(error.message);
