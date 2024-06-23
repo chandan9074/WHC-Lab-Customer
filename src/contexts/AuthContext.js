@@ -103,10 +103,12 @@ export function AuthProvider({ children }) {
                 // const credential = FacebookAuthProvider.credentialFromResult(user?.accessToken);
 
                 if (user) {
-                    await handleSocialLogin(
+                    const res = await handleSocialLogin(
                         user?.accessToken,
                         FACEBOOK_LOGIN_URL
                     );
+
+                    return res;
                 }
             }
         } catch (error) {
