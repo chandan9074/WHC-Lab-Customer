@@ -23,7 +23,7 @@ const ChangeEmailVerification = () => {
             const data = {
                 action: "change_email",
                 otp: parseInt(code),
-                email: _userInfo.primaryEmail,
+                email: _userInfo?.primaryEmail,
             };
             const response = await UserService.verifyOTP(data, token);
 
@@ -50,7 +50,7 @@ const ChangeEmailVerification = () => {
                 <section className="container mx-auto py-6 px-4 flex justify-center">
                     <VerificationForm
                         title="email address"
-                        verifyShortForm={_userInfo.primaryEmail}
+                        verifyShortForm={_userInfo?.primaryEmail}
                         handleUpdate={handleUpdate}
                         handleResendCode={handleResendCode}
                         verificationType={"change_email"}
