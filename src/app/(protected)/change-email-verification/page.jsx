@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { MY_ACCOUNT_PATH } from "@/helpers/slug";
 
-const ChangeEmailVarification = () => {
+const ChangeEmailVerification = () => {
     const [loading, setLoading] = useState(false);
     const token = getCookie("accessToken");
     const userInfo = getCookie("userInfo");
@@ -23,7 +23,7 @@ const ChangeEmailVarification = () => {
             const data = {
                 action: "change_email",
                 otp: parseInt(code),
-                email: _userInfo.primaryEmail,
+                email: _userInfo?.primaryEmail,
             };
             const response = await UserService.verifyOTP(data, token);
 
@@ -50,7 +50,7 @@ const ChangeEmailVarification = () => {
                 <section className="container mx-auto py-6 px-4 flex justify-center">
                     <VerificationForm
                         title="email address"
-                        verifyShortForm="asdasdasavc@gamil.com"
+                        verifyShortForm={_userInfo?.primaryEmail}
                         handleUpdate={handleUpdate}
                         handleResendCode={handleResendCode}
                         verificationType={"change_email"}
@@ -61,4 +61,4 @@ const ChangeEmailVarification = () => {
     );
 };
 
-export default ChangeEmailVarification;
+export default ChangeEmailVerification;

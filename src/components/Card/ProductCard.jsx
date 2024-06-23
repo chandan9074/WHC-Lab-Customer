@@ -82,23 +82,27 @@ const ProductCard = ({ data, wishListIds }) => {
                 {hasCookie("accessToken") && (
                     <div
                         className={`absolute top-4 right-4 ${
-                            wishListIds?.includes(data._id) ? "block" : "hidden"
+                            checkProductInWishList(data._id)
+                                ? "block"
+                                : "md:hidden block"
                         } md:group-hover:block  animate-fadeIn cursor-pointer`}
                         onClick={handlewishlistClick}
                     >
                         {loading ? (
                             <Spin spinning={loading} />
                         ) : (
-                            <Image
-                                alt="wishlist-icon"
-                                src={
-                                    checkProductInWishList(data._id)
-                                        ? Icons.wishlist_active
-                                        : Icons.wishlist_inactive
-                                }
-                                // src={Icons.wishlist_active}
-                                className="w-[22px] h-[22px] relative"
-                            />
+                            <div className="p-1.5 bg-white shadow-md rounded-full">
+                                <Image
+                                    alt="wishlist-icon"
+                                    src={
+                                        checkProductInWishList(data._id)
+                                            ? Icons.wishlist_active
+                                            : Icons.wishlist_inactive
+                                    }
+                                    // src={Icons.wishlist_active}
+                                    className="w-[22px] h-[22px] relative"
+                                />
+                            </div>
                         )}
                     </div>
                 )}

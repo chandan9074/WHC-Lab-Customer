@@ -403,11 +403,11 @@ textarea.ant-input:hover {
     top: -10px;
     right: 5px;
 }
-:where(.css-dev-only-do-not-override-usln0u).ant-modal .ant-modal-content {
+/* :where(.css-dev-only-do-not-override-usln0u).ant-modal .ant-modal-content {
     padding: 0px;
     margin: 0px;
 }
 
 .ant-modal .ant-modal-header {
     margin: 0px;
-}
+} */

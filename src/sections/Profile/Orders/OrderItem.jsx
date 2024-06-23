@@ -11,7 +11,7 @@ const OrderItem = ({ data }) => {
     const createdAtDate = new Date(data?.createdAt);
 
     return (
-        <div className=" py-6 px-8 bg-white border border-neutral-30 rounded-[8px]  duration-500">
+        <div className="py-3 px-4 sm:py-6 sm:px-8 bg-white border border-neutral-30 rounded-[8px]  duration-500">
             <Link href={`${ORDERS_HISTORY_PATH}/${data?._id}`}>
                 <div className="flex flex-row justify-between">
                     <div className="flex flex-col gap-2">
@@ -21,15 +21,15 @@ const OrderItem = ({ data }) => {
                                 src={Icons.calendar}
                                 width={18}
                             />
-                            <p className="text-neutral-300 font-medium text-sm">
+                            <p className="text-neutral-300 font-medium text-xs sm:text-sm">
                                 {formatDate(createdAtDate)}
                             </p>
                         </div>
                         <p>
-                            <span className="text-neutral-300 text-sm font-medium">
+                            <span className="text-neutral-300 text-xs sm:text-sm font-medium">
                                 Order number &nbsp;
                             </span>
-                            <span className="font-semibold text-neutral-700">
+                            <span className="text-xs sm:text-sm font-semibold text-neutral-700">
                                 #{data?.number}
                             </span>
                         </p>
@@ -37,14 +37,14 @@ const OrderItem = ({ data }) => {
                     <div className="flex flex-col items-end gap-2">
                         <div className="flex flex-row gap-2">
                             <Image alt="clock" src={Icons.clock} width={18} />
-                            <p className="text-neutral-300 font-medium text-sm">
+                            <p className="whitespace-nowrap text-neutral-300 font-medium text-xs sm:text-sm">
                                 {formatTime(createdAtDate)}
                             </p>
                         </div>
-                        <p className="text-neutral-700 text-sm font-medium">
+                        <p className="text-neutral-700 text-xs sm:text-sm font-medium">
                             {data?.lineItems?.length} items
                         </p>
-                        <p className="text-neutral-700 font-semibold text-base">
+                        <p className="text-neutral-700 font-semibold text-sm sm:text-base">
                             {currencyData[data?.currency].icon} {data?.total}
                         </p>
                     </div>

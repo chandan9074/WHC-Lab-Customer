@@ -51,16 +51,16 @@ const ProductHeader = ({
                         height={1000}
                         className="w-6 h-6"
                     />
-                    <p className="text-brand-blue-800 text-sm font-normal">
+                    <p className="text-brand-blue-800 text-xs sm:text-sm font-normal">
                         Filters
                     </p>
                 </button>
 
-                <h5 className="text-sm md:text-base text-brand-blue-800 font-normal leading-6">
+                <h5 className="text-xs sm:text-sm md:text-base text-brand-blue-800 font-normal leading-6">
                     Showing <span>{dataLength}</span> products
                 </h5>
                 <div className="flex items-center">
-                    <p className="hidden lg:block text-brand-blue-800 font-normal leading-6 text-sm md:text-base">
+                    <p className="hidden lg:block text-brand-blue-800 font-normal leading-6 text-xs sm:text-sm md:text-base">
                         Sort by :
                     </p>
                     <Select
