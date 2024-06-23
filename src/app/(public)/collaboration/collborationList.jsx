@@ -40,7 +40,7 @@ function CollaborationList() {
             <div className="flex flex-col items-center justify-center gap-7">
                 {collaborations?.map((item, index) => {
                     return (
-                        <div key={index}>
+                        <div key={index} className="w-full">
                             <Card data={item} />
                         </div>
                     );
