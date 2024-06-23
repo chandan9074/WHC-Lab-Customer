@@ -59,7 +59,7 @@ const ProductHeader = ({
                 <h5 className="text-xs sm:text-sm md:text-base text-brand-blue-800 font-normal leading-6">
                     Showing <span>{dataLength}</span> products
                 </h5>
-                <div className="flex items-center">
+                <div className="flex items-center gap-4">
                     <p className="hidden lg:block text-brand-blue-800 font-normal leading-6 text-xs sm:text-sm md:text-base">
                         Sort by :
                     </p>
