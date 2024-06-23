@@ -31,7 +31,7 @@ function SocialMediaShare({ title, quote, hashtag }) {
                 <FacebookShareButton
                     url={shareUrl}
                     quote={quote}
-                    hashtag={formattedHashtags}
+                    hashtag={formattedHashtags || ""}
                 >
                     <FacebookIcon size={40} round />
                 </FacebookShareButton>
@@ -39,7 +39,7 @@ function SocialMediaShare({ title, quote, hashtag }) {
                 <TwitterShareButton
                     url={shareUrl}
                     quote={quote}
-                    hashtag={formattedHashtags}
+                    hashtag={formattedHashtags || ""}
                 >
                     <TwitterIcon size={40} round />
                 </TwitterShareButton>
@@ -47,7 +47,7 @@ function SocialMediaShare({ title, quote, hashtag }) {
                 <LinkedinShareButton
                     url={shareUrl}
                     quote={quote}
-                    hashtag={formattedHashtags}
+                    hashtag={formattedHashtags || ""}
                 >
                     <LinkedinIcon size={40} round />
                 </LinkedinShareButton>

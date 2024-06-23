@@ -10,7 +10,6 @@ async function getData(token) {
         headers: { Authorization: token },
     });
     return res;
-
 }
 
 const MyAccount = async () => {
