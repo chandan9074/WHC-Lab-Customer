@@ -28,6 +28,7 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
             const res = await UserService.subscribeNewsletter({ email });
             if (res?.status === 200) {
                 toast.success(res?.message);
+                setEmail("");
             }
         } catch (e) {
             toast.error(e?.message);
@@ -97,6 +98,7 @@ const AnimatedFooter = ({ navLinks, socialLinks }) => {
                             <div className="flex gap-x-3">
                                 <input
                                     type="text"
+                                    value={email}
                                     className="bg-transparent border-b-[1.5px] border-[#2B2E3A] h-12 outline-none"
                                     onChange={(e) => {
                                         e.preventDefault();

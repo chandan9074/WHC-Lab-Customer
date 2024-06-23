@@ -5,6 +5,7 @@ import Images from "../../../public/assets/Images";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 function AuthorInfo({ data }) {
+    console.log({ data });
     return (
         <div className="p-6 bg-stroke-new-10 bg-opacity-50 flex rounded-2xl gap-4 w-full md:w-1/3">
             <Image
@@ -20,7 +21,9 @@ function AuthorInfo({ data }) {
             />
             <div className="flex flex-col gap-1">
                 <p className="text-brand-blue-500 font-semibold text-base md:text-lg">
-                    Author Name
+                    {`${data?.firstName ? data?.firstName : "--"} ${
+                        data?.lastName ? data?.lastName : "--"
+                    }`}
                 </p>
                 <p className="text-sm text-neutral-400">Business Owner</p>
             </div>
