@@ -454,7 +454,7 @@ const ProductRightView = ({
                 </div>
                 <SocialMediaShare
                     title=""
-                    hashtag={[data?.mainCategory?.name]}
+                    hashtag={["Product"]}
                     quote={data?.mainCategory?.name}
                 />
             </Modal>
