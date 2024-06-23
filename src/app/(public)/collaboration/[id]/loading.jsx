@@ -14,7 +14,7 @@ function Collaborationloading() {
                 <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
             </div>
             <div className="flex flex-row gap-5 flex-wrap">
-                <div class="flex items-center justify-center w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-[650px]  bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                <div class="flex items-center justify-center w-full h-[350px] bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
                     <svg
                         class="w-10 h-10 text-gray-200 dark:text-gray-600"
                         aria-hidden="true"
@@ -26,7 +26,7 @@ function Collaborationloading() {
                     </svg>
                 </div>
 
-                <div class="flex items-center justify-center w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-[650px]  bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                <div class="flex items-center justify-center w-full h-[350px] bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
                     <svg
                         class="w-10 h-10 text-gray-200 dark:text-gray-600"
                         aria-hidden="true"
@@ -38,7 +38,7 @@ function Collaborationloading() {
                     </svg>
                 </div>
 
-                <div class="flex items-center justify-center w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-[650px]  bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                <div class="flex items-center justify-center w-full h-[350px] bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
                     <svg
                         class="w-10 h-10 text-gray-200 dark:text-gray-600"
                         aria-hidden="true"
