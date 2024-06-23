@@ -26,7 +26,7 @@ const VerificationForm = ({
     const [timeRemaining, setTimeRemaining] = useState(timer);
 
     const resetTimer = () => {
-        setCookie("timeRemaining", timer,{
+        setCookie("timeRemaining", timer, {
             maxAge: 60 * 60 * 12,
         });
         setTimeRemaining(timer);
