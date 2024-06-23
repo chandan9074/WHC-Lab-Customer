@@ -17,6 +17,7 @@ import CountrySelectionModal from "../Store/CountrySelectionModal";
 import { checkStock } from "@/utils";
 import SocialMediaShare from "../Blog/SocialMediaShare";
 import Image from "next/image";
+import { generateTags } from "@/helpers/utils";
 
 const ProductRightView = ({
     forModal = false,
@@ -453,8 +454,8 @@ const ProductRightView = ({
                     </button>
                 </div>
                 <SocialMediaShare
-                    title=""
-                    hashtag={["Product"]}
+                    title={data?.name}
+                    hashtag={generateTags(data?.name)}
                     quote={data?.mainCategory?.name}
                 />
             </Modal>

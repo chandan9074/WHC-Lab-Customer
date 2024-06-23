@@ -129,3 +129,45 @@ export function calculateOrderItemsSubTotalPrice(orderItems) {
     );
     return subTotalPrice;
 }
+
+export function generateTags(title) {
+    // Check if the title is valid (not undefined, null, or empty string)
+    if (!title || typeof title !== "string") {
+        return [];
+    }
+
+    // Split the title into words, considering hyphens and spaces as word boundaries
+    const words = title.split(/[\s\-]+/);
+
+    // A set of common words to exclude from tags
+    const commonWords = new Set([
+        "the",
+        "and",
+        "a",
+        "an",
+        "in",
+        "on",
+        "with",
+        "at",
+        "by",
+        "for",
+        "to",
+        "of",
+        "is",
+        "are",
+        "it",
+        "this",
+        "that",
+        "these",
+        "those",
+        "or",
+        "new",
+    ]);
+
+    // Filter out common words and return unique words as tags
+    const tags = words
+        .filter((word) => word && !commonWords.has(word.toLowerCase()))
+        .map((word) => `#${word.toLowerCase().replace(/[^\w]/g, "")}`) // Remove non-alphanumeric characters
+        .slice(0, 5); // Limit to 5 tags
+    return tags;
+}
