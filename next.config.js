@@ -57,6 +57,17 @@ const nextConfig = {
         ],
     },
     reactStrictMode: false,
+    webpack: (config) => {
+        config.resolve.alias.canvas = false;
+        return config;
+    },
+    // experimental: {
+    //     turbo: {
+    //         resolveAlias: {
+    //             canvas: "./empty-module.ts",
+    //         },
+    //     },
+    // },
     // async redirects() {
     //     return [
     //         {
