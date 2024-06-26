@@ -75,7 +75,7 @@ const ProductHeader = ({
                                 className="w-4 h-4"
                             />
                         }
-                        style={{ width: 110 }}
+                        style={{ width: 150 }}
                         onChange={(value) =>
                             setSearchQuery({
                                 ...searchQuery,
@@ -87,6 +87,7 @@ const ProductHeader = ({
                         options={[
                             { value: "newest", label: "Newest" },
                             { value: "oldest", label: "Oldest" },
+                            { value: "popularity", label: "Popularity" },
                         ]}
                     />
                 </div>
