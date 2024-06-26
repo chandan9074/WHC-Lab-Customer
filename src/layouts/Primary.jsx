@@ -12,7 +12,7 @@ const Primary = ({ children, breadcrumb = true }) => {
             {breadcrumb && <NextBreadcrumb />}
             {children}
             <a
-                href="https://wa.me/353868961901" // Replace with your WhatsApp link
+                href="https://wa.me/8801711507877" // Replace with your WhatsApp link
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 rounded-full overflow-hidden shadow-md p-1 md:p-2.5 bg-white"
