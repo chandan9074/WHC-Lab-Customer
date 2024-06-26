@@ -211,6 +211,10 @@ const MegaMenu = ({ setOpen, open }) => {
                                     title={"CONTACT US"}
                                     path="/contact-us"
                                 />
+                                <NavLink
+                                    title={"Collaboration"}
+                                    path="/collaboration"
+                                />
                             </div>
                             <NavLink title={"WHC LAB"} path="/" />
                             <p className="mt-4 text-base text-white font-medium leading-7 w-[336px]">
