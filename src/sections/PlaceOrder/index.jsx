@@ -73,7 +73,7 @@ function PlaceOrderContainer({ addressData }) {
     const _calculateOrderData = getCookie("calculatedOrderData");
     const calculatedOrderData =
         _calculateOrderData && JSON.parse(_calculateOrderData);
-    console.log({ calculatedOrderData });
+    // console.log({ calculatedOrderData });
     const searchParams = useSearchParams();
     const userType = `${searchParams}`.split("=")[1];
 
@@ -109,10 +109,10 @@ function PlaceOrderContainer({ addressData }) {
                 body.instructions = values.instructions;
             }
             handlePlaceOrder(body);
+            // deleteCookie("calculatedOrderData");
         } else {
             toast.error("Some products are stock out. Please remove those!!");
         }
-        deleteCookie("calculatedOrderData");
         // console.log(orderIds, "order item");
     };
 
@@ -148,6 +148,7 @@ function PlaceOrderContainer({ addressData }) {
                 headers: { authorization: token },
                 body: body,
             });
+
             if (response.status === 200) {
                 getUpdateCartList(token);
                 toast.success(response?.message);
@@ -158,6 +159,8 @@ function PlaceOrderContainer({ addressData }) {
                     router.push(`${ORDER_CONFIRM_PATH}/${response.doc.number}`);
                 }
             }
+
+            deleteCookie("calculatedOrderData");
         } catch (error) {
             toast.error(error.message);
         } finally {
