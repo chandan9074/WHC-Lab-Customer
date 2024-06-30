@@ -40,7 +40,7 @@ function DownloadableResource({ text = "Downloadable Resources", link }) {
         <>
             <div
                 className="flex items-center gap-3 cursor-pointer"
-                onClick={showModal}
+                onClick={link.endsWith(".pdf") ? handleDownload : showModal}
             >
                 <Image
                     src={Icons.download}
