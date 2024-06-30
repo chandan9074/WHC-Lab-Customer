@@ -27,6 +27,7 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
 
             if (res?.status === 200) {
                 setUserInfo(res?.user);
+                // console.log(userInfo);
             }
         } catch (e) {
             toast.error(e?.message);
@@ -41,27 +42,27 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
         // setUserInfo(_userInfo);
     }, []);
 
-    const handleApplyForCredit = async () => {
-        try {
-            // const response = await CreditService.applyForCredit(token);
-            setLoading(true);
-            const response = await CreditService.applyForCreditBalance(token);
+    // const handleApplyForCredit = async () => {
+    //     try {
+    //         // const response = await CreditService.applyForCredit(token);
+    //         setLoading(true);
+    //         const response = await CreditService.applyForCreditBalance(token);
 
-            if (response.status === 200) {
-                toast.success(response.message);
-                let tempUser = userInfo;
-                getUserProfile(); // saw a bug that status was not changing after api call
-                tempUser.appliedForCreditBalance = true;
-                setUserInfo(tempUser);
-                setCookie("userInfo", JSON.stringify(tempUser), {
-                    maxAge: 60 * 60 * 12,
-                });
-                setLoading(false);
-            }
-        } catch (error) {
-            toast.error(error.message);
-        }
-    };
+    //         if (response.status === 200) {
+    //             toast.success(response.message);
+    //             let tempUser = userInfo;
+    //             getUserProfile(); // saw a bug that status was not changing after api call
+    //             tempUser.appliedForCreditBalance = true;
+    //             setUserInfo(tempUser);
+    //             setCookie("userInfo", JSON.stringify(tempUser), {
+    //                 maxAge: 60 * 60 * 12,
+    //             });
+    //             setLoading(false);
+    //         }
+    //     } catch (error) {
+    //         toast.error(error.message);
+    //     }
+    // };
 
     return (
         <div className="border border-stroke-new rounded-lg">
@@ -117,65 +118,75 @@ const PaymentMethodSelection = ({ paymentMethod, onChange, token }) => {
                                 </div>
                             </div>
                         </Radio>
-                        <Radio
-                            // style={radioStyle}
-                            value={"creditBalance"}
-                            className="custom-radio"
-                            onChange={() => onChange("creditBalance")}
-                            checked={paymentMethod === "creditBalance"}
-                        >
-                            <div className="w-full text-wrap bg-white flex justify-between items-center">
-                                <div className="w-full flex justify-between items-center gap-3">
-                                    <h2
-                                        className={`font-semibold ${handleInactiveFontColor(
-                                            paymentMethod,
-                                            "creditBalance"
-                                        )}`}
-                                    >
-                                        Credit Balance
-                                    </h2>
-                                    {/* {paymentMethod === "creditBalance" && ( */}
-                                    <div className="animate-fadeIn">
-                                        {userInfo?.creditBalance &&
-                                        userInfo?.creditBalanceLimit ? (
-                                            <div className="flex gap-x-2 sm:gap-x-6">
-                                                <p className="text-nowrap text-brand-blue-500 text-xs sm:text-sm leading-[18.23px]">
-                                                    Credit Limit:
-                                                    {
-                                                        currencyData[_currency]
-                                                            ?.icon
-                                                    }
-                                                    {
-                                                        userInfo?.creditBalanceLimit
-                                                    }
+                        {userInfo?.creditBalance > 0 &&
+                        userInfo?.creditBalanceLimit > 0 ? (
+                            <Radio
+                                // style={radioStyle}
+                                value={"creditBalance"}
+                                className="custom-radio"
+                                onChange={() => onChange("creditBalance")}
+                                checked={paymentMethod === "creditBalance"}
+                            >
+                                <div className="w-full text-wrap bg-white flex justify-between items-center">
+                                    <div className="w-full flex justify-between items-center gap-3">
+                                        <h2
+                                            className={`font-semibold ${handleInactiveFontColor(
+                                                paymentMethod,
+                                                "creditBalance"
+                                            )}`}
+                                        >
+                                            Credit Balance
+                                        </h2>
+                                        {/* {paymentMethod === "creditBalance" && ( */}
+                                        <div className="animate-fadeIn">
+                                            {userInfo?.creditBalance &&
+                                            userInfo?.creditBalanceLimit ? (
+                                                <div className="flex gap-x-2 sm:gap-x-6">
+                                                    <p className="text-nowrap text-brand-blue-500 text-xs sm:text-sm leading-[18.23px]">
+                                                        Credit Limit:
+                                                        {
+                                                            currencyData[
+                                                                _currency
+                                                            ]?.icon
+                                                        }
+                                                        {
+                                                            userInfo?.creditBalanceLimit
+                                                        }
+                                                    </p>
+                                                    <p className="text-nowrap text-brand-blue-500 text-xs sm:text-sm leading-[18.23px]">
+                                                        Credit Balance:
+                                                        {
+                                                            currencyData[
+                                                                _currency
+                                                            ]?.icon
+                                                        }
+                                                        {
+                                                            userInfo?.creditBalance
+                                                        }
+                                                    </p>
+                                                </div>
+                                            ) : userInfo?.appliedForCreditBalance ? (
+                                                <p className="text-brand-blue-500 text-sm font-semibold leading-[18.23px]">
+                                                    Applied
                                                 </p>
-                                                <p className="text-nowrap text-brand-blue-500 text-xs sm:text-sm leading-[18.23px]">
-                                                    Credit Balance:
-                                                    {
-                                                        currencyData[_currency]
-                                                            ?.icon
-                                                    }
-                                                    {userInfo?.creditBalance}
-                                                </p>
-                                            </div>
-                                        ) : userInfo?.appliedForCreditBalance ? (
-                                            <p className="text-brand-blue-500 text-sm font-semibold leading-[18.23px]">
-                                                Applied
-                                            </p>
-                                        ) : (
-                                            <button
+                                            ) : (
+                                                <></>
+                                            )}
+                                            {/* <button
                                                 type="button"
                                                 onClick={handleApplyForCredit}
                                                 className="text-brand-blue-500 text-sm font-semibold leading-[18.23px]"
                                             >
                                                 Apply For Credit Balance
-                                            </button>
-                                        )}
+                                            </button> */}
+                                        </div>
+                                        {/* )} */}
                                     </div>
-                                    {/* )} */}
                                 </div>
-                            </div>
-                        </Radio>
+                            </Radio>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                 </Radio.Group>
             </div>
