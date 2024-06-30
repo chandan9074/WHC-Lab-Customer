@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import WhcHero from "../../../../public/WhcHero";
 import petriDishVideo from "../../../../public/petri_dish_topview.mp4";
+import PetriDesignV2 from "../../../../public/Petri_Design_v2";
 
 const HeroRightSide = () => {
     const isDragging = useRef(false);
@@ -57,35 +58,37 @@ const HeroRightSide = () => {
     };
 
     return (
-        // <div
-        //     className="relative h-[600px]"
-        //     onMouseDown={handleMouseDown}
-        //     onMouseMove={handleMouseMove}
-        //     onMouseUp={handleMouseUp}
-        // >
-        //     <Canvas>
-        //         <ambientLight />
-        //         <Suspense fallback={null}>
-        //             {/* <Earth /> */}
-        //             <WhcHero />
-        //         </Suspense>
-        //         <OrbitControls
-        //             enableRotate={!isDragging.current}
-        //             enableZoom={false}
-        //         />
-        //         <Environment preset="sunset" />
-        //     </Canvas>
-        // </div>
-        <div className="flex justify-center items-center h-full">
-            <video
-                playsInline
-                src={petriDishVideo}
-                autoPlay
-                muted
-                loop
-                className="w-full h-[320px] sm:h-[400px] md:h-[300px] xl:h-[500px] 2xl:h-[600px] object-cover"
-            />
+        <div
+            className="relative h-[600px]"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+        >
+            <Canvas>
+                <ambientLight />
+                <Suspense fallback={null}>
+                    {/* <Earth /> */}
+                    <PetriDesignV2 />
+                </Suspense>
+                <OrbitControls
+                    enableRotate={!isDragging.current}
+                    enableZoom={false}
+                    // zoom0={500}
+                    // minZoom={500}
+                />
+                {/* <Environment preset="sunset" /> */}
+            </Canvas>
         </div>
+        // <div className="flex justify-center items-center h-full">
+        //     <video
+        //         playsInline
+        //         src={petriDishVideo}
+        //         autoPlay
+        //         muted
+        //         loop
+        //         className="w-full h-[320px] sm:h-[400px] md:h-[300px] xl:h-[500px] 2xl:h-[600px] object-cover"
+        //     />
+        // </div>
     );
 };
 
