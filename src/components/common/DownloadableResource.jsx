@@ -1,17 +1,17 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Icons from "../../../public/assets/Icons";
 import ResourceService from "@/services/ResourcesService";
 import { Modal } from "antd";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import { Document, Page } from "react-pdf";
-import { pdfjs } from "react-pdf";
+// import { pdfjs } from "react-pdf";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-).toString();
+// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+//     "pdfjs-dist/build/pdf.worker.min.mjs",
+//     import.meta.url
+// ).toString();
 
 function DownloadableResource({ text = "Downloadable Resources", link }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
