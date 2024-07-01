@@ -33,6 +33,7 @@ const ProductRightView = ({
     const [status, setStatus] = useState(null);
     const [shareModalVisible, setShareModalVisible] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
+    const [lowStockThreshold, setLowStockThreshold] = useState(0);
 
     const { currency } = useUserContext();
     const [stockStatus, setStockStatus] = useState(null);
@@ -40,6 +41,8 @@ const ProductRightView = ({
     const router = useRouter();
 
     const pathname = usePathname();
+
+    console.log({ data });
 
     const {
         createProductWishlist,
@@ -69,6 +72,7 @@ const ProductRightView = ({
                 if (stock) {
                     setMaxLimit(stock?.quantity);
                     setStatus(stock?.status);
+                    setLowStockThreshold(stock?.lowStockThreshold);
                 }
             }
         }
@@ -287,9 +291,21 @@ const ProductRightView = ({
                         {data[currency.field]}
                     </p>
                 )}
-                {!stockStatus && (
+                {!stockStatus ? (
                     <p className="py-1 px-2 bg-red-400 mt-2 text-white font-semibold rounded">
                         Out of Stock
+                    </p>
+                ) : (
+                    <p className="mt-2 text-green-600 text-base font-semibold flex items-center gap-2">
+                        In stock :
+                        {maxLimit <= lowStockThreshold * 1.5 ? (
+                            <p className="text-red-400">
+                                {" "}
+                                Only {maxLimit} left
+                            </p>
+                        ) : (
+                            <span className="">{maxLimit}</span>
+                        )}
                     </p>
                 )}
             </div>
