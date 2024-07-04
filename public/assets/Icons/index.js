@@ -72,8 +72,9 @@ import order_confirm from "./order_confirm.svg";
 import email from "./email.svg";
 import instagram from "./InstagramLogo.svg";
 import xLogo from "./XLogo.svg";
-import whatsappFloatingIcon from "./WhatsappFloatingButton.svg"
-import copyBlue from "./Copy.svg"
+import whatsappFloatingIcon from "./WhatsappFloatingButton.svg";
+import copyBlue from "./CopyBlue.svg";
+
 const Icons = {
     copyBlue,
     whatsappFloatingIcon,
