@@ -33,124 +33,12 @@ const Map = ({ data }) => {
         setActiveMarker(null);
     };
 
-    // const mapStyles = [
-    //     { elementType: "geometry", stylers: [{ color: "#ebe3cd" }] },
-    //     { elementType: "labels.text.fill", stylers: [{ color: "#523735" }] },
-    //     { elementType: "labels.text.stroke", stylers: [{ color: "#f5f1e6" }] },
-    //     {
-    //         featureType: "administrative",
-    //         elementType: "geometry.stroke",
-    //         stylers: [{ color: "#c9b2a6" }],
-    //     },
-    //     {
-    //         featureType: "administrative.land_parcel",
-    //         elementType: "geometry.stroke",
-    //         stylers: [{ color: "#dcd2be" }],
-    //     },
-    //     {
-    //         featureType: "administrative.land_parcel",
-    //         elementType: "labels.text.fill",
-    //         stylers: [{ color: "#ae9e90" }],
-    //     },
-    //     {
-    //         featureType: "landscape.natural",
-    //         elementType: "geometry",
-    //         stylers: [{ color: "#dfd2ae" }],
-    //     },
-    //     {
-    //         featureType: "poi",
-    //         elementType: "geometry",
-    //         stylers: [{ color: "#dfd2ae" }],
-    //     },
-    //     {
-    //         featureType: "poi",
-    //         elementType: "labels.text.fill",
-    //         stylers: [{ color: "#93817c" }],
-    //     },
-    //     {
-    //         featureType: "poi.park",
-    //         elementType: "geometry.fill",
-    //         stylers: [{ color: "#a5b076" }],
-    //     },
-    //     {
-    //         featureType: "poi.park",
-    //         elementType: "labels.text.fill",
-    //         stylers: [{ color: "#447530" }],
-    //     },
-    //     {
-    //         featureType: "road",
-    //         elementType: "geometry",
-    //         stylers: [{ color: "#f5f1e6" }],
-    //     },
-    //     {
-    //         featureType: "road.arterial",
-    //         elementType: "geometry",
-    //         stylers: [{ color: "#fdfcf8" }],
-    //     },
-    //     {
-    //         featureType: "road.highway",
-    //         elementType: "geometry",
-    //         stylers: [{ color: "#f8c967" }],
-    //     },
-    //     {
-    //         featureType: "road.highway",
-    //         elementType: "geometry.stroke",
-    //         stylers: [{ color: "#e9bc62" }],
-    //     },
-    //     {
-    //         featureType: "road.highway.controlled_access",
-    //         elementType: "geometry",
-    //         stylers: [{ color: "#e98d58" }],
-    //     },
-    //     {
-    //         featureType: "road.highway.controlled_access",
-    //         elementType: "geometry.stroke",
-    //         stylers: [{ color: "#db8555" }],
-    //     },
-    //     {
-    //         featureType: "road.local",
-    //         elementType: "labels.text.fill",
-    //         stylers: [{ color: "#806b63" }],
-    //     },
-    //     {
-    //         featureType: "transit.line",
-    //         elementType: "geometry",
-    //         stylers: [{ color: "#dfd2ae" }],
-    //     },
-    //     {
-    //         featureType: "transit.line",
-    //         elementType: "labels.text.fill",
-    //         stylers: [{ color: "#8f7d77" }],
-    //     },
-    //     {
-    //         featureType: "transit.line",
-    //         elementType: "labels.text.stroke",
-    //         stylers: [{ color: "#ebe3cd" }],
-    //     },
-    //     {
-    //         featureType: "transit.station",
-    //         elementType: "geometry",
-    //         stylers: [{ color: "#dfd2ae" }],
-    //     },
-    //     {
-    //         featureType: "water",
-    //         elementType: "geometry.fill",
-    //         stylers: [{ color: "#B3D46D" }],
-    //     },
-    //     {
-    //         featureType: "water",
-    //         elementType: "labels.text.fill",
-    //         stylers: [{ color: "#92998d" }],
-    //     },
-    // ];
-    // let iconMarker = new window.google.maps.MarkerImage(
-    //     "https://lh3.googleusercontent.com/bECXZ2YW3j0yIEBVo92ECVqlnlbX9ldYNGrCe0Kr4VGPq-vJ9Xncwvl16uvosukVXPfV=w300",
-    //     null /* size is determined at runtime */,
-    //     null /* origin is 0,0 */,
-    //     null /* anchor is bottom center of the scaled image */,
-    //     new window.google.maps.Size(32, 32)
-    // );
-
+    const handleDirectionsClick = () => {
+        if (activeMarker) {
+            const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${activeMarker.lat},${activeMarker.lng}`;
+            window.open(directionsUrl, "_blank");
+        }
+    };
     return (
         <LoadScript googleMapsApiKey={API_KEY}>
             <GoogleMap
@@ -197,11 +85,14 @@ const Map = ({ data }) => {
                                     />
                                 </button>
                             </div>
-                            <p className="text-base italic px-6 text-center">
+                            <p className="text-base italic px-6 py-2 text-center">
                                 {activeMarker.address}
                             </p>
                             <div className="flex gap-x-2 pb-[14.4px]">
-                                <button className="px-2 md:px-[21px] py-[4.5px] bg-[#0E2F55] text-white text-base">
+                                <button
+                                    onClick={handleDirectionsClick}
+                                    className="px-2 md:px-[21px] py-[4.5px] bg-[#0E2F55] text-white text-base"
+                                >
                                     Directions
                                 </button>
                                 <a
