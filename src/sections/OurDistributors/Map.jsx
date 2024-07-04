@@ -21,9 +21,8 @@ const center = {
     lng: 2.3522,
 };
 
-const Map = ({ data }) => {
+const Map = ({ data, activeMarker, setActiveMarker }) => {
     const API_KEY = "AIzaSyBf3jYv9bdMBEiFStZdyfmlyZlX82_Cbnc";
-    const [activeMarker, setActiveMarker] = useState(null);
 
     const handleMarkerClick = (marker) => {
         setActiveMarker(marker);

@@ -13,6 +13,8 @@ const DistributorContainer = ({
     const [distributorList, setDistributorList] = useState(
         distributorsData.length > 0 ? distributorsData : []
     );
+    const [activeMarker, setActiveMarker] = useState(null);
+
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const router = useRouter();
@@ -61,6 +63,7 @@ const DistributorContainer = ({
     useEffect(() => {
         handleUpdateSearchQuery();
         handleDistributors();
+        setActiveMarker(null);
     }, [searchQuery]);
 
     return (
@@ -78,7 +81,11 @@ const DistributorContainer = ({
                 />
             </div>
             <div className="col-span-12 xl:col-span-8 relative z-0">
-                <Map data={distributorList} />
+                <Map
+                    data={distributorList}
+                    activeMarker={activeMarker}
+                    setActiveMarker={setActiveMarker}
+                />
             </div>
         </div>
     );
