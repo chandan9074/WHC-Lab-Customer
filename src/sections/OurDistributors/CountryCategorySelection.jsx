@@ -1,10 +1,7 @@
 "use client";
 import { Select } from "antd";
-import React from "react";
 import Icons from "../../../public/assets/Icons";
 import Image from "next/image";
-import MakeApiCall from "@/services/MakeApiCall";
-import DistributorsService from "@/services/DistributorsService";
 
 const CountryCategorySelection = ({
     // data,
@@ -31,7 +28,7 @@ const CountryCategorySelection = ({
     }));
 
     return (
-        <div className="space-y-4 md:space-y-9 flex flex-col">
+        <div className="gap-4 md:gap-9 flex flex-col md:flex-row w-full xl:flex-col justify-between">
             <Select
                 allowClear={
                     <Image
@@ -41,7 +38,7 @@ const CountryCategorySelection = ({
                         alt="caretDown"
                     />
                 }
-                className="h-[52px]"
+                className="h-[52px] w-full"
                 suffixIcon={
                     <Image
                         src={Icons.caretDown}
@@ -71,7 +68,7 @@ const CountryCategorySelection = ({
                         alt="caretDown"
                     />
                 }
-                className="h-[52px]"
+                className="h-[52px] w-full"
                 suffixIcon={
                     <Image
                         src={Icons.caretDown}
@@ -81,9 +78,12 @@ const CountryCategorySelection = ({
                     />
                 }
                 placeholder="Select Country"
-                onChange={(value) =>
-                    setSearchQuery({ ...searchQuery, country: value })
-                }
+                onChange={(value) => {
+                    setSearchQuery({
+                        ...searchQuery,
+                        country: value ? value : "",
+                    });
+                }}
                 options={countries}
             />
         </div>

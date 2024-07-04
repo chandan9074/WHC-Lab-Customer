@@ -32,10 +32,14 @@ const DistributorContainer = ({
     const handleUpdateSearchQuery = () => {
         // console.log("clidck");
         const params = new URLSearchParams(searchParams);
+        console.log("The prams ", params);
         Object.keys(searchQuery).forEach((key) => {
+            console.log("searchQuery[key]", searchQuery[key]);
             if (searchQuery[key]) {
+                console.log("I am here", searchQuery[key]);
                 params.set(key, searchQuery[key]);
             } else {
+                console.log("I am delete", key);
                 params.delete(key);
             }
         });
@@ -55,15 +59,13 @@ const DistributorContainer = ({
     };
 
     useEffect(() => {
-        if (searchQuery.category || searchQuery.country) {
-            handleUpdateSearchQuery();
-            handleDistributors();
-        }
+        handleUpdateSearchQuery();
+        handleDistributors();
     }, [searchQuery]);
 
     return (
         <div className="grid grid-cols-12 gap-6">
-            <div className="col-span-12 md:col-span-4 space-y-4 md:space-y-9 w-full md:w-[384px]">
+            <div className="col-span-12 xl:col-span-4 space-y-4 md:space-y-9 w-full xl:w-[384px]">
                 <h1 className="text-5xl font-semibold text-brand-blue-800 leading-[62.4px]">
                     Know Our Distributors
                 </h1>
@@ -75,7 +77,7 @@ const DistributorContainer = ({
                     searchQuery={searchQuery}
                 />
             </div>
-            <div className="col-span-12 md:col-span-8 relative z-0">
+            <div className="col-span-12 xl:col-span-8 relative z-0">
                 <Map data={distributorList} />
             </div>
         </div>
