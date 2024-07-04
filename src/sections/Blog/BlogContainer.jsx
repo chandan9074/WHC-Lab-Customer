@@ -8,7 +8,7 @@ import { BLOG_URL } from "@/helpers/apiURLS";
 
 function BlogContainer({ blogsData }) {
     const [current, setCurrent] = useState(1);
-    const [list, setList] = useState(blogsData?.docs || []);
+    const [list, setList] = useState(blogsData || []);
     const token = getCookie("accessToken");
 
     const onChange = async (page) => {
