@@ -16,7 +16,7 @@ const TestimonialCarouselMobile = ({ data }) => {
         setCurrentSlide(current + 1);
     };
     return (
-        <div className="block md:hidden">
+        <div className="block lg:hidden">
             <Carousel ref={slider1} afterChange={onChange} dots={false}>
                 {data.map((item, index) => (
                     <div
