@@ -3,8 +3,10 @@ import MakeApiCall from "../MakeApiCall";
 // const { default: MakeApiCall } = require("../MakeApiCall");
 import { MethodsStructure } from "../MethodsStructure";
 
-async function getCollaborations(page = 1) {
-    return await MakeApiCall({ apiUrl: `${COLLABORATION_URL}?page=${page}` });
+async function getCollaborations(page = 1, limit = 3) {
+    return await MakeApiCall({
+        apiUrl: `${COLLABORATION_URL}?page=${page}&limit=${limit}`,
+    });
 }
 
 async function getCollaboration(id) {
