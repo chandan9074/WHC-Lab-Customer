@@ -31,10 +31,10 @@ function Card({ data }) {
 
                     <Link
                         href={`/collaboration/${_id}`}
-                        className="flex gap-x-2.5 items-center"
+                        className="flex gap-0 sm:gap-x-2.5 items-center"
                     >
-                        <h3 className="text-brand-blue-500 text-sm whitespace-nowrap lg:text-base font-medium uppercase">
-                            view all images
+                        <h3 className="hidden sm:block text-brand-blue-500 text-sm whitespace-nowrap lg:text-base font-medium uppercase">
+                            view all Images
                         </h3>
                         <Image
                             alt="icon"

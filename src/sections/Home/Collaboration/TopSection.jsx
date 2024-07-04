@@ -10,9 +10,20 @@ function TopSection({ fromPage = false }) {
                     Latest Collaboration
                 </h1>
                 {fromPage && (
-                    <Link href={"/collaboration"}>
-                        <Buttons.OutlinedButton label="Show All Collaboration" />
-                    </Link>
+                    <>
+                        <Link
+                            href={"/collaboration"}
+                            className="sm:block hidden"
+                        >
+                            <Buttons.OutlinedButton label="Show All Collaboration" />
+                        </Link>
+                        <Link
+                            href={"/collaboration"}
+                            className="sm:hidden block"
+                        >
+                            <Buttons.OutlinedButton label="Show All" />
+                        </Link>
+                    </>
                 )}
             </div>
             <p className="text-brand-blue-800 text-base font-normal">

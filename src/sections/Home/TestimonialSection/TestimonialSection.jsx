@@ -7,9 +7,9 @@ const TestimonialSection = ({ testimonialsData }) => {
     return (
         <div className="bg-[#F5F5F5]">
             <div className="container mx-auto py-9 px-6 md:px-0 md:py-[100px]  w-full flex flex-col">
-                <div className="flex">
-                    <div className="md:w-[403px]" />
-                    <h1 className="text-2xl md:text-5xl font-medium text-brand-blue-800 leading-7 md:leading-[57px]">
+                <div className="grid grid-cols-12">
+                    <div className="hidden lg:block lg:col-span-5 xl:col-span-4" />
+                    <h1 className="col-span-12 lg:col-span-7 xl:col-span-8 text-2xl md:text-5xl font-medium text-brand-blue-800 leading-7 md:leading-[57px]">
                         Clients reviews about our products
                     </h1>
                 </div>

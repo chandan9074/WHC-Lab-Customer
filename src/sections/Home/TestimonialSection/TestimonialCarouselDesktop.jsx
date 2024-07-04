@@ -14,12 +14,12 @@ const TestimonialCarouselDesktop = ({ data }) => {
         setCurrentSlide(current + 1);
     };
     return (
-        <div className="w-full hidden md:block">
+        <div className="w-full hidden lg:block">
             <Carousel ref={slider} afterChange={onChange} dots={false}>
                 {data.map((item, index) => (
-                    <div key={index} className="flex items-center py-12">
-                        <div className="flex gap-x-6 justify-center">
-                            <div className="flex items-center justify-center w-[383px]">
+                    <div key={index} className="pt-12 pb-8">
+                        <div key={index} className="grid grid-cols-12">
+                            <div className="col-span-5 xl:col-span-4">
                                 <div className="flex gap-x-5">
                                     <Image
                                         alt="avatar"
@@ -39,7 +39,7 @@ const TestimonialCarouselDesktop = ({ data }) => {
                                 </div>
                             </div>
 
-                            <div className="space-y-6 w-[791px]">
+                            <div className="space-y-6 col-span-7 xl:col-span-8">
                                 <Rate
                                     disabled
                                     defaultValue={item.rating}
@@ -54,9 +54,9 @@ const TestimonialCarouselDesktop = ({ data }) => {
                 ))}
             </Carousel>
 
-            <div className="flex">
-                <div className="md:w-[403px]" />
-                <div className="flex justify-between items-end md:w-[791px]">
+            <div className="grid grid-cols-12">
+                <div className="col-span-5 xl:col-span-4" />
+                <div className="flex justify-between items-end col-span-7 xl:col-span-8">
                     <div className="space-y-8">
                         <div className="flex gap-x-5">
                             <button

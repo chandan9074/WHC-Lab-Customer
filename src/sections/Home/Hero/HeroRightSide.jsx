@@ -59,7 +59,7 @@ const HeroRightSide = () => {
 
     return (
         <div
-            className="relative h-[600px]"
+            className="relative h-[400px] sm:h-[600px]"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
