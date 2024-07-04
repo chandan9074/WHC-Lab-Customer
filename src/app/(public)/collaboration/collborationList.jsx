@@ -7,17 +7,26 @@ import Card from "@/sections/Home/Collaboration/Card";
 function CollaborationList() {
     const [collaborations, setCollaborations] = useState([]);
     const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
+    const [limit, setLimit] = useState(3);
+    const [loading, setLoading] = useState(true);
     const [totalPages, setTotalPages] = useState(0);
 
     const getCollaborations = async () => {
         setLoading(true);
         try {
-            const res = await CollaborationService.getCollaborations(page);
+            const res = await CollaborationService.getCollaborations(
+                page,
+                limit
+            );
 
             if (res?.status === 200) {
-                setCollaborations((ps) => [...ps, ...res?.docs]);
+                if (page === 1) {
+                    setCollaborations(res?.docs);
+                } else {
+                    setCollaborations((ps) => [...ps, ...res?.docs]);
+                }
                 setTotalPages(res?.totalPages);
+                console.log({ res });
             }
         } catch (e) {
             console.log(e);
@@ -31,7 +40,11 @@ function CollaborationList() {
     }, [page]);
 
     const handlePageChange = () => {
-        setPage(2);
+        if (page === totalPages) {
+            setPage(1);
+        } else {
+            setPage(page + 1);
+        }
     };
 
     return (
@@ -47,10 +60,14 @@ function CollaborationList() {
                 })}
                 <button
                     onClick={handlePageChange}
-                    disabled={page === totalPages}
+                    // disabled={page === totalPages}
                     className="border border-[#061628] p-4 rounded-full text-[16px] test-[#0B2848]"
                 >
-                    {loading ? "Loading..." : "Show More"}
+                    {loading
+                        ? "Loading..."
+                        : totalPages === page
+                        ? "Show Less"
+                        : "Show More"}
                 </button>
             </div>
         </div>
