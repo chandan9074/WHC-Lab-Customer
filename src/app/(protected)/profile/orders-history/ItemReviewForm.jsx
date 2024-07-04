@@ -8,7 +8,7 @@ import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 
 const ItemReviewForm = ({ submit, productName, category, image, data }) => {
     const [form] = Form.useForm();
-    const [selectedRating, setSelectedRating] = useState(null);
+    const [selectedRating, setSelectedRating] = useState(5);
     const [isRatingEmpty, setIsRatingEmpty] = useState(false);
 
     const handleRating = (value) => {
