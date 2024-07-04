@@ -170,7 +170,7 @@ const MegaMenu = ({ setOpen, open }) => {
                                         <NavLink
                                             title={"LOG IN"}
                                             path={
-                                                pathname === "/"
+                                                pathname === "/" || "/sign-up"
                                                     ? `${LOGIN_PATH}`
                                                     : `${LOGIN_PATH}?redirect=${pathname}?${params.toString()}`
                                             }
