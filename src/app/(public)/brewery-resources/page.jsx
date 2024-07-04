@@ -10,8 +10,6 @@ async function BreweryResources() {
         "BREWING_RESOURCES"
     );
 
-    console.log(getResources);
-
     return (
         <Layouts.Primary breadcrumb={false}>
             <PageHeaderWithNameAndBgImage pageHeading="BREWING RESOURCES" />

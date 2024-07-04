@@ -5,8 +5,7 @@ import Icons from "../../../public/assets/Icons";
 import ResourceService from "@/services/ResourcesService";
 import { Modal } from "antd";
 import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
-import { pdfjs } from "react-pdf";
-import { Viewer } from "@react-pdf-viewer/core";
+import { pdfjs, Document, Page } from "react-pdf";
 
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
@@ -153,28 +152,6 @@ const FileRenderer = ({ link, setLoading }) => {
         </div>
     );
 
-    //     <Document
-    //     file={{ url: `${GET_IMAGE_RENDER}?key=${link}` }}
-    //     onLoadSuccess={onDocumentLoadSuccess}
-    //     onSourceSuccess={() => setLoading(false)}
-    //     renderMode="canvas"
-    //     loading={skeleton}
-    //     options={{
-    //         cMapUrl: "cmaps/",
-    //         cMapPacked: true,
-    //         standardFontDataUrl: "standard_fonts/",
-    //     }}
-    // >
-    //     {Array.from(new Array(numPages), (el, index) => (
-    //         <Page
-    //             key={`page_${index + 1}`}
-    //             pageNumber={index + 1}
-    //             renderTextLayer={false}
-    //             renderAnnotationLayer={false}
-    //         />
-    //     ))}
-    // </Document>
-
     if (link.endsWith(".mp4")) {
         return (
             <video loop autoPlay muted className="w-full h-full">
@@ -185,7 +162,27 @@ const FileRenderer = ({ link, setLoading }) => {
         return (
             <>
                 <div>
-                    <Viewer fileUrl={`${GET_IMAGE_RENDER}?key=${link}`} />
+                    <Document
+                        file={{ url: `${GET_IMAGE_RENDER}?key=${link}` }}
+                        onLoadSuccess={onDocumentLoadSuccess}
+                        onSourceSuccess={() => setLoading(false)}
+                        renderMode="canvas"
+                        loading={skeleton}
+                        options={{
+                            cMapUrl: "cmaps/",
+                            cMapPacked: true,
+                            standardFontDataUrl: "standard_fonts/",
+                        }}
+                    >
+                        {Array.from(new Array(numPages), (el, index) => (
+                            <Page
+                                key={`page_${index + 1}`}
+                                pageNumber={index + 1}
+                                renderTextLayer={false}
+                                renderAnnotationLayer={false}
+                            />
+                        ))}
+                    </Document>
                 </div>
             </>
         );
