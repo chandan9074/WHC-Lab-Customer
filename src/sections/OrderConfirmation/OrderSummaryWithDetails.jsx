@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
 import { Typography } from "antd";
+import { useUserContext } from "@/contexts/UserContext";
 
 const { Text } = Typography;
 
 const OrderSummaryWithDetails = ({ orderSummary }) => {
+    const { currency } = useUserContext();
     return (
         <div className="border p-4 rounded-lg">
             <div className="flex items-center justify-between border-b pb-2 mb-4">
@@ -12,7 +14,7 @@ const OrderSummaryWithDetails = ({ orderSummary }) => {
                     Total items ({orderSummary?.length} items)
                 </Text>
                 <Text className="font-bold text-neutral-700">
-                    ${" "}
+                    {currency?.icon}{" "}
                     {orderSummary?.reduce(
                         (acc, pro) => acc + pro.price * pro.quantity,
                         0
@@ -31,12 +33,12 @@ const OrderSummaryWithDetails = ({ orderSummary }) => {
                                     {ele?.name}
                                 </Text>
                                 <Text className="whitespace-nowrap text-sm text-neutral-300">
-                                    {ele?.quantity} x $
+                                    {ele?.quantity} x {currency?.icon}
                                     {ele?.price || ele?.price}
                                 </Text>
                             </div>
                             <Text className="whitespace-nowrap text-base text-neutral-600">
-                                $&nbsp;
+                                {currency?.icon}&nbsp;
                                 {ele?.quantity * ele?.price || ele?.price}
                             </Text>
                         </div>
