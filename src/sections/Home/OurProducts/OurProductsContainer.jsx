@@ -48,9 +48,14 @@ const OurProductsContainer = ({ data }) => {
             setProductList(newProducts.docs);
         }
     };
+
+    // const handleSlideChange = (current) => {
+    //     setCurrentSlide(current);
+    // };
+
     return (
-        <div className="bg-our-product bg-cover pl-6 sm:pl-3 xl:py-[100px] lg:py-20 md:py-14 sm:py-10 py-6">
-            <div className={`container mx-auto`}>
+        <div className="bg-our-product bg-cover xl:py-[100px] lg:py-20 md:py-14 sm:py-10 py-6">
+            <div className={`container mx-auto pl-6 sm:pl-3 `}>
                 <SectionHeader
                     title={"VARIOUS SERVICES WE OFFER"}
                     color="text-white"
@@ -67,6 +72,17 @@ const OurProductsContainer = ({ data }) => {
                 style={{ marginLeft: `${leftMargin}px` }}
             >
                 <Carousel
+                    dots={false}
+                    slidesToShow={slides}
+                    draggable={true}
+                    infinite={false}
+                >
+                    {productList?.map((item, index) => (
+                        <ProductCard key={item} index={index + 1} data={item} />
+                    ))}
+                </Carousel>
+                {/* <Carousel
+                    style={{ marginLeft: `${leftMargin}px` }}
                     slidesToShow={slides}
                     initialSlide={slides === 1 ? 1.2 : slides}
                     dots={false}
@@ -76,7 +92,7 @@ const OurProductsContainer = ({ data }) => {
                     {productList?.map((item, index) => (
                         <ProductCard key={item} index={index + 1} data={item} />
                     ))}
-                </Carousel>
+                </Carousel> */}
             </div>
             <div className="flex lg:hidden mt-10 justify-center pr-6">
                 <Buttons.IconWithLabel
