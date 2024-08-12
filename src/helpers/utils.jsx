@@ -9,11 +9,11 @@ export const generateLeftMargin = () => {
     } else if (window.innerWidth >= 1280) {
         x = (window.innerWidth - 1280) / 2;
         value = window.innerWidth - (1280 + x);
-        slides = 2.5;
+        slides = 2.6;
     } else if (window.innerWidth >= 1029) {
         x = (window.innerWidth - 1029) / 2;
         value = window.innerWidth - (1029 + x);
-        slides = 2;
+        slides = 2.2;
     } else if (window.innerWidth >= 768) {
         x = (window.innerWidth - 768) / 2;
         value = window.innerWidth - (768 + x);
@@ -21,7 +21,11 @@ export const generateLeftMargin = () => {
     } else if (window.innerWidth >= 640) {
         x = (window.innerWidth - 640) / 2;
         value = window.innerWidth - (640 + x);
-        slides = 1.5;
+        slides = 1.7;
+    } else if (window.innerWidth >= 500) {
+        x = (window.innerWidth - 500) / 2;
+        value = window.innerWidth - (500 + x);
+        slides = 1.4;
     } else {
         value = 0;
         slides = 1.05;
