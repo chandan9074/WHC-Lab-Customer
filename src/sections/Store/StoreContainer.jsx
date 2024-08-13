@@ -1,14 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import StoreTabButtonsSection from "./StoreTabButtonsSection";
-import ProductListContainer from "./ProductListContainer";
-import { StoreTabButtonsData } from "@/libs/storeTabButtons";
-import CountrySelectionModal from "./CountrySelectionModal";
-import ProductService from "@/services/productsService";
-import { getCookie } from "cookies-next";
 import { useUserContext } from "@/contexts/UserContext";
-import { StoreSkeleton } from "@/components/common/StoreSkeleton";
+import ProductService from "@/services/productsService";
 import { Spin } from "antd";
+import { getCookie } from "cookies-next";
+import { useEffect, useState } from "react";
+import ProductListContainer from "./ProductListContainer";
+import StoreTabButtonsSection from "./StoreTabButtonsSection";
 
 const StoreContainer = ({ productData, categoryData, initialCategory }) => {
     // const {
@@ -110,7 +107,7 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
                     setSearchQuery={setSearchQuery}
                 />
 
-                <CountrySelectionModal handleLocation={handleLocation} />
+                {/* <CountrySelectionModal handleLocation={handleLocation} /> */}
             </>
         </div>
     );

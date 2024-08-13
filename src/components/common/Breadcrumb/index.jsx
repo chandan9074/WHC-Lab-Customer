@@ -144,15 +144,13 @@
 
 "use client";
 
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { Breadcrumb, Select } from "antd";
-import { useState } from "react";
 import { useUserContext } from "@/contexts/UserContext";
-import { hasCookie, setCookie } from "cookies-next";
-import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
-import Image from "next/image";
 import { currencyData } from "@/libs/common";
+import { Breadcrumb } from "antd";
+import { hasCookie, setCookie } from "cookies-next";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 // Utility function to generate breadcrumb paths
 const generateBreadcrumbPaths = (pathname) => {
@@ -256,7 +254,7 @@ const NextBreadcrumb = () => {
                     );
                 })}
             </Breadcrumb>
-            {paths === "/store" && (
+            {/* {paths === "/store" && (
                 <Select
                     placeholder="Please select your country"
                     // style={{
@@ -289,7 +287,7 @@ const NextBreadcrumb = () => {
                         ),
                     }))}
                 />
-            )}
+            )} */}
         </div>
     );
 };

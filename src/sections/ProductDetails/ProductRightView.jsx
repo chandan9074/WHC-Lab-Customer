@@ -1,23 +1,21 @@
 "use client";
 
 import Buttons from "@/components/Buttons";
-import { Modal, Rate, Spin } from "antd";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import Icons from "../../../public/assets/Icons";
-import AddToCartSuccession from "./AddToCartSuccession";
-import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
-import { getCookie, hasCookie, setCookie } from "cookies-next";
 import { useCart } from "@/contexts/CartContext";
-import { toast } from "react-toastify";
-import { useWishlistContext } from "@/contexts/WishlistContext";
-import { usePathname, useSearchParams } from "next/navigation";
 import { useUserContext } from "@/contexts/UserContext";
-import CountrySelectionModal from "../Store/CountrySelectionModal";
-import { checkStock } from "@/utils";
-import SocialMediaShare from "../Blog/SocialMediaShare";
-import Image from "next/image";
+import { useWishlistContext } from "@/contexts/WishlistContext";
+import { PRODUCT_DETAILS_PATH } from "@/helpers/slug";
 import { generateTags } from "@/helpers/utils";
+import { checkStock } from "@/utils";
+import { Modal, Rate, Spin } from "antd";
+import { getCookie, hasCookie, setCookie } from "cookies-next";
+import Image from "next/image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import Icons from "../../../public/assets/Icons";
+import SocialMediaShare from "../Blog/SocialMediaShare";
+import AddToCartSuccession from "./AddToCartSuccession";
 
 const ProductRightView = ({
     forModal = false,
@@ -441,7 +439,7 @@ const ProductRightView = ({
                 </div>
             </div>
 
-            <CountrySelectionModal handleLocation={handleLocation} />
+            {/* <CountrySelectionModal handleLocation={handleLocation} /> */}
 
             <Modal
                 footer={false}
