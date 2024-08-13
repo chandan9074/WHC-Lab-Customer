@@ -1,5 +1,6 @@
 // apiController.js
 
+import { GET_LOCAL_IP } from "@/helpers/apiURLS";
 import { toast } from "react-toastify";
 
 // Function to make API calls
@@ -30,6 +31,8 @@ async function MakeApiCall({
     signal,
 }) {
     try {
+        const ipResponse = await fetch(GET_LOCAL_IP);
+        const resData = await ipResponse.json();
         const url = query
             ? `${apiUrl}?${new URLSearchParams({
                   ...query,
@@ -40,6 +43,7 @@ async function MakeApiCall({
             method,
             headers: {
                 "Content-Type": "application/json",
+                "x-client-ip": resData.ip,
                 ...headers,
             },
             cache,

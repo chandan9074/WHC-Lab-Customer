@@ -14,8 +14,24 @@ import TestimonialSection from "@/sections/Home/TestimonialSection/TestimonialSe
 import CollaborationService from "@/services/CollaborationService";
 import HomeService from "@/services/HomeService";
 import ProductService from "@/services/productsService";
+import { headers } from "next/headers";
 
 export default async function Home() {
+    // const requestHeaders = headers();
+
+    // Check the headers for the client's IP address
+    // const ipAddress =
+    //     requestHeaders.get("x-forwarded-for")?.split(",")[0].trim() ||
+    //     requestHeaders.get("x-real-ip") ||
+    //     requestHeaders.get("cf-connecting-ip") ||
+    //     requestHeaders.get("x-client-ip") ||
+    //     requestHeaders.get("x-forwarded") ||
+    //     requestHeaders.get("forwarded-for") ||
+    //     requestHeaders.get("forwarded") ||
+    //     "unknown";
+
+    // console.log({ ipAddress });
+
     const getTestimonials = HomeService.getTestimonials();
 
     const getMainCategories = HomeService.getMainCategories();
