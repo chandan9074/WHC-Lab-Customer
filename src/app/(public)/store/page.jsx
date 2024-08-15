@@ -15,24 +15,15 @@ const StoreContainer = dynamic(
 );
 
 async function Store(params) {
-    // const [isLoading, setIsLoading] = useState(false);
-
-    const _selectedLocation = getCookie("selected_location");
-    const locationId = _selectedLocation && JSON.parse(_selectedLocation);
     const getProducts = ProductService.getProducts({
-        locationId: locationId || "",
-        category: "Brewing Yeast",
+        ...params.searchParams,
     });
     const getCategories = ProductService.getCategories();
-
-    // console.log(params, "params value");
 
     const [productData, categoryData] = await Promise.all([
         getProducts,
         getCategories,
     ]);
-
-    // const [categoryData] = await Promise.all([getCategories]);
 
     return (
         <Suspense fallback={<Loader />}>

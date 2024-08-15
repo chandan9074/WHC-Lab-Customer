@@ -6,13 +6,20 @@ import Icons from "../../../public/assets/Icons";
 import { filterData } from "@/libs/productData";
 import Image from "next/image";
 import TagService from "@/services/TagService";
+import { useSearchParams } from "next/navigation";
 
 const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
     const [tagsData, setTagsData] = useState([]);
+    const searchParams = useSearchParams();
+    const params = new URLSearchParams(searchParams);
+    const [yeastTypeTags, setYeastTypeTags] = useState([]);
+    const [beerStyleTags, setBeerStyleTags] = useState([]);
+    const [flocculationTags, setFlocculationTags] = useState([]);
 
     const getTags = async () => {
         const response = await TagService.getTags();
         setTagsData(response.docs);
+        console.log(response.docs);
     };
 
     useEffect(() => {
@@ -20,11 +27,21 @@ const Primary = ({ data, setSearchQuery, searchQuery, selectedTab }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const yeastTypeTags = tagsData.filter((tag) => tag.type === "Yeast Type");
-    const beerStyleTags = tagsData.filter((tag) => tag.type === "Beer Style");
-    const flocculationTags = tagsData.filter(
-        (tag) => tag.type === "Flocculation"
-    );
+    useEffect(() => {
+        if (tagsData.length > 0) {
+            const resYeast = tagsData.filter(
+                (tag) => tag.type === "Yeast Type"
+            );
+            const resBeer = tagsData.filter((tag) => tag.type === "Beer Style");
+            const resFlocculation = tagsData.filter(
+                (tag) => tag.type === "Flocculation"
+            );
+            setYeastTypeTags(resYeast);
+            setBeerStyleTags(resBeer);
+            setFlocculationTags(resFlocculation);
+        }
+    }, [tagsData]);
+
     // console.log("tags---------------------", flocculationTags);
 
     const items = [

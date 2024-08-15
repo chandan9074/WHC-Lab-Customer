@@ -1,11 +1,8 @@
 "use client";
 import Filter from "@/components/Filter";
-import React, { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import ProductDisplay from "./ProductDisplay";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import ProductService from "@/services/productsService";
-import { getCookie, hasCookie } from "cookies-next";
-import { Spin } from "antd";
 
 const ProductListContainer = ({
     data,
@@ -17,61 +14,12 @@ const ProductListContainer = ({
     setSearchQuery,
 }) => {
     const searchParams = useSearchParams();
-    const [productList, setProductList] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [firstRender, setFirstRender] = useState(false);
-
     const pathname = usePathname();
     const router = useRouter();
 
-    useEffect(() => {
-        setProductList(productData);
-    }, [searchParams, productData]);
-
-    const handleSearchProduct = useCallback(async () => {
-        if (hasCookie("selected_location")) {
-            console.log("called");
-            setIsLoading(true);
-            const paramData = {};
-            searchParams.forEach((value, key) => {
-                setSearchQuery((prev) => ({ ...prev, [key]: value }));
-                paramData[key] = value;
-                console.log(paramData.category, "caetogyr dodata");
-                if (selectedTab) {
-                    setSelectedTab(
-                        categoryData.find(
-                            (item) => item.name === paramData.category
-                        )
-                    );
-                }
-            });
-
-            const locationId = getCookie("selected_location");
-            const _selectedLocation = locationId && JSON.parse(locationId);
-
-            const response = await ProductService.getProducts({
-                ...paramData,
-                // category: selectedTab.name,
-                locationId: _selectedLocation,
-            });
-            setProductList(response?.docs);
-            setIsLoading(false);
-        }
-    }, [searchParams]);
-
-    const handleProductLoading = useCallback(() => {
-        setIsLoading(true);
-    }, []);
-
-    useEffect(() => {
-        if (searchParams) {
-            handleSearchProduct();
-        }
-    }, [searchParams, handleSearchProduct]);
-
-    const handleUpdateSearchQuery = useCallback(() => {
-        handleProductLoading();
+    const handleFilter = () => {
         const params = new URLSearchParams(searchParams);
+
         Object.keys(searchQuery).forEach((key) => {
             if (searchQuery[key]) {
                 params.set(key, searchQuery[key]);
@@ -79,42 +27,37 @@ const ProductListContainer = ({
                 params.delete(key);
             }
         });
+
         const queryString = params.toString();
-        console.log({ queryString });
         const updatedPath = queryString
             ? `${pathname}?${queryString}`
             : `${pathname}?category=Brewing Yeast`;
-        setIsLoading(false);
-        // if (!firstRender) {
+
         router.push(updatedPath, { scroll: false });
-        // }
-    }, [handleProductLoading, searchQuery, searchParams, pathname, router]);
+    };
 
     useEffect(() => {
-        handleUpdateSearchQuery();
-    }, [handleUpdateSearchQuery]);
+        handleFilter();
+    }, [searchQuery]);
 
     return (
         <div className="flex gap-x-6">
-            <Spin spinning={isLoading} fullscreen />
             <div className="hidden md:block">
                 <Filter.Primary
                     data={data}
                     selectedTab={selectedTab}
                     setSearchQuery={setSearchQuery}
                     searchQuery={searchQuery}
-                    handleProductLoading={handleProductLoading}
                 />
             </div>
 
             <ProductDisplay
                 selectedTab={selectedTab}
-                data={productList}
+                data={productData}
                 setSearchQuery={setSearchQuery}
                 searchQuery={searchQuery}
                 productData={productData}
                 filterData={data}
-                handleProductLoading={handleProductLoading}
             />
         </div>
     );
