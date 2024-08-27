@@ -22,15 +22,29 @@ async function getLocalIP() {
     return res;
 }
 
+import { headers } from "next/headers";
+function IP() {
+    const FALLBACK_IP_ADDRESS = "0.0.0.0";
+    const forwardedFor = headers().get("x-forwarded-for");
+
+    if (forwardedFor) {
+        return forwardedFor.split(",")[0] ?? FALLBACK_IP_ADDRESS;
+    }
+
+    return headers().get("x-real-ip") ?? FALLBACK_IP_ADDRESS;
+}
+
 async function Store(params) {
     const response = await getLocalIP();
-    console.log(response);
+    // console.log(response);
+    const res = IP();
+    console.log(res, "ip local");
 
     const getProducts = ProductService.getProducts(
         {
             ...params.searchParams,
         },
-        response.ip
+        res
     );
     const getCategories = ProductService.getCategories();
 
