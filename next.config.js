@@ -43,6 +43,11 @@ const nextConfig = {
                 pathname: "/**",
             },
             {
+                protocol: "https",
+                hostname: "https://api.ipify.org",
+                pathname: "/**",
+            },
+            {
                 protocol: "http",
                 hostname: "192.168.68.154",
                 port: "5003",

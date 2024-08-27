@@ -1,8 +1,4 @@
-const {
-    ENV_VARIABLE,
-    ENV_VARIABLE_FOR_LOCAL,
-    ENV_VARIABLE_FOR_LOCAL_IP_API,
-} = require("./constant");
+const { ENV_VARIABLE, ENV_VARIABLE_FOR_LOCAL } = require("./constant");
 
 const domain =
     ENV_VARIABLE ?? ENV_VARIABLE_FOR_LOCAL
@@ -13,7 +9,7 @@ const domain =
 let BASEURL = domain;
 
 //local ip
-export const GET_LOCAL_IP = `${ENV_VARIABLE_FOR_LOCAL_IP_API}`;
+// export const GET_LOCAL_IP = `${ENV_VARIABLE_FOR_LOCAL_IP_API}`;
 
 // products
 export const GET_PRODUCTS = `${BASEURL}/products`;

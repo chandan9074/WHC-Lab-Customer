@@ -1,6 +1,7 @@
 // apiController.js
 
-import { GET_LOCAL_IP } from "@/helpers/apiURLS";
+import { GET_LOCAL_IP, GET_PRODUCTS } from "@/helpers/apiURLS";
+import axios from "axios";
 import { toast } from "react-toastify";
 
 // Function to make API calls
@@ -31,8 +32,15 @@ async function MakeApiCall({
     signal,
 }) {
     try {
-        const ipResponse = await fetch(GET_LOCAL_IP);
-        const resData = await ipResponse.json();
+        // let clientIp;
+        // if (typeof window !== "undefined") {
+        //     const ipResponse = await fetch("https://api.ipify.org?format=json");
+        //     const resData = await ipResponse.json();
+        //     clientIp = resData.ip;
+        // }
+
+        // const ipResponse = await fetch(GET_PRODUCTS);
+        // const resData = await ipResponse.json();
         const url = query
             ? `${apiUrl}?${new URLSearchParams({
                   ...query,
@@ -43,7 +51,8 @@ async function MakeApiCall({
             method,
             headers: {
                 "Content-Type": "application/json",
-                "x-client-ip": resData.ip,
+                // "x-client-ip": resData.ip,
+                // ...(clientIp && { "x-client-ip": clientIp }),
                 ...headers,
             },
             cache,

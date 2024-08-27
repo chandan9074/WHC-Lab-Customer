@@ -6,6 +6,7 @@ import { getCookie } from "cookies-next";
 import { StoreSkeleton } from "@/components/common/StoreSkeleton";
 import Loader from "@/components/common/Loader";
 import PopupModalComponent from "@/sections/Home/PopupModalSection";
+import MakeApiCall from "@/services/MakeApiCall";
 
 const StoreContainer = dynamic(
     () => import("@/sections/Store/StoreContainer"),
@@ -14,10 +15,23 @@ const StoreContainer = dynamic(
     }
 );
 
-async function Store(params) {
-    const getProducts = ProductService.getProducts({
-        ...params.searchParams,
+async function getLocalIP() {
+    const res = await MakeApiCall({
+        apiUrl: "https://api.ipify.org?format=json",
     });
+    return res;
+}
+
+async function Store(params) {
+    const response = await getLocalIP();
+    console.log(response);
+
+    const getProducts = ProductService.getProducts(
+        {
+            ...params.searchParams,
+        },
+        response.ip
+    );
     const getCategories = ProductService.getCategories();
 
     const [productData, categoryData] = await Promise.all([

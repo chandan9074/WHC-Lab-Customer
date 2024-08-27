@@ -2,14 +2,18 @@ import { CATEGORY_URL, GET_PRODUCTS, REVIEW_URL } from "@/helpers/apiURLS";
 import MakeApiCall from "../MakeApiCall";
 import { MethodsStructure } from "../MethodsStructure";
 
-async function getProducts(query) {
+async function getProducts(query, ip) {
     const url = query
         ? `${GET_PRODUCTS}?${new URLSearchParams({
-            ...query,
-        })}`
+              ...query,
+          })}`
         : `${GET_PRODUCTS}`;
 
-    const res = await MakeApiCall({ apiUrl: url, method: "GET" });
+    const res = await MakeApiCall({
+        apiUrl: url,
+        method: "GET",
+        ...MethodsStructure.getMethod({ "x-client-ip": ip }),
+    });
     return res;
 }
 

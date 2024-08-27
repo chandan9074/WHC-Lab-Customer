@@ -6,9 +6,9 @@ import DownloadableResource from "@/components/common/DownloadableResource";
 import ResourceService from "@/services/ResourcesService";
 
 async function DistilledResources() {
-    const getResources = await ResourceService.getResources(
-        "DISTILLING_RESOURCES"
-    );
+    const resource = ResourceService.getResources("DISTILLING_RESOURCES");
+
+    const [getResources] = await Promise.all([resource]);
 
     return (
         <Layouts.Primary breadcrumb={false}>
