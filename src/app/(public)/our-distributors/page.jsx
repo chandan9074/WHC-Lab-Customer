@@ -11,10 +11,24 @@ const DistributorContainer = dynamic(
     }
 );
 
+import { headers } from "next/headers";
+function IP() {
+    const FALLBACK_IP_ADDRESS = "0.0.0.0";
+    const forwardedFor = headers().get("x-forwarded-for");
+
+    if (forwardedFor) {
+        return forwardedFor.split(",")[0] ?? FALLBACK_IP_ADDRESS;
+    }
+
+    return headers().get("x-real-ip") ?? FALLBACK_IP_ADDRESS;
+}
+
 const OurDistributors = async (params) => {
-    const getDistributors = DistributorsService.getDistributors();
-    const getDistinctCountry = DistributorsService.getDistinctCountry();
-    const getDistinctCategory = DistributorsService.getDistinctCategory();
+    const ip = IP();
+
+    const getDistributors = DistributorsService.getDistributors({}, ip);
+    const getDistinctCountry = DistributorsService.getDistinctCountry(ip);
+    const getDistinctCategory = DistributorsService.getDistinctCategory(ip);
 
     const [distributorsData, distinctCountry, distinctCategory] =
         await Promise.all([

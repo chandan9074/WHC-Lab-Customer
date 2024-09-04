@@ -46,7 +46,7 @@ async function Store(params) {
         },
         res
     );
-    const getCategories = ProductService.getCategories();
+    const getCategories = ProductService.getCategories(res);
 
     const [productData, categoryData] = await Promise.all([
         getProducts,

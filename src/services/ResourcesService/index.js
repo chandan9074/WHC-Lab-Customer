@@ -7,10 +7,10 @@ const {
     GET_IMAGE_RENDER,
 } = require("@/helpers/apiURLS");
 
-async function getResources(slug) {
+async function getResources(slug, ip) {
     const res = await MakeApiCall({
         apiUrl: `${RESOURCES}?type=${slug}`,
-        ...MethodsStructure.getMethod(),
+        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
     });
 
     return res;

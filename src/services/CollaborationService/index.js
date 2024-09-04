@@ -6,6 +6,7 @@ import { MethodsStructure } from "../MethodsStructure";
 async function getCollaborations(page = 1, limit = 3) {
     return await MakeApiCall({
         apiUrl: `${COLLABORATION_URL}?page=${page}&limit=${limit}`,
+        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
     });
 }
 
