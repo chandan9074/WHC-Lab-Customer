@@ -12,7 +12,7 @@ async function getProducts(query, ip) {
     const res = await MakeApiCall({
         apiUrl: url,
         method: "GET",
-        ...MethodsStructure.getMethod({ "x-client-ip": ip }),
+        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
     });
     return res;
 }
@@ -21,7 +21,7 @@ async function getCategories(ip) {
     const res = await MakeApiCall({
         apiUrl: CATEGORY_URL,
         method: "GET",
-        ...MethodsStructure.getMethod({ "x-client-ip": ip }),
+        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
     });
     return res;
 }
