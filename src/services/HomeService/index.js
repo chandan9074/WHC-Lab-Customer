@@ -1,4 +1,5 @@
 import MakeApiCall from "../MakeApiCall";
+import { MethodsStructure } from "../MethodsStructure";
 
 const {
     GET_TESTIMONIALS,

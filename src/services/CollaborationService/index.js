@@ -1,12 +1,12 @@
 const { COLLABORATION_URL } = require("@/helpers/apiURLS");
 import MakeApiCall from "../MakeApiCall";
 // const { default: MakeApiCall } = require("../MakeApiCall");
-import { MethodsStructure } from "../MethodsStructure";
+// import { MethodsStructure } from "../MethodsStructure";
 
 async function getCollaborations(page = 1, limit = 3) {
     return await MakeApiCall({
         apiUrl: `${COLLABORATION_URL}?page=${page}&limit=${limit}`,
-        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
+        // ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
     });
 }
 
