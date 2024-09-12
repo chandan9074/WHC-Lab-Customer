@@ -53,7 +53,6 @@ export const isImageInvalid = async (file) => {
     return false;
 };
 
-
 // export const formatPrice = (price, currency) => {
 //     let currencySymbol = '';
 //     switch (currency) {
@@ -72,29 +71,35 @@ export const isImageInvalid = async (file) => {
 //     return `${currencySymbol} ${price}`;
 //   };
 
-  export function formatPrice(prices, currency) {
+export function formatPrice(prices, currency) {
     switch (currency) {
-        case 'USD':
-            return `$ ${prices.dollarPrice || '--'}`;
-        case 'EUR':
-            return `€ ${prices.euroPrice || '--'}`;
-        case 'GBP':
-            return `£ ${prices.poundPrice || '--'}`;
+        case "USD":
+            return `$ ${prices.dollarPrice || "--"}`;
+        case "EUR":
+            return `€ ${prices.euroPrice || "--"}`;
+        case "GBP":
+            return `£ ${prices.poundPrice || "--"}`;
         default:
-            return `$ ${prices.dollarPrice || '--'}`;
+            return `$ ${prices.dollarPrice || "--"}`;
     }
 }
 
-
-export function checkStock(product, locationId) { 
-    const variant = product.variants.find(variant => variant.location._id === locationId);
-
+/**
+ * Checks if a product variant is in stock.
+ *
+ * @param {Object} variant - The product variant to check.
+ * @param {string} variant.status - The status of the variant.
+ * @param {number} variant.quantity - The quantity of the variant.
+ * @returns {boolean} - Returns true if the variant is active and has a quantity greater than 0, otherwise false.
+ */
+export function checkStock(variant) {
     if (!variant) {
         return false;
     }
 
-    if (variant.status !== 'active' || variant.quantity <= 0) {
+    if (variant.status !== "active" || variant.quantity <= 0) {
         return false;
     }
+
     return true;
 }
