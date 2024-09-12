@@ -44,6 +44,11 @@ const nextConfig = {
             },
             {
                 protocol: "https",
+                hostname: "5091.006.ngrok.dev",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
                 hostname: "https://api.ipify.org",
                 pathname: "/**",
             },
