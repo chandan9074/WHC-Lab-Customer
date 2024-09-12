@@ -1,24 +1,23 @@
 "use client";
 
 import Buttons from "@/components/Buttons";
-import { Carousel, Modal, Rate } from "antd";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import Icons from "../../../public/assets/Icons";
-import Image from "next/image";
-import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
-import AddToCartSuccession from "./AddToCartSuccession";
-import { getCookie, hasCookie } from "cookies-next";
-import { useWishlistContext } from "@/contexts/WishlistContext";
-import { toast } from "react-toastify";
 import { useCart } from "@/contexts/CartContext";
 import { useUserContext } from "@/contexts/UserContext";
+import { useWishlistContext } from "@/contexts/WishlistContext";
+import { GET_IMAGE_RENDER } from "@/helpers/apiURLS";
 import { checkStock } from "@/utils";
-import SocialMediaShare from "../Blog/SocialMediaShare";
+import { Carousel, Modal, Rate } from "antd";
+import { getCookie, hasCookie } from "cookies-next";
 import copy from "copy-to-clipboard";
+import Image from "next/image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
+import Icons from "../../../public/assets/Icons";
+import SocialMediaShare from "../Blog/SocialMediaShare";
+import AddToCartSuccession from "./AddToCartSuccession";
 
 const ProductViewMobile = ({ data }) => {
-    console.log("tanjil khawa----------", data);
     const carouselRef = useRef();
     const [selectedColor, setSelectedColor] = useState(
         Object.keys(data.variants)[0]
