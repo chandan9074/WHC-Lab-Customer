@@ -15,6 +15,12 @@ const nextConfig = {
             },
             {
                 protocol: "http",
+                hostname: "192.168.10.61",
+                port: "5095",
+                pathname: "/**",
+            },
+            {
+                protocol: "http",
                 hostname: "localhost",
                 port: "5002",
                 pathname: "/**",
