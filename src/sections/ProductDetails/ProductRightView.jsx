@@ -54,25 +54,20 @@ const ProductRightView = ({
     const token = getCookie("accessToken");
 
     useEffect(() => {
-        if (hasCookie("selected_location")) {
-            const locationId = JSON.parse(getCookie("selected_location"));
-            const stockStatusData = checkStock(data, locationId);
-            if (data.inStock) {
-                setStockStatus(stockStatusData);
-            } else {
-                setStockStatus(data.inStock);
-            }
-            if (locationId) {
-                const stock = data?.variants.find(
-                    (item) => item.location._id === locationId
-                );
+        const stockStatusData = checkStock(data.variants[0]);
 
-                if (stock) {
-                    setMaxLimit(stock?.quantity);
-                    setStatus(stock?.status);
-                    setLowStockThreshold(stock?.lowStockThreshold);
-                }
-            }
+        if (data.inStock) {
+            setStockStatus(stockStatusData);
+        } else {
+            setStockStatus(data.inStock);
+        }
+
+        const stock = data?.variants[0];
+
+        if (stock) {
+            setMaxLimit(stock?.quantity);
+            setStatus(stock?.status);
+            setLowStockThreshold(stock?.lowStockThreshold);
         }
     }, [data]);
 
@@ -92,17 +87,13 @@ const ProductRightView = ({
         }
     };
 
-    const handlewishlistClick = async () => {
+    const handleWishlistClick = async () => {
         if (checkProductInWishList(data._id)) {
             //delete
             await deleteWishlist(data._id);
             await getProductWishlist(); // Call getWishlist after delete
         } else {
-            const locationId = JSON.parse(getCookie("selected_location"));
-
-            const variant = data.variants.find(
-                (item) => item.location._id === locationId
-            );
+            const variant = data.variants[0];
 
             //create
             const stockId = variant.stockId;
@@ -132,10 +123,7 @@ const ProductRightView = ({
     const handleAddToCart = async () => {
         // console.log(data.inStock, data._id, "instock");
         if (stockStatus) {
-            const locationId = JSON.parse(getCookie("selected_location"));
-            const variant = data.variants.find(
-                (item) => item.location._id === locationId
-            );
+            const variant = data.variants[0];
             const stockId = variant.stockId;
             const sku = variant.sku;
 
@@ -265,7 +253,7 @@ const ProductRightView = ({
                                     : Icons.wishlist_inactive
                             }
                             className="w-6 h-6"
-                            onClick={handlewishlistClick}
+                            onClick={handleWishlistClick}
                         />
                     )}
 

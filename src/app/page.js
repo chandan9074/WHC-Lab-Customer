@@ -14,29 +14,64 @@ import TestimonialSection from "@/sections/Home/TestimonialSection/TestimonialSe
 import CollaborationService from "@/services/CollaborationService";
 import HomeService from "@/services/HomeService";
 import ProductService from "@/services/productsService";
+import { headers } from "next/headers";
+
+function IP() {
+    const FALLBACK_IP_ADDRESS = "0.0.0.0";
+    const forwardedFor = headers().get("x-forwarded-for");
+
+    if (forwardedFor) {
+        return forwardedFor.split(",")[0] ?? FALLBACK_IP_ADDRESS;
+    }
+
+    return headers().get("x-real-ip") ?? FALLBACK_IP_ADDRESS;
+}
 
 export default async function Home() {
-    const getTestimonials = HomeService.getTestimonials();
+    const ip = IP();
+    // const requestHeaders = headers();
 
-    const getMainCategories = HomeService.getMainCategories();
+    // Check the headers for the client's IP address
+    // const ipAddress =
+    //     requestHeaders.get("x-forwarded-for")?.split(",")[0].trim() ||
+    //     requestHeaders.get("x-real-ip") ||
+    //     requestHeaders.get("cf-connecting-ip") ||
+    //     requestHeaders.get("x-client-ip") ||
+    //     requestHeaders.get("x-forwarded") ||
+    //     requestHeaders.get("forwarded-for") ||
+    //     requestHeaders.get("forwarded") ||
+    //     "unknown";
 
-    const getNewProducts = ProductService.getProducts();
+    // console.log({ ipAddress });
+
+    const getTestimonials = HomeService.getTestimonials(ip);
+
+    const getMainCategories = HomeService.getMainCategories(ip);
+
+    const getNewProducts = ProductService.getProducts({}, ip);
 
     const getFeaturedProducts = ProductService.getProducts({
         isFeatured: true,
+        ip,
     });
 
-    const getWhyUsLeftContents = HomeService.getWhyUsContents({
-        sectionType: "leftSection",
-    });
+    const getWhyUsLeftContents = HomeService.getWhyUsContents(
+        {
+            sectionType: "leftSection",
+        },
+        ip
+    );
 
-    const getWhyUsRightContents = HomeService.getWhyUsContents({
-        sectionType: "rightSection",
-    });
+    const getWhyUsRightContents = HomeService.getWhyUsContents(
+        {
+            sectionType: "rightSection",
+        },
+        ip
+    );
 
-    const getStrains = HomeService.getStrains();
+    const getStrains = HomeService.getStrains(ip);
 
-    const getCollaborations = CollaborationService.getCollaborations();
+    const getCollaborations = CollaborationService.getCollaborations(1, 3, ip);
 
     const [
         testimonialsData,

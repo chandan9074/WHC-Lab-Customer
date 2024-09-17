@@ -8,6 +8,9 @@ const domain =
 // BaseURL
 let BASEURL = domain;
 
+//local ip
+// export const GET_LOCAL_IP = `${ENV_VARIABLE_FOR_LOCAL_IP_API}`;
+
 // products
 export const GET_PRODUCTS = `${BASEURL}/products`;
 

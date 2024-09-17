@@ -2,19 +2,27 @@ import { CATEGORY_URL, GET_PRODUCTS, REVIEW_URL } from "@/helpers/apiURLS";
 import MakeApiCall from "../MakeApiCall";
 import { MethodsStructure } from "../MethodsStructure";
 
-async function getProducts(query) {
+async function getProducts(query, ip) {
     const url = query
         ? `${GET_PRODUCTS}?${new URLSearchParams({
-            ...query,
-        })}`
+              ...query,
+          })}`
         : `${GET_PRODUCTS}`;
 
-    const res = await MakeApiCall({ apiUrl: url, method: "GET" });
+    const res = await MakeApiCall({
+        apiUrl: url,
+        method: "GET",
+        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
+    });
     return res;
 }
 
-async function getCategories() {
-    const res = await MakeApiCall({ apiUrl: CATEGORY_URL, method: "GET" });
+async function getCategories(ip) {
+    const res = await MakeApiCall({
+        apiUrl: CATEGORY_URL,
+        method: "GET",
+        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
+    });
     return res;
 }
 

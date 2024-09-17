@@ -1,4 +1,5 @@
 import MakeApiCall from "../MakeApiCall";
+import { MethodsStructure } from "../MethodsStructure";
 
 const {
     GET_TESTIMONIALS,
@@ -8,14 +9,20 @@ const {
     STRAINS,
 } = require("@/helpers/apiURLS");
 
-async function getTestimonials() {
-    const res = await MakeApiCall({ apiUrl: GET_TESTIMONIALS });
+async function getTestimonials(ip) {
+    const res = await MakeApiCall({
+        apiUrl: GET_TESTIMONIALS,
+        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
+    });
 
     return res;
 }
 
-async function getMainCategories() {
-    const res = await MakeApiCall({ apiUrl: GET_MAIN_CATEGORIES });
+async function getMainCategories(ip) {
+    const res = await MakeApiCall({
+        apiUrl: GET_MAIN_CATEGORIES,
+        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
+    });
 
     return res;
 }
@@ -24,17 +31,23 @@ async function getSocialLink() {
     return await MakeApiCall({ apiUrl: SOCIAL_MEDIA_LINK_URL });
 }
 
-async function getWhyUsContents(query) {
+async function getWhyUsContents(query, ip) {
     const url = `${WHY_US}?${new URLSearchParams({
-            ...query,
-        })}`
-        
-    const res = await MakeApiCall({ apiUrl: url, method: "GET" });
+        ...query,
+    })}`;
+
+    const res = await MakeApiCall({
+        apiUrl: url,
+        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
+    });
     return res;
 }
 
-async function getStrains() {
-    return await MakeApiCall({ apiUrl: STRAINS });
+async function getStrains(ip) {
+    return await MakeApiCall({
+        apiUrl: STRAINS,
+        ...(ip && MethodsStructure.getMethod({ "x-client-ip": ip })),
+    });
 }
 
 const HomeService = {

@@ -47,7 +47,6 @@ export const ModalProvider = ({ children }) => {
                 apiUrl: POPUP_INFORMATION,
                 method: "GET",
             });
-
             if (res?.status === 200) {
                 setPopupInfo(res?.docs);
             }

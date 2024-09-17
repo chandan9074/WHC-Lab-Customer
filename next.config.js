@@ -15,6 +15,12 @@ const nextConfig = {
             },
             {
                 protocol: "http",
+                hostname: "192.168.10.61",
+                port: "5095",
+                pathname: "/**",
+            },
+            {
+                protocol: "http",
                 hostname: "localhost",
                 port: "5002",
                 pathname: "/**",
@@ -40,6 +46,16 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "whc-lab-backend.s2.zaagsys.com",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "5091.006.ngrok.dev",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "https://api.ipify.org",
                 pathname: "/**",
             },
             {

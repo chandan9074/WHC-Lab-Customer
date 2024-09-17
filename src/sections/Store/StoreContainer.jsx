@@ -1,89 +1,53 @@
 "use client";
-import { useUserContext } from "@/contexts/UserContext";
-import ProductService from "@/services/productsService";
 import { Spin } from "antd";
-import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import ProductListContainer from "./ProductListContainer";
 import StoreTabButtonsSection from "./StoreTabButtonsSection";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const StoreContainer = ({ productData, categoryData, initialCategory }) => {
-    // const {
-    //     productList,
-    //     setProductList,
-    //     selectedTab,
-    //     setSelectedTab,
-    //     handleLocation,
-    //     productLoading,
-    //     setProductLoading,
-    // } = useUserContext();
     const [selectedTab, setSelectedTab] = useState(
         initialCategory
             ? categoryData.find((item) => item.name === initialCategory)
             : {}
     );
-    const [loading, setLoading] = useState(false);
-    // setSelectedTab(
-    //     initialCategory
-    //         ? categoryData.find((item) => item.name === initialCategory)
-    //         : categoryData[0]
-    // );
-    // setProductList(productData || []);
-
-    // const [tagsLoading, setTagsLoading] = useState(false);
-    const [productList, setProductList] = useState(productData || []);
-    const { navLocation, setNavLocationValue } = useUserContext();
+    const [loading, setLoading] = useState(true);
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const router = useRouter();
+    const params = new URLSearchParams(searchParams);
     const [searchQuery, setSearchQuery] = useState({
-        yeastType: "",
-        beerStyle: "",
-        flocculation: "",
-        maxPrice: 0,
-        minPrice: 0,
-        category: "",
-        sortBy: "",
+        maxPrice: params.get("maxPrice"),
+        minPrice: params.get("minPrice"),
+        category: params.get("category"),
+        sortBy: params.get("sortBy"),
+        tag: params.get("tag"),
     });
 
-    const handleLocation = async (locationId) => {
-        const category = selectedTab.name;
-        setNavLocationValue(locationId);
-        setLoading(true);
-        const response = await ProductService.getProducts({
-            locationId,
-            category,
-        });
-        // console.log(response, "reposnse----");
-        console.log({ response });
-        setLoading(false);
-        setProductList(response?.docs);
-    };
-
     const handleTabButtonClick = async () => {
-        const _selectedLocation = getCookie("selected_location");
-        // setTagsLoading(true);
-        // const response = await ProductService.getProducts({
-        //     locationId,
-        //     category: data.name,
-        // });
-        // console.log(response, "reposnse----");
-        // setTagsLoading(false);
-        // console.log({ response });
-        // setProductList(response?.docs);
+        Object.keys(searchQuery).forEach((key) => {
+            if (searchQuery[key]) {
+                params.set(key, searchQuery[key]);
+            } else {
+                params.delete(key);
+            }
+        });
+
+        const queryString = params.toString();
+        const updatedPath = `${pathname}?${queryString}`;
+
+        router.push(updatedPath, { scroll: false });
     };
 
     useEffect(() => {
-        if (navLocation) {
-            console.log(navLocation);
-            handleLocation(navLocation);
+        if (productData) {
+            setLoading(false);
         }
-    }, [navLocation]);
+    }, [productData]);
 
-    // useEffect(() => {
-    //     const locationId = getCookie("selected_location");
-    //     const _selectedLocation = locationId && JSON.parse(locationId);
-
-    //     _selectedLocation &&
-    //         handleLocation(_selectedLocation, selectedTab.name);
-    // }, [selectedTab]);
+    useEffect(() => {
+        handleTabButtonClick();
+    }, [searchQuery]);
 
     return (
         <div className="container mx-auto space-y-[14.5px] px-4 md:px-0 pb-10 md:pb-20">
@@ -101,13 +65,11 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
                 <ProductListContainer
                     selectedTab={selectedTab}
                     setSelectedTab={setSelectedTab}
-                    productData={productList}
+                    productData={productData}
                     categoryData={categoryData}
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
                 />
-
-                {/* <CountrySelectionModal handleLocation={handleLocation} /> */}
             </>
         </div>
     );

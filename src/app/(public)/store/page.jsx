@@ -6,6 +6,7 @@ import { getCookie } from "cookies-next";
 import { StoreSkeleton } from "@/components/common/StoreSkeleton";
 import Loader from "@/components/common/Loader";
 import PopupModalComponent from "@/sections/Home/PopupModalSection";
+import MakeApiCall from "@/services/MakeApiCall";
 
 const StoreContainer = dynamic(
     () => import("@/sections/Store/StoreContainer"),
@@ -14,25 +15,43 @@ const StoreContainer = dynamic(
     }
 );
 
-async function Store(params) {
-    // const [isLoading, setIsLoading] = useState(false);
-
-    const _selectedLocation = getCookie("selected_location");
-    const locationId = _selectedLocation && JSON.parse(_selectedLocation);
-    const getProducts = ProductService.getProducts({
-        locationId: locationId || "",
-        category: "Brewing Yeast",
+async function getLocalIP() {
+    const res = await MakeApiCall({
+        apiUrl: "https://api.ipify.org?format=json",
     });
-    const getCategories = ProductService.getCategories();
+    return res;
+}
 
-    // console.log(params, "params value");
+import { headers } from "next/headers";
+function IP() {
+    const FALLBACK_IP_ADDRESS = "0.0.0.0";
+    const forwardedFor = headers().get("x-forwarded-for");
+
+    if (forwardedFor) {
+        return forwardedFor.split(",")[0] ?? FALLBACK_IP_ADDRESS;
+    }
+
+    return headers().get("x-real-ip") ?? FALLBACK_IP_ADDRESS;
+}
+
+async function Store(params) {
+    const response = await getLocalIP();
+    // console.log(response);
+    const res = IP();
+    console.log(res, "ip local");
+
+    const getProducts = ProductService.getProducts(
+        {
+            ...params.searchParams,
+        },
+        res
+    );
+    const getCategories = ProductService.getCategories(res);
 
     const [productData, categoryData] = await Promise.all([
         getProducts,
         getCategories,
     ]);
-
-    // const [categoryData] = await Promise.all([getCategories]);
 
     return (
         <Suspense fallback={<Loader />}>
