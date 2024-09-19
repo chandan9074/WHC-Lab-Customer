@@ -24,15 +24,25 @@ export function UserProvider({ children }) {
 
     useEffect(() => {
         if (hasCookie("userInfo")) {
-            setUserInfo(JSON.parse(getCookie("userInfo")));
+            const userData = JSON.parse(getCookie("userInfo"));
+            setUserInfo(userData);
+            const getCurrencyKey = currencyData[userData.country];
+            if (getCurrencyKey) {
+                setCurrency(getCurrencyKey);
+            } else {
+                setCookie("selected_currency", "Ireland");
+                const newCurrencyKey = currencyData["Ireland"];
+                setCurrency(newCurrencyKey);
+            }
         }
-        if (hasCookie("selected_currency")) {
-            const currencyValue = getCookie("selected_currency");
-            const getCurrencyKey = currencyData[currencyValue];
-            setCurrency(getCurrencyKey);
-        } else {
-            setCookie("selected_currency", "GBP");
-            const getCurrencyKey = currencyData["GBP"];
+        // else if (hasCookie("selected_currency")) {
+        //     const currencyValue = getCookie("selected_currency");
+        //     const getCurrencyKey = currencyData[currencyValue];
+        //     setCurrency(getCurrencyKey);
+        // }
+        else {
+            setCookie("selected_currency", "Ireland");
+            const getCurrencyKey = currencyData["Ireland"];
             setCurrency(getCurrencyKey);
         }
         if (hasCookie("selected_location")) {
