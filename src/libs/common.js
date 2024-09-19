@@ -78,7 +78,8 @@ export const chooseUsData = [
     {
         _id: "06",
         name: "Speedy Shipping",
-        description:"We use the highest quality control standards with our yeast production. We utilize both next generation gentic/QPCR and plating methods to test the various batches for any spoiler organisms. Nothing is shipped without meeting the highest QC Standards.",
+        description:
+            "We use the highest quality control standards with our yeast production. We utilize both next generation gentic/QPCR and plating methods to test the various batches for any spoiler organisms. Nothing is shipped without meeting the highest QC Standards.",
     },
 ];
 
@@ -97,9 +98,12 @@ export const orderStatusColor = [
     { title: "Canceled", color: "#D9333F", bgColor: "#d9333f14" },
 ];
 
-
 export const currencyData = {
-    "USD":{field: "dollarPrice", icon: "$"},
-    "EUR":{field: "euroPrice",  icon: "€"},
-    "GBP":{field: "poundPrice",  icon: "£"},
-}
+    "United States": { field: "dollarPrice", icon: "$" },
+    "United States Minor Outlying Islands": { field: "dollarPrice", icon: "$" },
+    "United States of America": { field: "dollarPrice", icon: "$" },
+    USA: { field: "dollarPrice", icon: "$" },
+    Ireland: { field: "euroPrice", icon: "€" },
+    UK: { field: "poundPrice", icon: "£" },
+    "United Kingdom": { field: "poundPrice", icon: "£" },
+};
