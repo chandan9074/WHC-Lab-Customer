@@ -24,6 +24,14 @@ const StoreContainer = ({ productData, categoryData, initialCategory }) => {
         tag: params.get("tag"),
     });
 
+    useEffect(() => {
+        setSelectedTab(
+            initialCategory
+                ? categoryData.find((item) => item.name === initialCategory)
+                : {}
+        );
+    }, [categoryData, initialCategory]);
+
     const handleTabButtonClick = async () => {
         Object.keys(searchQuery).forEach((key) => {
             if (searchQuery[key]) {
