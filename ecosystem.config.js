@@ -1,9 +1,9 @@
 module.exports = {
     apps: [
         {
-            name: "whc-lab.s2.zaagsys.com",
+            name: "whclab-customer",
             script: "npx",
-            args: "next start -p 3000",
+            args: "next start -p 3002",
             exec_mode: "fork",
             instances: 1,
         },
