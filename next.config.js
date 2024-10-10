@@ -50,7 +50,7 @@ const nextConfig = {
             },
             {
                 protocol: "https",
-                hostname: "whc-lab-backend.s3.zaagsys.com",
+                hostname: "whc-internal.s3.zaagsys.com",
                 pathname: "/**",
             },
             {
